@@ -1,4 +1,5 @@
-<h1 align="center">Realtime Messenger Application</h1>
+<h1 align="center">Lập Trình Web</h1>
+<h2 align="center">Trang tin tức tổng hợp</h2>
 
 # [**Table of contents**](#table-of-contents)
 
