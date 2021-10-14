@@ -11,8 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Transactional
 @Controller
 public class IndexController {
+	
+	/***************************************************
+	 * @author Hau
+	 * IndexController chuyen xu ly trang chu cua website
+	 ***************************************************/
+	
 	@Autowired
 	SessionFactory factory;
+	
+	
 	@RequestMapping("index")
 	public String index(ModelMap model){
 		return "index";

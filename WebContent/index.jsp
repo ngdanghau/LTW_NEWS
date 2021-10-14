@@ -1,28 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
    pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="vi" class="no-js">
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
       <script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
       <title>Times Writer &#8211; Tin tức nóng nhất, tin tức mới nhất cập nhật liên tục 24H</title>
+      
       <meta name='robots' content='max-image-preview:large' />
       <link rel='dns-prefetch' href='//fonts.googleapis.com' />
+      
       <link rel="icon" href="https://timeswriter.xyz/assets/images/favicon.ico" type="image/x-icon">
-      <link rel="shortcut icon" href="https://timeswriter.xyz/assets/images/favicon.ico" type="image/x-icon">
       <link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
       <link rel='stylesheet' id='wi-fonts-css' href='https://fonts.googleapis.com/css?family=Libre+Franklin%3A400%2C400italic%2C900%7CTinos%3A400%2C400italic%2C700%7CLora%3A400&#038;display=swap&#038;ver=4.6.7.1' media='all' />
-      <link rel='stylesheet' id='style-css' href="https://timeswriter.xyz/themes/assets/style.min.css?v=0403013" media='all' />
-      <link rel='stylesheet' id='style-inline-css' href="https://timeswriter.xyz/themes/assets/style.css?v=0403013" media='all' />
-      <script src="https://timeswriter.xyz/themes/assets/vendor/jquery/jquery.min.js?v=0403013" id='jquery-core-js'></script>
-      <script src="https://timeswriter.xyz/themes/assets/vendor/jquery/jquery-migrate.min.js?v=0403013" id='jquery-migrate-js'></script>
+      
+      
+      <!-- Trong tep tin spring-config-mvc da dinh nghia public mac dinh -->
+      <link rel='stylesheet' href="<c:url value='./public/client/style.min.css'/>" >
+      <link rel='stylesheet' href="<c:url value='./public/client/style.css'/>" > 
+      
+      
+      <script src="<c:url value='./public/client/vendor/jquery/jquery.min.js' />"></script>
+      <script src="<c:url value='./public/client/vendor/jquery/jquery-migrate.min.js' />"></script>
    </head>
    <body class="home blog theme-fox woocommerce-no-js has-sidebar sidebar-right layout-wide style--dropcap-default dropcap-style-default style--dropcap-font-heading style--tag-plain style--list-widget-1 style--tagcloud-1 style--blockquote-no-icon style--single-heading-border_top style--link-2 elementor-default elementor-kit-6" itemscope>
       <div id="wi-all" class="fox-outer-wrapper fox-all wi-all">
       <div id="wi-wrapper" class="fox-wrapper wi-wrapper">
       <div class="wi-container">
-      <jsp:include page="themes/fragments/header.fragment.jsp"/>
+      
+      <!-- HEADER FRAGMENT -->
+      <jsp:include page="/WEB-INF/views/client/fragments/header.fragment.jsp"/>
+      
       <div id="masthead-mobile" class="masthead-mobile">
          <div class="container">
             <div class="masthead-mobile-left masthead-mobile-part">
@@ -3181,79 +3192,8 @@
                      </div>
                   </div>
                </div>
-               <footer id="wi-footer" class="site-footer">
-                  <div id="footer-widgets" class="footer-widgets footer-sidebar footer-sidebar-1-1 skin-light stretch-content valign-middle">
-                     <div class="container">
-                        <div class="footer-widgets-inner footer-widgets-row">
-                           <aside class="widget-area footer-col col-1-2">
-                              <div class="footer-col-inner">
-                                 <div id="footer-logo-1" class="widget widget_footer_logo">
-                                    <div id="footer-logo" class="footer-bottom-element">
-                                       <a href="https://timeswriter.xyz" rel="home">
-                                       <img width="900" height="140" src="https://timeswriter.xyz/assets/uploads/1/images/logo/times.png" class="attachment-full size-full" alt="" loading="lazy" srcset="https://timeswriter.xyz/assets/uploads/1/images/logo/times.png">
-                                       </a>
-                                    </div>
-                                 </div>
-                                 <div id="copyright-2" class="widget widget_copyright">
-                                    <div class="footer-copyright copyright footer-bottom-element">
-                                       <p>© 2021 Trang tin tự động cập nhật các tin tức Việt Nam và thế giới từ các báo và trang tin điện tử hàng đầu<br>
-                                          ALL RIGHTS RESERVED.
-                                       </p>
-                                    </div>
-                                 </div>
-                                 <div id="footer-nav-1" class="widget footer_widget_nav">
-                                    <nav id="footernav" class="footernav footer-bottom-element" role="navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
-                                       <div class="menu">
-                                          <ul id="menu-footer" class="menu">
-                                             <li id="menu-item-7" class="menu-item menu-item-7">
-                                                <a href="/page/about">About</a>
-                                             </li>
-                                             <li id="menu-item-9" class="menu-item menu-item-9">
-                                                <a href="/page/help">Help</a>
-                                             </li>
-                                             <li id="menu-item-8" class="menu-item menu-item-8">
-                                                <a href="/page/privacy">Privacy</a>
-                                             </li>
-                                             <li id="menu-item-10" class="menu-item menu-item-10">
-                                                <a href="/page/terms">Terms</a>
-                                             </li>
-                                             <li id="menu-item-11" class="menu-item menu-item-11">
-                                                <a href="/page/lien-he">Contact</a>
-                                             </li>
-                                          </ul>
-                                       </div>
-                                    </nav>
-                                 </div>
-                              </div>
-                           </aside>
-                           <aside class="widget-area footer-col col-1-2">
-                              <div class="footer-col-inner">
-                                 <div id="mc4wp_form_widget-2" class="widget widget_mc4wp_form_widget">
-                                    <form id="mc4wp-form-1" class="mc4wp-form mc4wp-form-491" method="post" action="https://timeswriter.xyz">
-                                       <input type="hidden" name="action" value="subscribe">
-                                       <div class="mc4wp-form-fields">
-                                          <div class="fox-form-inline-wrapper">
-                                             <div class="fox-form-inline">
-                                                <p>
-                                                   <input type="email" name="email" placeholder="Your email address" required="">
-                                                </p>
-                                                <p>
-                                                   <input type="submit" id="submit" value="Đăng Ký Nhận Tin">
-                                                </p>
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <div class="mc4wp-response">
-                                          <div class="mc4wp-alert mc4wp-success" role="alert"></div>
-                                       </div>
-                                    </form>
-                                 </div>
-                              </div>
-                           </aside>
-                        </div>
-                     </div>
-                  </div>
-               </footer>
+               <!-- FOOTER FRAGMENT -->
+				<jsp:include page="/WEB-INF/views/client/fragments/footer.fragment.jsp"/>
             </div>
             <div class="wrapper-bg-element"></div>
             <div class="wrapper-border-top hand-border-h wrapper-border"></div>
@@ -3388,7 +3328,8 @@
       <script id='wi-main-js-extra'>
          var WITHEMES = {"enable_sticky_sidebar":"","enable_sticky_header":"1","tablet_breakpoint":"840","enable_lightbox":"1"};
       </script>
-      <script src="https://timeswriter.xyz/themes/assets/js/theme.min.js?v=0403013" id='wi-main-js'></script>
+      
+      <script src="<c:url value='./public/client/js/theme.min.js' />"></script>
       <script>
          (function($){
             $("body").on("submit", ".mc4wp-form", function(){

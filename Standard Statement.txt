@@ -1,0 +1,44 @@
+/****************************************************************
+ *@author Phong
+ *Thu muc public chua toan bo css & javascript cua du an nay
+ * +asset doi ten thanh client
+ * +resource doi ten thanh admin
+ *
+ *Trong nay chua nhung cau lenh tieu chuan de su dung
+ *Cho ... de dien duong dan | gia tri | bieu thuc thich hop
+ ****************************************************************/
+ 
+ 
+ 
+/*************************PUBLIC DIRECTORY STRUCTURE************************
+--public
+	|--admin
+		|--css
+		|--fonts
+		|--images
+		|--js
+		|--pages
+		|--uploads
+	|--client
+		|--css
+		|--js
+		|--vendor
+		+style.css
+		+style.min.css
+****************************************************************/
+
+
+
+/*************************STANDARD STATMENT*************************/
+<!--- TAG LIBRARY --->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+
+<!--- CSS & JAVASCRIPT --->
+<link rel='stylesheet' href="<c:url value='./public/...'/>"/>
+
+<script src="<c:url value='./public/...' />"></script>
+
+
+

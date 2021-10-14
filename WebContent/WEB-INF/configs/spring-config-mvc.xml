@@ -17,7 +17,11 @@
 	
 	<!-- Spring MVC Annotation -->
 	<context:annotation-config />
+	
+	
+	<!-- Dinh nghia duong dan mac dinh cho PUBLIC -->
 	<mvc:annotation-driven/>
+	<mvc:resources mapping="/public/**" location="/WebContent/public"/>
 	
 	<!-- Cấu hình view -->
 	<bean id="viewResolver" 
