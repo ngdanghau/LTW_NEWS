@@ -4,12 +4,12 @@
 
 - [**Table of contents**](#table-of-contents)
 - [**Topic**](#topic)
-
+- [**Our Team](#our-team)
 # [**Topic**](#topic)
 
 Chủ đề của nhóm mình là xây dựng một trang tin tức tổng hợp như kenh14.vn, tinhte.vn, dantri.com
 
-# [**Our Team**](#our team)
+# [**Our Team**](#our-team)
 <table>
     <tr>
      <td align="center">
