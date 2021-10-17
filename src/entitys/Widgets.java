@@ -14,8 +14,8 @@ import javax.persistence.Table;
 public class Widgets {
 
 	@Id @GeneratedValue
-	@Column(name="Id")
-	private int id;
+	@Column(name="WIDGET_ID")
+	private int widget_id;
 		
 	@Column(name="TITLE")
 	private String title;
@@ -39,12 +39,12 @@ public class Widgets {
 		this.categorie = categorie;
 	}
 
-	public int getId() {
-		return id;
+	public int getWidgetId() {
+		return widget_id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setWidgetId(int id) {
+		this.widget_id = id;
 	}
 
 	public String getTitle() {

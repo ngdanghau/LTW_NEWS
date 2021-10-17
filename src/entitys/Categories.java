@@ -14,13 +14,13 @@ import javax.persistence.Table;
 @Table(name="CATEGORIES")
 public class Categories {
 	@Id @GeneratedValue
-	@Column(name="ID")
-	private int id;
+	@Column(name="CAT_ID")
+	private int cat_id;
 	
-	@OneToMany(mappedBy="categorie", fetch=FetchType.EAGER) // MAP BY Categorie nằm trong CAT_POST ko phải class Categories
+	@OneToMany(mappedBy="category", fetch=FetchType.EAGER) // MAP BY Category nằm trong CAT_POST ko phải class Categories
 	private Collection<Cat_Post> cat;
 	
-	@OneToMany(mappedBy="categorie", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="category", fetch=FetchType.EAGER)
 	private Collection<Widgets> widget;
 	
 	@Column(name="NAME")
@@ -35,12 +35,12 @@ public class Categories {
 	@Column(name="PARENT")
 	private int parent;
 	
-	public int getId() {
-		return id;
+	public int getCatId() {
+		return cat_id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setCatId(int id) {
+		this.cat_id = id;
 	}
 
 	public Collection<Cat_Post> getCat() {

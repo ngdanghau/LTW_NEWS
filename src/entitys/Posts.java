@@ -21,8 +21,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name="POSTS")
 public class Posts {
 	@Id @GeneratedValue
-	@Column(name="Id")
-	private int id;
+	@Column(name="POST_ID")
+	private int post_id;
 	
 	@ManyToOne
 	@JoinColumn(name="USER_ID",referencedColumnName="ID") 
@@ -78,12 +78,12 @@ public class Posts {
 	@Column(name="SOURCE")
 	private long source;
 
-	public int getId() {
-		return id;
+	public int getPostId() {
+		return post_id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setPostId(int id) {
+		this.post_id = id;
 	}
 
 	public Users getUser() {

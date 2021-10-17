@@ -33,7 +33,7 @@ public class Cat_Post {
 	
 	@ManyToOne
 	@JoinColumn(name="CAT_ID")
-	private Categories categorie;
+	private Categories category;
 	
 	
 
@@ -46,11 +46,11 @@ public class Cat_Post {
 	}
 
 	public Categories getCategorie() {
-		return categorie;
+		return category;
 	}
 
-	public void setCategorie(Categories categorie) {
-		this.categorie = categorie;
+	public void setCategory(Categories category) {
+		this.category = category;
 	}
 
 	
