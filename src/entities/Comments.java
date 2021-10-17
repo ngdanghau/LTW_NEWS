@@ -1,4 +1,4 @@
-package entitys;
+package entities;
 
 import java.util.Date;
 
@@ -22,7 +22,7 @@ public class Comments {
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name="POST_ID",referencedColumnName="ID")
+	@JoinColumn(name="POST_ID")
 	private Posts post;
 
 	@Column(name="COMMENT_AUTHOR")

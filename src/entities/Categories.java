@@ -1,4 +1,4 @@
-package entitys;
+package entities;
 
 import java.util.Collection;
 
@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Table(name="CATEGORIES")
 public class Categories {
 	@Id @GeneratedValue
-	@Column(name="CAT_ID")
-	private int cat_id;
+	@Column(name="ID")
+	private int id;
 	
 	@OneToMany(mappedBy="category", fetch=FetchType.EAGER) // MAP BY Category nằm trong CAT_POST ko phải class Categories
 	private Collection<Cat_Post> cat;
@@ -35,12 +35,12 @@ public class Categories {
 	@Column(name="PARENT")
 	private int parent;
 	
-	public int getCatId() {
-		return cat_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setCatId(int id) {
-		this.cat_id = id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Collection<Cat_Post> getCat() {

@@ -1,4 +1,4 @@
-package entitys;
+package entities;
 
 
 import javax.persistence.Column;
@@ -14,15 +14,15 @@ import javax.persistence.Table;
 public class Widgets {
 
 	@Id @GeneratedValue
-	@Column(name="WIDGET_ID")
-	private int widget_id;
+	@Column(name="ID")
+	private int id;
 		
 	@Column(name="TITLE")
 	private String title;
 	
 	@ManyToOne
-	@JoinColumn(name="CAT_ID",referencedColumnName="ID")
-	private Categories categorie;
+	@JoinColumn(name="CAT_ID", referencedColumnName="ID")
+	private Categories category;
 	
 	@Column(name="LAYOUT")
 	private String layout;
@@ -31,20 +31,20 @@ public class Widgets {
 	private int order_widget;
 
 	
-	public Categories getCategorie() {
-		return categorie;
+	public Categories getCategory() {
+		return category;
 	}
 
-	public void setCategorie(Categories categorie) {
-		this.categorie = categorie;
+	public void setCategory(Categories category) {
+		this.category = category;
 	}
 
-	public int getWidgetId() {
-		return widget_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setWidgetId(int id) {
-		this.widget_id = id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTitle() {

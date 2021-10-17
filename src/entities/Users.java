@@ -1,4 +1,4 @@
-package entitys;
+package entities;
 
 import java.util.Collection;
 import java.util.Date;
@@ -11,8 +11,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name="USERS")
 public class Users {
 	@Id @GeneratedValue
-	@Column(name="USER_ID")
-	private int user_id;
+	@Column(name="ID")
+	private int id;
 	
 	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
 	private Collection<Pages> page;
@@ -68,12 +68,12 @@ public class Users {
 	@Column(name="VIEWER")
 	private int viewer;
 
-	public int getUserId() {
-		return user_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setUserId(int id) {
-		this.user_id = id;
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public Collection<Posts> getPost() {

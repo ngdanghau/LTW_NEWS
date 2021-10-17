@@ -17,7 +17,7 @@
       <link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
       <link rel='stylesheet' id='wi-fonts-css' href='https://fonts.googleapis.com/css?family=Libre+Franklin%3A400%2C400italic%2C900%7CTinos%3A400%2C400italic%2C700%7CLora%3A400&#038;display=swap&#038;ver=4.6.7.1' media='all' />
       
-      
+     
       <!-- Trong tep tin spring-config-mvc da dinh nghia public mac dinh -->
       <link rel='stylesheet' href="<c:url value='./public/client/style.min.css'/>" >
       <link rel='stylesheet' href="<c:url value='./public/client/style.css'/>" > 

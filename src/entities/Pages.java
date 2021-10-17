@@ -1,4 +1,4 @@
-package entitys;
+package entities;
 
 import java.util.Date;
 
@@ -18,11 +18,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name="PAGES")
 public class Pages {
 	@Id @GeneratedValue
-	@Column(name="CAT_ID")
-	private int cat_id;
+	@Column(name="ID")
+	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name="USER_ID",referencedColumnName="ID")
+	@JoinColumn(name="USER_ID", referencedColumnName="ID")
 	private Users user;
 
 	@Column(name="TITLE")
@@ -53,12 +53,12 @@ public class Pages {
 	@Column(name="MODIFIED_AT")
 	private Date modified_at;
 
-	public int getCatId() {
-		return cat_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setCatId(int id) {
-		this.cat_id = id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Users getUser() {
