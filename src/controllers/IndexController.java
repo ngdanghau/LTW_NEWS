@@ -1,4 +1,4 @@
-package ptithcm.controller;
+package controllers;
 
 import javax.transaction.Transactional;
 

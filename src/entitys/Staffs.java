@@ -1,4 +1,4 @@
-package ptithcm.entity;
+package entitys;
 
 
 import java.util.Collection;
@@ -33,7 +33,7 @@ public class Staffs {
 	@Column(name="DepartId")
 	private String departId;
 	@ManyToOne
-	@JoinColumn(name="departId")
+	@JoinColumn(name="departId",referencedColumnName="ID")
 	private Departs depart;
 	
 	@OneToMany(mappedBy="staff", fetch=FetchType.EAGER)

@@ -1,4 +1,4 @@
-package ptithcm.entity;
+package entitys;
 
 import java.util.Collection;
 import javax.persistence.*;
