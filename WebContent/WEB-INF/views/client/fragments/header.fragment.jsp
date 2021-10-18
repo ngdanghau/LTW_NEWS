@@ -26,7 +26,7 @@
             <nav id="wi-mainnav" class="navigation-ele wi-mainnav" role="navigation">
                <div class="menu style-indicator-plus">
                   <ul id="menu-primary" class="menu">
-                  		<c:forEach var="m" items="${list}">
+                  		<c:forEach var="m" items="${listMenuHeader}">
 	                  		<li id="menu-item-${m.menu.id}" class="${m.children != null && m.children.size() > 0 ? 'menu-item-has-children' : ''}">
 		                        <a href="${m.menu.target}">${m.menu.title}</a>
 		                        	<c:if test = "${m.children != null && m.children.size() > 0}">

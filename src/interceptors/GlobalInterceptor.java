@@ -44,8 +44,11 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 			}
 			list.add(menu);
 		}
+		request.setAttribute("listMenuHeader", list);
 		
-		request.setAttribute("list", list);
+		
+		List<Menu> listMenuFooter = getMenu(1, 0);
+		request.setAttribute("listMenuFooter", listMenuFooter);
 	
 		return true;
 	}

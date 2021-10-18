@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+   
 <footer id="wi-footer" class="site-footer">
    <div id="footer-widgets" class="footer-widgets footer-sidebar footer-sidebar-1-1 skin-light stretch-content valign-middle">
       <div class="container">
@@ -24,21 +26,11 @@
                      <nav id="footernav" class="footernav footer-bottom-element" role="navigation">
                         <div class="menu">
                            <ul id="menu-footer" class="menu">
-                              <li id="menu-item-7" class="menu-item menu-item-7">
-                                 <a href="/page/about">About</a>
-                              </li>
-                              <li id="menu-item-9" class="menu-item menu-item-9">
-                                 <a href="/page/help">Help</a>
-                              </li>
-                              <li id="menu-item-8" class="menu-item menu-item-8">
-                                 <a href="/page/privacy">Privacy</a>
-                              </li>
-                              <li id="menu-item-10" class="menu-item menu-item-10">
-                                 <a href="/page/terms">Terms</a>
-                              </li>
-                              <li id="menu-item-11" class="menu-item menu-item-11">
-                                 <a href="/page/lien-he">Contact</a>
-                              </li>
+	                           <c:forEach var="m" items="${listMenuFooter}">
+			                  		<li id="menu-item-${m.id}">
+				                        <a href="${m.target}">${m.title}</a>
+				                     </li>
+								</c:forEach>
                            </ul>
                         </div>
                      </nav>
