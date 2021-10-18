@@ -73,10 +73,10 @@ public class Posts {
 	private String featured;
 	
 	@Column(name="EXTERNAL_ID")
-	private long external_id;
+	private String external_id;
 
 	@Column(name="SOURCE")
-	private long source;
+	private String source;
 
 	public int getId() {
 		return id;
@@ -190,19 +190,19 @@ public class Posts {
 		this.featured = featured;
 	}
 
-	public long getExternal_id() {
+	public String getExternal_id() {
 		return external_id;
 	}
 
-	public void setExternal_id(long external_id) {
+	public void setExternal_id(String external_id) {
 		this.external_id = external_id;
 	}
 
-	public long getSource() {
+	public String getSource() {
 		return source;
 	}
 
-	public void setSource(long source) {
+	public void setSource(String source) {
 		this.source = source;
 	}
 	

@@ -10,14 +10,14 @@
                <div class="footer-col-inner">
                   <div id="footer-logo-1" class="widget widget_footer_logo">
                      <div id="footer-logo" class="footer-bottom-element">
-                        <a href="https://timeswriter.xyz" rel="home">
-                        <img width="900" height="140" src="https://timeswriter.xyz/assets/uploads/1/images/logo/times.png" class="attachment-full size-full" alt="" loading="lazy" srcset="https://timeswriter.xyz/assets/uploads/1/images/logo/times.png">
+                        <a href="${HOMEURL }" rel="home">
+                        <img width="900" height="140" src="${ SettingsData.getLogotype() }" class="attachment-full size-full" alt="" loading="lazy" srcset="${ SettingsData.getLogotype() }">
                         </a>
                      </div>
                   </div>
                   <div id="copyright-2" class="widget widget_copyright">
                      <div class="footer-copyright copyright footer-bottom-element">
-                        <p>© 2021 Trang tin tự động cập nhật các tin tức Việt Nam và thế giới từ các báo và trang tin điện tử hàng đầu<br>
+                        <p>© ${ currentYear } ${ SettingsData.getSite_description() }<br>
                            ALL RIGHTS RESERVED.
                         </p>
                      </div>

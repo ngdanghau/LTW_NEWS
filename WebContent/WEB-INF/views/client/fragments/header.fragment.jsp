@@ -10,12 +10,12 @@
             <div id="logo-area" class="fox-logo-area fox-header-logo site-branding">
                <div id="wi-logo" class="fox-logo-container">
                   <h1 class="wi-logo-main fox-logo logo-type-image" id="site-logo">
-                     <a href="https://timeswriter.xyz" rel="home">
-                     <img width="744" height="90" src="https://timeswriter.xyz/assets/uploads/1/images/logo/times.png" class="main-img-logo" alt="" loading="lazy" srcset="https://timeswriter.xyz/assets/uploads/1/images/logo/times.png" />
+                     <a href="${HOMEURL}" rel="home">
+                     <img width="744" height="90" src="${ SettingsData.getLogotype() }" class="main-img-logo" alt="" loading="lazy" srcset="${ SettingsData.getLogotype() }" />
                      </a>
                   </h1>
                </div>
-               <h3 class="slogan site-description">Tin tức nóng nhất, tin tức mới nhất cập nhật liên tục 24H</h3>
+               <h3 class="slogan site-description">${ SettingsData.getSite_slogan() }</h3>
             </div>
            <jsp:include page="searchform.fragment.jsp"/>
             <jsp:include page="social.fragment.jsp"/>

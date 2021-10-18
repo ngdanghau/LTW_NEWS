@@ -34,21 +34,7 @@
       <!-- HEADER FRAGMENT -->
       <jsp:include page="/WEB-INF/views/client/fragments/header.fragment.jsp"/>
       
-      <div id="masthead-mobile" class="masthead-mobile">
-         <div class="container">
-            <div class="masthead-mobile-left masthead-mobile-part">
-               <a class="toggle-menu hamburger hamburger-btn">
-               <i class="fa fa-bars ic-hamburger"></i> <i class="feather-x"></i>
-               </a>
-            </div>
-            <h4 id="mobile-logo" class="mobile-logo mobile-logo-image">
-               <a href="https://timeswriter.xyz" rel="home">
-               <img width="744" height="90" src="https://timeswriter.xyz/assets/uploads/1/images/logo/times.png" class="attachment-full size-full" alt="" loading="lazy" srcset="https://timeswriter.xyz/assets/uploads/1/images/logo/times.png" />
-               </a>
-            </h4>
-         </div>
-         <div class="masthead-mobile-bg"></div>
-      </div>
+      <jsp:include page="/WEB-INF/views/client/fragments/logo.fragment.jsp"/>
       <div id="wi-main" class="wi-main fox-main">
       <div class="wi-content content">
       <div id="wi-bf" class="all-sections wi-homepage-builder sections-spacing-normal">
