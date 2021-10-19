@@ -11,7 +11,7 @@
                   <div id="footer-logo-1" class="widget widget_footer_logo">
                      <div id="footer-logo" class="footer-bottom-element">
                         <a href="${HOMEURL }" rel="home">
-                        <img width="900" height="140" src="${ SettingsData.getLogotype() }" class="attachment-full size-full" alt="" loading="lazy" srcset="${ SettingsData.getLogotype() }">
+                        <img width="900" height="140" class="attachment-full size-full" alt="" loading="lazy" srcset="${ SettingsData.getLogotype() }">
                         </a>
                      </div>
                   </div>
