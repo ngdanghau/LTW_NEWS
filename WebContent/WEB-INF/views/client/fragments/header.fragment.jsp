@@ -28,14 +28,14 @@
                   <ul id="menu-primary" class="menu">
                   		<c:forEach var="m" items="${listMenuHeader}">
 	                  		<li id="menu-item-${m.menu.id}" class="${m.children != null && m.children.size() > 0 ? 'menu-item-has-children' : ''}">
-		                        <a href="${m.menu.target}">${m.menu.title}</a>
+		                        <a href="${APPURL}${m.menu.target}">${m.menu.title}</a>
 		                        	<c:if test = "${m.children != null && m.children.size() > 0}">
 							          	<ul class="sub-menu">
 							      	</c:if>
 							      
 							      	<c:forEach var="c" items="${m.children}">
 							      		<li id="menu-item-${c.id}">
-			                              <a href="${c.target}">${c.title}</a>
+			                              <a href="${APPURL}${c.target}">${c.title}</a>
 			                           </li>
 			                      	</c:forEach>
 			                      	
