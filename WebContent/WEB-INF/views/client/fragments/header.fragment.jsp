@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
    pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-<base href="${pageContext.servletContext.contextPath}/">
-
+   
 <header id="masthead" class="site-header header-classic header-sticky-style-border submenu-light">
    <div id="masthead-mobile-height"></div>
    <div class="header-container header-stack3 header-nav-top-1 header-nav-bottom-1">
@@ -27,18 +26,16 @@
             <nav id="wi-mainnav" class="navigation-ele wi-mainnav" role="navigation">
                <div class="menu style-indicator-plus">
                   <ul id="menu-primary" class="menu">
-                  
                   		<c:forEach var="m" items="${listMenuHeader}">
 	                  		<li id="menu-item-${m.menu.id}" class="${m.children != null && m.children.size() > 0 ? 'menu-item-has-children' : ''}">
-		                        <a href="${ APPURL }${m.menu.target}.htm">${m.menu.title}</a>
-		                        
+		                        <a href="${APPURL}${m.menu.target}">${m.menu.title}</a>
 		                        	<c:if test = "${m.children != null && m.children.size() > 0}">
 							          	<ul class="sub-menu">
 							      	</c:if>
 							      
 							      	<c:forEach var="c" items="${m.children}">
 							      		<li id="menu-item-${c.id}">
-			                              <a href="${APPURL }${c.target}.htm">${c.title}</a>
+			                              <a href="${APPURL}${c.target}">${c.title}</a>
 			                           </li>
 			                      	</c:forEach>
 			                      	
