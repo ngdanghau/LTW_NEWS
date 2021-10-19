@@ -31,15 +31,11 @@
 		                        <a href="${APPURL}${m.menu.target}">${m.menu.title}</a>
 		                        	<c:if test = "${m.children != null && m.children.size() > 0}">
 							          	<ul class="sub-menu">
-							      	</c:if>
-							      
-							      	<c:forEach var="c" items="${m.children}">
-							      		<li id="menu-item-${c.id}">
-			                              <a href="${APPURL}${c.target}">${c.title}</a>
-			                           </li>
-			                      	</c:forEach>
-			                      	
-			                      	<c:if test = "${m.children != null && m.children.size() > 0}">
+									      	<c:forEach var="c" items="${m.children}">
+									      		<li id="menu-item-${c.id}">
+					                              <a href="${APPURL}${c.target}">${c.title}</a>
+					                           </li>
+					                      	</c:forEach>
 							          	</ul>
 							      	</c:if>
 		                     </li>

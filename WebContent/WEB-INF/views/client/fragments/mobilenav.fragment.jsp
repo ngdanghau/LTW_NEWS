@@ -24,10 +24,9 @@
                   		<!-- MENU PARENT -->
                   		<li class="menu-item menu-item-${ element.menu.id } ${element.children != null && element.children.size() > 0 ? 'menu-item-has-children' : ''}">
                         	<a href="${ APPURL }${element.menu.target}.htm"> ${ element.menu.title } </a>
-                     	</li>
-                  		
-	                  			<!-- MENU CHILDREN -->
+                        	<!-- MENU CHILDREN -->
 		                  		<c:if test="${ element.children != null && element.children.size() > 0}">
+		                  			<span class="indicator"><i class="indicator-ic"></i></span>
 		                  			<ul class="sub-menu">
 		                  				<c:forEach var="e" items="${ element.children }">
 			                  				<li id="menu-item-${ e.id }" class="menu-item-object-category menu-item menu-item-${ e.id }">
@@ -36,6 +35,8 @@
 		                  				</c:forEach>
 		                  			</ul>
 		                  		</c:if>
+                     	</li>
+	                  			
 	                  		
                   	</c:forEach>
                   		
