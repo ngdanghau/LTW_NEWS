@@ -14,12 +14,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.General_Data;
 import entities.Menu;
+import entities.Posts;
 import models.MenuModel;
 import models.SettingsData;
 
@@ -39,25 +41,27 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		return list;
 	}
 	
-	public void setMenu(HttpServletRequest request) {
+	public void setMenu(HttpServletRequest request) 
+	{
 		// get Menu
-				List<Menu> listParent = getMenu(0, 0);
-				
-				List<MenuModel> list = new ArrayList<MenuModel>();
-				for(Menu item: listParent) {
-					MenuModel menu = new MenuModel();
-					menu.setMenu(item);
-					List<Menu> listChildren = getMenu(0, item.getId());
-					if(listChildren != null && listChildren.size() > 0) {
-						menu.setChildren(listChildren);
-					}
-					list.add(menu);
-				}
-				request.setAttribute("listMenuHeader", list);
-				
-				
-				List<Menu> listMenuFooter = getMenu(1, 0);
-				request.setAttribute("listMenuFooter", listMenuFooter);
+		List<Menu> listParent = getMenu(0, 0);
+		
+		List<MenuModel> list = new ArrayList<MenuModel>();
+		
+		for(Menu item: listParent) {
+			MenuModel menu = new MenuModel();
+			menu.setMenu(item);
+			List<Menu> listChildren = getMenu(0, item.getId());
+			if(listChildren != null && listChildren.size() > 0) {
+				menu.setChildren(listChildren);
+			}
+			list.add(menu);
+		}
+		request.setAttribute("listMenuHeader", list);
+		
+		
+		List<Menu> listMenuFooter = getMenu(1, 0);
+		request.setAttribute("listMenuFooter", listMenuFooter);
 	}
 	
 	public void setAppUrl(HttpServletRequest request) {
@@ -107,4 +111,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		
 		return true;
 	}
+	
+	
+	
 }

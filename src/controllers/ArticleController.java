@@ -29,12 +29,14 @@ public class ArticleController {
 	SessionFactory factory;
 	
 	@SuppressWarnings("unchecked")
-	public Posts getPost(int post_id){
+	public Posts getPost(int post_id)
+	{
 		Session session = factory.getCurrentSession();
 		String hql = "FROM Posts WHERE id = :id"; 
 		Query query = session.createQuery(hql); 
 		query.setParameter("id", post_id);
-		try {
+		try 
+		{
 			Posts post = (Posts) query.list().get(0);
 			return post;
 		}catch(Exception ex) {
@@ -49,7 +51,7 @@ public class ArticleController {
 	 * @return
 	 ***************************************************/
 	
-	@RequestMapping(value = "{post_id}-{post_slug}", method = RequestMethod.GET)
+	@RequestMapping(value = "{post_id}/{post_slug}", method = RequestMethod.GET)
 	public String update(ModelMap model, @PathVariable("post_id") int post_id, @PathVariable("post_slug") String post_slug){
 //		Session session = factory.getCurrentSession();
 //		Posts post = (Posts) session.get(Posts.class, post_id);		

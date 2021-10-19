@@ -15,7 +15,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="CAT_POST")
 public class Cat_Post {
-	@Id @GeneratedValue
+	@Id 
+	@GeneratedValue
 	@Column(name="ID")
 	private int id;	
 	

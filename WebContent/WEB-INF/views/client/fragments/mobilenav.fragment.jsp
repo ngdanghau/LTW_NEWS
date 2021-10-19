@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-    
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<base href="${pageContext.servletContext.contextPath}/">
     <div id="offcanvas" class="offcanvas offcanvas-light">
          <div class="offcanvas-inner">
             <div class="offcanvas-search offcanvas-element">
@@ -16,75 +18,29 @@
             <nav id="mobilenav" class="offcanvas-nav offcanvas-element">
                <div class="menu">
                   <ul id="menu-primary-1" class="menu">
-                     <li class="menu-item menu-item-4 ">
-                        <a href="/category/the-gioi">Thế Giới</a>
-                     </li>
-                     <li class="menu-item menu-item-5 menu-item-has-children">
-                        <a href="/category/xa-hoi">Xã Hội</a>
-                        <span class="indicator"><i class="indicator-ic"></i></span>
-                        <ul class="sub-menu">
-                           <li id="menu-item-12" class="menu-item-object-category menu-item menu-item-12">
-                              <a href="/category/thoi-su">Thời Sự</a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li class="menu-item menu-item-3 menu-item-has-children">
-                        <a href="/category/van-hoa">Văn Hoá</a>
-                        <span class="indicator"><i class="indicator-ic"></i></span>
-                        <ul class="sub-menu">
-                           <li id="menu-item-6" class="menu-item-object-category menu-item menu-item-6">
-                              <a href="/category/nghe-thuat">Nghệ Thuật</a>
-                           </li>
-                           <li id="menu-item-28" class="menu-item-object-category menu-item menu-item-28">
-                              <a href="/category/am-thuc">Ẩm Thực</a>
-                           </li>
-                           <li id="menu-item-29" class="menu-item-object-category menu-item menu-item-29">
-                              <a href="/category/du-lich">Du Lịch</a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li class="menu-item menu-item-13 ">
-                        <a href="/category/kinh-te">Kinh Tế</a>
-                     </li>
-                     <li class="menu-item menu-item-14 menu-item-has-children">
-                        <a href="/category/giao-duc">Giáo Dục</a>
-                        <span class="indicator"><i class="indicator-ic"></i></span>
-                        <ul class="sub-menu">
-                           <li id="menu-item-15" class="menu-item-object-category menu-item menu-item-15">
-                              <a href="/category/hoc-bong-du-hoc">Học Bổng - Du Học</a>
-                           </li>
-                           <li id="menu-item-16" class="menu-item-object-category menu-item menu-item-16">
-                              <a href="/category/dao-tao-thi-cu">Đào Tạo - Thi Cử</a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li class="menu-item menu-item-21 ">
-                        <a href="/category/the-thao">Thể Thao</a>
-                     </li>
-                     <li class="menu-item menu-item-27 ">
-                        <a href="/category/phap-luat">Pháp Luật</a>
-                     </li>
-                     <li class="menu-item menu-item-22 menu-item-has-children">
-                        <a href="/category/giai-tri">Giải - Trí</a>
-                        <span class="indicator"><i class="indicator-ic"></i></span>
-                        <ul class="sub-menu">
-                           <li id="menu-item-23" class="menu-item-object-category menu-item menu-item-23">
-                              <a href="/category/am-nhac">Âm Nhạc</a>
-                           </li>
-                           <li id="menu-item-24" class="menu-item-object-category menu-item menu-item-24">
-                              <a href="/category/thoi-trang">Thời Trang</a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li class="menu-item menu-item-25 menu-item-has-children">
-                        <a href="/category/cong-nghe">Công Nghệ</a>
-                        <span class="indicator"><i class="indicator-ic"></i></span>
-                        <ul class="sub-menu">
-                           <li id="menu-item-26" class="menu-item-object-category menu-item menu-item-26">
-                              <a href="/category/vien-thong">Viễn Thông</a>
-                           </li>
-                        </ul>
-                     </li>
+                  	
+                  	<c:forEach var="element" items="${ listMenuHeader }">
+                  	
+                  		<!-- MENU PARENT -->
+                  		<li class="menu-item menu-item-${ element.menu.id } ${element.children != null && element.children.size() > 0 ? 'menu-item-has-children' : ''}">
+                        	<a href="${ APPURL }${element.menu.target}.htm"> ${ element.menu.title } </a>
+                     	</li>
+                  		
+	                  			<!-- MENU CHILDREN -->
+		                  		<c:if test="${ element.children != null && element.children.size() > 0}">
+		                  			<ul class="sub-menu">
+		                  				<c:forEach var="e" items="${ element.children }">
+			                  				<li id="menu-item-${ e.id }" class="menu-item-object-category menu-item menu-item-${ e.id }">
+			                              		<a href="${APPURL }${e.target}.htm">${ e.title }</a>
+			                           		</li>
+		                  				</c:forEach>
+		                  			</ul>
+		                  		</c:if>
+	                  		
+                  	</c:forEach>
+                  		
+                     
+                     
                   </ul>
                </div>
             </nav>

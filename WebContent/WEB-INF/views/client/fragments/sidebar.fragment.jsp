@@ -1,19 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-    <aside class="section-secondary section-sidebar secondary">
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ 
+ <aside class="section-secondary section-sidebar secondary">
    <div class="theiaStickySidebar">
       <div class="widget-area">
          <div id="latest-posts-1" class="widget widget_latest_posts">
             <h3 class="widget-title"><span>Tin Nóng</span></h3>
             <div class="wi-blog fox-blog blog-list blog-widget blog-widget-small v-spacing-small blog-card-has-shadow">
-               <article class="wi-post post-item post-list post-thumbnail-align-left post-valign-top list-mobile-layout-list post type-post status-publish format-standard has-post-thumbnail hentry category-opinion tag-article tag-breaking-news tag-publishing tag-times tag-travel tag-wp">
+               
+              <c:forEach var="element" items="${ mostPopularArticle }" begin="0" end="5">
+              
+              	<article class="wi-post post-item post-list post-thumbnail-align-left post-valign-top list-mobile-layout-list post type-post status-publish format-standard has-post-thumbnail hentry category-opinion tag-article tag-breaking-news tag-publishing tag-times tag-travel tag-wp">
                   <div class="post-list-sep" style="border-color:#eaeaea"></div>
                   <div class="post-item-inner list-inner post-list-inner">
                      <figure class="wi-thumbnail fox-thumbnail post-item-thumbnail fox-figure  list-thumbnail thumbnail-acute  hover-none">
                         <div class="thumbnail-inner">
-                           <a href="https://timeswriter.xyz/post/4270-hoa-hau-ky-duyen-ban-nude-tao-bao" class="post-link">
+                           <a href="${APPURL}/article/${element.id}/${element.post_slug}.htm" class="post-link">
                            <span class="image-element">
-                           <img width="480" height="480" src="https://nld.mediacdn.vn/291774122806476800/2021/5/23/base64-1621738866458764677429.png" class="attachment-thumbnail-square size-thumbnail-square" alt="" loading="lazy" srcset="https://nld.mediacdn.vn/291774122806476800/2021/5/23/base64-1621738866458764677429.png" />
+                           <img width="480" height="480" src="${ element.media }" class="attachment-thumbnail-square size-thumbnail-square" alt="" loading="lazy" srcset="${ element.media }" />
                            </span>
                            </a>
                         </div>
@@ -22,125 +27,22 @@
                         <div class="post-body-inner">
                            <div class="post-item-header">
                               <h3 class="post-item-title wi-post-title fox-post-title post-header-section latest-title size-tiny">
-                                 <a href="https://timeswriter.xyz/post/4270-hoa-hau-ky-duyen-ban-nude-tao-bao" rel="bookmark">
-                                 Hoa hậu Kỳ Duy&#234;n b&#225;n nude t&#225;o bạo </a>
+                                 <a href="${APPURL}/article/${element.id}/${element.post_slug}.htm" rel="bookmark">
+                                 ${ element.title } </a>
                               </h3>
                            </div>
                            <div class="post-item-excerpt entry-excerpt excerpt-size-normal" itemprop="text">
-                              <p>(NLĐO)- Loạt ảnh bán nude táo bạo trong bồn tắm của Hoa hậu Kỳ Duyên thu hút sự chú ý của cư dân mạng.</p>
+                              <p>${ element.excerpt }</p>
                            </div>
                         </div>
                      </div>
                   </div>
                </article>
-               <article class="wi-post post-item post-list post-thumbnail-align-left post-valign-top list-mobile-layout-list post type-post status-publish format-standard has-post-thumbnail hentry category-opinion tag-article tag-breaking-news tag-publishing tag-times tag-travel tag-wp">
-                  <div class="post-list-sep" style="border-color:#eaeaea"></div>
-                  <div class="post-item-inner list-inner post-list-inner">
-                     <figure class="wi-thumbnail fox-thumbnail post-item-thumbnail fox-figure  list-thumbnail thumbnail-acute  hover-none">
-                        <div class="thumbnail-inner">
-                           <a href="https://timeswriter.xyz/post/4420-thoi-hoi-tho-duong-dai-vao-nhac-xua" class="post-link">
-                           <span class="image-element">
-                           <img width="480" height="480" src="https://nld.mediacdn.vn/291774122806476800/2021/6/7/8-chot-16230746192951375857870.jpg" class="attachment-thumbnail-square size-thumbnail-square" alt="" loading="lazy" srcset="https://nld.mediacdn.vn/291774122806476800/2021/6/7/8-chot-16230746192951375857870.jpg" />
-                           </span>
-                           </a>
-                        </div>
-                     </figure>
-                     <div class="post-body post-item-body list-body post-list-body">
-                        <div class="post-body-inner">
-                           <div class="post-item-header">
-                              <h3 class="post-item-title wi-post-title fox-post-title post-header-section latest-title size-tiny">
-                                 <a href="https://timeswriter.xyz/post/4420-thoi-hoi-tho-duong-dai-vao-nhac-xua" rel="bookmark">
-                                 Thổi hơi thở đương đại v&#224;o nhạc xưa </a>
-                              </h3>
-                           </div>
-                           <div class="post-item-excerpt entry-excerpt excerpt-size-normal" itemprop="text">
-                              <p>Cover thời hiện tại không chỉ là hát lại mà là nỗ lực đem lại âm hưởng mới mẻ, trong lành từ nhạc xưa, giai điệu bất hủ</p>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </article>
-               <article class="wi-post post-item post-list post-thumbnail-align-left post-valign-top list-mobile-layout-list post type-post status-publish format-standard has-post-thumbnail hentry category-opinion tag-article tag-breaking-news tag-publishing tag-times tag-travel tag-wp">
-                  <div class="post-list-sep" style="border-color:#eaeaea"></div>
-                  <div class="post-item-inner list-inner post-list-inner">
-                     <figure class="wi-thumbnail fox-thumbnail post-item-thumbnail fox-figure  list-thumbnail thumbnail-acute  hover-none">
-                        <div class="thumbnail-inner">
-                           <a href="https://timeswriter.xyz/post/4128-tien-toi-thi-diem-don-khach-quoc-te" class="post-link">
-                           <span class="image-element">
-                           <img width="480" height="480" src="https://nld.mediacdn.vn/291774122806476800/2021/3/25/10-chot-10-16166790293392074085244.jpg" class="attachment-thumbnail-square size-thumbnail-square" alt="" loading="lazy" srcset="https://nld.mediacdn.vn/291774122806476800/2021/3/25/10-chot-10-16166790293392074085244.jpg" />
-                           </span>
-                           </a>
-                        </div>
-                     </figure>
-                     <div class="post-body post-item-body list-body post-list-body">
-                        <div class="post-body-inner">
-                           <div class="post-item-header">
-                              <h3 class="post-item-title wi-post-title fox-post-title post-header-section latest-title size-tiny">
-                                 <a href="https://timeswriter.xyz/post/4128-tien-toi-thi-diem-don-khach-quoc-te" rel="bookmark">
-                                 Tiến tới th&#237; điểm đ&#243;n kh&#225;ch quốc tế </a>
-                              </h3>
-                           </div>
-                           <div class="post-item-excerpt entry-excerpt excerpt-size-normal" itemprop="text">
-                              <p>Theo Tổng cục Du lịch, Nhật Bản, Hàn Quốc và vùng lãnh thổ Đài Loan là những thị trường quốc tế đang được nhắm tới kh...</p>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </article>
-               <article class="wi-post post-item post-list post-thumbnail-align-left post-valign-top list-mobile-layout-list post type-post status-publish format-standard has-post-thumbnail hentry category-opinion tag-article tag-breaking-news tag-publishing tag-times tag-travel tag-wp">
-                  <div class="post-list-sep" style="border-color:#eaeaea"></div>
-                  <div class="post-item-inner list-inner post-list-inner">
-                     <figure class="wi-thumbnail fox-thumbnail post-item-thumbnail fox-figure  list-thumbnail thumbnail-acute  hover-none">
-                        <div class="thumbnail-inner">
-                           <a href="https://timeswriter.xyz/post/4742-clip-bat-tai-tran-hon-12500kg-tom-bi-gian-thuong-bom-tap-chat" class="post-link">
-                           <span class="image-element">
-                           <img width="480" height="480" src="https://nld.mediacdn.vn/291774122806476800/2021/6/13/img16235043360491623546165483-1623548470772224634179-1623548580067989742070.jpg" class="attachment-thumbnail-square size-thumbnail-square" alt="" loading="lazy" srcset="https://nld.mediacdn.vn/291774122806476800/2021/6/13/img16235043360491623546165483-1623548470772224634179-1623548580067989742070.jpg" />
-                           </span>
-                           </a>
-                        </div>
-                     </figure>
-                     <div class="post-body post-item-body list-body post-list-body">
-                        <div class="post-body-inner">
-                           <div class="post-item-header">
-                              <h3 class="post-item-title wi-post-title fox-post-title post-header-section latest-title size-tiny">
-                                 <a href="https://timeswriter.xyz/post/4742-clip-bat-tai-tran-hon-12500kg-tom-bi-gian-thuong-bom-tap-chat" rel="bookmark">
-                                 CLIP: Bắt tại trận hơn 12.500kg t&#244;m bị gian thương bơm tạp chất </a>
-                              </h3>
-                           </div>
-                           <div class="post-item-excerpt entry-excerpt excerpt-size-normal" itemprop="text">
-                              <p>Hơn 12.500kg tôm sú bị gian thương bơm tạp chất Agar vào để tăng trọng lượng trước khi đến tay người tiêu dùng.</p>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </article>
-               <article class="wi-post post-item post-list post-thumbnail-align-left post-valign-top list-mobile-layout-list post type-post status-publish format-standard has-post-thumbnail hentry category-opinion tag-article tag-breaking-news tag-publishing tag-times tag-travel tag-wp">
-                  <div class="post-list-sep" style="border-color:#eaeaea"></div>
-                  <div class="post-item-inner list-inner post-list-inner">
-                     <figure class="wi-thumbnail fox-thumbnail post-item-thumbnail fox-figure  list-thumbnail thumbnail-acute  hover-none">
-                        <div class="thumbnail-inner">
-                           <a href="https://timeswriter.xyz/post/4510-nong-do-co2-cao-ky-luc-trong-4-trieu-nam-trai-dat-ngo-doc-nang" class="post-link">
-                           <span class="image-element">
-                           <img width="480" height="480" src="https://nld.mediacdn.vn/291774122806476800/2021/6/8/photo-1-16231456135951513357452.jpg" class="attachment-thumbnail-square size-thumbnail-square" alt="" loading="lazy" srcset="https://nld.mediacdn.vn/291774122806476800/2021/6/8/photo-1-16231456135951513357452.jpg" />
-                           </span>
-                           </a>
-                        </div>
-                     </figure>
-                     <div class="post-body post-item-body list-body post-list-body">
-                        <div class="post-body-inner">
-                           <div class="post-item-header">
-                              <h3 class="post-item-title wi-post-title fox-post-title post-header-section latest-title size-tiny">
-                                 <a href="https://timeswriter.xyz/post/4510-nong-do-co2-cao-ky-luc-trong-4-trieu-nam-trai-dat-ngo-doc-nang" rel="bookmark">
-                                 Nồng độ CO2 cao kỷ lục trong 4 triệu năm, tr&#225;i đất &quot;ngộ độc&quot; nặng </a>
-                              </h3>
-                           </div>
-                           <div class="post-item-excerpt entry-excerpt excerpt-size-normal" itemprop="text">
-                              <p>(NLĐO) – Mặc dù giao thông và các hoạt động thương mại sụt giảm đáng kể trong những tháng đầu của đại dịch Covid-19, ...</p>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </article>
+               
+              </c:forEach>
+               
+               
+               
             </div>
          </div>
          <div id="coronavirus-2" class="widget widget_coronavirus">

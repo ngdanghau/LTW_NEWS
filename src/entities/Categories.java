@@ -13,11 +13,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name="CATEGORIES")
 public class Categories {
-	@Id @GeneratedValue
+	@Id 
+	@GeneratedValue
 	@Column(name="ID")
 	private int id;
 	
-	@OneToMany(mappedBy="category", fetch=FetchType.EAGER) // MAP BY Category nằm trong CAT_POST ko phải class Categories
+	@OneToMany(mappedBy="category", fetch=FetchType.EAGER)// category nay nam trong Cat_Post
 	private Collection<Cat_Post> cat;
 	
 	@OneToMany(mappedBy="category", fetch=FetchType.EAGER)

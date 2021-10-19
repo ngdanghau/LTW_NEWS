@@ -29,16 +29,28 @@
 
 
 
+/**************************************************
+ * @author Phong
+ * 
+ * @return
+ **************************************************/
+
+
+
 /*************************STANDARD STATMENT*************************/
 <!--- TAG LIBRARY --->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
+<%@taglib prefix="format" uri="http://java.sun.com/jstl/fmt_rt" %>
+<%@tablib prefix="form" uri="http://www.springframeword.org/tags/form" %>
+<%@tablib prefix="spring" uri="http://www.springframeword.org/tags" %>
 
 <!--- CSS & JAVASCRIPT --->
 <link rel='stylesheet' href="<c:url value='./public/...'/>"/>
 
 <script src="<c:url value='./public/...' />"></script>
 
+<!-- THEM CSS VA JAVASCRIPT -->
+<base href="${pageContext.servletContext.contextPath}/"> dùng cái này thì không cần dùng <%@taglib prefix="c" %> nữa 
+Cú  pháp: <%@include file="..." %>
 
 
