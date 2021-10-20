@@ -1,10 +1,7 @@
 package controllers;
 
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 import javax.transaction.Transactional;
 
@@ -20,11 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import entities.General_Data;
 import entities.Posts;
 import entities.Users;
 import entities.Categories;
-import models.SettingsData;
 import models.UserSettings;
 
 @Transactional
@@ -60,11 +55,29 @@ public class ArticleController {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Categories> getListCategories(int postId)
 	{	
 		Session session = factory.getCurrentSession();
 		String hql = "SELECT c FROM Categories c, Cat_Post cp WHERE cp.category.id = c.id AND cp.post.id = :postId ORDER BY c.parent ASC"; 
 		Query query = session.createQuery(hql); 
+		query.setParameter("postId", postId);
+		try 
+		{
+			return query.list();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Posts> getRelatedPost(int postId, int limitPost){
+		Session session = factory.getCurrentSession();
+		String hql = "SELECT p FROM Posts p WHERE p.id != :postId ORDER BY RAND()"; 
+		Query query = session.createQuery(hql); 
+		query.setFirstResult(0);
+		query.setMaxResults(limitPost);
 		query.setParameter("postId", postId);
 		try 
 		{
@@ -87,13 +100,13 @@ public class ArticleController {
 		if(post == null) {
 			return "redirect:../index.htm";
 		}
-		DateFormat dateFormat = new SimpleDateFormat("dd MMMM, yyyy", new Locale("vi", "VN"));
-		model.addAttribute("dateFormat", dateFormat);
 		model.addAttribute("post", post);
 		
 		UserSettings settings = this.getUserSettings(post.getUser());
 		model.addAttribute("UserSettings", settings);
 		model.addAttribute("ListCategoriesPost", this.getListCategories(post.getId()));
+		model.addAttribute("ListRelatedPost", this.getRelatedPost(post.getId(), 4));
+		
 		return "client/article";
 	}
 }

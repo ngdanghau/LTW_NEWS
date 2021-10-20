@@ -8,7 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
       <script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
-      <title>Times Writer &#8211; Tin tức nóng nhất, tin tức mới nhất cập nhật liên tục 24H</title>
+      <title> ${ SettingsData.getSite_name() } - ${ SettingsData.getSite_slogan() }</title>
       
       <meta name='robots' content='max-image-preview:large' />
       <link rel='dns-prefetch' href='//fonts.googleapis.com' />
@@ -353,37 +353,7 @@
       </script>
       
       <script src="<c:url value='./public/client/js/theme.min.js' />"></script>
-      <script>
-         (function($){
-            $("body").on("submit", ".mc4wp-form", function(){
-               $form = $(this);
-               $form.find(".mc4wp-success").html("<p>Đang thực hiện....</p>");
-               $form.find("input#submit").prop('disabled', true);
-               $.ajax({
-                  url: $form.attr("action"),
-                  type: $form.attr("method"),
-                  dataType: 'jsonp',
-                  data: $form.serialize(),
-                  error: function() {
-                     $form.find("input#submit").prop('disabled', false);
-                     $form.find(".mc4wp-success").html("<p>Oops! Đã xảy ra lỗi. Vui lòng thử lại sau!</p>");
-                  },
-                  success: function(resp) {
-                     if (typeof resp.redirect === "string") {
-                           window.location.href = resp.redirect;
-                     } else if (typeof resp.msg === "string") {
-                           $form.find("input#submit").prop('disabled', false);
-                           $form.find(".mc4wp-success").html(resp.msg);
-                     } else {
-                           $form.find("input#submit").prop('disabled', false);
-                           $form.find(".mc4wp-success").html("<p>Oops! Đã xảy ra lỗi. Vui lòng thử lại sau!</p>");
-                     }
-                  }
-               });
-               return false;
-            })
-         })(jQuery);
-      </script> 
+      <jsp:include page="/WEB-INF/views/inc/javascript.jsp"/>
       <jsp:include page="/WEB-INF/views/inc/google-analytics.jsp"/>
    </body>
 </html>
