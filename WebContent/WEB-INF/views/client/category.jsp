@@ -9,9 +9,9 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="Tổng hợp sự kiện tin tức thế giới, biển đông, quốc tế mới nhất, nhanh nhất liên tục trong ngày" />
+      <meta name="description" content="${ category.description }" />
       <script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
-      <title>Thế Giới &#8211; Times Writer</title>
+      <title>${ category.name } &#8211; ${ SettingsData.getSite_name() }</title>
       <base href="${APPURL}/" />
       <link rel='dns-prefetch' href='//fonts.googleapis.com' />
       <link rel="icon" href="https://timeswriter.xyz/assets/images/favicon.ico" type="image/x-icon">
@@ -184,44 +184,7 @@
          var WITHEMES = {"enable_sticky_sidebar":"","enable_sticky_header":"1","tablet_breakpoint":"840","enable_lightbox":"1"};
       </script>
       <script src="<c:url value='./public/client/js/theme.min.js' />"></script>
-      <script>
-         (function($){
-            $("body").on("submit", ".mc4wp-form", function(){
-               $form = $(this);
-               $form.find(".mc4wp-success").html("<p>Đang thực hiện....</p>");
-               $form.find("input#submit").prop('disabled', true);
-               $.ajax({
-                  url: $form.attr("action"),
-                  type: $form.attr("method"),
-                  dataType: 'jsonp',
-                  data: $form.serialize(),
-                  error: function() {
-                     $form.find("input#submit").prop('disabled', false);
-                     $form.find(".mc4wp-success").html("<p>Oops! Đã xảy ra lỗi. Vui lòng thử lại sau!</p>");
-                  },
-                  success: function(resp) {
-                     if (typeof resp.redirect === "string") {
-                           window.location.href = resp.redirect;
-                     } else if (typeof resp.msg === "string") {
-                           $form.find("input#submit").prop('disabled', false);
-                           $form.find(".mc4wp-success").html(resp.msg);
-                     } else {
-                           $form.find("input#submit").prop('disabled', false);
-                           $form.find(".mc4wp-success").html("<p>Oops! Đã xảy ra lỗi. Vui lòng thử lại sau!</p>");
-                     }
-                  }
-               });
-               return false;
-            })
-         })(jQuery);
-      </script> <script>
-         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-         
-         ga('create', 'UA-199495229-1', 'auto');
-         ga('send', 'pageview');
-      </script>
+      <jsp:include page="/WEB-INF/views/inc/javascript.jsp"/>
+      <jsp:include page="/WEB-INF/views/inc/google-analytics.jsp"/>
    </body>
 </html>

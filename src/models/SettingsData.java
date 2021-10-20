@@ -3,6 +3,10 @@ package models;
 import java.io.Serializable;
 
 public class SettingsData implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String site_name;
 	private String site_slogan;
 	private String site_description;

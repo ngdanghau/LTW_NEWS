@@ -11,7 +11,7 @@
       <meta name='robots' content='max-image-preview:large' />
       <link rel='dns-prefetch' href='//fonts.googleapis.com' />
 	  <base href="${APPURL}/" />
-      <link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+      <link href='https://fonts.gstatic.com' rel='preconnect' />
       <link rel='stylesheet' id='wi-fonts-css' href='https://fonts.googleapis.com/css?family=Libre+Franklin%3A400%2C400italic%2C900%7CTinos%3A400%2C400italic%2C700%7CLora%3A400&#038;display=swap&#038;ver=4.6.7.1' media='all' />
       <link rel='stylesheet' href="<c:url value='./public/client/vendor/jquery/jquery.min.js'/>"/>
       <meta name="description" content="${ post.excerpt }" />
@@ -52,7 +52,11 @@
                                                    <div class="header-main narrow-area">
                                                       <div class="post-item-header">
                                                          <div class="entry-categories meta-categories categories-plain standalone-categories post-header-section">
-                                                            <a href="https://timeswriter.xyz/category/giao-duc" rel="tag">Giáo Dục</a>
+                                                            <c:forEach items="${ListCategoriesPost}" var="c"  varStatus="status">
+															    <a href="${APPURL }/category/${c.slug}" rel="tag">${c.name}</a>
+															    ${not status.last ? '<span class="sep">/</span>' : ''}
+															</c:forEach>
+                                                            
                                                          </div>
                                                          <div class="title-subtitle">
                                                             <h1 class="post-title post-item-title">${ post.title }</h1>
@@ -79,120 +83,10 @@
                                                   ${ post.content }
                                              </div>
                                              <p>Nguồn: <i>${ post.source }</i></p>
-                                             <div class="single-component single-component-share">
-                                                <div class="fox-share share-style-custom  color-custom background-custom hover-color-custom hover-background-custom share-icons-shape-circle size-small share-layout-stack">
-                                                   <span class="share-label"><i class="fa fa-share-alt"></i>Share this</span>
-                                                   <ul>
-                                                      <li class="li-share-facebook">
-                                                         <a href="https://www.facebook.com/sharer/sharer.php?u=${APPURL}/article/${ post.id }-${ post.post_slug }" title="Facebook" class="share share-facebook">
-                                                         <i class="fab fa-facebook-f"></i>
-                                                         <span>Facebook</span>
-                                                         </a>
-                                                      </li>
-                                                      <li class="li-share-messenger">
-                                                         <a href="https://www.facebook.com/dialog/send?app_id=794927004237856&#038;link=${APPURL}/article/${ post.id }-${ post.post_slug }&#038;redirect_uri=${APPURL}" title="Messenger" class="share share-messenger">
-                                                         <i class="fab fa-facebook-messenger"></i>
-                                                         <span>Messenger</span>
-                                                         </a>
-                                                      </li>
-                                                      <li class="li-share-twitter">
-                                                         <a href="https://twitter.com/intent/tweet?url=${APPURL}/article/${ post.id }-${ post.post_slug }&#038;text=${ post.title }" title="Twitter" class="share share-twitter">
-                                                         <i class="fab fa-twitter"></i>
-                                                         <span>Twitter</span>
-                                                         </a>
-                                                      </li>
-                                                      <li class="li-share-pinterest">
-                                                         <a href="https://pinterest.com/pin/create/button/?url=${APPURL}/article/${ post.id }-${ post.post_slug }&#038;description=${ post.title }" title="Pinterest" class="share share-pinterest">
-                                                         <i class="fab fa-pinterest-p"></i>
-                                                         <span>Pinterest</span>
-                                                         </a>
-                                                      </li>
-                                                      <li class="li-share-linkedin">
-                                                         <a href="https://www.linkedin.com/shareArticle?mini=true&#038;url=${APPURL}/article/${ post.id }-${ post.post_slug }&#038;title=${ post.title }" title="Linkedin" class="share share-linkedin">
-                                                         <i class="fab fa-linkedin-in"></i>
-                                                         <span>Linkedin</span>
-                                                         </a>
-                                                      </li>
-                                                      <li class="li-share-whatsapp">
-                                                         <a href="https://api.whatsapp.com/send?phone=&#038;text=${APPURL}/article/${ post.id }-${ post.post_slug }" title="Whatsapp" class="share share-whatsapp">
-                                                         <i class="fab fa-whatsapp"></i>
-                                                         <span>Whatsapp</span>
-                                                         </a>
-                                                      </li>
-                                                      <li class="li-share-reddit">
-                                                         <a href="https://www.reddit.com/submit?url=${APPURL}/article/${ post.id }-${ post.post_slug }&#038;title=${ post.title }" title="Reddit" class="share share-reddit">
-                                                         <i class="fab fa-reddit-alien"></i>
-                                                         <span>Reddit</span>
-                                                         </a>
-                                                      </li>
-                                                      <li class="li-share-email">
-                                                         <a href="mailto:?subject=${ post.title }&amp;body=${APPURL}/article/${ post.id }-${ post.post_slug }" title="Email" class="email-share">
-                                                         <i class="feather-mail"></i>
-                                                         <span>Email</span>
-                                                         </a>
-                                                      </li>
-                                                   </ul>
-                                                </div>
-                                             </div>
-                                             <div class="single-component single-component-authorbox">
-                                                <div class="fox-authorbox authorbox-simple authorbox-narrow">
-                                                   <div class="authorbox-inner">
-                                                      <div class="user-item-avatar authorbox-avatar avatar-circle">
-                                                         <a href="https://timeswriter.xyz/author/poleyi2417">
-                                                         <img alt='' src="https://timeswriter.xyz/assets/images/users/no-avatar.png" srcset='http://timeswriter.xyz/assets/images/users/no-avatar.png 2x' class='avatar avatar-300 photo' height='300' width='300' loading='lazy' />
-                                                         </a>
-                                                      </div>
-                                                      <div class="authorbox-text">
-                                                         <div class="fox-user-item authorbox-tab active authorbox-content" data-tab="author">
-                                                            <div class="user-item-body">
-                                                               <h3 class="user-item-name">
-                                                                  <a href="https://timeswriter.xyz/author/poleyi2417">Nancy M Seifert</a>
-                                                               </h3>
-                                                               <div class="user-item-description">
-                                                                  <p></p>
-                                                               </div>
-                                                               <div class="social-list user-item-social shape-circle style-plain">
-                                                                  <ul>
-                                                                     <li class="li-facebook">
-                                                                        <a href="#" target="_blank" rel="noopener" class="tooltipstered">
-                                                                        <i class="fab fa-facebook-square"></i>
-                                                                        </a>
-                                                                     </li>
-                                                                     <li class="li-pinterest">
-                                                                        <a href="#" target="_blank" rel="noopener" class="tooltipstered">
-                                                                        <i class="fab fa-pinterest-p"></i>
-                                                                        </a>
-                                                                     </li>
-                                                                     <li class="li-tumblr">
-                                                                        <a href="#" target="_blank" rel="noopener" class="tooltipstered">
-                                                                        <i class="fab fa-tumblr"></i>
-                                                                        </a>
-                                                                     </li>
-                                                                     <li class="li-vkontakte">
-                                                                        <a href="#" target="_blank" rel="noopener" class="tooltipstered">
-                                                                        <i class="fab fa-vk"></i>
-                                                                        </a>
-                                                                     </li>
-                                                                     <li class="li-whatsapp">
-                                                                        <a href="#" target="_blank" rel="noopener" class="tooltipstered">
-                                                                        <i class="fab fa-whatsapp"></i>
-                                                                        </a>
-                                                                     </li>
-                                                                     <li class="li-telegram">
-                                                                        <a href="#" target="_blank" rel="noopener" class="tooltipstered">
-                                                                        <i class="fab fa-telegram"></i>
-                                                                        </a>
-                                                                     </li>
-                                                                  </ul>
-                                                               </div>
-                                                            </div>
-                                                         </div>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                             </div>
+                                             <jsp:include page="./components/share.component.jsp"/>
+                                             <jsp:include page="./components/authorbox.component.jsp"/>
                                              <c:if test="${ post.comment_status }">
-                                             	<jsp:include page="./fragments/comment.fragment.jsp"/>
+                                             	<jsp:include page="./components/comment.component.jsp"/>
                                              </c:if>
                                           </div>
                                        </div>
@@ -202,131 +96,7 @@
                            </div>
                         </div>
                      </div>
-                     <div class="single-related-wrapper single-big-section single-bottom-section single-big-section-related">
-                        <div class="fox-related-posts">
-                           <div class="container">
-                              <h3 class="single-heading related-label related-heading">
-                                 <span>Tin liên quan</span>
-                              </h3>
-                              <div class="blog-container blog-container-grid">
-                                 <div class="wi-blog fox-blog blog-grid fox-grid blog-card-has-shadow column-4 spacing-small">
-                                    <article class="wi-post post-item post-grid fox-grid-item post-align-left post--thumbnail-before post-1396 post type-post status-publish format-standard has-post-thumbnail hentry category-travel tag-article tag-blog tag-gutenberg tag-instagram tag-times no-sidebar">
-                                       <div class="post-item-inner grid-inner post-grid-inner">
-                                          <figure class="wi-thumbnail fox-thumbnail post-item-thumbnail fox-figure  grid-thumbnail thumbnail-acute  hover-none thumbnail-loading effect-fade">
-                                             <div class="thumbnail-inner">
-                                                <a href="https://timeswriter.xyz/post/4948-cau-be-14-tuoi-tiem-vac-xin-covid-19-trung-hoc-bong-toan-phan" class="post-link">
-                                                <span class="image-element">
-                                                <img width="480" height="384" src="https://vnn-imgs-f.vgcloud.vn/2021/05/28/20/cau-be-14-tuoi-tiem-vac-xin-covid-19-trung-hoc-bong-toan-phan-1.jpg" class="attachment-thumbnail-medium size-thumbnail-medium" alt="" loading="lazy" />
-                                                </span>
-                                                </a>
-                                             </div>
-                                          </figure>
-                                          <div class="post-body post-item-body grid-body post-grid-body">
-                                             <div class="post-body-inner">
-                                                <div class="post-item-header">
-                                                   <div class="post-item-meta wi-meta fox-meta post-header-section ">
-                                                      <div class="entry-date meta-time machine-time time-short">
-                                                         <time class="published">29 Tháng năm, 2021</time>
-                                                      </div>
-                                                   </div>
-                                                   <h3 class="post-item-title wi-post-title fox-post-title post-header-section size-tiny">
-                                                      <a href="https://timeswriter.xyz/post/4948-cau-be-14-tuoi-tiem-vac-xin-covid-19-trung-hoc-bong-toan-phan" rel="bookmark">
-                                                      Cậu bé 14 tuổi trúng học bổng toàn phần sau tiêm vắc xin Covid-19 </a>
-                                                   </h3>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </article>
-                                    <article class="wi-post post-item post-grid fox-grid-item post-align-left post--thumbnail-before post-1396 post type-post status-publish format-standard has-post-thumbnail hentry category-travel tag-article tag-blog tag-gutenberg tag-instagram tag-times no-sidebar">
-                                       <div class="post-item-inner grid-inner post-grid-inner">
-                                          <figure class="wi-thumbnail fox-thumbnail post-item-thumbnail fox-figure  grid-thumbnail thumbnail-acute  hover-none thumbnail-loading effect-fade">
-                                             <div class="thumbnail-inner">
-                                                <a href="https://timeswriter.xyz/post/4947-co-gai-tot-nghiep-dh-thanh-hoa-bi-chi-trich-khi-lam-bao-mau" class="post-link">
-                                                <span class="image-element">
-                                                <img width="480" height="384" src="https://vnn-imgs-f.vgcloud.vn/2021/05/29/08/co-gai-tot-nghiep-dh-thanh-hoa-bi-chi-trich-khi-lam-bao-mau.jpg" class="attachment-thumbnail-medium size-thumbnail-medium" alt="" loading="lazy" />
-                                                </span>
-                                                </a>
-                                             </div>
-                                          </figure>
-                                          <div class="post-body post-item-body grid-body post-grid-body">
-                                             <div class="post-body-inner">
-                                                <div class="post-item-header">
-                                                   <div class="post-item-meta wi-meta fox-meta post-header-section ">
-                                                      <div class="entry-date meta-time machine-time time-short">
-                                                         <time class="published">30 Tháng năm, 2021</time>
-                                                      </div>
-                                                   </div>
-                                                   <h3 class="post-item-title wi-post-title fox-post-title post-header-section size-tiny">
-                                                      <a href="https://timeswriter.xyz/post/4947-co-gai-tot-nghiep-dh-thanh-hoa-bi-chi-trich-khi-lam-bao-mau" rel="bookmark">
-                                                      Cô gái tốt nghiệp ĐH Thanh Hoa bị chỉ trích vì đi làm quản gia </a>
-                                                   </h3>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </article>
-                                    <article class="wi-post post-item post-grid fox-grid-item post-align-left post--thumbnail-before post-1396 post type-post status-publish format-standard has-post-thumbnail hentry category-travel tag-article tag-blog tag-gutenberg tag-instagram tag-times no-sidebar">
-                                       <div class="post-item-inner grid-inner post-grid-inner">
-                                          <figure class="wi-thumbnail fox-thumbnail post-item-thumbnail fox-figure  grid-thumbnail thumbnail-acute  hover-none thumbnail-loading effect-fade">
-                                             <div class="thumbnail-inner">
-                                                <a href="https://timeswriter.xyz/post/4946-trai-nghiem-hoc-van-o-nuoc-my-cua-10x-tung-gianh-giai-nhat-quoc-gia" class="post-link">
-                                                <span class="image-element">
-                                                <img width="480" height="384" src="https://vnn-imgs-f.vgcloud.vn/2021/05/30/21/ava-2.jpg" class="attachment-thumbnail-medium size-thumbnail-medium" alt="" loading="lazy" />
-                                                </span>
-                                                </a>
-                                             </div>
-                                          </figure>
-                                          <div class="post-body post-item-body grid-body post-grid-body">
-                                             <div class="post-body-inner">
-                                                <div class="post-item-header">
-                                                   <div class="post-item-meta wi-meta fox-meta post-header-section ">
-                                                      <div class="entry-date meta-time machine-time time-short">
-                                                         <time class="published">31 Tháng năm, 2021</time>
-                                                      </div>
-                                                   </div>
-                                                   <h3 class="post-item-title wi-post-title fox-post-title post-header-section size-tiny">
-                                                      <a href="https://timeswriter.xyz/post/4946-trai-nghiem-hoc-van-o-nuoc-my-cua-10x-tung-gianh-giai-nhat-quoc-gia" rel="bookmark">
-                                                      10X từng giành giải Nhất quốc gia kể chuyện học Văn trên đất Mỹ </a>
-                                                   </h3>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </article>
-                                    <article class="wi-post post-item post-grid fox-grid-item post-align-left post--thumbnail-before post-1396 post type-post status-publish format-standard has-post-thumbnail hentry category-travel tag-article tag-blog tag-gutenberg tag-instagram tag-times no-sidebar">
-                                       <div class="post-item-inner grid-inner post-grid-inner">
-                                          <figure class="wi-thumbnail fox-thumbnail post-item-thumbnail fox-figure  grid-thumbnail thumbnail-acute  hover-none thumbnail-loading effect-fade">
-                                             <div class="thumbnail-inner">
-                                                <a href="https://timeswriter.xyz/post/4945-suc-manh-tu-cau-noi-co-khong-biet-cua-nu-gs-dh-duke" class="post-link">
-                                                <span class="image-element">
-                                                <img width="480" height="384" src="https://vnn-imgs-f.vgcloud.vn/2021/06/04/08/ava.jpg" class="attachment-thumbnail-medium size-thumbnail-medium" alt="" loading="lazy" />
-                                                </span>
-                                                </a>
-                                             </div>
-                                          </figure>
-                                          <div class="post-body post-item-body grid-body post-grid-body">
-                                             <div class="post-body-inner">
-                                                <div class="post-item-header">
-                                                   <div class="post-item-meta wi-meta fox-meta post-header-section ">
-                                                      <div class="entry-date meta-time machine-time time-short">
-                                                         <time class="published">04 Tháng sáu, 2021</time>
-                                                      </div>
-                                                   </div>
-                                                   <h3 class="post-item-title wi-post-title fox-post-title post-header-section size-tiny">
-                                                      <a href="https://timeswriter.xyz/post/4945-suc-manh-tu-cau-noi-co-khong-biet-cua-nu-gs-dh-duke" rel="bookmark">
-                                                      Sức mạnh từ câu nói 'Cô không biết' của nữ GS người Mỹ </a>
-                                                   </h3>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </article>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
+                      <jsp:include page="./components/related.component.jsp"/>
                   </article>
                </div>
                <!-- FOOTER FRAGMENT -->
@@ -350,42 +120,12 @@
             <span class="reading-progress-bar"></span>
          </div>
       </progress>
-      <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://timeswriter.xyz/themes/assets/js/comment-reply.min.js?v=0403013" id='wi-main-js'></script>
+      <script src="https://timeswriter.xyz/themes/assets/js/comment-reply.min.js?v=0403013" id='wi-main-js'></script>
       <script id='wi-main-js-extra'>
          var WITHEMES = {"enable_sticky_sidebar":"","enable_sticky_header":"1","tablet_breakpoint":"840","enable_lightbox":"1"};
       </script>
       <script src="<c:url value='./public/client/js/theme.min.js' />"></script>
-      <script>
-         (function($){
-            $("body").on("submit", ".mc4wp-form", function(){
-               $form = $(this);
-               $form.find(".mc4wp-success").html("<p>Đang thực hiện....</p>");
-               $form.find("input#submit").prop('disabled', true);
-               $.ajax({
-                  url: $form.attr("action"),
-                  type: $form.attr("method"),
-                  dataType: 'jsonp',
-                  data: $form.serialize(),
-                  error: function() {
-                     $form.find("input#submit").prop('disabled', false);
-                     $form.find(".mc4wp-success").html("<p>Oops! Đã xảy ra lỗi. Vui lòng thử lại sau!</p>");
-                  },
-                  success: function(resp) {
-                     if (typeof resp.redirect === "string") {
-                           window.location.href = resp.redirect;
-                     } else if (typeof resp.msg === "string") {
-                           $form.find("input#submit").prop('disabled', false);
-                           $form.find(".mc4wp-success").html(resp.msg);
-                     } else {
-                           $form.find("input#submit").prop('disabled', false);
-                           $form.find(".mc4wp-success").html("<p>Oops! Đã xảy ra lỗi. Vui lòng thử lại sau!</p>");
-                     }
-                  }
-               });
-               return false;
-            })
-         })(jQuery);
-      </script>
+      <jsp:include page="/WEB-INF/views/inc/javascript.jsp"/>
       <jsp:include page="/WEB-INF/views/inc/google-analytics.jsp"/>
    </body>
 </html>
