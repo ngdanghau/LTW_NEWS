@@ -3,7 +3,6 @@ package controllers;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -34,7 +33,7 @@ import models.UserSettings;
 public class ArticleController {
 	@Autowired
 	SessionFactory factory;
-	@SuppressWarnings("unchecked")
+	
 	public Posts getPost(int post_id)
 	{
 		Session session = factory.getCurrentSession();
