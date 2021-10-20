@@ -18,11 +18,8 @@ public class Categories {
 	@Column(name="ID")
 	private int id;
 	
-	@OneToMany(mappedBy="category", fetch=FetchType.EAGER)// category nay nam trong Cat_Post
-	private Collection<Cat_Post> cat;
-	
 	@OneToMany(mappedBy="category", fetch=FetchType.EAGER)
-	private Collection<Widgets> widget;
+	private Collection<Cat_Post> cat;
 	
 	@Column(name="NAME")
 	private String name;
@@ -50,14 +47,6 @@ public class Categories {
 
 	public void setCat(Collection<Cat_Post> cat) {
 		this.cat = cat;
-	}
-
-	public Collection<Widgets> getWidget() {
-		return widget;
-	}
-
-	public void setWidget(Collection<Widgets> widget) {
-		this.widget = widget;
 	}
 
 	public String getName() {
