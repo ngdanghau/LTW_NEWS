@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.General_Data;
 import entities.Menu;
+import entities.Posts;
 import models.MenuModel;
 import models.SettingsData;
 
@@ -153,6 +154,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 	 * 
 	 * du lieu nay do vao /WEB-INF/views/client/fragment/sidebar.fragment.jsp
 	 **************************************************/
+	@SuppressWarnings("unchecked")
 	public void retriveMostPopularArticle(HttpServletRequest request)
 	{
 		/*Step 1*/
@@ -168,7 +170,14 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		request.setAttribute("mostPopularArticle", list);
 	}
 	
-	
+	/**
+	 * Hàm để khai báo một biến Date Format chung cho toàn bộ web
+	 * @param request
+	 */
+	public void setDateFormat(HttpServletRequest request) {
+		DateFormat dateFormat = new SimpleDateFormat("dd MMMM, yyyy", new Locale("vi", "VN"));
+		request.setAttribute("dateFormat", dateFormat);
+	}
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object Handler) throws Exception{
@@ -180,7 +189,4 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		setDateFormat(request);	
 		return true;
 	}
-	
-	
-	
 }

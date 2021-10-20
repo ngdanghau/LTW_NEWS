@@ -23,20 +23,6 @@ public class InformationPageController {
 	@Autowired
 	SessionFactory factory;
 	
-	/* **************************************************
-	 * @author Phong
-	 * 
-	 * InformationPageController de xu ly cac trang thong tin ngoai le nhu: 
-	 * ABOUT, HELP, PRIVACY, TERMS,CONTACT
-	 * ***************************************************/
-	@RequestMapping("informationPage")
-	public String informationPage()
-	{
-		return "client/informationPage";
-	}
-	
-	
-	
 	/**************************************************
 	 * @author Phong
 	 * 
@@ -46,6 +32,7 @@ public class InformationPageController {
 	 * 
 	 * @return
 	 **************************************************/
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="page/{slug}", method = RequestMethod.GET)
 	public String retrievePageBySlug(ModelMap modelMap, @PathVariable("slug") String slug)
 	{
@@ -60,9 +47,11 @@ public class InformationPageController {
 		
 		/*Step 3*/
 		List<Pages> list = query.list();
-		modelMap.addAttribute("page", list.get(0));
-		
-		
+		try {
+			modelMap.addAttribute("page", list.get(0));
+		}catch(Exception ex){
+			return "redirect:../index.htm";
+		}
 		return "client/informationPage";
 	}
 }

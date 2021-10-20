@@ -26,16 +26,6 @@ public class CategoryController {
 	@Autowired
 	SessionFactory factory;
 	
-	
-	
-	@RequestMapping("category")
-	public String category()
-	{
-		return "client/category";
-	}
-	
-	
-	
 	/*************************************************
 	 * @author Phong
 	 * Step 1: khoi tao cau truy van
@@ -49,28 +39,25 @@ public class CategoryController {
 	 * @return lay ra cac bai viet theo theo loai @param slug
 	 *************************************************/
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value="category/{slug}", method=RequestMethod.GET)
 	public String retrieveArticlesByCategory(HttpServletRequest request ,ModelMap modelMap, @PathVariable("slug") String slug)
 	{
 		/*Step 1*/
 		Session session = factory.getCurrentSession();
 		
+		/*Step 2*/
+		Categories category = retrieveCategory(slug);
+		
+		/*Step 3*/
 		String hql = "SELECT p "
 				+ "FROM Categories c, Posts p, Cat_Post cp "
 				+ "WHERE cp.category.id = c.id "
-				+ "AND cp.post.id = p.id "
-				+ "AND c.slug = :slug";
+				+ "AND cp.category.id = :catId";
 		
-		
-		/*Step 2*/
 		Query query = session.createQuery(hql);
-		query.setParameter("slug", slug);
-		
-		
-		/*Step 3*/
-		@SuppressWarnings("unchecked")
+		query.setParameter("catId", category.getId());
 		List<Posts> list = query.list();
-		Categories category = retrieveCategory(slug);
 		
 		/*PAGINATION*/
 		PagedListHolder pagedListHolder = new PagedListHolder(list);
@@ -100,6 +87,7 @@ public class CategoryController {
 	 * du lieu do vao /WEB-INF/views/client/category.jsp
 	 *********************************************/
 	
+	@SuppressWarnings("unchecked")
 	@ModelAttribute("category")
 	public Categories retrieveCategory(String slug)
 	{

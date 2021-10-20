@@ -110,16 +110,8 @@
          </div>
       </div>
       <jsp:include page="./fragments/mobilenav.fragment.jsp"/>
-      <div id="offcanvas-bg" class="offcanvas-bg"></div>
-      <div class="offcanvas-overlay" id="offcanvas-overlay"></div>
-      <div id="backtotop" class="backtotop fox-backtotop scrollup backtotop-circle backtotop-icon">
-         <span class="btt-icon"><i class="feather-chevrons-up"></i></span>
-      </div>
-      <progress value="0" class="reading-progress-wrapper position-top">
-         <div class="progress-container">
-            <span class="reading-progress-bar"></span>
-         </div>
-      </progress>
+      <jsp:include page="./fragments/topup.fragment.jsp"/>
+      <jsp:include page="./fragments/progress.fragment.jsp"/>
       <script src="https://timeswriter.xyz/themes/assets/js/comment-reply.min.js?v=0403013" id='wi-main-js'></script>
       <script id='wi-main-js-extra'>
          var WITHEMES = {"enable_sticky_sidebar":"","enable_sticky_header":"1","tablet_breakpoint":"840","enable_lightbox":"1"};

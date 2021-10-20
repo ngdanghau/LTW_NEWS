@@ -18,7 +18,7 @@
       <link rel='dns-prefetch' href='//fonts.googleapis.com' />
       <link rel="icon" href="https://timeswriter.xyz/assets/images/favicon.ico" type="image/x-icon">
       <link rel="shortcut icon" href="https://timeswriter.xyz/assets/images/favicon.ico" type="image/x-icon">
-      <link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+      <link href='https://fonts.gstatic.com' rel='preconnect' />
       <link rel='stylesheet' id='wi-fonts-css' href='https://fonts.googleapis.com/css?family=Libre+Franklin%3A400%2C400italic%2C900%7CTinos%3A400%2C400italic%2C700%7CLora%3A400&#038;display=swap&#038;ver=4.6.7.1' media='all' />
       <link rel='stylesheet' href="<c:url value='./public/client/style.min.css'/>"/>
       <link rel='stylesheet' href="<c:url value='./public/client/style.css'/>"/>
@@ -51,50 +51,47 @@
          </div>
       </div>
       <div class="toparea">
-      <div class="container">
-         <div class="blog-container blog-container-vertical">
-            <div class="wi-blog fox-blog blog-vertical">
-            
-            <!-- SHOW ARTICLE -->
-            <c:forEach var="element" items="${ categoryPost }" begin="0" end="0">
-            	<article class="wi-post post-item post-vertical post-thumbnail-align-left  post type-post status-publish format-standard has-post-thumbnail hentry category-books category-opinion tag-facebook tag-magazine tag-politics tag-travel tag-wordpress">
-                  <div class="post-item-inner vertical-inner post-vertical-inner">
-                     <figure class="wi-thumbnail fox-thumbnail post-item-thumbnail fox-figure  vertical-thumbnail thumbnail-acute  hover-none thumbnail-loading effect-fade">
-                        <div class="thumbnail-inner">
-                           <a href="${APPURL}/article/${element.id}/${element.post_slug}.htm" class="post-link">
-                           <span class="image-element">
-                           <img width="1024" height="695" class="attachment-large size-large" alt="" loading="lazy" srcset="${element.media }" />
-                           </span>
-                           </a>
-                        </div>
-                     </figure>
-                     <div class="post-body post-item-body vertical-body post-vertical-body">
-                        <div class="post-body-inner">
-                           <div class="post-item-header">
-                              <div class="entry-categories meta-categories categories-plain standalone-categories post-header-section">
-                                 <a href="${APPURL }/category/${category.slug}.htm" rel="tag">${ category.name }</a>
-                              </div>
-                              <h2 class="post-item-title wi-post-title fox-post-title post-header-section post-vertical-title size-large">
-                                 <a href="${APPURL}/article/${element.id}/${element.post_slug}.htm" rel="bookmark">
-                                 	${ element.title }
-                                 </a>
-                              </h2>
-                           </div>
-                           <div class="post-item-excerpt entry-excerpt excerpt-size-medium post-vertical-content">
-                              <p></p>
-                           </div>
-                           <div class="post-item-meta wi-meta fox-meta post-header-section ">
-                              <div class="entry-date meta-time machine-time time-short">
-                                 <time class="published"><fmt:formatDate value="${element.modified_at}" pattern="dd-MM-yyyy"/></time>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-               </article>
-            </c:forEach>
-               
-               
-               
+      	<div class="container">
+         	<div class="blog-container blog-container-vertical">
+            	<div class="wi-blog fox-blog blog-vertical">
+		            <!-- SHOW ARTICLE -->
+		            <c:forEach var="element" items="${ categoryPost }" begin="0" end="0">
+		            	<article class="wi-post post-item post-vertical post-thumbnail-align-left  post type-post status-publish format-standard has-post-thumbnail hentry category-books category-opinion tag-facebook tag-magazine tag-politics tag-travel tag-wordpress">
+		                  <div class="post-item-inner vertical-inner post-vertical-inner">
+		                     <figure class="wi-thumbnail fox-thumbnail post-item-thumbnail fox-figure  vertical-thumbnail thumbnail-acute  hover-none thumbnail-loading effect-fade">
+		                        <div class="thumbnail-inner">
+		                           <a href="${APPURL}/article/${element.id}/${element.post_slug}.htm" class="post-link">
+		                           <span class="image-element">
+		                           <img width="1024" height="695" class="attachment-large size-large" alt="" loading="lazy" srcset="${element.media }" />
+		                           </span>
+		                           </a>
+		                        </div>
+		                     </figure>
+		                     <div class="post-body post-item-body vertical-body post-vertical-body">
+		                        <div class="post-body-inner">
+		                           <div class="post-item-header">
+		                              <div class="entry-categories meta-categories categories-plain standalone-categories post-header-section">
+		                                 <a href="${APPURL }/category/${category.slug}.htm" rel="tag">${ category.name }</a>
+		                              </div>
+		                              <h2 class="post-item-title wi-post-title fox-post-title post-header-section post-vertical-title size-large">
+		                                 <a href="${APPURL}/article/${element.id}/${element.post_slug}.htm" rel="bookmark">
+		                                 	${ element.title }
+		                                 </a>
+		                              </h2>
+		                           </div>
+		                           <div class="post-item-excerpt entry-excerpt excerpt-size-medium post-vertical-content">
+		                              <p></p>
+		                           </div>
+		                           <div class="post-item-meta wi-meta fox-meta post-header-section ">
+		                              <div class="entry-date meta-time machine-time time-short">
+		                                 <time class="published"><fmt:formatDate value="${element.modified_at}" pattern="dd-MM-yyyy"/></time>
+		                              </div>
+		                           </div>
+		                        </div>
+		                     </div>
+		                  </div>
+		               </article>
+		            </c:forEach>
                </div>
             </div>
          </div>
@@ -119,35 +116,36 @@
                		<article class="wi-post post-item post-list post-thumbnail-align-left post-valign-top list-mobile-layout-list  post type-post status-publish format-standard has-post-thumbnail hentry category-books category-opinion tag-facebook tag-magazine tag-politics tag-travel tag-wordpress">
                      	<div class="post-list-sep" style="border-color:#eaeaea"></div>
                      	<div class="post-item-inner list-inner post-list-inner">
-                        <figure class="wi-thumbnail fox-thumbnail post-item-thumbnail fox-figure  list-thumbnail thumbnail-acute  hover-none thumbnail-loading effect-fade" style="width:240px">
-                           <div class="thumbnail-inner">
-                              <a href="${APPURL}/article/${element.id}/${element.post_slug}.htm" class="post-link">
-                              <span class="image-element">
-                              <img width="480" height="384" class="attachment-thumbnail-medium size-thumbnail-medium" alt="" loading="lazy" srcset="${element.media }" />
-                              </span>
-                              </a>
-                           </div>
-                        </figure>
-                        <div class="post-body post-item-body list-body post-list-body">
-                           <div class="post-body-inner">
-                              <div class="post-item-header">
-                                 <div class="entry-categories meta-categories categories-plain standalone-categories post-header-section">
-                                    <a href="${ APPURL }/category/${category.slug}.htm" rel="tag"> ${ category.name }</a>
-                                 </div>
-                                 <h2 class="post-item-title wi-post-title fox-post-title post-header-section size-normal">
-                                    <a href="${APPURL}/article/${element.id}/${element.post_slug}.htm" rel="bookmark">
-                                    	${ element.title } </a>
-                                 </h2>
-                              </div>
-                              <div class="post-item-excerpt entry-excerpt excerpt-size-normal">
-                                 <p> ${ element.excerpt} </p>
-                              </div>
-                              <div class="post-item-meta wi-meta fox-meta post-header-section ">
-                                 <div class="entry-date meta-time machine-time time-short">
-                                    <time class="published"><fmt:formatDate value="${element.modified_at}" pattern="dd-MM-yyyy"/></time>	
-                                 </div>
-                              </div>
-                           </div>
+	                        <figure class="wi-thumbnail fox-thumbnail post-item-thumbnail fox-figure  list-thumbnail thumbnail-acute  hover-none thumbnail-loading effect-fade" style="width:240px">
+	                           <div class="thumbnail-inner">
+	                              <a href="${APPURL}/article/${element.id}/${element.post_slug}.htm" class="post-link">
+	                              <span class="image-element">
+	                              <img width="480" height="384" class="attachment-thumbnail-medium size-thumbnail-medium" alt="" loading="lazy" srcset="${element.media }" />
+	                              </span>
+	                              </a>
+	                           </div>
+	                        </figure>
+	                        <div class="post-body post-item-body list-body post-list-body">
+	                           <div class="post-body-inner">
+	                              <div class="post-item-header">
+	                                 <div class="entry-categories meta-categories categories-plain standalone-categories post-header-section">
+	                                    <a href="${ APPURL }/category/${category.slug}.htm" rel="tag"> ${ category.name }</a>
+	                                 </div>
+	                                 <h2 class="post-item-title wi-post-title fox-post-title post-header-section size-normal">
+	                                    <a href="${APPURL}/article/${element.id}/${element.post_slug}.htm" rel="bookmark">
+	                                    	${ element.title } </a>
+	                                 </h2>
+	                              </div>
+	                              <div class="post-item-excerpt entry-excerpt excerpt-size-normal">
+	                                 <p> ${ element.excerpt} </p>
+	                              </div>
+	                              <div class="post-item-meta wi-meta fox-meta post-header-section ">
+	                                 <div class="entry-date meta-time machine-time time-short">
+	                                    <time class="published"><fmt:formatDate value="${element.modified_at}" pattern="dd-MM-yyyy"/></time>	
+	                                 </div>
+	                              </div>
+	                           </div>
+	                        </div>
                         </div>
                   </article>
                </c:forEach>
@@ -160,16 +158,6 @@
                 <!-- PAGINGATION -->
                 <tg:paging pagedListHolder="${pagedListHolder}"
 				pagedLink="${pagedLink}" />
-                
-				<!-- <div class="wi-pagination fox-pagination font-heading pagination-3">
-				   <div class="pagination-inner">
-				      <span aria-current="page" class="page-numbers current"><span>1</span></span>
-				      <a class="page-numbers" href="/category/the-gioi?page=2"><span>2</span></a>
-				      <a class="page-numbers" href="/category/the-gioi?page=3"><span>3</span></a>
-				      <a class="next page-numbers" href="/category/the-gioi?page=2"><span>Tiến</span></a>
-				      <a class="next page-numbers" href="/category/the-gioi?page=13"><span>Cuối</span></a>
-				   </div>
-				</div> -->
 				
 			</div>
 		</div>
@@ -192,11 +180,7 @@
          </div>
       </div>
      	<jsp:include page="./fragments/mobilenav.fragment.jsp"/>
-      <div id="offcanvas-bg" class="offcanvas-bg"></div>
-      <div class="offcanvas-overlay" id="offcanvas-overlay"></div>
-      <div id="backtotop" class="backtotop fox-backtotop scrollup backtotop-circle backtotop-icon">
-         <span class="btt-icon"><i class="feather-chevrons-up"></i></span>
-      </div>
+      <jsp:include page="./fragments/topup.fragment.jsp"/>
       <script id='wi-main-js-extra'>
          var WITHEMES = {"enable_sticky_sidebar":"","enable_sticky_header":"1","tablet_breakpoint":"840","enable_lightbox":"1"};
       </script>

@@ -1,16 +1,13 @@
 package entities;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,12 +24,7 @@ public class Posts {
 	@ManyToOne
 	@JoinColumn(name="USER_ID", referencedColumnName="ID") 
 	private Users user; 		
-	
-	@OneToMany(mappedBy="post", fetch=FetchType.EAGER)
-	private Collection<Comments> comment;
-	
-	@OneToMany(mappedBy="post", fetch=FetchType.EAGER)
-	private Collection<Cat_Post> cat;
+
 	
 
 	@Temporal(TemporalType.DATE)
@@ -92,14 +84,6 @@ public class Posts {
 
 	public void setUser(Users user) {
 		this.user = user;
-	}
-
-	public Collection<Comments> getComment() {
-		return comment;
-	}
-
-	public void setComment(Collection<Comments> comment) {
-		this.comment = comment;
 	}
 
 	public Date getCreated_at() {
