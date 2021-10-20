@@ -4,6 +4,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 
+<%@taglib prefix="tg" tagdir="/WEB-INF/tags" %>
+
 <!DOCTYPE html>
 <html lang="vi" class="no-js">
    <head>
@@ -115,12 +117,21 @@
       <div class="content-area primary" id="primary" role="main">
          <div class="theiaStickySidebar">
             <div class="blog-container blog-container-list">
-               <div class="wi-blog fox-blog blog-list v-spacing-small blog-card-has-shadow">
+            	
+              <div class="wi-blog fox-blog blog-list v-spacing-small blog-card-has-shadow">
                
-               <c:forEach var="element" items="${ categoryPost }" begin="0" end="5">
+               <!-- PAGINGATION -->
+            	<jsp:useBean id="pagedListHolder" scope="request" type="org.springframework.beans.support.PagedListHolder"/>
+				<c:url value="category/${category.slug }.htm" var="pagedLink">
+					<c:param name="p" value="~" />
+				</c:url>
+               
+               <%-- <c:forEach var="element" items="${ categoryPost }" begin="0" end="5"> --%>
+               <c:forEach var="element" items="${ pagedListHolder.pageList }">
+               
                		<article class="wi-post post-item post-list post-thumbnail-align-left post-valign-top list-mobile-layout-list  post type-post status-publish format-standard has-post-thumbnail hentry category-books category-opinion tag-facebook tag-magazine tag-politics tag-travel tag-wordpress">
-                     <div class="post-list-sep" style="border-color:#eaeaea"></div>
-                     <div class="post-item-inner list-inner post-list-inner">
+                     	<div class="post-list-sep" style="border-color:#eaeaea"></div>
+                     	<div class="post-item-inner list-inner post-list-inner">
                         <figure class="wi-thumbnail fox-thumbnail post-item-thumbnail fox-figure  list-thumbnail thumbnail-acute  hover-none thumbnail-loading effect-fade" style="width:240px">
                            <div class="thumbnail-inner">
                               <a href="${APPURL}/article/${element.id}/${element.post_slug}.htm" class="post-link">
@@ -153,23 +164,29 @@
                         </div>
                   </article>
                </c:forEach>
-                  
-                  
-                  
-                  
-                </div>
-					<div class="wi-pagination fox-pagination font-heading pagination-3">
-					   <div class="pagination-inner">
-					      <span aria-current="page" class="page-numbers current"><span>1</span></span>
-					      <a class="page-numbers" href="/category/the-gioi?page=2"><span>2</span></a>
-					      <a class="page-numbers" href="/category/the-gioi?page=3"><span>3</span></a>
-					      <a class="next page-numbers" href="/category/the-gioi?page=2"><span>Tiến</span></a>
-					      <a class="next page-numbers" href="/category/the-gioi?page=13"><span>Cuối</span></a>
-					   </div>
-					</div>
-					</div>
-					</div>
-					</div>
+               
+			</div>
+                
+                
+                
+                
+                <!-- PAGINGATION -->
+                <tg:paging pagedListHolder="${pagedListHolder}"
+				pagedLink="${pagedLink}" />
+                
+				<!-- <div class="wi-pagination fox-pagination font-heading pagination-3">
+				   <div class="pagination-inner">
+				      <span aria-current="page" class="page-numbers current"><span>1</span></span>
+				      <a class="page-numbers" href="/category/the-gioi?page=2"><span>2</span></a>
+				      <a class="page-numbers" href="/category/the-gioi?page=3"><span>3</span></a>
+				      <a class="next page-numbers" href="/category/the-gioi?page=2"><span>Tiến</span></a>
+				      <a class="next page-numbers" href="/category/the-gioi?page=13"><span>Cuối</span></a>
+				   </div>
+				</div> -->
+				
+			</div>
+		</div>
+	</div>
                   
                   <!-- SIDE BAR FRAGMENT -->
                   <jsp:include page="./fragments/sidebar.fragment.jsp"/>
