@@ -29,7 +29,7 @@ Chủ đề của nhóm mình là xây dựng một trang tin tức tổng hợp
         </a>
     </td>
       <td align="center">
-        <a href="#">
+        <a href="https://github.com/nhoxkhang2014">
             <img src="https://scontent.fsgn2-4.fna.fbcdn.net/v/t1.6435-9/101085441_2669062526716502_5253087195937374208_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=o6V2zNJ6Z3QAX-1C3kU&_nc_oc=AQkQOMz0BfnjuMOZGebAyPJN__-Qv6Ca1f_QkrnYozW68nlKfiE3Z50ycYQRN5AjxaA&tn=m7OqlQBtbCs2zL_g&_nc_ht=scontent.fsgn2-4.fna&oh=737287f13dc240a09e5d97bd7b3c8334&oe=6189C71A" width="100px;" alt=""/>
             <br />
             <sub><b>Lương Đình Khang</b></sub>
