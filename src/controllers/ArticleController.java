@@ -19,7 +19,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import entities.General_Data;
 import entities.Posts;
+import entities.Users;
+import entities.Categories;
+import models.SettingsData;
+import models.UserSettings;
 
 @Transactional
 @Controller
@@ -27,7 +34,6 @@ import entities.Posts;
 public class ArticleController {
 	@Autowired
 	SessionFactory factory;
-	
 	@SuppressWarnings("unchecked")
 	public Posts getPost(int post_id)
 	{
@@ -45,6 +51,31 @@ public class ArticleController {
 		}
 	}
 	
+	public UserSettings getUserSettings(Users user)
+	{
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.readValue(user.getSettings(), UserSettings.class);
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	public List<Categories> getListCategories(int postId)
+	{	
+		Session session = factory.getCurrentSession();
+		String hql = "SELECT c FROM Categories c, Cat_Post cp WHERE cp.category.id = c.id AND cp.post.id = :postId ORDER BY c.parent ASC"; 
+		Query query = session.createQuery(hql); 
+		query.setParameter("postId", postId);
+		try 
+		{
+			return query.list();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	
 	/***************************************************
 	 * @author Phong
 	 * ArticleController chuyen xu ly hien thi cho mot bai viet
@@ -52,9 +83,7 @@ public class ArticleController {
 	 ***************************************************/
 	
 	@RequestMapping(value = "{post_id}/{post_slug}", method = RequestMethod.GET)
-	public String update(ModelMap model, @PathVariable("post_id") int post_id, @PathVariable("post_slug") String post_slug){
-//		Session session = factory.getCurrentSession();
-//		Posts post = (Posts) session.get(Posts.class, post_id);		
+	public String update(ModelMap model, @PathVariable("post_id") int post_id, @PathVariable("post_slug") String post_slug){	
 		Posts post = this.getPost(post_id);
 		if(post == null) {
 			return "redirect:../index.htm";
@@ -62,6 +91,10 @@ public class ArticleController {
 		DateFormat dateFormat = new SimpleDateFormat("dd MMMM, yyyy", new Locale("vi", "VN"));
 		model.addAttribute("dateFormat", dateFormat);
 		model.addAttribute("post", post);
+		
+		UserSettings settings = this.getUserSettings(post.getUser());
+		model.addAttribute("UserSettings", settings);
+		model.addAttribute("ListCategoriesPost", this.getListCategories(post.getId()));
 		return "client/article";
 	}
 }

@@ -2,12 +2,15 @@ package controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +46,7 @@ public class CategoryController {
 	 *************************************************/
 	
 	@RequestMapping(value="category/{slug}", method=RequestMethod.GET)
-	public String retrieveArticlesByCategory(ModelMap modelMap, @PathVariable("slug") String slug)
+	public String retrieveArticlesByCategory(HttpServletRequest request ,ModelMap modelMap, @PathVariable("slug") String slug)
 	{
 		/*Step 1*/
 		Session session = factory.getCurrentSession();
@@ -61,12 +64,20 @@ public class CategoryController {
 		
 		
 		/*Step 3*/
+		@SuppressWarnings("unchecked")
 		List<Posts> list = query.list();
 		Categories category = retrieveCategory(slug);
 		
 		
+		PagedListHolder pagedListHolder = new PagedListHolder(list);
+		int page = ServletRequestUtils.getIntParameter(request, "p", 0);
+		pagedListHolder.setPage(page);
+		pagedListHolder.setMaxLinkedPages(5);
+		pagedListHolder.setPageSize(5);
+		
 		/*Step 4*/
-		modelMap.addAttribute("categoryPost", list);
+		//modelMap.addAttribute("categoryPost", list);
+		modelMap.addAttribute("pagedListHolder", pagedListHolder);
 		modelMap.addAttribute("category", category);
 		return "client/category";
 	}

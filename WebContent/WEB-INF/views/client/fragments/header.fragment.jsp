@@ -11,7 +11,7 @@
                <div id="wi-logo" class="fox-logo-container">
                   <h1 class="wi-logo-main fox-logo logo-type-image" id="site-logo">
                      <a href="${HOMEURL}" rel="home">
-                     <img width="744" height="90" src="${ SettingsData.getLogotype() }" class="main-img-logo" alt="" loading="lazy" srcset="${ SettingsData.getLogotype() }" />
+                     <img width="744" height="90" class="main-img-logo" alt="" loading="lazy" srcset="${ SettingsData.getLogotype() }" />
                      </a>
                   </h1>
                </div>
@@ -31,15 +31,11 @@
 		                        <a href="${APPURL}${m.menu.target}">${m.menu.title}</a>
 		                        	<c:if test = "${m.children != null && m.children.size() > 0}">
 							          	<ul class="sub-menu">
-							      	</c:if>
-							      
-							      	<c:forEach var="c" items="${m.children}">
-							      		<li id="menu-item-${c.id}">
-			                              <a href="${APPURL}${c.target}">${c.title}</a>
-			                           </li>
-			                      	</c:forEach>
-			                      	
-			                      	<c:if test = "${m.children != null && m.children.size() > 0}">
+									      	<c:forEach var="c" items="${m.children}">
+									      		<li id="menu-item-${c.id}">
+					                              <a href="${APPURL}${c.target}">${c.title}</a>
+					                           </li>
+					                      	</c:forEach>
 							          	</ul>
 							      	</c:if>
 		                     </li>

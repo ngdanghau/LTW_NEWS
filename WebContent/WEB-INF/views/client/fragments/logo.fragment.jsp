@@ -10,7 +10,7 @@
                      </div>
                      <h4 id="mobile-logo" class="mobile-logo mobile-logo-image">
                         <a href="${ HOMEURL }" rel="home">
-                        <img width="744" height="90" src="${ SettingsData.getLogotype() }" class="attachment-full size-full" alt="" loading="lazy" srcset="${ SettingsData.getLogotype() }" />
+                        <img width="744" height="90" class="attachment-full size-full" alt="" loading="lazy" srcset="${ SettingsData.getLogotype() }" />
                         </a>
                      </h4>
                   </div>
