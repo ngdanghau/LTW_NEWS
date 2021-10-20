@@ -95,7 +95,7 @@ public class ArticleController {
 	 ***************************************************/
 	
 	@RequestMapping(value = "{post_id}/{post_slug}", method = RequestMethod.GET)
-	public String update(ModelMap model, @PathVariable("post_id") int post_id, @PathVariable("post_slug") String post_slug){	
+	public String article(ModelMap model, @PathVariable("post_id") int post_id, @PathVariable("post_slug") String post_slug){	
 		Posts post = this.getPost(post_id);
 		if(post == null) {
 			return "redirect:../index.htm";
