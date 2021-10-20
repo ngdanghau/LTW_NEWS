@@ -41,6 +41,14 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		return list;
 	}
 	
+	
+	
+	/**************************************************
+	 * @author Hau
+	 * 
+	 * @return tra ve cac menu o duoi cung cua trang web
+	 * bao gom ABOUT, HELP, PRIVACY, TERMS, CONTACT
+	 **************************************************/
 	public void setMenu(HttpServletRequest request) 
 	{
 		// get Menu
@@ -64,6 +72,16 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		request.setAttribute("listMenuFooter", listMenuFooter);
 	}
 	
+	
+	
+	/**************************************************
+	 * @author Hau
+	 * 
+	 * @return tra ve duong dan cua trang
+	 * 
+	 * APPURL: http://localhost:8080/LTW_NEWS/
+	 * HOMEURL http://localhost:8080/LTW_NEWS/index.htm
+	 **************************************************/
 	public void setAppUrl(HttpServletRequest request) {
 		// set path 
 		String APPURL = String.format("%s://%s:%s%s", request.getScheme(), request.getServerName(), request.getServerPort(), request.getContextPath() );
@@ -75,6 +93,11 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 	}
 	
 	
+	/**************************************************
+	 * @author Hau
+	 * 
+	 * @return lay du lieu chung
+	 **************************************************/
 	public SettingsData getGeneralData(String name) {
 		ObjectMapper mapper = new ObjectMapper();
 		Session session = factory.getCurrentSession();
@@ -89,11 +112,25 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		}
 	}
 	
+	
+	
+	/**************************************************
+	 * @author Hau
+	 * 
+	 * @return lay cac cai dat tong quat 
+	 **************************************************/
 	public void setGeneralData(HttpServletRequest request) {
 		request.setAttribute("SettingsData", getGeneralData("settings"));
 		request.setAttribute("SocialData", getGeneralData("social"));
 	}
 	
+	
+	
+	/**************************************************
+	 * @author Hau
+	 * 
+	 * @return lay nam hien tai
+	 **************************************************/
 	public void setCurrentYear(HttpServletRequest request) {
 		Date date = new Date();  
 		Calendar calendar = new GregorianCalendar();
@@ -102,13 +139,43 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		request.setAttribute("currentYear", year);
 	}
 	
+	
+	
+	/**************************************************
+	 * @author Phong
+	 * 
+	 * Step 1: khoi tao cau truy van
+	 * Step 2: gan dieu kien
+	 * Step 3: tra ve ket qua
+	 * 
+	 * @return lay ra nhung bai viet co nhieu luot xem nhat
+	 * 
+	 * du lieu nay do vao /WEB-INF/views/client/fragment/sidebar.fragment.jsp
+	 **************************************************/
+	public void retriveMostPopularArticle(HttpServletRequest request)
+	{
+		/*Step 1*/
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Posts p "
+				+ "ORDER BY p.viewer DESC";
+		
+		/*Step 2*/
+		Query query = session.createQuery(hql);
+		List<Posts> list = query.list();
+		
+		/*Step 3*/
+		request.setAttribute("mostPopularArticle", list);
+	}
+	
+	
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object Handler) throws Exception{
 		setMenu(request);
 		setAppUrl(request);
 		setGeneralData(request);
 		setCurrentYear(request);
-		
+		retriveMostPopularArticle(request);
 		return true;
 	}
 	
