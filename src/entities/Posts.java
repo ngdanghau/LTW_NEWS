@@ -22,9 +22,13 @@ public class Posts {
 	@Column(name="ID")
 	private int id;
 	
-	@ManyToOne( fetch=FetchType.LAZY)
+	@ManyToOne( fetch=FetchType.EAGER)
 	@JoinColumn(name="USER_ID", referencedColumnName="ID") 
 	private Users user;
+	
+	@ManyToOne( fetch=FetchType.EAGER)
+	@JoinColumn(name="CAT_ID", referencedColumnName="ID") 
+	private Categories category;
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="MM/dd/yyyy")
@@ -75,6 +79,14 @@ public class Posts {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public Categories getCategory() {
+		return category;
+	}
+
+	public void setCategory(Categories category) {
+		this.category = category;
 	}
 
 	public Users getUser() {

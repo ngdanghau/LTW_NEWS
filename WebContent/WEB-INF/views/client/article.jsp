@@ -52,10 +52,7 @@
                                                    <div class="header-main narrow-area">
                                                       <div class="post-item-header">
                                                          <div class="entry-categories meta-categories categories-plain standalone-categories post-header-section">
-                                                            <c:forEach items="${ListCategoriesPost}" var="c"  varStatus="status">
-															    <a href="${APPURL }/category/${c.slug}.htm" rel="tag">${c.name}</a>
-															    ${not status.last ? '<span class="sep">/</span>' : ''}
-															</c:forEach>
+                                                            <a href="${APPURL }/category/${ post.category.slug }.htm" rel="tag">${post.category.name }</a>
                                                             
                                                          </div>
                                                          <div class="title-subtitle">

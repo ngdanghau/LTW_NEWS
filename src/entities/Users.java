@@ -15,10 +15,10 @@ public class Users {
 	private int id;
 	
 	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
-	private Collection<Pages> page;
+	private Collection<Pages> pages;
 	
 	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
-	private Collection<Posts> post;
+	private Collection<Posts> posts;
 	
 	
 	@Column(name="ACCOUNT_TYPE")
@@ -76,12 +76,12 @@ public class Users {
 		this.id = id;
 	}
 	
-	public Collection<Posts> getPost() {
-		return post;
+	public Collection<Posts> getPosts() {
+		return posts;
 	}
 
-	public void setPost(Collection<Posts> post) {
-		this.post = post;
+	public void setPosts(Collection<Posts> posts) {
+		this.posts = posts;
 	}
 
 	public String getFirstname() {
@@ -101,12 +101,12 @@ public class Users {
 	}
 
 
-	public Collection<Pages> getPage() {
-		return page;
+	public Collection<Pages> getPages() {
+		return pages;
 	}
 
-	public void setPage(Collection<Pages> page) {
-		this.page = page;
+	public void setPages(Collection<Pages> pages) {
+		this.pages = pages;
 	}
 
 	public String getAccount_type() {

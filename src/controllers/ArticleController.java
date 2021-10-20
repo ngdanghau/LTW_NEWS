@@ -19,7 +19,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.Posts;
 import entities.Users;
-import entities.Categories;
 import models.UserSettings;
 
 @Transactional
@@ -55,21 +54,6 @@ public class ArticleController {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<Categories> getListCategories(int postId)
-	{	
-		Session session = factory.getCurrentSession();
-		String hql = "SELECT c FROM Categories c, Cat_Post cp WHERE cp.category.id = c.id AND cp.post.id = :postId ORDER BY c.parent ASC"; 
-		Query query = session.createQuery(hql); 
-		query.setParameter("postId", postId);
-		try 
-		{
-			return query.list();
-		}catch(Exception ex) {
-			ex.printStackTrace();
-			return null;
-		}
-	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Posts> getRelatedPost(int postId, int limitPost){
@@ -104,7 +88,6 @@ public class ArticleController {
 		
 		UserSettings settings = this.getUserSettings(post.getUser());
 		model.addAttribute("UserSettings", settings);
-		model.addAttribute("ListCategoriesPost", this.getListCategories(post.getId()));
 		model.addAttribute("ListRelatedPost", this.getRelatedPost(post.getId(), 4));
 		
 		return "client/article";

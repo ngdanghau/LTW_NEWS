@@ -55,7 +55,7 @@
          	<div class="blog-container blog-container-vertical">
             	<div class="wi-blog fox-blog blog-vertical">
 		            <!-- SHOW ARTICLE -->
-		            <c:forEach var="element" items="${ categoryPost }" begin="0" end="0">
+		            <c:forEach var="element" items="${ pagedListHolder.pageList }" begin="0" end="0">
 		            	<article class="wi-post post-item post-vertical post-thumbnail-align-left  post type-post status-publish format-standard has-post-thumbnail hentry category-books category-opinion tag-facebook tag-magazine tag-politics tag-travel tag-wordpress">
 		                  <div class="post-item-inner vertical-inner post-vertical-inner">
 		                     <figure class="wi-thumbnail fox-thumbnail post-item-thumbnail fox-figure  vertical-thumbnail thumbnail-acute  hover-none thumbnail-loading effect-fade">
@@ -110,8 +110,7 @@
 					<c:param name="p" value="~" />
 				</c:url>
                
-               <%-- <c:forEach var="element" items="${ categoryPost }" begin="0" end="5"> --%>
-               <c:forEach var="element" items="${ pagedListHolder.pageList }">
+                <c:forEach var="element" items="${ pagedListHolder.pageList }" begin="1" > 
                
                		<article class="wi-post post-item post-list post-thumbnail-align-left post-valign-top list-mobile-layout-list  post type-post status-publish format-standard has-post-thumbnail hentry category-books category-opinion tag-facebook tag-magazine tag-politics tag-travel tag-wordpress">
                      	<div class="post-list-sep" style="border-color:#eaeaea"></div>
@@ -149,12 +148,7 @@
                         </div>
                   </article>
                </c:forEach>
-               
 			</div>
-                
-                
-                
-                
                 <!-- PAGINGATION -->
                 <tg:paging pagedListHolder="${pagedListHolder}"
 				pagedLink="${pagedLink}" />

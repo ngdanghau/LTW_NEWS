@@ -1,5 +1,6 @@
 package entities;
 
+
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -19,7 +20,7 @@ public class Categories {
 	private int id;
 	
 	@OneToMany(mappedBy="category", fetch=FetchType.EAGER)
-	private Collection<Cat_Post> cat;
+	private Collection<Posts> posts;
 	
 	@Column(name="NAME")
 	private String name;
@@ -33,20 +34,21 @@ public class Categories {
 	@Column(name="PARENT")
 	private int parent;
 	
+	
+	public Collection<Posts> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(Collection<Posts> posts) {
+		this.posts = posts;
+	}
+	
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Collection<Cat_Post> getCat() {
-		return cat;
-	}
-
-	public void setCat(Collection<Cat_Post> cat) {
-		this.cat = cat;
 	}
 
 	public String getName() {

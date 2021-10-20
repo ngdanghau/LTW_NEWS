@@ -50,10 +50,7 @@ public class CategoryController {
 		Categories category = retrieveCategory(slug);
 		
 		/*Step 3*/
-		String hql = "SELECT p "
-				+ "FROM Categories c, Posts p, Cat_Post cp "
-				+ "WHERE cp.category.id = c.id "
-				+ "AND cp.category.id = :catId";
+		String hql = "FROM Posts p WHERE p.category.id = :catId";
 		
 		Query query = session.createQuery(hql);
 		query.setParameter("catId", category.getId());
@@ -67,7 +64,6 @@ public class CategoryController {
 		pagedListHolder.setPageSize(8);
 		
 		/*Step 4*/
-		//modelMap.addAttribute("categoryPost", list);
 		modelMap.addAttribute("pagedListHolder", pagedListHolder);
 		modelMap.addAttribute("category", category);
 		return "client/category";
