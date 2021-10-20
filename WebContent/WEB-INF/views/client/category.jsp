@@ -32,7 +32,7 @@
       <div class="wi-container">
       <!-- HEADER FRAGMENT -->
       <jsp:include page="./fragments/header.fragment.jsp"/>
-      
+      <!-- LOGO FRAGMENT -->
       <jsp:include page="./fragments/logo.fragment.jsp"/>
       
       <div id="wi-main" class="wi-main fox-main">
@@ -55,7 +55,7 @@
          <div class="blog-container blog-container-vertical">
             <div class="wi-blog fox-blog blog-vertical">
             
-            <!-- SHOW OFF ARTICLE -->
+            <!-- SHOW ARTICLE -->
             <c:forEach var="element" items="${ categoryPost }" begin="0" end="0">
             	<article class="wi-post post-item post-vertical post-thumbnail-align-left  post type-post status-publish format-standard has-post-thumbnail hentry category-books category-opinion tag-facebook tag-magazine tag-politics tag-travel tag-wordpress">
                   <div class="post-item-inner vertical-inner post-vertical-inner">
@@ -107,7 +107,7 @@
             	
               <div class="wi-blog fox-blog blog-list v-spacing-small blog-card-has-shadow">
                
-               <!-- PAGINGATION -->
+               <!-- PAGINATION - HIEN THI BAI VIET NHUNG CO PHAN TRANG -->
             	<jsp:useBean id="pagedListHolder" scope="request" type="org.springframework.beans.support.PagedListHolder"/>
 				<c:url value="category/${category.slug }.htm" var="pagedLink">
 					<c:param name="p" value="~" />

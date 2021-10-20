@@ -28,7 +28,7 @@
                            <ul id="menu-footer" class="menu">
 	                           <c:forEach var="m" items="${listMenuFooter}">
 			                  		<li id="menu-item-${m.id}">
-				                        <a href="${m.target}">${m.title}</a>
+				                        <a href="${APPURL }${m.target}">${m.title}</a>
 				                     </li>
 								</c:forEach>
                            </ul>

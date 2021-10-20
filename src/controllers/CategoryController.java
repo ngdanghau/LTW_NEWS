@@ -42,6 +42,10 @@ public class CategoryController {
 	 * Step 2: gan dieu kien cho cau truy van
 	 * Step 3: tra ket qua ve
 	 * Step 4: gan ket qua vao @ModelMap de tra ra view
+	 * 
+	 * PAGINATION
+	 * setMaxLinkedPages(3) ngoai trang hien tai thi co 3 trang khac duoc hien thi
+	 * setPageSize(8) coi 8 bai viet o moi trang
 	 * @return lay ra cac bai viet theo theo loai @param slug
 	 *************************************************/
 	
@@ -68,12 +72,12 @@ public class CategoryController {
 		List<Posts> list = query.list();
 		Categories category = retrieveCategory(slug);
 		
-		
+		/*PAGINATION*/
 		PagedListHolder pagedListHolder = new PagedListHolder(list);
 		int page = ServletRequestUtils.getIntParameter(request, "p", 0);
 		pagedListHolder.setPage(page);
-		pagedListHolder.setMaxLinkedPages(5);
-		pagedListHolder.setPageSize(5);
+		pagedListHolder.setMaxLinkedPages(3);
+		pagedListHolder.setPageSize(8);
 		
 		/*Step 4*/
 		//modelMap.addAttribute("categoryPost", list);
@@ -91,7 +95,7 @@ public class CategoryController {
 	 * 
 	 * Step 1: khoi tao cau truy van
 	 * Step 2: gan dieu kien
-	 * Step 3: tra ve ket qua
+	 * Step 3: tra ve ket qua voi du lieu la phan tu o vi tri so 0
 	 * 
 	 * du lieu do vao /WEB-INF/views/client/category.jsp
 	 *********************************************/
@@ -124,31 +128,5 @@ public class CategoryController {
 	
 	
 	
-	/**************************************************
-	 * @author Phong
-	 * 
-	 * Step 1: khoi tao cau truy van
-	 * Step 2: gan dieu kien
-	 * Step 3: tra ve ket qua
-	 * 
-	 * @return lay ra nhung bai viet co nhieu luot xem nhat
-	 * 
-	 * du lieu nay do vao /WEB-INF/views/client/fragment/sidebar.fragment.jsp
-	 **************************************************/
 	
-	@ModelAttribute("mostPopularArticle")
-	public List<Posts> retriveMostPopularArticle()
-	{
-		/*Step 1*/
-		Session session = factory.getCurrentSession();
-		String hql = "FROM Posts p "
-				+ "ORDER BY p.viewer DESC";
-		
-		/*Step 2*/
-		Query query = session.createQuery(hql);
-		List<Posts> list = query.list();
-		
-		/*Step 3*/
-		return list;
-	}
 }
