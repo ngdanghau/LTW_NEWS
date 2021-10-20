@@ -53,6 +53,6 @@
 <base href="${pageContext.servletContext.contextPath}/"> dùng cái này thì không cần dùng <%@taglib prefix="c" %> nữa 
 Cú  pháp: <%@include file="..." %>
 
--- test
+-- testdasdasdasdas
 
 
