@@ -1,10 +1,13 @@
 package interceptors;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,14 +17,12 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.General_Data;
 import entities.Menu;
-import entities.Posts;
 import models.MenuModel;
 import models.SettingsData;
 
@@ -176,6 +177,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		setGeneralData(request);
 		setCurrentYear(request);
 		retriveMostPopularArticle(request);
+		setDateFormat(request);	
 		return true;
 	}
 	

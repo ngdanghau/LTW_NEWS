@@ -10,10 +10,10 @@
                                                    <div id="respond" class="comment-respond">
                                                       <h3 id="reply-title" class="comment-reply-title single-heading"><span>Trả lời</span>
                                                          <small>
-                                                         <a rel="nofollow" id="cancel-comment-reply-link" href="https://timeswriter.xyz/post/4727-co-hoi-viec-lam-nganh-du-lich-nha-trang-hau-covid-19#respond" style="display:none;">Hủy</a>
+                                                         <a rel="nofollow" id="cancel-comment-reply-link" href="${APPURL}/article/${ post.id }/${ post.post_slug }.htm#respond" style="display:none;">Hủy</a>
                                                          </small>
                                                       </h3>
-                                                      <form action="https://timeswriter.xyz/post/4727-co-hoi-viec-lam-nganh-du-lich-nha-trang-hau-covid-19#respond" method="post" id="commentform" class="comment-form js-ajax-form">
+                                                      <form action="${APPURL}/article/${ post.id }/${ post.post_slug }.htm#respond" method="post" id="commentform" class="comment-form js-ajax-form">
                                                          <input type="hidden" name="action" value="comment">
                                                          <p class="comment-form-comment">
                                                             <textarea id="comment" name="comment" cols="45" rows="8" required aria-required="true" placeholder="viết bình luận..."></textarea>
@@ -33,7 +33,7 @@
                                                          </div>
                                                          <p class="form-submit">
                                                             <input name="submit" type="submit" id="submit" class="submit" value="Phản hồi" />
-                                                            <input type='hidden' name='comment_post_id' value='4727' id='comment_post_id' />
+                                                            <input type='hidden' name='comment_post_id' value='${ post.id }' id='comment_post_id' />
                                                             <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
                                                          </p>
                                                       </form>
