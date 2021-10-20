@@ -15,7 +15,6 @@
 	|--admin
 		|--css
 		|--fonts
-		|--images
 		|--js
 		|--pages
 		|--uploads
@@ -25,6 +24,7 @@
 		|--vendor
 		+style.css
 		+style.min.css
+	|--images
 ****************************************************************/
 
 
