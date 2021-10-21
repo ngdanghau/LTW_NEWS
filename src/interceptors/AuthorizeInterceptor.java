@@ -1,21 +1,22 @@
 package interceptors;
 
+import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
 
 public class AuthorizeInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object Handler) throws Exception{
-		HttpSession session = request.getSession();
-		
-		if(session.getAttribute("user") == null)
-		{
-			response.sendRedirect(request.getContextPath() + "/user/login.htm");
-			return false;
-		}
+//		Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		if(principal == null)
+//		{
+//			response.sendRedirect(request.getContextPath() + "/admin.htm");
+//			return false;
+//		}
 		return true;
 	}
 }
