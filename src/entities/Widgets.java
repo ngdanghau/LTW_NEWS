@@ -21,7 +21,7 @@ public class Widgets {
 	@Column(name="TITLE")
 	private String title;
 	
-	@ManyToOne( fetch=FetchType.LAZY)
+	@ManyToOne( fetch=FetchType.EAGER)
 	@JoinColumn(name="CAT_ID", referencedColumnName="ID")
 	private Categories category;
 	
@@ -30,6 +30,9 @@ public class Widgets {
 	
 	@Column(name="ORDER_WIDGET")
 	private int order_widget;
+	
+	@Column(name="NUM_POST")
+	private int num_post;
 
 	
 	public Categories getCategory() {
@@ -72,5 +75,15 @@ public class Widgets {
 	public void setOrder_widget(int order_widget) {
 		this.order_widget = order_widget;
 	}
+
+	public int getNum_post() {
+		return num_post;
+	}
+
+	public void setNum_post(int num_post) {
+		this.num_post = num_post;
+	}
+	
+	
 	
 }

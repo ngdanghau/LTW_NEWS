@@ -21,8 +21,8 @@
       <meta property="og:url" content="${APPURL}/article/${ post.id }-${ post.post_slug }" />
       <meta property="og:image" content="${ post.media }" />
       <meta property="og:description" content="${ post.excerpt }" />
-      <link rel="icon" href="<c:url value='./public/client/images/favicon.ico'/>" type="image/x-icon">
-      <link rel="shortcut icon" href="<c:url value='./public/client/images/favicon.ico'/>" type="image/x-icon">
+      <link rel="icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
+      <link rel="shortcut icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
       <link rel='stylesheet' href="<c:url value='./public/client/vendor/block-library/style.min.css'/>"/>
       <link rel='stylesheet' href="<c:url value='./public/client/style.min.css'/>"/>
       <link rel='stylesheet' href="<c:url value='./public/client/style.css'/>"/>

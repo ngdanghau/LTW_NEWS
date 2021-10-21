@@ -16,9 +16,9 @@
       <link rel='stylesheet' id='wi-fonts-css' href='https://fonts.googleapis.com/css?family=Libre+Franklin%3A400%2C400italic%2C900%7CTinos%3A400%2C400italic%2C700%7CLora%3A400&#038;display=swap&#038;ver=4.6.7.1' media='all' />
       <script src="<c:url value='./public/client/vendor/jquery/jquery.min.js' />"></script>
       <meta name="description" content="${ page.excerpt }" />
-      
-      <link rel="icon" href="https://timeswriter.xyz/assets/images/favicon.ico" type="image/x-icon">
-      <link rel="shortcut icon" href="https://timeswriter.xyz/assets/images/favicon.ico" type="image/x-icon">
+      <base href="${APPURL}/" />
+      <link rel="icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
+      <link rel="shortcut icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
       
       <link rel='stylesheet' href="<c:url value='/public/client/vendor/block-library/style.min.css'/>"/>
       <link rel='stylesheet' href="<c:url value='/public/client/style.min.css'/>"/>
@@ -144,7 +144,7 @@
       <jsp:include page="./fragments/progress.fragment.jsp"/>
       
       <script id='wi-main-js-extra'>
-         var WITHEMES = {"enable_sticky_sidebar":"","enable_sticky_header":"1","ajaxurl":"https:\/\/bmtopvn.com\/ajax.php","nonce":"5af06dfff4","tablet_breakpoint":"840","enable_lightbox":"1"};
+         var WITHEMES = {"enable_sticky_sidebar":"","enable_sticky_header":"1","nonce":"5af06dfff4","tablet_breakpoint":"840","enable_lightbox":"1"};
       </script>
       <script src="<c:url value='./public/client/js/theme.min.js' />"></script>
       <jsp:include page="/WEB-INF/views/inc/javascript.jsp"/>

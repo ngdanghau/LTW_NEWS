@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
    pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html lang="vi" class="no-js">
    <head>
@@ -13,7 +15,9 @@
       <meta name='robots' content='max-image-preview:large' />
       <link rel='dns-prefetch' href='//fonts.googleapis.com' />
       
-      <link rel="icon" href="https://timeswriter.xyz/assets/images/favicon.ico" type="image/x-icon">
+      <link rel="icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
+      <link rel="shortcut icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
+      
       <link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
       <link rel='stylesheet' id='wi-fonts-css' href='https://fonts.googleapis.com/css?family=Libre+Franklin%3A400%2C400italic%2C900%7CTinos%3A400%2C400italic%2C700%7CLora%3A400&#038;display=swap&#038;ver=4.6.7.1' media='all' />
       
@@ -25,7 +29,7 @@
       <script src="<c:url value='./public/client/vendor/jquery/jquery.min.js' />"></script>
       <script src="<c:url value='./public/client/vendor/jquery/jquery-migrate.min.js' />"></script>
    </head>
-   <body class="home blog theme-fox woocommerce-no-js has-sidebar sidebar-right layout-wide style--dropcap-default dropcap-style-default style--dropcap-font-heading style--tag-plain style--list-widget-1 style--tagcloud-1 style--blockquote-no-icon style--single-heading-border_top style--link-2 elementor-default elementor-kit-6" itemscope>
+   <body class="home blog theme-fox has-sidebar sidebar-right layout-wide style--dropcap-default dropcap-style-default style--dropcap-font-heading style--tag-plain style--list-widget-1 style--tagcloud-1 style--blockquote-no-icon style--single-heading-border_top style--link-2 elementor-default elementor-kit-6">
       <div id="wi-all" class="fox-outer-wrapper fox-all wi-all">
       <div id="wi-wrapper" class="fox-wrapper wi-wrapper">
       <div class="wi-container">
@@ -37,18 +41,59 @@
       <div id="wi-main" class="wi-main fox-main">
       <div class="wi-content content">
       <div id="wi-bf" class="all-sections wi-homepage-builder sections-spacing-normal">
-      <jsp:include page="/WEB-INF/views/client/layouts/group-2.layout.jsp"/>
       
-      <jsp:include page="/WEB-INF/views/client/layouts/grid-1.layout.jsp"/>
-      <jsp:include page="/WEB-INF/views/client/layouts/group-1.layout.jsp"/>
+      <c:forEach var="widget" items="${ listWidgets }">
+      	<c:set var="posts" value="${widget.posts}" scope="request"/>
+      	<c:set var="category" value="${widget.category}" scope="request"/>
       
-      <jsp:include page="/WEB-INF/views/client/layouts/grid-1.layout.jsp"/>
-      <jsp:include page="/WEB-INF/views/client/layouts/vertical.layout.jsp"/>
-      <jsp:include page="/WEB-INF/views/client/layouts/group-3.layout.jsp"/>
+      	<c:choose>
+      	
+		    <c:when test="${ fn:contains(widget.layout, 'layout-grid-1')}">
+		        <c:if test="${ widget.posts != null && widget.posts.size() > 0 }">
+		         	<jsp:include page="/WEB-INF/views/client/layouts/grid-1.layout.jsp"/>
+		        </c:if>
+		    </c:when>   
+		     
+		    <c:when test="${ fn:contains(widget.layout, 'layout-grid-2')}">
+		        <c:if test="${ widget.posts != null && widget.posts.size() > 0 }">
+		         	<jsp:include page="/WEB-INF/views/client/layouts/grid-2.layout.jsp"/>
+		        </c:if>
+		    </c:when> 
+		     
+		    <c:when test="${ fn:contains(widget.layout, 'layout-group-1')}">
+		       <c:if test="${ widget.posts != null && widget.posts.size() > 0 }">
+		       	 	<jsp:include page="/WEB-INF/views/client/layouts/group-1.layout.jsp"/>
+		        </c:if>
+		    </c:when> 
+		    
+		    <c:when test="${ fn:contains(widget.layout, 'layout-group-2')}">
+		       <c:if test="${ widget.posts != null && widget.posts.size() > 0 }">
+		        	<jsp:include page="/WEB-INF/views/client/layouts/group-2.layout.jsp"/>
+		        </c:if>
+		    </c:when> 
+		    
+		    <c:when test="${ fn:contains(widget.layout, 'layout-group-3')}">
+		        <c:if test="${ widget.posts != null && widget.posts.size() > 0 }">
+		         	<jsp:include page="/WEB-INF/views/client/layouts/group-3.layout.jsp"/>
+		        </c:if>
+		    </c:when> 
+		    
+		    <c:when test="${ fn:contains(widget.layout, 'layout-group-4')}">
+		        <c:if test="${ widget.posts != null && widget.posts.size() > 0 }">
+		         	<jsp:include page="/WEB-INF/views/client/layouts/group-4.layout.jsp"/>
+		        </c:if>
+		    </c:when>  
+		    
+		    <c:when test="${ fn:contains(widget.layout, 'layout-vertical')}">
+		       <c:if test="${ widget.posts != null && widget.posts.size() > 0 }">
+		        	<jsp:include page="/WEB-INF/views/client/layouts/vertical.layout.jsp"/>
+		        </c:if>
+		    </c:when> 
+		    
+		</c:choose>
+      </c:forEach>
       
-      <jsp:include page="/WEB-INF/views/client/layouts/grid-1.layout.jsp"/>
-      <jsp:include page="/WEB-INF/views/client/layouts/group-4.layout.jsp"/>
-      <jsp:include page="/WEB-INF/views/client/layouts/grid-2.layout.jsp"/>
+    
       
       <div class="wi-section fox-section section-layout-list section-stretch-content show_on_desktop show_on_tablet show_on_mobile section-has-sidebar section-sidebar-right section-has-heading">
       <div class="section-heading heading-link--inheading heading-line heading-line-2 heading-line-middle heading-line-stretch-content heading-tiny align-left">
