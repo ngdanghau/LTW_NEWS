@@ -1,14 +1,95 @@
 package client.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import entities.Posts;
+import entities.Users;
+
+@Transactional
 @Controller
+@RequestMapping("/author/")
 public class AuthorController {
 
-	@RequestMapping("author")
-	public String author()
+	@Autowired
+	SessionFactory factory;
+	
+	@SuppressWarnings("unchecked")
+	public List<Posts> getPostByAuthor(int userid){
+		Session session = factory.getCurrentSession();
+		String hql = "SELECT p FROM Posts p WHERE p.user.id = :userid"; 
+		Query query = session.createQuery(hql); 
+
+		query.setParameter("userid", userid);
+		try 
+		{
+			return query.list();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Users getUser(String username)
 	{
+		try 
+		{
+			/*Step 1*/
+			Session session = factory.getCurrentSession();
+			String hql = "FROM Users u "
+						+ "WHERE u.username = :username";
+			
+			/*Step 2*/
+			Query query = session.createQuery(hql);
+			query.setParameter("username", username);
+			
+			
+			/*Step 3*/
+			List<Users> list = query.list();
+			return list.get(0);
+			
+		
+
+		}
+		catch(Exception ex) 
+		{
+			return null;
+		}
+	}
+	
+	@RequestMapping(value="{username}", method=RequestMethod.GET)
+	public String author(HttpServletRequest request ,ModelMap modelMap, @PathVariable("username") String username)
+	{
+		Users user = getUser(username);
+		if(user == null) {
+			return "redirect:../index.htm";
+		}
+		List<Posts> posts = getPostByAuthor(user.getId());
+		PagedListHolder pagedlistHolder = new PagedListHolder(posts);
+		int page = ServletRequestUtils.getIntParameter(request, "p",0);
+		pagedlistHolder.setPage(page);
+		pagedlistHolder.setMaxLinkedPages(5);
+		pagedlistHolder.setPageSize(7);
+		
+//		modelMap.addAttribute("posts", posts);
+		modelMap.addAttribute("pagedListHolder", pagedlistHolder);
+		modelMap.addAttribute("user", user);
 		return "client/author";
 	}
 }
