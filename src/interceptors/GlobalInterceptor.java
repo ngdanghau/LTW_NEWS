@@ -1,10 +1,12 @@
 package interceptors;
 
+import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +17,13 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.General_Data;
+import entities.Users;
 import models.SettingsData;
 
 @Transactional
@@ -67,6 +71,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 	
 	
 	
+	
 	/**************************************************
 	 * @author Hau
 	 * 
@@ -93,6 +98,32 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
+	public void setAuthUser(HttpServletRequest request) {
+		Principal userPrincipal = (Principal) request.getUserPrincipal();
+		Users AuthUser = null;
+		if(userPrincipal != null) {
+			try 
+			{
+				Session session = factory.getCurrentSession();
+				String hql = "FROM Users u "
+							+ "WHERE u.email = :email";
+				
+				Query query = session.createQuery(hql);
+				query.setParameter("email", userPrincipal.getName());
+				
+				List<Users> list = query.list();
+				AuthUser = list.get(0);
+			}
+			catch(Exception ex) 
+			{
+				AuthUser = null;
+			}
+			
+		}
+		request.setAttribute("AuthUser", AuthUser);
+	}
+	
 
 	/**
 	 * Hàm để khai báo một biến Date Format chung cho toàn bộ web
@@ -109,6 +140,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		setGeneralData(request);
 		setCurrentYear(request);
 		setDateFormat(request);	
+		setAuthUser(request);
 		return true;
 	}
 }

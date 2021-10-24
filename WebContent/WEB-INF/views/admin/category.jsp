@@ -24,13 +24,7 @@
       <link rel="apple-touch-icon" sizes="180x180" href="./public/admin/media/favicons/apple-touch-icon-180x180.png">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
       <link rel="stylesheet" id="css-main" href="./public/admin/css/oneui.min.css">
-      
-      <link rel='stylesheet' id='wi-fonts-css' href='https://fonts.googleapis.com/css?family=Libre+Franklin%3A400%2C400italic%2C900%7CTinos%3A400%2C400italic%2C700%7CLora%3A400&#038;display=swap&#038;ver=4.6.7.1' media='all' />
-      <link rel='stylesheet' href="<c:url value='./public/client/style.min.css'/>"/>
-      <link rel='stylesheet' href="<c:url value='./public/client/style.css'/>"/>
-      <script src="<c:url value='./public/client/vendor/jquery/jquery.min.js' />"></script>
-      <script src="<c:url value='./public/client/vendor/jquery/jquery-migrate.min.js' />"></script>
-      
+            
    </head>
    <body>
    	  <!-- ADMIN CATEGORY  -->
@@ -44,7 +38,7 @@
       <jsp:include page="./fragments/header.fragment.jsp"/>
       <main id="main-container">
          <div class="content">
-            <div class="col-xl-6">
+            <div class="col-xl-12">
                <div class="block block-rounded">
                   <div class="block-header block-header-default">
                      <h3 class="block-title">Thể loại</h3>
@@ -73,9 +67,7 @@
 							<c:url value="/admin/category.htm" var="pagedLink">
 								<c:param name="p" value="~" />
 							</c:url>
-                        
-                        	<%-- <c:forEach var="element" items="${ category }" varStatus="status"> --%>
-                        		
+                                                		
                         	<c:forEach var="element" items="${ pagedListHolder.pageList }" varStatus="status" begin="1"> 
                         		<tr>
 	                              <th class="text-center" scope="row"> ${ status.index } </th>
@@ -87,16 +79,12 @@
 	                              </td>
 	                              <td class="text-center">
 	                                 <div class="btn-group">
-		                                 <a href="${APPURL }/admin/edit-category-${element.id}.htm">
-		                                    <button  type="button" class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Edit Client">
-		                                    	 <i  class="fa fa-fw fa-pencil-alt"></i> 
-		                                    </button>
+		                                 <a href="${APPURL }/admin/edit-category-${element.id}.htm" class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Edit Client">
+		                                 <i  class="fa fa-fw fa-pencil-alt"></i> 
 		                                 </a>
 		                                 
-		                                 <a href="${APPURL }/admin/remove-category-${element.id}.htm" > 
-		                                    <button  type="button" class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Remove Client">
-		                                    	<i  class="fa fa-fw fa-times"></i>
-		                                    </button>
+		                                 <a href="${APPURL }/admin/remove-category-${element.id}.htm" class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Remove Client"> 
+		                                   <i  class="fa fa-fw fa-times"></i>
 	                                     </a>
 	                                 </div>
 	                              </td>
@@ -110,7 +98,7 @@
                      </table>
                      
                      <!-- PAGINGATION -->
-			         <tg:paging pagedListHolder="${pagedListHolder}" pagedLink="${pagedLink}" />
+			         <tg:paging_admin pagedListHolder="${pagedListHolder}" pagedLink="${pagedLink}" />
                   </div>
                </div>
             </div>
