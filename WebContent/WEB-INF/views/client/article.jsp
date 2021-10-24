@@ -64,7 +64,7 @@
                                                          <div class="post-item-meta wi-meta fox-meta post-header-section ">
                                                             <div class="fox-meta-author entry-author meta-author">
                                                                <span class="byline"> Bởi <span class="author vcard">
-                                                               <a class="url fn" href="${APPURL}/author/${post.user.username}">
+                                                               <a class="url fn" href="${APPURL}/author/${post.user.username}.htm">
                                                                <span>${post.user.firstname} ${post.user.lastname}</span></a></span></span>
                                                             </div>
                                                             <div class="entry-date meta-time machine-time time-short">
