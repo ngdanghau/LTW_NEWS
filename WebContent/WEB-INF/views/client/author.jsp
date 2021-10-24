@@ -19,8 +19,10 @@
       <meta property="og:image" content="" />
       <meta property="og:description" content="${user.firstname} ${user.lastname}" />
       <link rel='dns-prefetch' href='//fonts.googleapis.com' />
-      <link rel="icon" href="https://timeswriter.xyz/assets/images/favicon.ico" type="image/x-icon">
-      <link rel="shortcut icon" href="https://timeswriter.xyz/assets/images/favicon.ico" type="image/x-icon">
+      
+      <link rel="icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
+      <link rel="shortcut icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
+      
       <link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
       <link rel='stylesheet' id='wi-fonts-css' href='https://fonts.googleapis.com/css?family=Libre+Franklin%3A400%2C400italic%2C900%7CTinos%3A400%2C400italic%2C700%7CLora%3A400&#038;display=swap&#038;ver=4.6.7.1' media='all' />
       <link rel='stylesheet' href="<c:url value='./public/client/style.min.css'/>"/>
@@ -59,32 +61,32 @@
                      <div class="social-list user-item-social shape-circle style-plain user-item-name-meta">
                         <ul>
                            <li class="li-facebook">
-                              <a href="#" target="_blank" rel="noopener" class="tooltipstered">
+                              <a href="${ UserSettings.facebook }" target="_blank" rel="noopener" class="tooltipstered">
                               <i class="fab fa-facebook-square"></i>
                               </a>
                            </li>
                            <li class="li-pinterest">
-                              <a href="#" target="_blank" rel="noopener" class="tooltipstered">
+                              <a href="${ UserSettings.pinterest }" target="_blank" rel="noopener" class="tooltipstered">
                               <i class="fab fa-pinterest-p"></i>
                               </a>
                            </li>
                            <li class="li-tumblr">
-                              <a href="#" target="_blank" rel="noopener" class="tooltipstered">
+                              <a href="${ UserSettings.tumblr }" target="_blank" rel="noopener" class="tooltipstered">
                               <i class="fab fa-tumblr"></i>
                               </a>
                            </li>
                            <li class="li-vkontakte">
-                              <a href="#" target="_blank" rel="noopener" class="tooltipstered">
+                              <a href="${ UserSettings.vkontakte }" target="_blank" rel="noopener" class="tooltipstered">
                               <i class="fab fa-vk"></i>
                               </a>
                            </li>
                            <li class="li-whatsapp">
-                              <a href="#" target="_blank" rel="noopener" class="tooltipstered">
+                              <a href="${ UserSettings.whatsapp }" target="_blank" rel="noopener" class="tooltipstered">
                               <i class="fab fa-whatsapp"></i>
                               </a>
                            </li>
                            <li class="li-telegram">
-                              <a href="#" target="_blank" rel="noopener" class="tooltipstered">
+                              <a href="${ UserSettings.telegram }" target="_blank" rel="noopener" class="tooltipstered">
                               <i class="fab fa-telegram"></i>
                               </a>
                            </li>
@@ -104,7 +106,7 @@
             
             <jsp:useBean id="pagedListHolder" scope="request"
 				type="org.springframework.beans.support.PagedListHolder" />
-				<c:url value="author/sykhung.htm" var="pagedLink">
+				<c:url value="${ APPURL }/author/${user.username}.htm" var="pagedLink">
 					<c:param name="p" value="~" />
 				</c:url>
            <%--  <c:forEach var="post" items="${ posts }"> --%>
@@ -151,18 +153,8 @@
               
                </div>
                <div class="pagination">
-               <tg:paging pagedListHolder="${pagedListHolder}"
-				pagedLink="${pagedLink}" />
+	               	<tg:paging pagedListHolder="${pagedListHolder}" pagedLink="${pagedLink}" />
 				</div>
-              <!--  <div class="wi-pagination fox-pagination font-heading pagination-3">
-               <div class="pagination-inner">
-               <span aria-current="page" class="page-numbers current"><span>1</span></span>
-               <a class="page-numbers" href="/author/tambao?page=2"><span>2</span></a>
-               <a class="page-numbers" href="/author/tambao?page=3"><span>3</span></a>
-               <a class="next page-numbers" href="/author/tambao?page=2"><span>Tiến</span></a>
-               <a class="next page-numbers" href="/author/tambao?page=7"><span>Cuối</span></a>
-               </div>
-               </div> -->
                </div>
                </div>
                </div>

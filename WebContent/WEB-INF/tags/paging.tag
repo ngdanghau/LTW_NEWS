@@ -6,24 +6,6 @@
 	type="org.springframework.beans.support.PagedListHolder"%>
 	
 <%@ attribute name="pagedLink" required="true" type="java.lang.String"%>
-<!-- <link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
-	
-	
-<!-- <div class="wi-pagination fox-pagination font-heading pagination-3">
-	   <div class="pagination-inner">
-	      <span aria-current="page" class="page-numbers current"><span>1</span></span>
-	      <a class="page-numbers" href="/category/the-gioi?page=2"><span>2</span></a>
-	      <a class="page-numbers" href="/category/the-gioi?page=3"><span>3</span></a>
-	      <a class="next page-numbers" href="/category/the-gioi?page=2"><span>Tiến</span></a>
-	      <a class="next page-numbers" href="/category/the-gioi?page=13"><span>Cuối</span></a>
-	   </div>
-	</div> -->	
-	
 <c:if test="${pagedListHolder.pageCount > 1}">
 	<div class="wi-pagination fox-pagination font-heading pagination-3">
 		<div class="pagination-inner">
@@ -52,7 +34,7 @@
 		<c:forEach begin="${pagedListHolder.firstLinkedPage}" end="${pagedListHolder.lastLinkedPage}" var="i">
 			<c:choose>
 				<c:when test="${pagedListHolder.page == i}">
-					<a class="page-numbers current" href="<%=StringUtils.replace(pagedLink, "~", String.valueOf( pagedListHolder.getPage() + 1 ))%>">${i+1}</a></li>
+					<span aria-current="page" class="page-numbers current"><span>${i+1}</span></span>
 				</c:when>
 				
 				 <c:otherwise>

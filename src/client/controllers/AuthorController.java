@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import entities.Posts;
 import entities.Users;
+import models.UserSettings;
 
 @Transactional
 @Controller
@@ -27,6 +30,16 @@ public class AuthorController {
 
 	@Autowired
 	SessionFactory factory;
+	
+	public UserSettings getUserSettings(Users user)
+	{
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.readValue(user.getSettings(), UserSettings.class);
+		}catch(Exception ex) {
+			return null;
+		}
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Posts> getPostByAuthor(int userid){
@@ -73,6 +86,7 @@ public class AuthorController {
 		}
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value="{username}", method=RequestMethod.GET)
 	public String author(HttpServletRequest request ,ModelMap modelMap, @PathVariable("username") String username)
 	{
@@ -87,7 +101,8 @@ public class AuthorController {
 		pagedlistHolder.setMaxLinkedPages(5);
 		pagedlistHolder.setPageSize(7);
 		
-//		modelMap.addAttribute("posts", posts);
+		UserSettings settings = this.getUserSettings(user);
+		modelMap.addAttribute("UserSettings", settings);
 		modelMap.addAttribute("pagedListHolder", pagedlistHolder);
 		modelMap.addAttribute("user", user);
 		return "client/author";
