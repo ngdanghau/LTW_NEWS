@@ -39,17 +39,24 @@
 
 
 /*************************STANDARD STATMENT*************************/
+
 <!--- TAG LIBRARY --->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="format" uri="http://java.sun.com/jstl/fmt_rt" %>
 <%@tablib prefix="form" uri="http://www.springframeword.org/tags/form" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@tablib prefix="spring" uri="http://www.springframeword.org/tags" %>
 
 <!--- CSS & JAVASCRIPT --->
 <link rel='stylesheet' href="<c:url value='./public/...'/>"/>
-
 <script src="<c:url value='./public/...' />"></script>
 
 <!-- THEM CSS VA JAVASCRIPT -->
 <base href="${pageContext.servletContext.contextPath}/"> dùng cái này thì không cần dùng <%@taglib prefix="c" %> nữa 
 Cú  pháp: <%@include file="..." %>
+
+
+Admin template URL: https://demo.pixelcave.com/oneui/be_pages_dashboard.html
+Admin timewrite.xyz: https://timeswriter.xyz/login
+Admin account: 00xshen00@gmail.com
+Admin password: D7JdAo4z7pzRG

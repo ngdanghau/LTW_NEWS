@@ -36,12 +36,17 @@
 		</c:if>
 		
 		<!-- TRANG HIEN TAI -->
-		<%-- <span aria-current="page" class="page-numbers current"><span>${ pagedListHolder.page + 1}</span></span> --%>
+		<%-- <span aria-current="page" class="page-numbers current"><span>${ pagedListHolder.page}</span></span> --%>
 		
 		<!-- TRANG DAU TIEN -->
 		<%-- <c:if test="${pagedListHolder.firstLinkedPage > 0}">
 			<a class="page-numbers current" href="<%=StringUtils.replace(pagedLink, "~", "0")%>"><span>1</span></a></li>
 		</c:if> --%>
+		
+		
+		<c:if test="${pagedListHolder.firstLinkedPage > 0}">
+			<a class="page-numbers" href="<%=StringUtils.replace(pagedLink, "~", "0")%>">1</a>
+		</c:if>
 		
 		
 		 <c:if test="${pagedListHolder.firstLinkedPage > 1}">
@@ -52,11 +57,11 @@
 		<c:forEach begin="${pagedListHolder.firstLinkedPage}" end="${pagedListHolder.lastLinkedPage}" var="i">
 			<c:choose>
 				<c:when test="${pagedListHolder.page == i}">
-					<a class="page-numbers current" href="<%=StringUtils.replace(pagedLink, "~", String.valueOf( pagedListHolder.getPage() + 1 ))%>">${i+1}</a></li>
+					<span aria-current="page" class="page-numbers current" href="#"><span>${ pagedListHolder.page + 1}</span></span>
 				</c:when>
 				
 				 <c:otherwise>
-					<a class="page-numbers" href="<%=StringUtils.replace(pagedLink, "~", String.valueOf( pagedListHolder.getPage() + 2))%>">${i+1}</a>
+					<a class="page-numbers" href="<%=StringUtils.replace(pagedLink, "~", String.valueOf(jspContext.getAttribute("i")))%>">${i + 1}</a>
 				</c:otherwise>
 				
 			</c:choose>

@@ -28,7 +28,7 @@
    <body class="home blog theme-fox woocommerce-no-js has-sidebar sidebar-right layout-wide style--dropcap-default dropcap-style-default style--dropcap-font-heading style--tag-plain style--list-widget-1 style--tagcloud-1 style--blockquote-no-icon style--single-heading-border_top style--link-2 elementor-default elementor-kit-6">
       <div id="wi-all" class="fox-outer-wrapper fox-all wi-all">
       <div id="wi-wrapper" class="fox-wrapper wi-wrapper">
-      
+      <!-- CLIENT CATEGORY.JSP -->
       <div class="wi-container">
       <!-- HEADER FRAGMENT -->
       <jsp:include page="./fragments/header.fragment.jsp"/>
