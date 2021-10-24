@@ -28,9 +28,6 @@
 <body>
 <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
     
-  <!-- ASIDE FRAGMENT -->
-  <jsp:include page="./fragments/aside.fragment.jsp"/>  
-
   <!-- SIDEBAR FRAGMENT -->
   <jsp:include page="./fragments/sidebar.fragment.jsp"/>
 
@@ -534,3 +531,10 @@
   
   <!-- FOOTER FRAGMENT -->
   <jsp:include page="./fragments/footer.fragment.jsp"/>
+  
+</div>
+		<script src="./public/admin/js/oneui.app.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+		<script src="./public/admin/js/pages/be_pages_dashboard.min.js"></script>
+  </body>
+</html>

@@ -47,6 +47,9 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		String HOMEURL = String.format("%s://%s:%s%s/index.htm", request.getScheme(), request.getServerName(), request.getServerPort(), request.getContextPath() );
 		request.setAttribute("HOMEURL", HOMEURL);
 		
+		String ADMINURL = String.format("%s://%s:%s%s/admin", request.getScheme(), request.getServerName(), request.getServerPort(), request.getContextPath() );
+		request.setAttribute("ADMINURL", ADMINURL);
+		
 	}
 	
 	

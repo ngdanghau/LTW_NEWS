@@ -47,8 +47,6 @@
    <body>
       <!-- AMIND CATEGORY EDIT -->
       <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
-      <!-- ASIDE FRAGMENT -->
-      <jsp:include page="./fragments/aside.fragment.jsp"/>
       <!-- SIDEBAR FRAGMENT -->
       <jsp:include page="./fragments/sidebar.fragment.jsp"/>
       <!-- HEADER FRAGMENT -->
@@ -114,3 +112,7 @@
       </main>
       <!-- FOOTER FRAGMENT -->
       <jsp:include page="./fragments/footer.fragment.jsp"/>
+</div>
+		<script src="./public/admin/js/oneui.app.min.js"></script>
+  </body>
+</html>
