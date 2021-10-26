@@ -32,7 +32,7 @@ public class Posts {
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="MM/dd/yyyy")
-	@Column(name="CREATED_AT")
+	@Column(name="CREATED_AT", columnDefinition = "DATETIME default getdate()")
 	private Date created_at;
 	
 	@Column(name="CONTENT")
@@ -55,16 +55,16 @@ public class Posts {
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="MM/dd/yyyy")
-	@Column(name="MODIFIED_AT")
+	@Column(name="MODIFIED_AT" , columnDefinition = "DATETIME default getdate()")
 	private Date modified_at;
 	
 	@Column(name="MEDIA")
 	private String media;
 	
-	@Column(name="VIEWER")
+	@Column(name="VIEWER", columnDefinition = "integer default 0")
 	private long viewer;
 	
-	@Column(name="FEATURED")
+	@Column(name="FEATURED", columnDefinition = "boolean default false")
 	private String featured;
 	
 	@Column(name="EXTERNAL_ID")

@@ -19,9 +19,6 @@ public class Categories {
 	@Column(name="ID")
 	private int id;
 	
-	@OneToMany(mappedBy="category", fetch=FetchType.EAGER)
-	private Collection<Posts> posts;
-	
 	@Column(name="NAME")
 	private String name;
 	
@@ -33,15 +30,6 @@ public class Categories {
 	
 	@Column(name="PARENT")
 	private int parent;
-	
-	
-	public Collection<Posts> getPosts() {
-		return posts;
-	}
-
-	public void setPosts(Collection<Posts> posts) {
-		this.posts = posts;
-	}
 	
 	public int getId() {
 		return id;

@@ -73,7 +73,7 @@ public class IndexController {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping("index")
-	public String index(HttpServletRequest request,ModelMap model){
+	public String index(HttpServletRequest request, ModelMap model){
 		List<WidgetModel> lists = new ArrayList<WidgetModel>();
 		
 		List<Posts> posts = getPostRecent();

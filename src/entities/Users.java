@@ -14,12 +14,6 @@ public class Users {
 	@Column(name="ID")
 	private int id;
 	
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
-	private Collection<Pages> pages;
-	
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
-	private Collection<Posts> posts;
-	
 	
 	@Column(name="ACCOUNT_TYPE")
 	private String account_type;
@@ -75,14 +69,7 @@ public class Users {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public Collection<Posts> getPosts() {
-		return posts;
-	}
 
-	public void setPosts(Collection<Posts> posts) {
-		this.posts = posts;
-	}
 
 	public String getFirstname() {
 		return firstname;
@@ -100,14 +87,6 @@ public class Users {
 		this.settings = settings;
 	}
 
-
-	public Collection<Pages> getPages() {
-		return pages;
-	}
-
-	public void setPages(Collection<Pages> pages) {
-		this.pages = pages;
-	}
 
 	public String getAccount_type() {
 		return account_type;

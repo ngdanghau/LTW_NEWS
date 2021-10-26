@@ -91,7 +91,7 @@
                   	</li>
                   	
                   	<li class="nav-main-item">
-	                     <a class="nav-main-link" href="be_blocks_styles.html">
+	                     <a class="nav-main-link" href="${ ADMINURL }/post.htm">
 	                     	<span class="nav-main-link-name"> Thêm mới</span>
 	                     </a>
                   	</li>

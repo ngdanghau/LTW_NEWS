@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
    pageEncoding="utf-8"%>
-   
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="tg" tagdir="/WEB-INF/tags" %>
 <!doctype html>
 <html lang="en">
   <head>
@@ -37,7 +38,7 @@
           Bài viết
         </h1>
       </div>
-     <a  href="${ ADMINURL }/posts/new.htm" class="btn btn-sm btn-primary">
+     <a  href="${ ADMINURL }/post.htm" class="btn btn-sm btn-primary">
                 <i class="fa fa-plus me-1"></i> Bài viết mới
               </a>
     </div>
@@ -46,18 +47,47 @@
 <div class="content">
   <div class="block block-rounded">
     <div class="block-header block-header-default">
-      <h3 class="block-title">Topics</h3>
+      
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group">
+		          <select class="form-control form-control-sm" id="action" name="action" style="width: 120px">
+		          	<option value="-1">Chọn hành động</option>
+		          	<option value="trash">Cho vào rác</option>
+		         </select>
+		        </div>
+			</div>
+			<div class="col-sm-6">
+				<button class="btn btn-sm btn-primary">Thực hiện</button>
+			</div>
+		</div>
       <div class="block-options">
-        <button type="button" class="btn-block-option me-2">
-         
-        </button>
-        <button type="button" class="btn-block-option" data-toggle="block-option" data-action="fullscreen_toggle"></button>
-        <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
-          <i class="si si-refresh"></i>
+        <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="class-toggle" data-target="#one-search" data-class="d-none">
+          <i class="fa fa-search"></i>
         </button>
       </div>
     </div>
+    <div id="one-search" class="block-content border-bottom d-none">
+      <form action="${ADMINURL }/posts.htm" method="GET">
+        <div class="push">
+          <div class="input-group">
+            <input type="text" class="form-control form-control-alt" id="search" value="${ param.search }" name="search" placeholder="Tìm bài viết">
+            <span class="input-group-text bg-body border-0">
+              <i class="fa fa-search"></i>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
     <div class="block-content">
+    	<c:if test="${successMessage != null && successMessage.trim().length() > 0 }">
+			<div class="alert alert-success alert-dismissible" role="alert">
+		     	<p class="mb-0">
+		        	${ successMessage }
+		     	</p>
+		    	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	      	</div>
+		</c:if>
       <table class="table table-striped table-borderless table-vcenter">
         <thead class="border-bottom">
           <tr>
@@ -86,83 +116,64 @@
           </tr>
         </tfoot>
         <tbody>
-          <tr>
-            <td class="text-center" style="width: 40px;">
-              <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="1" id="example-checkbox-default1" name="example-checkbox-default1">
-                </div>
-            </td>
-            <td colspan="2">
-              <a class="fw-semibold" href="be_pages_forum_discussion.html">Welcome to our forums!</a>
-              <div class="fs-sm text-muted mt-1">
-                <a class="fw-medium" href="be_pages_generic_profile.html">Scott Young</a> on May 20, 2019
-              </div>
-            </td>
-            <td class="d-none d-md-table-cell text-center">
-              <a class="fw-semibold" href="javascript:void(0)">184</a>
-            </td>
-            <td class="d-none d-md-table-cell text-center">
-              <a class="fw-semibold" href="javascript:void(0)">101</a>
-            </td>
-            <td class="d-none d-md-table-cell">
-              <span class="fs-sm">by <a class="fw-medium" href="be_pages_generic_profile.html">Adam McCoy</a><br>on May 21, 2019</span>
-            </td>
-          </tr>
+        	<jsp:useBean id="pagedListHolder" scope="request" type="org.springframework.beans.support.PagedListHolder"/>
+			<c:url value="${ ADMINURL }/posts.htm?search=${ param.search }&user_id=${ param.user_id }&cat_id=${ param.cat_id }&post_status=${ param.post_status }" var="pagedLink">
+				<c:param name="p" value="~" />
+			</c:url>
+			<c:forEach var="post" items="${ pagedListHolder.pageList }" begin="0" > 			
+	          <tr>
+	            <td class="text-center" style="width: 40px;">
+	              <div class="form-check">
+	                  <input class="form-check-input" type="checkbox" value="${ post.id }" id="items[]" name="items[]">
+	                </div>
+	            </td>
+	            <td colspan="2">
+	            	<c:choose>
+					    <c:when test="${ post.post_status == 'trash' }">
+					    	<span class="fw-semibold">${ post.title }</span>
+					    </c:when>    
+					    <c:otherwise>
+					        <a class="fw-semibold" href="${ ADMINURL }/post.htm?postid=${ post.id }">${ post.title }</a>
+					    </c:otherwise>
+					</c:choose>
+	              
+	            </td>
+	            <td class="d-none d-md-table-cell text-center">
+					<a class="fw-semibold" href="${ADMINURL }/posts.htm?user_id=${ post.user.id }">${ post.user.username }</a>
+	            </td>
+	            <td class="d-none d-md-table-cell text-center">
+	              <a class="fw-semibold" href="${ADMINURL }/posts.htm?cat_id=${ post.category.id }">${ post.category.name }</a>
+	            </td>
+	            <td class="d-none d-md-table-cell">
+	              <span class="fs-sm"> ${ post.post_status } <br> ${ dateFormatPost.format(post.modified_at) }</span>
+	            </td>
+	          </tr>
+          </c:forEach>
          
-          <tr>
-          <td class="text-center" style="width: 40px;">
-             <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="1" id="example-checkbox-default1" name="example-checkbox-default1">
-                </div>
-            </td>
-            <td colspan="2">
-              <a class="fw-semibold" href="be_pages_forum_discussion.html">Testing out the API</a>
-              <div class="fs-sm text-muted mt-1">
-                <a class="fw-medium" href="be_pages_generic_profile.html">Wayne Garcia</a> on April 25, 2019
-              </div>
-            </td>
-            <td class="d-none d-md-table-cell text-center">
-              <a class="fw-semibold" href="javascript:void(0)">209</a>
-            </td>
-            <td class="d-none d-md-table-cell text-center">
-              <a class="fw-semibold" href="javascript:void(0)">1701</a>
-            </td>
-            <td class="d-none d-md-table-cell">
-              <span class="fs-sm">by <a class="fw-medium" href="be_pages_generic_profile.html">Barbara Scott</a><br>on May 4, 2019</span>
-            </td>
-          </tr>
         </tbody>
       </table>
-      <nav aria-label="Topics navigation">
-        <ul class="pagination justify-content-end">
-          <li class="page-item active">
-            <a class="page-link" href="javascript:void(0)">1</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="javascript:void(0)">2</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="javascript:void(0)">3</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="javascript:void(0)" aria-label="Next">
-              <span aria-hidden="true">
-                <i class="fa fa-angle-right"></i>
-              </span>
-              <span class="visually-hidden">Next</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+       <tg:paging_admin pagedListHolder="${pagedListHolder}" pagedLink="${pagedLink}" />
     </div>
   </div>
 </div>
   </main>
+  <c:remove var="successMessage" scope="session" />
+  <c:remove var="errorMessage" scope="session" />
   <!-- FOOTER FRAGMENT -->
       <jsp:include page="./fragments/footer.fragment.jsp"/>
       
 
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
+		<script src="./public/admin/js/pages/post.js"></script>
+		<script>
+			$( document ).ready(function() {
+				
+				TimesWriter.CheckAll();
+			    
+				
+			});
+		</script>
   </body>
 </html>

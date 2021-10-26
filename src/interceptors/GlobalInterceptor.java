@@ -17,7 +17,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -109,7 +108,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 			try 
 			{
 				Session session = factory.getCurrentSession();
-				String hql = "FROM Users u "
+				String hql = "SELECT u FROM Users u "
 							+ "WHERE u.email = :email";
 				
 				Query query = session.createQuery(hql);

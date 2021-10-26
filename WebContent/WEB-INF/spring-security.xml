@@ -21,6 +21,8 @@
 
 
         <intercept-url pattern="/dashboard.htm" access="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_CONTRIBUTOR')" />
+        <intercept-url pattern="/admin/posts.htm" access="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_CONTRIBUTOR')" />
+        <intercept-url pattern="/admin/post.htm" access="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_CONTRIBUTOR')" />
         <intercept-url pattern="/other/**" access="isAuthenticated()" />
         
         
