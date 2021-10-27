@@ -127,7 +127,16 @@
 				<div class="form-group">
 		          <select class="form-control form-control-sm" id="action" name="action" style="width: 120px">
 		          	<option value="-1">Chọn hành động</option>
-		          	<option value="trash">Cho vào rác</option>
+		          	<c:choose>
+					    <c:when test="${ param.post_status == 'trash' }">
+					    	<option value="restore">Khôi phục</option>
+					    	<option value="delete">Xóa vĩnh viễn</option>
+					    </c:when>    
+					    <c:otherwise>
+					    	<option value="trash">Cho vào rác</option>
+					    </c:otherwise>
+					</c:choose>
+		          	
 		         </select>
 		        </div>
 			</div>
@@ -175,6 +184,7 @@
             <th class="d-none d-md-table-cell text-center" style="width: 100px;">Thể Loại</th>
             <th class="d-none d-md-table-cell" style="width: 200px;">Ngày</th>
             <th class="d-none d-md-table-cell" >Nổi bật</th>
+            <th class="d-none d-md-table-cell">Hành động</th>
           </tr>
         </thead>
         <tfoot class="border-bottom">
@@ -189,6 +199,7 @@
             <th class="d-none d-md-table-cell text-center" style="width: 100px;">Thể Loại</th>
             <th class="d-none d-md-table-cell" style="width: 200px;">Ngày</th>
             <th class="d-none d-md-table-cell" >Nổi bật</th>
+            <th class="d-none d-md-table-cell">Hành động</th>
           </tr>
         </tfoot>
         <tbody>
@@ -212,7 +223,6 @@
 					        <a class="fw-semibold" href="${ ADMINURL }/post.htm?postid=${ post.id }">${ post.title }</a>
 					    </c:otherwise>
 					</c:choose>
-	              
 	            </td>
 	            <td class="d-none d-md-table-cell text-center">
 					<a class="fw-semibold" href="${ADMINURL }/posts.htm?user_id=${ post.user.id }">${ post.user.username }</a>
@@ -237,6 +247,14 @@
 					    </c:otherwise>
 					</c:choose>
 	            </td>
+	            <td class="text-center">
+                  <a class="btn btn-sm btn-alt-secondary" href="${APPURL }/article/${post.id}/${post.post_slug}.htm" target="_blank" data-bs-toggle="tooltip" title="View">
+                    <i class="fa fa-fw fa-eye"></i>
+                  </a>
+                  <a class="btn btn-sm btn-alt-secondary" href="javascript:void(0)" data-bs-toggle="tooltip" title="Delete">
+                    <i class="fa fa-fw fa-times"></i>
+                  </a>
+                </td>
 	          </tr>
           </c:forEach>
          

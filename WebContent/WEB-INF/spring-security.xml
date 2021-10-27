@@ -23,7 +23,7 @@
         <intercept-url pattern="/dashboard.htm" access="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_CONTRIBUTOR')" />
         <intercept-url pattern="/admin/posts.htm" access="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_CONTRIBUTOR')" />
         <intercept-url pattern="/admin/post.htm" access="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_CONTRIBUTOR')" />
-        <intercept-url pattern="/other/**" access="isAuthenticated()" />
+        <intercept-url pattern="/admin/**" access="isAuthenticated()" />
         
         
         <access-denied-handler error-page="/403" />
@@ -35,7 +35,8 @@
 
         <logout logout-url="/logout.htm" logout-success-url="/admin.htm?logout=true"
             delete-cookies="JSESSIONID" invalidate-session="true" />
-            
+        
+        <remember-me key="uniqueAndSecret" token-validity-seconds="1296000"/>
 
     </http>
     

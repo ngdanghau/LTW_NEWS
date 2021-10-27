@@ -93,6 +93,12 @@
                 <div class="mb-4">
                   <input type="password" class="form-control form-control-lg form-control-alt py-3" id="password" name="password" placeholder="Password">
                 </div>
+                <div class="mb-4">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="remember" name="remember">
+                      <label class="form-check-label" for="remember">Remember Me</label>
+                    </div>
+                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-4">
                   <div>
                     <a class="text-muted fs-sm fw-medium d-block d-lg-inline-block mb-1" href="forgot-password.htm">
