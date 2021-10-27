@@ -58,5 +58,3 @@ Cú  pháp: <%@include file="..." %>
 
 Admin template URL: https://demo.pixelcave.com/oneui/be_pages_dashboard.html
 Admin timewrite.xyz: https://timeswriter.xyz/login
-Admin account: 00xshen00@gmail.com
-Admin password: D7JdAo4z7pzRG
