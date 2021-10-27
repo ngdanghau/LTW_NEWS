@@ -114,7 +114,7 @@
 				            </div>
 				            <div class="row mb-4">
 								<div class="col-9">
-									<a href="${ADMINURL }/post_delete.htm?postid=${post.id}" class="fs-sm submitdelete" style="color: #b32d2e;text-decoration: underline;">Cho vào thùng rác</a>
+									<a href="${ADMINURL }/post_trash.htm?postid=${post.id}" class="fs-sm submitdelete" style="color: #b32d2e;text-decoration: underline;">Cho vào thùng rác</a>
 								</div>
 								<div class="col-2 text-right">
 									<button type="submit" class="btn btn-primary">Lưu</button>

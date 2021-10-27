@@ -91,16 +91,57 @@ TimesWriter.Featured = function () {
 
             success: function(resp) {
             	$form.removeClass('block-mode-loading');
-            	try{
-            		resp = JSON.parse(resp);
-            		if(resp.result == 0){
-                        Swal.fire('Oops...', resp.msg, 'error')
-                    }else{
-                       $this.html(resp.html);
-                    }
-            	}catch(ex){
-            		Swal.fire('Oops...', "Oops! Đã xảy ra lỗi. Vui lòng thử lại sau!", 'error')
-            	}
+            	if(resp.result == 0){
+                    Swal.fire('Oops...', resp.msg, 'error')
+                }else{
+                   $this.html(resp.html);
+                }
+            }
+        });
+    });
+ }
+
+TimesWriter.ActionSubmit = function () {
+    $(".btn-action").on("click", function() {
+        var $this = $(this);
+        $form = $this.parents(".block ");
+        
+        var ids = [];
+        document.querySelectorAll('input[name="items[]"]:checked').forEach(item => ids.push(item.value));
+        ids = ids.filter(Boolean);
+        if(ids.length == 0){
+            Swal.fire('Oops...', "Vui lòng chọn ít nhất một bài viết", 'error');
+            return;
+        }
+        
+        
+        var url = $this.data("url");
+        var action = $("#action").val();
+        if(action == "-1" || action == null){
+        	Swal.fire('Oops...', "Hãy chọn hành động thực hiện", 'error');
+            return;
+        }
+        $form.addClass('block-mode-loading');
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                action: action,
+                ids: ids,
+                next: window.location.href,
+            },
+            error: function(error) {
+                $form.removeClass('block-mode-loading');
+                Swal.fire('Oops...', "Oops! Đã xảy ra lỗi. Vui lòng thử lại sau!", 'error')
+            },
+
+            success: function(resp) {
+            	$form.removeClass('block-mode-loading');
+        		if(resp.result == 0){
+                    Swal.fire('Oops...', resp.msg, 'error')
+                }else{
+                	//window.location.href = window.location.href;
+                }
             }
         });
     });

@@ -141,7 +141,7 @@
 		        </div>
 			</div>
 			<div class="col-sm-6">
-				<button class="btn btn-sm btn-primary">Thực hiện</button>
+				<button class="btn btn-sm btn-primary btn-action" data-url="${ADMINURL }/post_bulk.htm" >Thực hiện</button>
 			</div>
 		</div>
       <div class="block-options">
@@ -251,7 +251,8 @@
                   <a class="btn btn-sm btn-alt-secondary" href="${APPURL }/article/${post.id}/${post.post_slug}.htm" target="_blank" data-bs-toggle="tooltip" title="View">
                     <i class="fa fa-fw fa-eye"></i>
                   </a>
-                  <a class="btn btn-sm btn-alt-secondary" href="javascript:void(0)" data-bs-toggle="tooltip" title="Delete">
+                  
+                  <a class="btn btn-sm btn-alt-secondary" href="${ADMINURL }/${ post.post_status == 'trash' ? 'post_delete' : 'post_trash' }.htm?postid=${post.id}&next=${dataUrl}" data-bs-toggle="tooltip" title="Delete">
                     <i class="fa fa-fw fa-times"></i>
                   </a>
                 </td>
@@ -281,6 +282,7 @@
 				
 				TimesWriter.CheckAll();
 				TimesWriter.Featured();
+				TimesWriter.ActionSubmit();
 				
 			});
 		</script>

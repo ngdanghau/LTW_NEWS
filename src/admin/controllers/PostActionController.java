@@ -1,6 +1,9 @@
 package admin.controllers;
 
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,12 +16,20 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import entities.Posts;
 
@@ -29,6 +40,9 @@ import entities.Posts;
 public class PostActionController {
 	@Autowired
 	SessionFactory factory;
+	
+	@Autowired
+	ObjectMapper mapper;
 	
 	@SuppressWarnings("unchecked")
 	public Posts getPostById(int postid){
@@ -47,8 +61,8 @@ public class PostActionController {
 		}
 	}
 	
-	@RequestMapping( value="post_delete", method = RequestMethod.GET)
-	public String delete(HttpServletRequest request, ModelMap model){	
+	@RequestMapping( value="post_trash", method = RequestMethod.GET)
+	public String trash(HttpServletRequest request, ModelMap model){	
 		int postId = 0;
 		try {
 			postId = Integer.parseInt(request.getParameter("postid"));
@@ -90,24 +104,76 @@ public class PostActionController {
 		return "redirect:/admin/posts.htm";
 	}
 	
+	@RequestMapping( value="post_delete", method = RequestMethod.GET)
+	public String delete(HttpServletRequest request, ModelMap model) throws UnsupportedEncodingException{
+		String url = request.getParameter("next");
+		if(url == null) url = "/admin/posts.htm";
+		else url = URLDecoder.decode(url, "UTF-8");
+		
+		int postId = 0;
+		try {
+			postId = Integer.parseInt(request.getParameter("postid"));
+		}catch(Exception ex) {
+			postId = 0;
+		}
+		
+		if(postId == 0) {
+			return "redirect:" + url;
+		}
+		
+		
+		
+		List<String> errorMessage = new ArrayList<String>();
+		Posts post = getPostById(postId);
+		if(post == null) {
+			errorMessage.add("Bài viết không tồn tại !");
+		}else {
+			Session session = factory.openSession();
+			Transaction t =  session.beginTransaction();
+			try{   
+				session.delete(post);
+				t.commit();
+				request.getSession().setAttribute("successMessage", "Xóa bài viết thành công");
+			}
+			catch(Exception e){
+				e.printStackTrace();
+				t.rollback();
+				errorMessage.add("Xóa bài viết thất bại !");
+			}
+			finally{
+				session.close();
+			}
+		}
+		
+		if(errorMessage.size() > 0) {
+			return "redirect:" + url;
+		}
+		request.getSession().setAttribute("successMessage", "Xóa bài viết thành công");
+		return "redirect:"+ url;
+	}
+	
 	
 	@RequestMapping( value="post_featured", method = RequestMethod.POST)
-	@ResponseBody
-	public String featured(HttpServletRequest request, @RequestParam Map<String, Object> params) {	
+	public ResponseEntity<JsonNode> featured(HttpServletRequest request, @RequestParam Map<String, Object> params) {	
 		int postId = 0;
 		try {
 			postId = Integer.parseInt((String) params.get("id"));
 		}catch(Exception ex) {
 			postId = 0;
 		}
+		ObjectNode objectNode = mapper.createObjectNode();
 		
 		if(postId == 0) {
-			return "{\"result\": 0, \"msg\": \"Bài viết không hợp lệ!\"}";
+			objectNode.put("result", 0);
+			objectNode.put("msg", "Bài viết không hợp lệ!");
+			return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
 		}
 		
 		Posts post = getPostById(postId);
 		if(post == null) {
-			return "{\"result\": 0, \"msg\": \"Bài viết không hợp lệ!\"}";
+			objectNode.put("result", 0);
+			objectNode.put("msg", "Bài viết không hợp lệ!");
+			return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
 		}else {
 			Session session = factory.openSession();
 			Transaction t =  session.beginTransaction();
@@ -119,7 +185,9 @@ public class PostActionController {
 			catch(Exception e){
 				e.printStackTrace();
 				t.rollback();
-				return "{\"result\": 0, \"msg\": \"Lỗi! Hãy thử lại!\"}";
+				objectNode.put("result", 0);
+				objectNode.put("msg", "Lỗi! Hãy thử lại!");
+				return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
 			}
 			finally{
 				session.close();
@@ -127,9 +195,60 @@ public class PostActionController {
 		}
 		
 		if(post.isFeatured()) {
-			return "{\"result\": 1, \"html\": \"<i class='fas fa-star text-warning'></i>\"}";
+			objectNode.put("result", 1);
+			objectNode.put("html", "<i class='fas fa-star text-warning'></i>");
 		}else {
-			return "{\"result\": 1, \"html\": \"<i class='far fa-star'></i>\"}";
+			objectNode.put("html", "<i class='far fa-star'></i>");
 		}
+		return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
+	}
+	
+	
+	
+	@RequestMapping( value="post_bulk", method = RequestMethod.POST)
+	public ResponseEntity<JsonNode> bulk(HttpServletRequest request, @RequestParam("action") String action, @RequestParam("ids[]") List<Integer> ids) throws IOException {	
+		Session session = factory.openSession();
+		ObjectNode objectNode = mapper.createObjectNode();
+		if(action == null || action == "") {
+			objectNode.put("result", 0);
+			objectNode.put("msg", "Hành động không hợp lệ!");
+			return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
+		}
+		
+		if(ids == null || ids.size() == 0) {
+			objectNode.put("result", 0);
+			objectNode.put("msg", "Danh sách không hợp lệ!");
+			return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
+		}
+		
+		String values = "";
+		for(Integer item: ids) {
+			values += "id = " + item + " OR ";
+		}
+		
+		Transaction t =  session.beginTransaction();
+		if(action == "trash") {
+			try{   
+				String hql = "UPDATE Posts SET post_status = :post_status WHERE :list"; 
+				Query query = session.createQuery(hql); 
+				query.setParameter("list", values);
+				query.setParameter("post_status", "trash");
+				query.executeUpdate();
+				t.commit();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+				t.rollback();
+				objectNode.put("result", 0);
+				objectNode.put("msg", "Lỗi! Hãy thử lại!");
+				return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
+			}
+			finally{
+				session.close();
+			}
+			request.getSession().setAttribute("successMessage", "Cho vào rác danh sách bài viết thành công!");
+		}
+		objectNode.put("result", 1);
+		return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
 	}
 }

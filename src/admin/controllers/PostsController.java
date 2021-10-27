@@ -1,6 +1,9 @@
 package admin.controllers;
 
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -78,7 +81,7 @@ public class PostsController {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping( value="posts", method = RequestMethod.GET)
-	public String index(HttpServletRequest request, ModelMap model, HttpSession session){	
+	public String index(HttpServletRequest request, ModelMap model, HttpSession session) throws UnsupportedEncodingException{	
 		String successMessage = (String) session.getAttribute("successMessage");
 		List<String> errorMessage = new ArrayList<String>();
 		try {
@@ -116,13 +119,14 @@ public class PostsController {
 		
 		// lấy tóm tắt 
 		List<Object[]> listSummary  = getListSummary();
-		
+		String url = request.getRequestURL().toString() + "?" + (request.getQueryString() == null ? "post_status=publish" : request.getQueryString().toString());
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa", new Locale("vi", "VN"));
 		model.addAttribute("dateFormatPost", dateFormat);
 		model.addAttribute("pagedListHolder", pagedlistHolder);
 		model.addAttribute("successMessage", successMessage);
 		model.addAttribute("errorMessage", errorMessage);
 		model.addAttribute("listSummary", listSummary);
+		model.addAttribute("dataUrl", URLEncoder.encode(url, StandardCharsets.UTF_8.toString()));
 		return "admin/posts";
 	}
 }
