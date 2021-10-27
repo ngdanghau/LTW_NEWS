@@ -58,21 +58,22 @@
               <i class="fa fa-2x fa-circle-notch text-primary-light"></i>
             </p>
             <h1 class="fw-bold mb-2">
-              Password Reminder
+              Quên mật khẩu
             </h1>
             <p class="fw-medium text-muted">
-              Please provide your account’s email and we will send you your password.
+              Vui lòng cung cấp email của bạn.
             </p>
           </div>
           <div class="row g-0 justify-content-center">
             <div class="col-sm-8 col-xl-4">
-              <form class="js-validation-reminder" action="be_pages_auth_all.html" method="POST">
+              <form class="js-validation-reminder" action="${APPURL }/forgot-password.htm" method="POST">
                 <div class="mb-4">
-                  <input type="text" class="form-control form-control-lg form-control-alt py-3" id="reminder-credential" name="reminder-credential" placeholder="Username or Email">
+                  <input type="email" class="form-control form-control-lg form-control-alt py-3" id="email" name="email" placeholder="Email">
                 </div>
+                <p>${message }</p>
                 <div class="text-center">
                   <button type="submit" class="btn btn-lg btn-alt-primary">
-                    <i class="fa fa-fw fa-envelope me-1 opacity-50"></i> Send Mail
+                    <i class="fa fa-fw fa-envelope me-1 opacity-50"></i> Gửi
                   </button>
                 </div>
               </form>
