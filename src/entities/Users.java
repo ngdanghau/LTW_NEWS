@@ -14,7 +14,6 @@ public class Users {
 	@Column(name="ID")
 	private int id;
 	
-	
 	@Column(name="ACCOUNT_TYPE")
 	private String account_type;
 	
@@ -69,8 +68,7 @@ public class Users {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
+	
 	public String getFirstname() {
 		return firstname;
 	}
@@ -86,7 +84,6 @@ public class Users {
 	public void setSettings(String settings) {
 		this.settings = settings;
 	}
-
 
 	public String getAccount_type() {
 		return account_type;
