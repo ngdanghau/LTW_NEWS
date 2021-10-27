@@ -3,6 +3,7 @@ package admin.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import entities.Posts;
 
@@ -45,7 +48,7 @@ public class PostActionController {
 	}
 	
 	@RequestMapping( value="post_delete", method = RequestMethod.GET)
-	public String index(HttpServletRequest request, ModelMap model){	
+	public String delete(HttpServletRequest request, ModelMap model){	
 		int postId = 0;
 		try {
 			postId = Integer.parseInt(request.getParameter("postid"));
@@ -85,5 +88,48 @@ public class PostActionController {
 		}
 		request.getSession().setAttribute("successMessage", "Xóa bài viết thành công");
 		return "redirect:/admin/posts.htm";
+	}
+	
+	
+	@RequestMapping( value="post_featured", method = RequestMethod.POST)
+	@ResponseBody
+	public String featured(HttpServletRequest request, @RequestParam Map<String, Object> params) {	
+		int postId = 0;
+		try {
+			postId = Integer.parseInt((String) params.get("id"));
+		}catch(Exception ex) {
+			postId = 0;
+		}
+		
+		if(postId == 0) {
+			return "{\"result\": 0, \"msg\": \"Bài viết không hợp lệ!\"}";
+		}
+		
+		Posts post = getPostById(postId);
+		if(post == null) {
+			return "{\"result\": 0, \"msg\": \"Bài viết không hợp lệ!\"}";
+		}else {
+			Session session = factory.openSession();
+			Transaction t =  session.beginTransaction();
+			try{   
+				post.setFeatured(!post.isFeatured());
+				session.update(post);
+				t.commit();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+				t.rollback();
+				return "{\"result\": 0, \"msg\": \"Lỗi! Hãy thử lại!\"}";
+			}
+			finally{
+				session.close();
+			}
+		}
+		
+		if(post.isFeatured()) {
+			return "{\"result\": 1, \"html\": \"<i class='fas fa-star text-warning'></i>\"}";
+		}else {
+			return "{\"result\": 1, \"html\": \"<i class='far fa-star'></i>\"}";
+		}
 	}
 }

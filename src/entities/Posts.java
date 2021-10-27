@@ -65,7 +65,7 @@ public class Posts {
 	private long viewer;
 	
 	@Column(name="FEATURED", columnDefinition = "boolean default false")
-	private String featured;
+	private boolean featured;
 	
 	@Column(name="EXTERNAL_ID")
 	private String external_id;
@@ -177,11 +177,11 @@ public class Posts {
 		this.viewer = viewer;
 	}
 
-	public String getFeatured() {
+	public boolean isFeatured() {
 		return featured;
 	}
 
-	public void setFeatured(String featured) {
+	public void setFeatured(boolean featured) {
 		this.featured = featured;
 	}
 

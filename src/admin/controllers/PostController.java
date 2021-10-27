@@ -100,9 +100,7 @@ public class PostController {
 		// Lấy danh sách thể loại
 		
 		List<Categories> listParent = getCat(0);
-		
 		List<CategoriesModel> list = new ArrayList<CategoriesModel>();
-		
 		for(Categories item: listParent) {
 			CategoriesModel cat = new CategoriesModel();
 			cat.setCategory(item);
@@ -232,6 +230,7 @@ public class PostController {
 				post.setUser((Users)request.getAttribute("AuthUser"));
 				String external_id = CommonHelper.RandomString(10);
 				post.setExternal_id(external_id);
+				post.setFeatured(false);
 				// thêm mới
 				try{   
 					session.save(post);

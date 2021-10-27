@@ -69,3 +69,40 @@ TimesWriter.SlugUrl = function(){
     });
 }
 
+TimesWriter.Featured = function () {
+    $(".btn-featured").on("click", function() {
+        var $this = $(this);
+        $form = $this.parents(".block ");
+        $form.addClass('block-mode-loading');
+        var url = $this.data("url");
+        var id = $this.data("id");
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                action: 'featured',
+                id: id,
+            },
+            error: function(error) {
+                $form.removeClass('block-mode-loading');
+                Swal.fire('Oops...', "Oops! Đã xảy ra lỗi. Vui lòng thử lại sau!", 'error')
+            },
+
+            success: function(resp) {
+            	$form.removeClass('block-mode-loading');
+            	try{
+            		resp = JSON.parse(resp);
+            		if(resp.result == 0){
+                        Swal.fire('Oops...', resp.msg, 'error')
+                    }else{
+                       $this.html(resp.html);
+                    }
+            	}catch(ex){
+            		Swal.fire('Oops...', "Oops! Đã xảy ra lỗi. Vui lòng thử lại sau!", 'error')
+            	}
+            }
+        });
+    });
+ }
+

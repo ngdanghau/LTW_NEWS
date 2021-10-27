@@ -63,9 +63,18 @@ public class PostsController {
 			return query.list();
 		}catch(Exception ex) {
 			ex.printStackTrace();
-			return null;
+			return new ArrayList<Posts>();
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Object[]> getListSummary(){
+		Session session = factory.getCurrentSession();
+		String hql = "SELECT p.post_status, COUNT(p.id) FROM Posts p GROUP BY p.post_status"; 
+		Query query = session.createQuery(hql); 
+		return query.list();
+	}
+	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping( value="posts", method = RequestMethod.GET)
@@ -105,11 +114,15 @@ public class PostsController {
 		pagedlistHolder.setPageSize(15);
 		
 		
+		// lấy tóm tắt 
+		List<Object[]> listSummary  = getListSummary();
+		
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa", new Locale("vi", "VN"));
 		model.addAttribute("dateFormatPost", dateFormat);
 		model.addAttribute("pagedListHolder", pagedlistHolder);
 		model.addAttribute("successMessage", successMessage);
 		model.addAttribute("errorMessage", errorMessage);
+		model.addAttribute("listSummary", listSummary);
 		return "admin/posts";
 	}
 }

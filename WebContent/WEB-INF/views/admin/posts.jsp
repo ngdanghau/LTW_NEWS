@@ -22,6 +22,7 @@
       <link rel="apple-touch-icon" sizes="180x180" href="./public/admin/media/favicons/apple-touch-icon-180x180.png">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
       <link rel="stylesheet" id="css-main" href="./public/admin/css/oneui.min.css">
+      <link rel="stylesheet" href="./public/admin/js/plugins/sweetalert2/sweetalert2.min.css">
 </head>
 <body>
 <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
@@ -45,6 +46,79 @@
   </div>
 </div>
 <div class="content">
+	<div class="sub mb-3 fs-sm">
+		<c:forEach items="${listSummary}" var="summary">
+			<c:if test="${ summary[0] == 'publish' }">
+			  		<c:choose>
+					    <c:when test="${ param.post_status == null || param.post_status == 'publish' }">
+					    	<a class=" link-fx text-primary-darker" href="${ ADMINURL }/posts.htm?post_status=publish">
+					    		<strong>Xuất bản (${ summary[1] })</strong>
+					  		</a>
+					    </c:when>    
+					    <c:otherwise>
+					    	<a class=" link-fx" href="${ ADMINURL }/posts.htm?post_status=publish">
+					    		 Xuất bản (${ summary[1] })
+					  		</a>
+					    </c:otherwise>
+					</c:choose>
+	            |
+            </c:if>
+        </c:forEach>
+        
+        <c:forEach items="${listSummary}" var="summary">
+			<c:if test="${ summary[0] == 'draft' }">
+			  		<c:choose>
+					    <c:when test="${ param.post_status == 'draft' }">
+					    	<a class=" link-fx text-primary-darker" href="${ ADMINURL }/posts.htm?post_status=draft">
+					    		<strong>Nháp (${ summary[1] })</strong>
+					  		</a>
+					    </c:when>    
+					    <c:otherwise>
+					    	<a class=" link-fx" href="${ ADMINURL }/posts.htm?post_status=draft">
+					    		 Nháp (${ summary[1] })
+					  		</a>
+					    </c:otherwise>
+					</c:choose>
+	            |
+            </c:if>
+        </c:forEach>
+        
+        <c:forEach items="${listSummary}" var="summary">
+			<c:if test="${ summary[0] == 'pending' }">
+			  		<c:choose>
+					    <c:when test="${ param.post_status == 'pending' }">
+					    	<a class=" link-fx text-primary-darker" href="${ ADMINURL }/posts.htm?post_status=pending">
+					    		<strong>Chờ duyệt (${ summary[1] })</strong>
+					  		</a>
+					    </c:when>    
+					    <c:otherwise>
+					    	<a class=" link-fx" href="${ ADMINURL }/posts.htm?post_status=pending">
+					    		 Chờ duyệt (${ summary[1] })
+					  		</a>
+					    </c:otherwise>
+					</c:choose>
+	            |
+            </c:if>
+        </c:forEach>
+        
+        <c:forEach items="${listSummary}" var="summary">
+			<c:if test="${ summary[0] == 'trash' }">
+			  		<c:choose>
+					    <c:when test="${ param.post_status == 'trash' }">
+					    	<a class=" link-fx text-primary-darker" href="${ ADMINURL }/posts.htm?post_status=trash">
+					    		<strong>Rác (${ summary[1] })</strong>
+					  		</a>
+					    </c:when>    
+					    <c:otherwise>
+					    	<a class=" link-fx" href="${ ADMINURL }/posts.htm?post_status=trash">
+					    		 Rác (${ summary[1] })
+					  		</a>
+					    </c:otherwise>
+					</c:choose>
+            </c:if>
+        </c:forEach>
+  	
+  	</div>
   <div class="block block-rounded">
     <div class="block-header block-header-default">
       
@@ -100,6 +174,7 @@
             <th class="d-none d-md-table-cell text-center" style="width: 100px;">Tác giả</th>
             <th class="d-none d-md-table-cell text-center" style="width: 100px;">Thể Loại</th>
             <th class="d-none d-md-table-cell" style="width: 200px;">Ngày</th>
+            <th class="d-none d-md-table-cell" >Nổi bật</th>
           </tr>
         </thead>
         <tfoot class="border-bottom">
@@ -113,11 +188,12 @@
             <th class="d-none d-md-table-cell text-center" style="width: 100px;">Tác giả</th>
             <th class="d-none d-md-table-cell text-center" style="width: 100px;">Thể Loại</th>
             <th class="d-none d-md-table-cell" style="width: 200px;">Ngày</th>
+            <th class="d-none d-md-table-cell" >Nổi bật</th>
           </tr>
         </tfoot>
         <tbody>
         	<jsp:useBean id="pagedListHolder" scope="request" type="org.springframework.beans.support.PagedListHolder"/>
-			<c:url value="${ ADMINURL }/posts.htm?search=${ param.search }&user_id=${ param.user_id }&cat_id=${ param.cat_id }&post_status=${ param.post_status }" var="pagedLink">
+			<c:url value="${ ADMINURL }/posts.htm?search=${ param.search }&user_id=${ param.user_id }&cat_id=${ param.cat_id }&post_status=${ param.post_status != null ? param.post_status : 'publish' }" var="pagedLink">
 				<c:param name="p" value="~" />
 			</c:url>
 			<c:forEach var="post" items="${ pagedListHolder.pageList }" begin="0" > 			
@@ -147,6 +223,20 @@
 	            <td class="d-none d-md-table-cell">
 	              <span class="fs-sm"> ${ post.post_status } <br> ${ dateFormatPost.format(post.modified_at) }</span>
 	            </td>
+	            <td class="d-none d-md-table-cell">
+	            	<c:choose>
+					    <c:when test="${ post.featured == 'true' }">
+					    	<a class="btn-featured" href="javascript:void(0)" data-url="${ADMINURL }/post_featured.htm" data-id="${ post.id }">
+			            		<i class="fa fa-star text-warning"></i>
+			            	</a>
+					    </c:when>    
+					    <c:otherwise>
+					        <a class="btn-featured" href="javascript:void(0)"  data-url="${ADMINURL }/post_featured.htm" data-id="${ post.id }">
+			            		<i class="far fa-star"></i>
+			            	</a>
+					    </c:otherwise>
+					</c:choose>
+	            </td>
 	          </tr>
           </c:forEach>
          
@@ -164,14 +254,15 @@
       
 
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
+		<script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
 		<script src="./public/admin/js/pages/post.js"></script>
 		<script>
 			$( document ).ready(function() {
 				
 				TimesWriter.CheckAll();
-			    
+				TimesWriter.Featured();
 				
 			});
 		</script>
