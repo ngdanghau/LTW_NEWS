@@ -59,12 +59,12 @@
                </div>
                <div class="block-content block-content-full">
                
-                  <form:form action="${APPURL }/admin/add-category.htm" method="POST" modelAttribute="category">
+                  <form:form action="${APPURL }/admin/edit-category.htm" method="POST" modelAttribute="category">
                   
                      <div class="row">
                         <div class="col-lg-4">
                            <p class="fs-sm text-muted">
-                              Có <b style="color:red;"> 1896 </b> bài viết thuộc thể loại này.
+                              Có <b style="color:red;"> ${ quantity } </b> bài viết thuộc thể loại này.
                               <p>Tên: Tên riêng sẽ hiển thị trên trang mạng của bạn.</p>
                               <p>Đường dẫn: Đường dẫn (URL). Chuỗi này bao gồm chữ cái thường, số và dấu gạch ngang (-). Ví dụ: https://www.fb.com/game-online123</p>
                               <p>Chuyên mục: Chuyên mục khác với thẻ, bạn có thể sử dụng nhiều cấp chuyên mục. Ví dụ: Trong chuyên mục nhạc, bạn có chuyên mục con là nhạc Pop, nhạc Jazz.</p>
@@ -83,12 +83,21 @@
                            
                            <div class="form-floating mb-4">
                               <form:select path="parent" class="form-select" id="example-select-floating" name="example-select-floating" aria-label="Floating label select example">
-                                 <option selected>Select an option</option>
-                                 <option value="1">One</option>
-                                 <option value="2">Two</option>
-                                 <option value="3">Three</option>
+                              	<c:forEach var="element" items="${ categories }" varStatus="status">
+                              	
+                              		<c:if test="${ category.parent == element.id }">
+                              			<option selected value="${ element.id }">${ element.name }</option>
+                              		</c:if>
+                              		
+                              		<c:if test="${ category.parent != element.id }">
+                              			<option value="${ element.id }">${ element.name }</option>
+                              		</c:if>
+                              		
+                              		
+                              	</c:forEach>
+                                 
                               </form:select>
-                              <label for="example-select-floating">Chuyên mục</label>
+                              <label for="example-select-floating">Chuyên mục gốc</label>
                            </div>
                            <div class="form-floating mb-4">
                               <form:textarea path="description" class="form-control" id="example-textarea-floating" name="example-textarea-floating" style="height: 200px" placeholder="Leave a comment here" />
@@ -100,7 +109,8 @@
                       
                       <div class="container">
 						  <div class="center">
-						    	<input type="submit" class="btn btn-primary" value="Lưu lại">
+						    	<input type="button" id="btn-edit-category-confirm" data-uid="${ category.id }" class="btn btn-primary" value="Lưu lại">
+						    	<input type="button" id="btn-edit-category-cancel" class="btn btn-danger" value="Hủy bỏ">
 						  </div>
 					 </div>
 						                      
@@ -114,5 +124,11 @@
       <jsp:include page="./fragments/footer.fragment.jsp"/>
 </div>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
+		
+		<!-- MY OWN LIBRARY -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		
+		<script src="./public/admin/js/category.js"></script>
   </body>
 </html>

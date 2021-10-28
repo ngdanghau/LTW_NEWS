@@ -82,10 +82,19 @@
                            
                            <div class="form-floating mb-4">
                               <form:select path="parent" class="form-select" id="example-select-floating" name="example-select-floating" aria-label="Floating label select example">
-                                 <option selected>Select an option</option>
-                                 <option value="1">One</option>
-                                 <option value="2">Two</option>
-                                 <option value="3">Three</option>
+                              	<c:forEach var="element" items="${ categories }" varStatus="status">
+                              	
+                              		<c:if test="${ category.parent == element.id }">
+                              			<option selected value="${ element.id }">${ element.name }</option>
+                              		</c:if>
+                              		
+                              		<c:if test="${ category.parent != element.id }">
+                              			<option value="${ element.id }">${ element.name }</option>
+                              		</c:if>
+                              		
+                              		
+                              	</c:forEach>
+                                 
                               </form:select>
                               <label for="example-select-floating">Chuyên mục</label>
                            </div>
@@ -100,6 +109,7 @@
                       <div class="container">
 						  <div class="center">
 						    	<input type="submit" class="btn btn-primary" value="Lưu lại">
+						    	<input type="button" id="btn-add-category-cancel" class="btn btn-danger" value="Hủy bỏ">
 						  </div>
 					 </div>
 						                      
@@ -111,3 +121,9 @@
       </main>
       <!-- FOOTER FRAGMENT -->
       <jsp:include page="./fragments/footer.fragment.jsp"/>
+      
+      <!-- MY OWN LIBRARY -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		
+		<script src="./public/admin/js/category.js"></script>

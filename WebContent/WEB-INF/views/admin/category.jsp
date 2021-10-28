@@ -67,7 +67,7 @@
 							</c:url>
                                                 		
                         	<c:forEach var="element" items="${ pagedListHolder.pageList }" varStatus="status" begin="1"> 
-                        		<tr>
+                        		<tr data-uid="${ element.id }">
 	                              <th class="text-center" scope="row"> ${ status.index } </th>
 	                              <td class="fw-semibold fs-sm">
 	                                 <a href="be_pages_generic_profile.html">${ element.description }</a>
@@ -77,12 +77,12 @@
 	                              </td>
 	                              <td class="text-center">
 	                                 <div class="btn-group">
-		                                 <a href="${APPURL }/admin/edit-category-${element.id}.htm" class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Edit Client">
-		                                 <i  class="fa fa-fw fa-pencil-alt"></i> 
+		                                 <a href="${APPURL }/admin/edit-category-${element.id}.htm" class="btn-edit-category btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Edit">
+		                                 	<i  class="fa fa-fw fa-pencil-alt"></i> 
 		                                 </a>
 		                                 
-		                                 <a href="${APPURL }/admin/remove-category-${element.id}.htm" class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Remove Client"> 
-		                                   <i  class="fa fa-fw fa-times"></i>
+		                                 <a data-uid="${ element.id }" class="btn-remove-category btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Remove"> 
+		                                   	<i  class="fa fa-fw fa-times"></i>
 	                                     </a>
 	                                 </div>
 	                              </td>
@@ -102,12 +102,23 @@
             </div>
          </div>
       </main>
-      <!-- FOOTER FRAGMENT -->
+      	<!-- FOOTER FRAGMENT -->
       	<jsp:include page="./fragments/footer.fragment.jsp"/>
       
 		</div>
+		
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+		
 		<script src="./public/admin/js/pages/be_pages_dashboard.min.js"></script>
+		
+		
+		
+		<!-- MY OWN LIBRARY -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		
+		<script src="./public/admin/js/category.js"></script>
+		
   </body>
 </html>
