@@ -59,7 +59,11 @@ public class PostActionController {
 	}
 	
 	@RequestMapping( value="post_trash", method = RequestMethod.GET)
-	public String trash(HttpServletRequest request, ModelMap model){	
+	public String trash(HttpServletRequest request, ModelMap model) throws UnsupportedEncodingException{
+		String url = request.getParameter("next");
+		if(url == null) url = "/admin/posts.htm";
+		else url = URLDecoder.decode(url, "UTF-8");
+		
 		int postId = 0;
 		try {
 			postId = Integer.parseInt(request.getParameter("postid"));
@@ -68,7 +72,7 @@ public class PostActionController {
 		}
 		
 		if(postId == 0) {
-			return "redirect:/admin/posts.htm";
+			return "redirect:" + url;
 		}
 		
 		List<String> errorMessage = new ArrayList<String>();
@@ -98,7 +102,7 @@ public class PostActionController {
 			return "redirect:/admin/post.htm?postid=" + postId;
 		}
 		request.getSession().setAttribute("successMessage", "Xóa bài viết thành công");
-		return "redirect:/admin/posts.htm";
+		return "redirect:"+ url;
 	}
 	
 	@RequestMapping( value="post_delete", method = RequestMethod.GET)
