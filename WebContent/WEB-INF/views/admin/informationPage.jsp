@@ -40,10 +40,10 @@
             <div class="col-xl-12">
                <div class="block block-rounded">
                   <div class="block-header block-header-default">
-                     <h3 class="block-title">Thể loại</h3>
+                     <h3 class="block-title">Trang thông tin</h3>
                      <div class="block-options">
                         <div class="block-options-item">
-                           <code>.category</code>
+                           <code>.Information Page</code>
                         </div>
                      </div>
                   </div>
@@ -63,26 +63,26 @@
                         <tbody>
                         	<!-- PAGINATION - HIEN THI BAI VIET NHUNG CO PHAN TRANG -->
 			            	<jsp:useBean id="pagedListHolder" scope="request" type="org.springframework.beans.support.PagedListHolder"/>
-							<c:url value="/admin/category.htm" var="pagedLink">
+							<c:url value="/admin/information-page.htm" var="pagedLink">
 								<c:param name="p" value="~" />
 							</c:url>
                                                 		
-                        	<c:forEach var="element" items="${ pagedListHolder.pageList }" varStatus="status" begin="1"> 
+                        	<c:forEach var="element" items="${ pagedListHolder.pageList }" varStatus="status" begin="0"> 
                         		<tr data-uid="${ element.id }">
-	                              <th class="text-center" scope="row"> ${ status.index + 1} </th>
+	                              <th class="text-center" scope="row"> ${ status.index + 1 } </th>
 	                              <td class="fw-semibold fs-sm">
-	                                 <a href="be_pages_generic_profile.html">${ element.description }</a>
+	                                 <a href="be_pages_generic_profile.html">${ element.excerpt }</a>
 	                              </td>
 	                              <td class="d-none d-sm-table-cell">
-	                                 <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">${ element.name }</span>
+	                                 <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">${ element.title }</span>
 	                              </td>
 	                              <td class="text-center">
 	                                 <div class="btn-group">
-		                                 <a href="${APPURL }/admin/edit-category-${element.id}.htm" class="btn-edit-category btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Edit">
+		                                 <a href="${APPURL }/admin/edit-information-page-${element.id}.htm" class="btn-edit-information-page btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Edit">
 		                                 	<i  class="fa fa-fw fa-pencil-alt"></i> 
 		                                 </a>
 		                                 
-		                                 <a data-uid="${ element.id }" class="btn-remove-category btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Remove"> 
+		                                 <a data-uid="${ element.id }" class="btn-remove-information-page btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Remove"> 
 		                                   	<i  class="fa fa-fw fa-times"></i>
 	                                     </a>
 	                                 </div>
@@ -111,7 +111,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
-		<script src="./public/admin/js/pages/category.js"></script>
+		<script src="./public/admin/js/pages/informationPage.js"></script>
 		
   </body>
 </html>

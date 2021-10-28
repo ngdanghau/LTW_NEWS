@@ -128,13 +128,13 @@
                
                <ul class="nav-main-submenu">
                		<li class="nav-main-item">
-	                     <a class="nav-main-link" href="be_blocks_styles.html">
+	                     <a class="nav-main-link" href="${APPURL }/admin/information-page.htm">
 	                     	<span class="nav-main-link-name"> Xem tất cả</span>
 	                     </a>
                   	</li>
                   	
                   	<li class="nav-main-item">
-	                     <a class="nav-main-link" href="be_blocks_styles.html">
+	                     <a class="nav-main-link" href="${APPURL }/admin/add-information-page.htm">
 	                     	<span class="nav-main-link-name"> Thêm mới</span>
 	                     </a>
                   	</li>

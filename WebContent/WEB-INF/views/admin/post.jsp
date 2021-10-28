@@ -132,6 +132,7 @@
 				            <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
 				          </div>
 				        </div>
+				        
 				        <div class="block-content">
 				         	<div style="height: 300px; overflow: hidden scroll;" class="p-3">
 				         		<c:forEach var="c" items="${ listCategories }">

@@ -61,6 +61,27 @@
                
                   <form:form action="${APPURL }/admin/add-category.htm" method="POST" modelAttribute="category">
                   
+                  	<c:if test="${successMessage != null && successMessage.trim().length() > 0 }">
+						<div class="alert alert-success alert-dismissible" role="alert">
+				            <p class="mb-0">
+				              ${ successMessage }
+				            </p>
+				            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			          	</div>
+					</c:if>
+                  	
+                  
+                  	<c:if test="${errorMessage != null && errorMessage.size() > 0 }">
+						<c:forEach var="error" items="${ errorMessage }">
+							<div class="alert alert-danger alert-dismissible" role="alert">
+					            <p class="mb-0">
+					              ${ error }
+					            </p>
+					            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				          	</div>
+						</c:forEach>
+					</c:if>
+                  
                      <div class="row">
                         <div class="col-lg-4">
                            <p class="fs-sm text-muted">
@@ -80,7 +101,7 @@
                               <label for="example-email-input-floating">Đường dẫn</label>
                            </div>
                            
-                           <div class="form-floating mb-4">
+                          <div class="form-floating mb-4">
                               <form:select path="parent" class="form-select" id="example-select-floating" name="example-select-floating" aria-label="Floating label select example">
                               	<c:forEach var="element" items="${ categories }" varStatus="status">
                               	
@@ -98,6 +119,9 @@
                               </form:select>
                               <label for="example-select-floating">Chuyên mục</label>
                            </div>
+                           
+                          
+                           
                            <div class="form-floating mb-4">
                               <form:textarea path="description" class="form-control" id="example-textarea-floating" name="example-textarea-floating" style="height: 200px" placeholder="Leave a comment here" />
                               <label for="example-textarea-floating">Mô tả</label>
@@ -119,6 +143,8 @@
             </div>
          </div>
       </main>
+      <c:remove var="successMessage" scope="session" />
+  	  <c:remove var="errorMessage" scope="session" />
       <!-- FOOTER FRAGMENT -->
       <jsp:include page="./fragments/footer.fragment.jsp"/>
       
@@ -126,4 +152,4 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		
-		<script src="./public/admin/js/category.js"></script>
+		<script src="./public/admin/js/pages/category.js"></script>

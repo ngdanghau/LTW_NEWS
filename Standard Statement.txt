@@ -52,9 +52,13 @@
 <script src="<c:url value='./public/...' />"></script>
 
 <!-- THEM CSS VA JAVASCRIPT -->
-<base href="${pageContext.servletContext.contextPath}/"> dùng cái này thì không cần dùng <%@taglib prefix="c" %> nữa 
-Cú  pháp: <%@include file="..." %>
+<base href="${pageContext.servletContext.contextPath}/"> dĂ¹ng cĂ¡i nĂ y thĂ¬ khĂ´ng cáº§n dĂ¹ng <%@taglib prefix="c" %> ná»¯a 
+CĂº  phĂ¡p: <%@include file="..." %>
 
 
 Admin template URL: https://demo.pixelcave.com/oneui/be_pages_dashboard.html
 Admin timewrite.xyz: https://timeswriter.xyz/login
+
+/*xóa thư viện hibernate.validator.jar -> tạo ra bean -> gây ra xung đột bean sessionFactory
+	các validator ví dụ @notnull, @notEmpty
+*/

@@ -1,5 +1,6 @@
 package admin.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -107,38 +108,73 @@ public class AdminCategoryController {
 	 * 
 	 * Step 1: khoi tao phien lam viec voi du lieu. 
 	 * Do phai thay doi co so du lieu nen dung beginTransaction() thay vi getCurrentSession()
-	 * Step 2: doi tuong vua duoc them vao. 
-	 * Step 3: tra ve ket qua thanh cong
+	 * Step 2: kiem tra du lieu dau vao. Su dung flag error.
+	 * 		Neu error == false thi them moi tiep tuc
+	 * 		Neu error == true thi tra ra loi luon
+	 * Step 3: neu error == false thi openSession() de save() doi tuong moi lai
+	 * 
 	 * 
 	 * POST: add-category
 	 * 
 	 * @return mo form them moi the loai
 	 **************************************************/
 	@RequestMapping(value="add-category", method=RequestMethod.POST)
-	public String addCategory(ModelMap modelMap, @ModelAttribute("category") Categories cat)
+	public String addCategory(HttpServletRequest request,ModelMap modelMap, @ModelAttribute("category") Categories category)
 	{
-		Session session = factory.openSession();
-		Transaction t = session.beginTransaction();
+		/*Step 1*/
+		List<String> errorMessage = new ArrayList<String>();
+		boolean error = false;
 		
-		try 
+		String name = category.getName();
+		String slug = category.getSlug();
+		int parent = category.getParent();
+		
+		/*Step 2*/
+		if( name.trim().length() == 0 || name == null)
 		{
-			session.save(cat);
-			t.commit();
-			return "redirect:/admin/category.htm";
+			errorMessage.add("Thiếu tên thể loại");
+			error = true;
 		}
-		catch(Exception ex)
+		if( slug.trim().length() == 0 || slug == null)
 		{
-			t.rollback();
-			System.out.println(ex);
-			return "admin/categoryAdd";
+			errorMessage.add("Thiếu đường dẫn thể loại");
+			error = true;
+		}
+		if( parent < 0)
+		{
+			errorMessage.add("Thể loại cha không hợp lệ");
+			error = true;
+		}
+		
+		/*Step 3*/
+		if( error == false)
+		{
+			
+			Session session = factory.openSession();
+			Transaction t = session.beginTransaction();
+			
+			try 
+			{
+				session.save(category);
+				t.commit();
+				request.getSession().setAttribute("successMessage", "Thêm thể loại thành công");
+			}
+			catch(Exception ex)
+			{
+				t.rollback();
+				System.out.println(ex);
+				errorMessage.add("Thêm thể loại thất bại");
+				request.getSession().setAttribute("errorMessage", errorMessage);
+			}
+			finally
+			{
+				session.close();
+			}
 			
 		}
-		finally
-		{
-			session.close();
-		}
-		
-		//return "redirect:/admin/category.htm";
+
+		request.getSession().setAttribute("errorMessage", errorMessage);
+		return "redirect:/admin/add-category.htm";
 	}
 	
 	
