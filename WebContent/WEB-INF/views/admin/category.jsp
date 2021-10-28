@@ -24,6 +24,7 @@
       <link rel="apple-touch-icon" sizes="180x180" href="./public/admin/media/favicons/apple-touch-icon-180x180.png">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
       <link rel="stylesheet" id="css-main" href="./public/admin/css/oneui.min.css">
+      <link rel="stylesheet" href="./public/admin/js/plugins/sweetalert2/sweetalert2.min.css">
             
    </head>
    <body>
@@ -107,18 +108,10 @@
       
 		</div>
 		
-		<script src="./public/admin/js/oneui.app.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
-		
-		<script src="./public/admin/js/pages/be_pages_dashboard.min.js"></script>
-		
-		
-		
-		<!-- MY OWN LIBRARY -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		
-		<script src="./public/admin/js/category.js"></script>
+		<script src="./public/admin/js/oneui.app.min.js"></script>
+		<script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+		<script src="./public/admin/js/pages/category.js"></script>
 		
   </body>
 </html>
