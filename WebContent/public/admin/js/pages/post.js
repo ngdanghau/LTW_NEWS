@@ -140,7 +140,7 @@ TimesWriter.ActionSubmit = function () {
         		if(resp.result == 0){
                     Swal.fire('Oops...', resp.msg, 'error')
                 }else{
-                	//window.location.href = window.location.href;
+                	window.location.href = window.location.href;
                 }
             }
         });

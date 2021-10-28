@@ -219,16 +219,20 @@ public class PostActionController {
 		}
 		
 		String values = "";
+		 int i = 0;
 		for(Integer item: ids) {
-			values += "id = " + item + " OR ";
+			if(i++ == ids.size() - 1){
+				values += "id = " + item;
+			}else {
+				values += "id = " + item + " OR ";
+			}
 		}
 		
 		Transaction t =  session.beginTransaction();
-		if(action == "trash") {
+		if(action.equals("trash")) {
 			try{   
-				String hql = "UPDATE Posts SET post_status = :post_status WHERE :list"; 
+				String hql = "UPDATE Posts SET post_status = :post_status WHERE " + values; 
 				Query query = session.createQuery(hql); 
-				query.setParameter("list", values);
 				query.setParameter("post_status", "trash");
 				query.executeUpdate();
 				t.commit();
@@ -244,6 +248,45 @@ public class PostActionController {
 				session.close();
 			}
 			request.getSession().setAttribute("successMessage", "Cho vào rác danh sách bài viết thành công!");
+		}
+		else if(action.equals("restore")) {
+			try{   
+				String hql = "UPDATE Posts SET post_status = :post_status WHERE " + values; 
+				Query query = session.createQuery(hql); 
+				query.setParameter("post_status", "pending");
+				query.executeUpdate();
+				t.commit();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+				t.rollback();
+				objectNode.put("result", 0);
+				objectNode.put("msg", "Lỗi! Hãy thử lại!");
+				return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
+			}
+			finally{
+				session.close();
+			}
+			request.getSession().setAttribute("successMessage", "Khôi phục bài viết thành công!");
+		}
+		else if(action.equals("delete")) {
+			try{   
+				String hql = "DELETE FROM Posts WHERE " + values; 
+				Query query = session.createQuery(hql); 
+				query.executeUpdate();
+				t.commit();
+			}
+			catch(Exception e){
+				e.printStackTrace();
+				t.rollback();
+				objectNode.put("result", 0);
+				objectNode.put("msg", "Lỗi! Hãy thử lại!");
+				return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
+			}
+			finally{
+				session.close();
+			}
+			request.getSession().setAttribute("successMessage", "Xóa vĩnh viễn bài viết thành công!");
 		}
 		objectNode.put("result", 1);
 		return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
