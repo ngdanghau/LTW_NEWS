@@ -2,6 +2,8 @@ package admin.controllers;
 
 import java.security.Principal;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.hibernate.SessionFactory;
@@ -21,10 +23,12 @@ public class AdminController {
 		
 	
 	@RequestMapping( method = RequestMethod.GET)
-	public String index(ModelMap model, Principal principal){	
+	public String index(HttpSession session, ModelMap model, Principal principal){	
 		if(principal != null) {
 			return "redirect:./dashboard.htm";
 		}
+		String successMessage = (String) session.getAttribute("successMessage");
+		model.addAttribute("successMessage", successMessage);
 		return "admin/index";
 	}
 }

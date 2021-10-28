@@ -1,9 +1,9 @@
 package admin.controllers;
 
 
-import java.util.List;
+import java.io.IOException;
 
-
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -19,69 +19,101 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import entities.Users;
 
+@Transactional
 @Controller
 public class ResetPasswordController {
 	@Autowired
 	SessionFactory factory;
+	@Autowired
+	ObjectMapper mapper;
 	
 	@RequestMapping(value="/reset-password/{hash}")
-	public String retrievePassword(@PathVariable("hash") String hash,ModelMap model)
+	public String retrievePassword(@PathVariable("hash") String hash,ModelMap model) throws IOException
 	{
 		String array[] = hash.split("_");
 		String id = array[0];
 		String token = array[1];
-		System.out.println(id+token);
 		Users user = getUser(id);
-		if(user==null)
+		String recoveryhash = "";
+		if(user == null) {
+			return "admin/404";
+		}
+		
+		JsonNode jsonNode = mapper.readTree(user.getData());
+		if(jsonNode.get("recoveryhash") == null) {
+			return "admin/404";
+		}
+		recoveryhash = jsonNode.get("recoveryhash").asText();
+		
+		if(recoveryhash.compareTo(token) == 0)
+		{
+			return "admin/reset-password";
+		}
 		return "admin/404";
 		
-		if(user.getData().compareTo(token)==0)
-		{
-			model.addAttribute("hash",hash);
-			return "admin/reset-password";
-		}
-		else
-		return "admin/404";
 	}
 	
-	@RequestMapping(value="/reset-password/{hash}",method=RequestMethod.POST)
-	public String changePassword(ModelMap model,@RequestParam("password") String password,
-			@RequestParam("repeatpassword") String repeatpassword,ModelMap modelMap,@PathVariable("hash") String hash)
+	@RequestMapping(value="/reset-password/{hash}", method=RequestMethod.POST)
+	public String changePassword(
+			HttpServletRequest request,
+			ModelMap model,
+			@RequestParam("password") String password,
+			@RequestParam("repeatpassword") String repeatpassword, 
+			ModelMap modelMap, 
+			@PathVariable("hash") String hash) throws IOException
 	{
-		if(password.compareTo(repeatpassword)!=0)
+		if(password.compareTo(repeatpassword) != 0)
 		{
 			model.addAttribute("message", "Mật khẩu và mật khẩu nhập lại không trùng nhau!");
-			model.addAttribute("hash", hash);
-			return "admin/reset-password";
+			return "redirect:/reset-password/"+hash+".htm";
 		}
+		
 		String array[] = hash.split("_");
+		if(array.length != 2) {
+			return "redirect:/404.htm";
+		}
+		
 		String id = array[0];
 		String token = array[1];
 		Users user = getUser(id);
-		if(user.getData().compareTo(token)==0)
-		{
+		
+		if(user == null) {
+			return "redirect:/404.htm";
+		}
+		
+		JsonNode jsonNode = mapper.readTree(user.getData());
+		if(jsonNode.get("recoveryhash") == null) {
+			return "redirect:/404.htm";
+		}
+		String recoveryhash = jsonNode.get("recoveryhash").asText();
+
+		if(recoveryhash.compareTo(token) == 0) {
 			String encryptedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
-			System.out.println("Password: " + password);
-			System.out.println("BCrypt hash: " + encryptedPassword);
 			user.setPassword(encryptedPassword);
+			((ObjectNode)jsonNode).remove("recoveryhash");
+			user.setData(mapper.writeValueAsString(jsonNode));
 			Session session = factory.openSession();
 			Transaction t = session.beginTransaction();
 			try {
 				session.update(user);
 				t.commit();
-			}catch (Exception ex)
-				{
-					t.rollback();
-					System.out.println(ex);
-					return "admin/404";
-				}
-			return "redirect:/index.htm";
+			}
+			catch (Exception ex)
+			{
+				t.rollback();
+				System.out.println(ex);
+				return "redirect:/404.htm";
+			}
 		}
-		else
-		return "admin/404";
+		
+		request.getSession().setAttribute("successMessage", "Thay đổi mật khẩu thành công! Hãy đăng nhập lại!");
+		return "redirect:/admin.htm";
 	}
 	
 	

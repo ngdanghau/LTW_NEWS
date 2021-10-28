@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
    pageEncoding="utf-8"%>
-
-   
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+  
 <!doctype html>
 <html lang="en">
   <head>
@@ -64,13 +64,25 @@
               Vui lòng cung cấp email của bạn.
             </p>
           </div>
+          
           <div class="row g-0 justify-content-center">
             <div class="col-sm-8 col-xl-4">
+            	<c:if test="${ message != null || message.length > 0  }">
+            	<div class="alert alert-success d-flex align-items-center" role="alert">
+		            <div class="flex-shrink-0">
+		              <i class="fa fa-fw fa-check"></i>
+		            </div>
+		            <div class="flex-grow-1 ms-3">
+		              <p class="mb-0">
+		                ${ message }
+		              </p>
+		            </div>
+		          </div>
+            	</c:if>
               <form class="js-validation-reminder" action="${APPURL }/forgot-password.htm" method="POST">
                 <div class="mb-4">
                   <input type="email" class="form-control form-control-lg form-control-alt py-3" id="email" name="email" placeholder="Email">
                 </div>
-                <p>${message }</p>
                 <div class="text-center">
                   <button type="submit" class="btn btn-lg btn-alt-primary">
                     <i class="fa fa-fw fa-envelope me-1 opacity-50"></i> Gửi

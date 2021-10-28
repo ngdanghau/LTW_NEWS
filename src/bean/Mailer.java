@@ -75,7 +75,7 @@ public class Mailer {
 				"                    </tr>\r\n" + 
 				"                    <tr>\r\n" + 
 				"                        <td style=\"text-align:center;\">\r\n" + 
-				"                            <p style=\"font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;\">&copy; <strong>www.rakeshmandal.com</strong></p>\r\n" + 
+				"                            <p style=\"font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;\">&copy; <strong>https://timeswriter.xyz</strong></p>\r\n" + 
 				"                        </td>\r\n" + 
 				"                    </tr>\r\n" + 
 				"                    <tr>\r\n" + 

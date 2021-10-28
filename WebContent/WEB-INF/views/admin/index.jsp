@@ -85,6 +85,15 @@
 						  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					 </div>
 			    	</c:if>
+			    	
+			    	<c:if test="${successMessage != null && successMessage.trim().length() > 0 }">
+						<div class="alert alert-success alert-dismissible" role="alert">
+				            <p class="mb-0">
+				              ${ successMessage } 
+				            </p>
+				            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			          	</div>
+					</c:if>
 	          
               <form class="js-validation-signin" name="f" action="${APPURL }/login.htm" method="POST">
                 <div class="mb-4">
@@ -124,6 +133,7 @@
     </div>
   </div>
 </div>
+<c:remove var="successMessage" scope="session" />
   </main>
   </div>
 <script src="./public/admin/js/oneui.app.min.js"></script>

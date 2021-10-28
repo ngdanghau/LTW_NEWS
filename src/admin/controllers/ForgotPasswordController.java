@@ -1,9 +1,7 @@
 package admin.controllers;
 
-import java.sql.SQLException;
-import java.util.List;
+import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -14,9 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import bean.Mailer;
 import entities.Users;
 
@@ -27,7 +29,8 @@ public class ForgotPasswordController {
 	SessionFactory factory;
 	@Autowired
 	Mailer mailer;
-		
+	@Autowired
+	ObjectMapper mapper;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(ModelMap model){	
@@ -59,27 +62,38 @@ public class ForgotPasswordController {
 		try {
 			Users user = (Users)query.uniqueResult();
 			String userEmail = user.getEmail();
-			if(userEmail==null)
-			model.addAttribute("message", "Email không tồn tại");
+			if(userEmail == null) {
+				model.addAttribute("message", "Email không tồn tại");
+			}
 			else
 			{
-				String hash = user.getId()+"_"+updateToken(user);
-				if(hash==null)
-				throw new Exception("Update thất bại");
-				mailer.send(mailer.from(),userEmail,mailer.retrievePasswordSubject(), mailer.bodyRP(hash));	
-				model.addAttribute("message", "Vui lòng xác nhận cấp lại mật khẩu trong Email");
+				JsonNode jsonNode = mapper.readTree(user.getData());
+				String recoveryhash = "";
+				if(jsonNode.get("recoveryhash") == null) {
+					recoveryhash = updateToken(user);
+				}else {
+					recoveryhash = jsonNode.get("recoveryhash").asText();
+				}
+				
+				if(recoveryhash != null) {
+					recoveryhash = user.getId()+"_"+recoveryhash;
+					mailer.send(mailer.from(),userEmail,mailer.retrievePasswordSubject(), mailer.bodyRP(recoveryhash));	
+					model.addAttribute("message", "Vui lòng xác nhận cấp lại mật khẩu trong Email");
+				}
 			}
-		}catch(Exception ex){			
-			System.out.println(ex);
+		}catch(Exception ex){	
+			ex.printStackTrace();
 			return "admin/404";
 		}
 		return "admin/forgot-password";
 	}
 	
-	public String updateToken(Users user)
+	public String updateToken(Users user) throws IOException
 	{
-		String token =Long.toHexString(Double.doubleToLongBits(Math.random())); // HÀM TẠO RANDOM HASH ĐỂ LẤY LẠI MẬT KHẨU
-		user.setData(token);
+		JsonNode jsonNode = mapper.readTree(user.getData());
+		String token = Long.toHexString(Double.doubleToLongBits(Math.random())); // HÀM TẠO RANDOM HASH ĐỂ LẤY LẠI MẬT KHẨU
+		((ObjectNode)jsonNode).put("recoveryhash", token);
+		user.setData(mapper.writeValueAsString(jsonNode));
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
@@ -88,8 +102,7 @@ public class ForgotPasswordController {
 		}catch (Exception ex)
 			{
 				t.rollback();
-				System.out.println(ex);
-				return null;
+				return "";
 			}
 		return token;
 	}
