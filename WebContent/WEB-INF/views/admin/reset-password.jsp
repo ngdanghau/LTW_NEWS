@@ -10,7 +10,7 @@
 	</style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Change Password</title>
+    <title>Thay đổi mật khẩu</title>
     <base href="${APPURL}/" />
     <meta name="description" content="OneUI - Bootstrap 5 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest | This is the demo of OneUI! You need to purchase a license for legal use! | DEMO">
     <meta name="robots" content="noindex, nofollow">
@@ -38,14 +38,14 @@
       <div class="col-md-8 col-lg-6 col-xl-4">
         <div class="block block-rounded mb-0">
           <div class="block-header block-header-default">
-            <h3 class="block-title">Change Password</h3>
+            <h3 class="block-title">Thay đổi mật khẩu</h3>
             
           </div>
           <div class="block-content">
             <div class="p-sm-3 px-lg-4 px-xxl-5 py-lg-5">
               <h1 class="h2 mb-1">${SettingsData.getSite_name() }</h1>
               <p class="fw-medium text-muted">
-                Welcome, please change your password.
+                Vui lòng nhập mật khẩu mới cho tài khoản của bạn.
               </p>
               <p class="error">
                 ${message}
@@ -53,16 +53,16 @@
               <form class="js-validation-signin" action="${APPURL }/reset-password/${hash}.htm" method="POST">
                 <div class="py-3">
                   <div class="mb-4">
-                    <input type="password" class="form-control form-control-alt form-control-lg" id="login-password" name="password" placeholder="New password">
+                    <input type="password" class="form-control form-control-alt form-control-lg" id="login-password" name="password" placeholder="Mật khẩu mới">
                   </div>
                   <div class="mb-4">
-                    <input type="password" class="form-control form-control-alt form-control-lg" id="login-password" name="repeatpassword" placeholder="Repeat your new password">
+                    <input type="password" class="form-control form-control-alt form-control-lg" id="login-password" name="repeatpassword" placeholder="Nhập lại mật khẩu mới">
                   </div>               
                 </div>
                 <div class="row mb-4">
                   <div class="col-md-6 col-xl-5">
                     <button type="submit" class="btn w-100 btn-alt-primary">
-                      <i class="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i> Confirm
+                      <i class="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i> Xác nhận
                     </button>
                   </div>
                 </div>

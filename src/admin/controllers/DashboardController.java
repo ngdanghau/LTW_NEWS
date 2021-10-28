@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Transactional
 @Controller
-@RequestMapping("dashboard")
+@RequestMapping("/dashboard")
 public class DashboardController {
 	@Autowired
 	SessionFactory factory;

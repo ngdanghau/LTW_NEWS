@@ -43,6 +43,7 @@ public class ForgotPasswordController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String ForgotPassword(ModelMap model, @ModelAttribute("email") String email)
 	{
+		email = email.trim();
 		if(email.isEmpty())
 		{
 			model.addAttribute("message", "Không được để trống email");
@@ -67,15 +68,9 @@ public class ForgotPasswordController {
 			}
 			else
 			{
-				JsonNode jsonNode = mapper.readTree(user.getData());
 				String recoveryhash = "";
-				if(jsonNode.get("recoveryhash") == null) {
-					recoveryhash = updateToken(user);
-				}else {
-					recoveryhash = jsonNode.get("recoveryhash").asText();
-				}
-				
-				if(recoveryhash != null) {
+				recoveryhash = updateToken(user);	
+				if(recoveryhash != "") {
 					recoveryhash = user.getId()+"_"+recoveryhash;
 					mailer.send(mailer.from(),userEmail,mailer.retrievePasswordSubject(), mailer.bodyRP(recoveryhash));	
 					model.addAttribute("message", "Vui lòng xác nhận cấp lại mật khẩu trong Email");
