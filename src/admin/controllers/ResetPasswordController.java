@@ -4,7 +4,7 @@ package admin.controllers;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
+
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -25,7 +25,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import entities.Users;
 
-@Transactional
+
 @Controller
 public class ResetPasswordController {
 	@Autowired
@@ -113,6 +113,7 @@ public class ResetPasswordController {
 		}
 		
 		request.getSession().setAttribute("successMessage", "Thay đổi mật khẩu thành công! Hãy đăng nhập lại!");
+		modelMap.addAttribute("email",user.getUsername());
 		return "redirect:/admin.htm";
 	}
 	
