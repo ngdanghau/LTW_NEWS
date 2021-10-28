@@ -21,8 +21,8 @@
       <meta property="og:url" content="${APPURL}/article/${ post.id }-${ post.post_slug }" />
       <meta property="og:image" content="${ post.media }" />
       <meta property="og:description" content="${ post.excerpt }" />
-      <link rel="icon" href="<c:url value='./public/client/images/favicon.ico'/>" type="image/x-icon">
-      <link rel="shortcut icon" href="<c:url value='./public/client/images/favicon.ico'/>" type="image/x-icon">
+      <link rel="icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
+      <link rel="shortcut icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
       <link rel='stylesheet' href="<c:url value='./public/client/vendor/block-library/style.min.css'/>"/>
       <link rel='stylesheet' href="<c:url value='./public/client/style.min.css'/>"/>
       <link rel='stylesheet' href="<c:url value='./public/client/style.css'/>"/>
@@ -52,10 +52,7 @@
                                                    <div class="header-main narrow-area">
                                                       <div class="post-item-header">
                                                          <div class="entry-categories meta-categories categories-plain standalone-categories post-header-section">
-                                                            <c:forEach items="${ListCategoriesPost}" var="c"  varStatus="status">
-															    <a href="${APPURL }/category/${c.slug}.htm" rel="tag">${c.name}</a>
-															    ${not status.last ? '<span class="sep">/</span>' : ''}
-															</c:forEach>
+                                                            <a href="${APPURL }/category/${ post.category.slug }.htm" rel="tag">${post.category.name }</a>
                                                             
                                                          </div>
                                                          <div class="title-subtitle">
@@ -67,7 +64,7 @@
                                                          <div class="post-item-meta wi-meta fox-meta post-header-section ">
                                                             <div class="fox-meta-author entry-author meta-author">
                                                                <span class="byline"> Bởi <span class="author vcard">
-                                                               <a class="url fn" href="${APPURL}/author/${post.user.username}">
+                                                               <a class="url fn" href="${APPURL}/author/${post.user.username}.htm">
                                                                <span>${post.user.firstname} ${post.user.lastname}</span></a></span></span>
                                                             </div>
                                                             <div class="entry-date meta-time machine-time time-short">
@@ -110,16 +107,8 @@
          </div>
       </div>
       <jsp:include page="./fragments/mobilenav.fragment.jsp"/>
-      <div id="offcanvas-bg" class="offcanvas-bg"></div>
-      <div class="offcanvas-overlay" id="offcanvas-overlay"></div>
-      <div id="backtotop" class="backtotop fox-backtotop scrollup backtotop-circle backtotop-icon">
-         <span class="btt-icon"><i class="feather-chevrons-up"></i></span>
-      </div>
-      <progress value="0" class="reading-progress-wrapper position-top">
-         <div class="progress-container">
-            <span class="reading-progress-bar"></span>
-         </div>
-      </progress>
+      <jsp:include page="./fragments/topup.fragment.jsp"/>
+      <jsp:include page="./fragments/progress.fragment.jsp"/>
       <script src="https://timeswriter.xyz/themes/assets/js/comment-reply.min.js?v=0403013" id='wi-main-js'></script>
       <script id='wi-main-js-extra'>
          var WITHEMES = {"enable_sticky_sidebar":"","enable_sticky_header":"1","tablet_breakpoint":"840","enable_lightbox":"1"};

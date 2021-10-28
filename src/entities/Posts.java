@@ -1,6 +1,5 @@
 package entities;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,20 +22,17 @@ public class Posts {
 	@Column(name="ID")
 	private int id;
 	
-	@ManyToOne
+	@ManyToOne( fetch=FetchType.EAGER)
 	@JoinColumn(name="USER_ID", referencedColumnName="ID") 
-	private Users user; 		
+	private Users user;
 	
-	@OneToMany(mappedBy="post", fetch=FetchType.EAGER)
-	private Collection<Comments> comment;
-	
-	@OneToMany(mappedBy="post", fetch=FetchType.EAGER)
-	private Collection<Cat_Post> cat;
-	
+	@ManyToOne( fetch=FetchType.EAGER)
+	@JoinColumn(name="CAT_ID", referencedColumnName="ID") 
+	private Categories category;
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="MM/dd/yyyy")
-	@Column(name="CREATED_AT")
+	@Column(name="CREATED_AT", columnDefinition = "DATETIME default getdate()")
 	private Date created_at;
 	
 	@Column(name="CONTENT")
@@ -60,17 +55,17 @@ public class Posts {
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="MM/dd/yyyy")
-	@Column(name="MODIFIED_AT")
+	@Column(name="MODIFIED_AT" , columnDefinition = "DATETIME default getdate()")
 	private Date modified_at;
 	
 	@Column(name="MEDIA")
 	private String media;
 	
-	@Column(name="VIEWER")
+	@Column(name="VIEWER", columnDefinition = "integer default 0")
 	private long viewer;
 	
-	@Column(name="FEATURED")
-	private String featured;
+	@Column(name="FEATURED", columnDefinition = "boolean default false")
+	private boolean featured;
 	
 	@Column(name="EXTERNAL_ID")
 	private String external_id;
@@ -85,6 +80,14 @@ public class Posts {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public Categories getCategory() {
+		return category;
+	}
+
+	public void setCategory(Categories category) {
+		this.category = category;
+	}
 
 	public Users getUser() {
 		return user;
@@ -92,14 +95,6 @@ public class Posts {
 
 	public void setUser(Users user) {
 		this.user = user;
-	}
-
-	public Collection<Comments> getComment() {
-		return comment;
-	}
-
-	public void setComment(Collection<Comments> comment) {
-		this.comment = comment;
 	}
 
 	public Date getCreated_at() {
@@ -182,11 +177,11 @@ public class Posts {
 		this.viewer = viewer;
 	}
 
-	public String getFeatured() {
+	public boolean isFeatured() {
 		return featured;
 	}
 
-	public void setFeatured(String featured) {
+	public void setFeatured(boolean featured) {
 		this.featured = featured;
 	}
 

@@ -17,10 +17,9 @@
 	
 	<!-- Spring MVC Annotation -->
 	<context:annotation-config />
-	
+	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"/>
 	
 	<!-- Dinh nghia duong dan mac dinh cho PUBLIC -->
-	<mvc:annotation-driven/>
 	<mvc:resources mapping="/public/**" location="/WebContent/public"/>
 	
 	<!-- Cấu hình view -->
@@ -29,6 +28,15 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
    	
    	<!-- Cấu hình package chứa các controller -->
-	<context:component-scan base-package="controllers, entities, models"/>
+	<context:component-scan base-package="client.controllers, admin.controllers, entities, models"/>
+	<bean class="com.fasterxml.jackson.databind.ObjectMapper"></bean>
 
+	
+	<context:component-scan base-package="client.controllers, admin.controllers, entities, models, bean"/>
+
+	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="favorPathExtension" value="false"/>
+        <property name="favorParameter" value="true"/>
+        <property name="ignoreAcceptHeader" value="false" />
+    </bean>
 </beans>

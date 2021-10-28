@@ -1,8 +1,8 @@
 package interceptors;
 
+import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -22,58 +22,13 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.General_Data;
-import entities.Menu;
-import models.MenuModel;
+import entities.Users;
 import models.SettingsData;
 
 @Transactional
 public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 	@Autowired
 	SessionFactory factory;
-	
-	@SuppressWarnings("unchecked")
-	public List<Menu> getMenu(int position, int parent){
-		Session session = factory.getCurrentSession();
-		String hql = "FROM Menu m WHERE parent = :parent AND position = :position ORDER BY m.order_menu ASC"; 
-		Query query = session.createQuery(hql); 
-		query.setParameter("parent", parent);
-		query.setParameter("position", position);
-		List<Menu> list = query.list();
-		return list;
-	}
-	
-	
-	
-	/**************************************************
-	 * @author Hau
-	 * 
-	 * @return tra ve cac menu o duoi cung cua trang web
-	 * bao gom ABOUT, HELP, PRIVACY, TERMS, CONTACT
-	 **************************************************/
-	public void setMenu(HttpServletRequest request) 
-	{
-		// get Menu
-		List<Menu> listParent = getMenu(0, 0);
-		
-		List<MenuModel> list = new ArrayList<MenuModel>();
-		
-		for(Menu item: listParent) {
-			MenuModel menu = new MenuModel();
-			menu.setMenu(item);
-			List<Menu> listChildren = getMenu(0, item.getId());
-			if(listChildren != null && listChildren.size() > 0) {
-				menu.setChildren(listChildren);
-			}
-			list.add(menu);
-		}
-		request.setAttribute("listMenuHeader", list);
-		
-		
-		List<Menu> listMenuFooter = getMenu(1, 0);
-		request.setAttribute("listMenuFooter", listMenuFooter);
-	}
-	
-	
 	
 	/**************************************************
 	 * @author Hau
@@ -90,6 +45,9 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		
 		String HOMEURL = String.format("%s://%s:%s%s/index.htm", request.getScheme(), request.getServerName(), request.getServerPort(), request.getContextPath() );
 		request.setAttribute("HOMEURL", HOMEURL);
+		
+		String ADMINURL = String.format("%s://%s:%s%s/admin", request.getScheme(), request.getServerName(), request.getServerPort(), request.getContextPath() );
+		request.setAttribute("ADMINURL", ADMINURL);
 		
 	}
 	
@@ -112,6 +70,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 			return null;
 		}
 	}
+	
 	
 	
 	
@@ -141,46 +100,49 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 	}
 	
 	
-	
-	/**************************************************
-	 * @author Phong
-	 * 
-	 * Step 1: khoi tao cau truy van
-	 * Step 2: gan dieu kien
-	 * Step 3: tra ve ket qua
-	 * 
-	 * @return lay ra nhung bai viet co nhieu luot xem nhat
-	 * 
-	 * du lieu nay do vao /WEB-INF/views/client/fragment/sidebar.fragment.jsp
-	 **************************************************/
-	public void retriveMostPopularArticle(HttpServletRequest request)
-	{
-		/*Step 1*/
-		Session session = factory.getCurrentSession();
-		String hql = "FROM Posts p "
-				+ "ORDER BY p.viewer DESC";
-		
-		/*Step 2*/
-		Query query = session.createQuery(hql);
-		List<Posts> list = query.list();
-		
-		/*Step 3*/
-		request.setAttribute("mostPopularArticle", list);
+	@SuppressWarnings("unchecked")
+	public void setAuthUser(HttpServletRequest request) {
+		Principal userPrincipal = (Principal) request.getUserPrincipal();
+		Users AuthUser = null;
+		if(userPrincipal != null) {
+			try 
+			{
+				Session session = factory.getCurrentSession();
+				String hql = "SELECT u FROM Users u "
+							+ "WHERE u.email = :email";
+				
+				Query query = session.createQuery(hql);
+				query.setParameter("email", userPrincipal.getName());
+				
+				List<Users> list = query.list();
+				AuthUser = list.get(0);
+			}
+			catch(Exception ex) 
+			{
+				AuthUser = null;
+			}
+			
+		}
+		request.setAttribute("AuthUser", AuthUser);
 	}
 	
-	
+
+	/**
+	 * Hàm để khai báo một biến Date Format chung cho toàn bộ web
+	 * @param request
+	 */
+	public void setDateFormat(HttpServletRequest request) {
+		DateFormat dateFormat = new SimpleDateFormat("dd MMMM, yyyy", new Locale("vi", "VN"));
+		request.setAttribute("dateFormat", dateFormat);
+	}
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object Handler) throws Exception{
-		setMenu(request);
 		setAppUrl(request);
 		setGeneralData(request);
 		setCurrentYear(request);
-		retriveMostPopularArticle(request);
 		setDateFormat(request);	
+		setAuthUser(request);
 		return true;
 	}
-	
-	
-	
 }

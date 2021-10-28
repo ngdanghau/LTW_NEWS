@@ -17,6 +17,16 @@
 	<!-- Cấu hình interceptor --> 
 	<mvc:interceptors>  
 		<bean class="interceptors.GlobalInterceptor" />
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/index.htm"/>
+			<mvc:mapping path="/article/**"/>
+			<mvc:mapping path="/category/**"/>
+			<mvc:mapping path="/author/**"/>
+			<mvc:mapping path="/page/**"/>
+			<bean class="interceptors.ClientInterceptor" />
+		</mvc:interceptor>
+		
 	</mvc:interceptors>
 
 </beans>

@@ -1,5 +1,6 @@
 package entities;
 
+
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -17,12 +18,6 @@ public class Categories {
 	@GeneratedValue
 	@Column(name="ID")
 	private int id;
-	
-	@OneToMany(mappedBy="category", fetch=FetchType.EAGER)// category nay nam trong Cat_Post
-	private Collection<Cat_Post> cat;
-	
-	@OneToMany(mappedBy="category", fetch=FetchType.EAGER)
-	private Collection<Widgets> widget;
 	
 	@Column(name="NAME")
 	private String name;
@@ -42,22 +37,6 @@ public class Categories {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public Collection<Cat_Post> getCat() {
-		return cat;
-	}
-
-	public void setCat(Collection<Cat_Post> cat) {
-		this.cat = cat;
-	}
-
-	public Collection<Widgets> getWidget() {
-		return widget;
-	}
-
-	public void setWidget(Collection<Widgets> widget) {
-		this.widget = widget;
 	}
 
 	public String getName() {

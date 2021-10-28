@@ -6,24 +6,6 @@
 	type="org.springframework.beans.support.PagedListHolder"%>
 	
 <%@ attribute name="pagedLink" required="true" type="java.lang.String"%>
-<!-- <link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
-	
-	
-<!-- <div class="wi-pagination fox-pagination font-heading pagination-3">
-	   <div class="pagination-inner">
-	      <span aria-current="page" class="page-numbers current"><span>1</span></span>
-	      <a class="page-numbers" href="/category/the-gioi?page=2"><span>2</span></a>
-	      <a class="page-numbers" href="/category/the-gioi?page=3"><span>3</span></a>
-	      <a class="next page-numbers" href="/category/the-gioi?page=2"><span>Tiến</span></a>
-	      <a class="next page-numbers" href="/category/the-gioi?page=13"><span>Cuối</span></a>
-	   </div>
-	</div> -->	
-	
 <c:if test="${pagedListHolder.pageCount > 1}">
 	<div class="wi-pagination fox-pagination font-heading pagination-3">
 		<div class="pagination-inner">
@@ -35,13 +17,9 @@
 			<a class="next page-numbers" href="<%=StringUtils.replace(pagedLink, "~", String.valueOf(pagedListHolder.getPage() - 1))%>"><span>Previous</span></a>
 		</c:if>
 		
-		<!-- TRANG HIEN TAI -->
-		<%-- <span aria-current="page" class="page-numbers current"><span>${ pagedListHolder.page + 1}</span></span> --%>
-		
-		<!-- TRANG DAU TIEN -->
-		<%-- <c:if test="${pagedListHolder.firstLinkedPage > 0}">
-			<a class="page-numbers current" href="<%=StringUtils.replace(pagedLink, "~", "0")%>"><span>1</span></a></li>
-		</c:if> --%>
+		<c:if test="${pagedListHolder.firstLinkedPage > 0}">
+			<a class="page-numbers" href="<%=StringUtils.replace(pagedLink, "~", "0")%>">1</a>
+		</c:if>
 		
 		
 		 <c:if test="${pagedListHolder.firstLinkedPage > 1}">
@@ -52,11 +30,11 @@
 		<c:forEach begin="${pagedListHolder.firstLinkedPage}" end="${pagedListHolder.lastLinkedPage}" var="i">
 			<c:choose>
 				<c:when test="${pagedListHolder.page == i}">
-					<a class="page-numbers current" href="<%=StringUtils.replace(pagedLink, "~", String.valueOf( pagedListHolder.getPage() + 1 ))%>">${i+1}</a></li>
+					<span aria-current="page" class="page-numbers current"><span>${ pagedListHolder.page + 1}</span></span>
 				</c:when>
 				
 				 <c:otherwise>
-					<a class="page-numbers" href="<%=StringUtils.replace(pagedLink, "~", String.valueOf( pagedListHolder.getPage() + 2))%>">${i+1}</a>
+					<a class="page-numbers" href="<%=StringUtils.replace(pagedLink, "~", String.valueOf(jspContext.getAttribute("i")))%>">${i + 1}</a>
 				</c:otherwise>
 				
 			</c:choose>
