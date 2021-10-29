@@ -52,8 +52,8 @@
                         <thead>
                            <tr>
                               <th class="text-center" style="width: 50px;">#</th>
-                              <th>Description</th>
-                              <th class="d-none d-sm-table-cell" style="width: 15%;">Name</th>
+                              <th>Name</th>
+                              <th class="d-none d-sm-table-cell" style="width: 15%;">Status</th>
                               <th class="text-center" style="width: 100px;">Actions</th>
                            </tr>
                         </thead>
@@ -71,10 +71,15 @@
                         		<tr data-uid="${ element.id }">
 	                              <th class="text-center" scope="row"> ${ status.index + 1 } </th>
 	                              <td class="fw-semibold fs-sm">
-	                                 <a href="be_pages_generic_profile.html">${ element.excerpt }</a>
+	                                 <a href="${APPURL }/page/${element.page_slug}.htm">${ element.title }</a>
 	                              </td>
 	                              <td class="d-none d-sm-table-cell">
-	                                 <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">${ element.title }</span>
+	                              	<c:if test="${ element.page_status == 'publish' }">
+	                              		<span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">${ element.page_status }</span>
+	                              	</c:if>
+	                                 <c:if test="${ element.page_status != 'publish' }">
+	                              		<span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">${ element.page_status }</span>
+	                              	</c:if>
 	                              </td>
 	                              <td class="text-center">
 	                                 <div class="btn-group">

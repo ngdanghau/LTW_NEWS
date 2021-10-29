@@ -138,7 +138,7 @@ public class AdminInformationPageController {
 	 * @return
 	 **************************************************/
 	@RequestMapping(value="edit-information-page-{id}", method=RequestMethod.POST)
-	public @ResponseBody String addInformationPage(@ModelAttribute("page") Pages page, @PathVariable("id") String id)
+	public @ResponseBody String addInformationPage(HttpServletRequest request, @ModelAttribute("page") Pages page, @PathVariable("id") String id)
 	{
 		/*Step 1*/
 		String title = page.getTitle();
@@ -149,7 +149,7 @@ public class AdminInformationPageController {
 		
 		String status = page.getPage_status();
 		
-		
+		System.out.println("CONTENT : " + content);
 		
 		/*Step 2*/
 		if( title == "" || excerpt == "" || 
@@ -174,8 +174,8 @@ public class AdminInformationPageController {
 					+ "WHERE id = " + id;
 			
 			Query query = session.createQuery(hql);
-			query.executeUpdate();
-					
+			int x = query.executeUpdate();
+			System.out.println("AFFECTED ROWS :" +x);		
 		    return "success";
 		} 
 		catch (Exception e) 

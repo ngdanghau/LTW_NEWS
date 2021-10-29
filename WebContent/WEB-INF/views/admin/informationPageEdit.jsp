@@ -84,16 +84,8 @@
 					</c:if>
                   	<!-- KET THUC IN THONG BAO THANH CONG HOAC LOI -->
                      <div class="row">
-                        <div class="col-lg-4">
-                           <p class="fs-sm text-muted">
-                              <p>Tên: Tên riêng sẽ hiển thị trên trang mạng của bạn.</p>
-                              <p>Đường dẫn: Đường dẫn (URL). Chuỗi này bao gồm chữ cái thường, số và dấu gạch ngang (-). Ví dụ: https://www.fb.com/game-online123</p>
-                              <p>Trạng thái:</br> <b>Xuất bản</b> sẽ hiển thị trên trang chủ. <b>Chờ duyệt</b> sẽ không hiển thị ở trang chủ</p>
-                              <p>Mô tả rút gọn: khái quát ý nghĩa trang thông tin này</p>
-                              <p>Mô tả đầy đủ: thể hiện đầy đủ ý nghĩa của trang thông tin này </p>
-                           </p>
-                        </div>
-                        <div class="col-lg-8 col-xl-5">
+                        
+                        <div class="col-lg-8 col-xl-9">
                            <div class="form-floating mb-4">
                               <form:input path="title" class="form-control" id="example-text-input-floating" name="example-text-input-floating" placeholder="John Doe"/>
                               <label for="example-text-input-floating">Tên</label>
@@ -101,7 +93,9 @@
                            
                            <div class="form-floating mb-4">
                               <form:input path="page_slug" class="form-control" id="example-email-input-floating" name="example-email-input-floating" placeholder="john.doe@example.com"/>
-                              <label for="example-email-input-floating">Đường dẫn</label>
+                              
+                              <label for="example-email-input-floating">Đường dẫn</label></br>
+                              <a class="btn btn-info btn-sm" href="${APPURL }/page/${page.page_slug}.htm" target="_blank">Truy cập</a>
                            </div>
                            
                           <div class="form-floating mb-4">
@@ -117,12 +111,12 @@
                               <form:input path="excerpt" class="form-control" id="example-text-input-floating" name="example-text-input-floating" placeholder="John Doe"/>
                               <label for="example-text-input-floating">Mô tả rút gọn</label>
                            </div>
-                           
-                           <div class="form-floating mb-4">
-                              <form:textarea path="content" class="form-control" id="example-textarea-floating" name="example-textarea-floating" style="height: 200px" placeholder="Leave a comment here" />
-                              <label for="example-textarea-floating">Mô tả đầy đủ</label>
-                           </div>
-                        </div>
+                                                
+                     
+                     	   <label for="example-textarea-floating">Mô tả đầy đủ</label>
+                           <form:textarea path="content" id="mainContent" class="form-control" name="mainContent" rows="10" cols="80"></form:textarea> 
+                     </div>
+                        
                      </div>
                      
                       
@@ -149,3 +143,14 @@
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		
 		<script src="./public/admin/js/pages/informationPage.js"></script>
+		
+		<script src="./public/vendor/ckeditor/ckeditor.js"></script>
+		<script src="./public/vendor/ckfinder/ckfinder.js"></script>
+		<script>
+			$( document ).ready(function() {
+			    // khoi tao ckeditor va ckfinder
+				var editor = CKEDITOR.replace('mainContent');
+				editor.config.height = '500px';
+				CKFinder.setupCKEditor( editor, '${APPURL}/public/vendor/ckfinder/' );
+			});
+		</script>
