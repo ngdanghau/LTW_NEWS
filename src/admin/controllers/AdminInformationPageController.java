@@ -149,7 +149,6 @@ public class AdminInformationPageController {
 		
 		String status = page.getPage_status();
 		
-		System.out.println("CONTENT : " + content);
 		
 		/*Step 2*/
 		if( title == "" || excerpt == "" || 
