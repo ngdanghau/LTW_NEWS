@@ -131,8 +131,43 @@ let confirmEditInformationPage = ()=>{
 	});
 }
 
+
+/**************************************************
+ * @author Phong
+ * @return huy bo viec chinh sua hoac them trong informationPageAdd va informationPageEdit
+ **************************************************/
+let cancelEditInformationPage = ()=>{
+	$("#btn-edit-information-page-cancel").unbind("click").on("click", function(){
+		
+		/*Step 1 */
+		Swal.fire({
+            title: 'Bạn có chắc chắn huỷ không ?',
+            text: "Bạn sẽ không thể khôi phục hành động này!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Có',
+            cancelButtonText: 'Không'
+          }).then((result) => {
+	
+            /*Step 2*/
+            if (result.isConfirmed) {
+			
+			   /* Nhan OK -> Dieu huong ve admin/category.htm */
+			   window.location.href = `${URL}/admin/information-page.htm`;
+				
+            }
+          })
+	});
+}
+
+
+
 $(document).ready(function(){
     removeInformationPage();
 
 	confirmEditInformationPage();
+	
+	cancelEditInformationPage();
 });

@@ -58,10 +58,10 @@
               <i class="fa fa-2x fa-circle-notch text-primary-light"></i>
             </p>
             <h1 class="fw-bold mb-2">
-              Sign In
+              Xin chào
             </h1>
             <p class="fw-medium text-muted">
-              Welcome, please login.
+              Vui lòng đăng nhập.
             </p>
           </div>
           
@@ -80,7 +80,7 @@
 				    <c:if test="${param.logout == 'true'}">
 			            <div class="alert alert-success alert-dismissible" role="alert">
 						   <p class="mb-0">
-						             You have been logged out
+						             Bạn đã đăng xuất!
 							</p>
 						  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					 </div>
@@ -97,26 +97,26 @@
 	          
               <form class="js-validation-signin" name="f" action="${APPURL }/login.htm" method="POST">
                 <div class="mb-4">
-                  <input type="text" class="form-control form-control-lg form-control-alt py-3" id="username" name="username" placeholder="Username">
+                  <input type="text" class="form-control form-control-lg form-control-alt py-3" id="username" name="username" value="${email}" placeholder="Tên đăng nhập">
                 </div>
                 <div class="mb-4">
-                  <input type="password" class="form-control form-control-lg form-control-alt py-3" id="password" name="password" placeholder="Password">
+                  <input type="password" class="form-control form-control-lg form-control-alt py-3" id="password" name="password" placeholder="Mật khẩu">
                 </div>
                 <div class="mb-4">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="" id="remember" name="remember">
-                      <label class="form-check-label" for="remember">Remember Me</label>
+                      <label class="form-check-label" for="remember">Nhớ mật khẩu</label>
                     </div>
                  </div>
                 <div class="d-flex justify-content-between align-items-center mb-4">
                   <div>
                     <a class="text-muted fs-sm fw-medium d-block d-lg-inline-block mb-1" href="forgot-password.htm">
-                      Forgot Password?
+                      Quên mật khẩu?
                     </a>
                   </div>
                   <div>
                     <button type="submit" class="btn btn-lg btn-alt-primary">
-                      <i class="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i> Sign In
+                      <i class="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i> Đăng nhập
                     </button>
                   </div>
                 </div>
