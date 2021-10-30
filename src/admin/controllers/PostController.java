@@ -174,10 +174,8 @@ public class PostController {
 		}else {
 			category = getCategory(cat_id);
 			if(category == null) {
-				errorMessage.add("Thể loại không tồn tại!");
-				error = true;
+				category = getCategory("1");
 			}
-			
 		}
 		
 		

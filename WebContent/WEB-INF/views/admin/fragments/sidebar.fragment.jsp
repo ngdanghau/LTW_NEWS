@@ -3,7 +3,7 @@
 
 <nav id="sidebar" aria-label="Main Navigation">
    <div class="content-header">
-      <a class="fw-semibold text-dual" href="index.html">
+      <a class="fw-semibold text-dual" href="${HOMEURL }">
       <span class="smini-visible">
       <i class="fa fa-circle-notch text-primary"></i>
       </span>
