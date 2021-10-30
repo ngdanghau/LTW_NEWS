@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <nav id="sidebar" aria-label="Main Navigation">
    <div class="content-header">
@@ -22,23 +23,23 @@
                <span>Default</span>
                <i class="fa fa-circle text-default"></i>
                </a>
-               <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="./public/admin/css/themes/amethyst.min-5.1.css" href="#">
+               <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="./public/admin/css/themes/amethyst.min.css" href="#">
                <span>Amethyst</span>
                <i class="fa fa-circle text-amethyst"></i>
                </a>
-               <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="./public/admin/css/themes/city.min-5.1.css" href="#">
+               <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="./public/admin/css/themes/city.min.css" href="#">
                <span>City</span>
                <i class="fa fa-circle text-city"></i>
                </a>
-               <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="./public/admin/css/themes/flat.min-5.1.css" href="#">
+               <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="./public/admin/css/themes/flat.min.css" href="#">
                <span>Flat</span>
                <i class="fa fa-circle text-flat"></i>
                </a>
-               <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="./public/admin/css/themes/modern.min-5.1.css" href="#">
+               <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="./public/admin/css/themes/modern.min.css" href="#">
                <span>Modern</span>
                <i class="fa fa-circle text-modern"></i>
                </a>
-               <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="./public/admin/css/themes/smooth.min-5.1.css" href="#">
+               <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="./public/admin/css/themes/smooth.min.css" href="#">
                <span>Smooth</span>
                <i class="fa fa-circle text-smooth"></i>
                </a>
@@ -158,9 +159,10 @@
             </li>
             
             
-           
+           <c:if test="${ AuthUser.account_type == 'ADMIN' }"> 
             
             <li class="nav-main-heading">ADMINSTRATOR</li>
+            
             <li class="nav-main-item">
                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                <i class="nav-main-link-icon si si-wrench"></i>
@@ -299,7 +301,7 @@
             
            
             
-        
+        </c:if>
             
          
          </ul>

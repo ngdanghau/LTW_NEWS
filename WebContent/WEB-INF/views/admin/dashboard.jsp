@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 
-<base href="${pageContext.servletContext.contextPath}/">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!doctype html>
@@ -25,7 +24,7 @@
   	<link rel="stylesheet" id="css-main" href="./public/admin/css/oneui.min.css">
 </head>
 <body>
-<div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+<div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow remember-theme ">
     
   <!-- SIDEBAR FRAGMENT -->
   <jsp:include page="./fragments/sidebar.fragment.jsp"/>

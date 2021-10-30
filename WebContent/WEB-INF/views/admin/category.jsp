@@ -29,7 +29,7 @@
    <body>
    	  <!-- ADMIN CATEGORY  -->
    
-      <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+      <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow remember-theme">
       <!-- SIDEBAR FRAGMENT -->
       <jsp:include page="./fragments/sidebar.fragment.jsp"/>
       <!-- HEADER FRAGMENT -->
@@ -70,7 +70,7 @@
                         		<tr data-uid="${ element.id }">
 	                              <th class="text-center" scope="row"> ${ status.index + 1} </th>
 	                              <td class="fw-semibold fs-sm">
-	                                 <a href="be_pages_generic_profile.html">${ element.description }</a>
+	                                 <a href="${APPURL }/admin/edit-category-${element.id}.htm">${ element.description }</a>
 	                              </td>
 	                              <td class="d-none d-sm-table-cell">
 	                                 <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">${ element.name }</span>

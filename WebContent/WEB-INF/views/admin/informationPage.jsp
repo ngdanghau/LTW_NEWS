@@ -29,7 +29,7 @@
    <body>
    	  <!-- ADMIN CATEGORY  -->
    
-      <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+      <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow remember-theme">
       <!-- SIDEBAR FRAGMENT -->
       <jsp:include page="./fragments/sidebar.fragment.jsp"/>
       <!-- HEADER FRAGMENT -->

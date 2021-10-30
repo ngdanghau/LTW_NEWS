@@ -22,7 +22,7 @@
       <link rel="stylesheet" id="css-main" href="./public/admin/css/oneui.min.css">
 </head>
 <body>
-<div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+<div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow remember-theme">
       <!-- SIDEBAR FRAGMENT -->
       <jsp:include page="./fragments/sidebar.fragment.jsp"/>
       <!-- HEADER FRAGMENT -->
