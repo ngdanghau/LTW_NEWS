@@ -101,7 +101,7 @@
             
             <li class="nav-main-item">
                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-               		<i class="nav-main-link-icon si si-badge"></i>
+               		<i class="nav-main-link-icon si si-tag"></i>
                		<span class="nav-main-link-name"> Thể loại </span>
                </a>
                
@@ -122,7 +122,7 @@
             
             <li class="nav-main-item">
                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-               		<i class="nav-main-link-icon si si-badge"></i>
+               		<i class="nav-main-link-icon si si-docs"></i>
                		<span class="nav-main-link-name"> Trang thông tin </span>
                </a>
                
@@ -152,7 +152,7 @@
             <li class="nav-main-heading">MEDIA</li>
             <li class="nav-main-item">
                <a class="nav-main-link" aria-haspopup="true" aria-expanded="false" href="${ ADMINURL }/media.htm">
-               		<i class="nav-main-link-icon si si-badge"></i>
+               		<i class="nav-main-link-icon si si-picture"></i>
                		<span class="nav-main-link-name"> Media </span>
                </a>
             </li>
@@ -172,66 +172,6 @@
                      <span class="nav-main-link-name">Loaders</span>
                      </a>
                   </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link" href="be_comp_image_cropper.html">
-                     <span class="nav-main-link-name">Image Cropper</span>
-                     </a>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link" href="be_comp_appear.html">
-                     <span class="nav-main-link-name">Appear</span>
-                     </a>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link" href="be_comp_charts.html">
-                     <span class="nav-main-link-name">Charts</span>
-                     </a>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link" href="be_comp_calendar.html">
-                     <span class="nav-main-link-name">Calendar</span>
-                     </a>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link" href="be_comp_sliders.html">
-                     <span class="nav-main-link-name">Sliders</span>
-                     </a>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link" href="be_comp_carousel.html">
-                     <span class="nav-main-link-name">Carousel</span>
-                     </a>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link" href="be_comp_syntax_highlighting.html">
-                     <span class="nav-main-link-name">Syntax Highlighting</span>
-                     </a>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link" href="be_comp_rating.html">
-                     <span class="nav-main-link-name">Rating</span>
-                     </a>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link" href="be_comp_maps_vector.html">
-                     <span class="nav-main-link-name">Vector Maps</span>
-                     </a>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link" href="be_comp_dialogs.html">
-                     <span class="nav-main-link-name">Dialogs</span>
-                     </a>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link" href="be_comp_notifications.html">
-                     <span class="nav-main-link-name">Notifications</span>
-                     </a>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link" href="be_comp_gallery.html">
-                     <span class="nav-main-link-name">Gallery</span>
-                     </a>
-                  </li>
                </ul>
             </li>
             <li class="nav-main-item">
@@ -240,148 +180,14 @@
                		<span class="nav-main-link-name">Giao diện</span>
                </a>
                <ul class="nav-main-submenu">
-                  <li class="nav-main-item">
-                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                     <span class="nav-main-link-name">Page</span>
+               	  <li class="nav-main-item">
+                     <a class="nav-main-link" href="${ ADMINURL}/widget.htm">
+                     <span class="nav-main-link-name">Widget</span>
                      </a>
-                     <ul class="nav-main-submenu">
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_page_default.html">
-                           <span class="nav-main-link-name">Default</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_page_flipped.html">
-                           <span class="nav-main-link-name">Flipped</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_page_native_scrolling.html">
-                           <span class="nav-main-link-name">Native Scrolling</span>
-                           </a>
-                        </li>
-                     </ul>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                     <span class="nav-main-link-name">Dark Mode</span>
-                     </a>
-                     <ul class="nav-main-submenu">
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_dark_mode_on.html">
-                           <span class="nav-main-link-name">On</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_dark_mode_off.html">
-                           <span class="nav-main-link-name">Off</span>
-                           </a>
-                        </li>
-                     </ul>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                     <span class="nav-main-link-name">Main Content</span>
-                     </a>
-                     <ul class="nav-main-submenu">
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_content_main_full_width.html">
-                           <span class="nav-main-link-name">Full Width</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_content_main_narrow.html">
-                           <span class="nav-main-link-name">Narrow</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_content_main_boxed.html">
-                           <span class="nav-main-link-name">Boxed</span>
-                           </a>
-                        </li>
-                     </ul>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                     <span class="nav-main-link-name">Header</span>
-                     </a>
-                     <ul class="nav-main-submenu">
-                        <li class="nav-main-heading">Fixed</li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_header_fixed_light.html">
-                           <span class="nav-main-link-name">Light</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_header_fixed_dark.html">
-                           <span class="nav-main-link-name">Dark</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-heading">Static</li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_header_static_light.html">
-                           <span class="nav-main-link-name">Light</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_header_static_dark.html">
-                           <span class="nav-main-link-name">Dark</span>
-                           </a>
-                        </li>
-                     </ul>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                     <span class="nav-main-link-name">Sidebar</span>
-                     </a>
-                     <ul class="nav-main-submenu">
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_sidebar_mini.html">
-                           <span class="nav-main-link-name">Mini</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_sidebar_light.html">
-                           <span class="nav-main-link-name">Light</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_sidebar_dark.html">
-                           <span class="nav-main-link-name">Dark</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_sidebar_hidden.html">
-                           <span class="nav-main-link-name">Hidden</span>
-                           </a>
-                        </li>
-                     </ul>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                     <span class="nav-main-link-name">Side Overlay</span>
-                     </a>
-                     <ul class="nav-main-submenu">
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_side_overlay_visible.html">
-                           <span class="nav-main-link-name">Visible</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_side_overlay_mode_hover.html">
-                           <span class="nav-main-link-name">Hover Mode</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="be_layout_side_overlay_no_page_overlay.html">
-                           <span class="nav-main-link-name">No Page Overlay</span>
-                           </a>
-                        </li>
-                     </ul>
                   </li>
                   <li class="nav-main-item">
                      <a class="nav-main-link" href="be_layout_api.html">
-                     <span class="nav-main-link-name">API</span>
+                     <span class="nav-main-link-name">Menu</span>
                      </a>
                   </li>
                </ul>
@@ -491,215 +297,9 @@
                </ul>
             </li>
             
-            <!-- EMAIL -->
-            <li class="nav-main-item">
-               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-               <i class="nav-main-link-icon si si-puzzle"></i>
-               <span class="nav-main-link-name">Email</span>
-               </a>
-               <ul class="nav-main-submenu">
-                  <li class="nav-main-item">
-                     <a class="nav-main-link" href="#">
-                     <span class="nav-main-link-name">Link 1-1</span>
-                     </a>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link" href="#">
-                     <span class="nav-main-link-name">Link 1-2</span>
-                     </a>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                     <span class="nav-main-link-name">Sub Level 2</span>
-                     </a>
-                     <ul class="nav-main-submenu">
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="#">
-                           <span class="nav-main-link-name">Link 2-1</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="#">
-                           <span class="nav-main-link-name">Link 2-2</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                           <span class="nav-main-link-name">Sub Level 3</span>
-                           </a>
-                           <ul class="nav-main-submenu">
-                              <li class="nav-main-item">
-                                 <a class="nav-main-link" href="#">
-                                 <span class="nav-main-link-name">Link 3-1</span>
-                                 </a>
-                              </li>
-                              <li class="nav-main-item">
-                                 <a class="nav-main-link" href="#">
-                                 <span class="nav-main-link-name">Link 3-2</span>
-                                 </a>
-                              </li>
-                              <li class="nav-main-item">
-                                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                 <span class="nav-main-link-name">Sub Level 4</span>
-                                 </a>
-                                 <ul class="nav-main-submenu">
-                                    <li class="nav-main-item">
-                                       <a class="nav-main-link" href="#">
-                                       <span class="nav-main-link-name">Link 4-1</span>
-                                       </a>
-                                    </li>
-                                    <li class="nav-main-item">
-                                       <a class="nav-main-link" href="#">
-                                       <span class="nav-main-link-name">Link 4-2</span>
-                                       </a>
-                                    </li>
-                                    <li class="nav-main-item">
-                                       <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                       <span class="nav-main-link-name">Sub Level 5</span>
-                                       </a>
-                                       <ul class="nav-main-submenu">
-                                          <li class="nav-main-item">
-                                             <a class="nav-main-link" href="#">
-                                             <span class="nav-main-link-name">Link 5-1</span>
-                                             </a>
-                                          </li>
-                                          <li class="nav-main-item">
-                                             <a class="nav-main-link" href="#">
-                                             <span class="nav-main-link-name">Link 5-2</span>
-                                             </a>
-                                          </li>
-                                          <li class="nav-main-item">
-                                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                             <span class="nav-main-link-name">Sub Level 6</span>
-                                             </a>
-                                             <ul class="nav-main-submenu">
-                                                <li class="nav-main-item">
-                                                   <a class="nav-main-link" href="#">
-                                                   <span class="nav-main-link-name">Link 6-1</span>
-                                                   </a>
-                                                </li>
-                                                <li class="nav-main-item">
-                                                   <a class="nav-main-link" href="#">
-                                                   <span class="nav-main-link-name">Link 6-2</span>
-                                                   </a>
-                                                </li>
-                                             </ul>
-                                          </li>
-                                       </ul>
-                                    </li>
-                                 </ul>
-                              </li>
-                           </ul>
-                        </li>
-                     </ul>
-                  </li>
-               </ul>
-            </li>
+           
             
-            <!-- TICH HOP -->
-            <li class="nav-main-item">
-               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-               <i class="nav-main-link-icon si si-puzzle"></i>
-               <span class="nav-main-link-name">Tích hợp</span>
-               </a>
-               <ul class="nav-main-submenu">
-                  <li class="nav-main-item">
-                     <a class="nav-main-link" href="#">
-                     <span class="nav-main-link-name">Link 1-1</span>
-                     </a>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link" href="#">
-                     <span class="nav-main-link-name">Link 1-2</span>
-                     </a>
-                  </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                     <span class="nav-main-link-name">Sub Level 2</span>
-                     </a>
-                     <ul class="nav-main-submenu">
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="#">
-                           <span class="nav-main-link-name">Link 2-1</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link" href="#">
-                           <span class="nav-main-link-name">Link 2-2</span>
-                           </a>
-                        </li>
-                        <li class="nav-main-item">
-                           <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                           <span class="nav-main-link-name">Sub Level 3</span>
-                           </a>
-                           <ul class="nav-main-submenu">
-                              <li class="nav-main-item">
-                                 <a class="nav-main-link" href="#">
-                                 <span class="nav-main-link-name">Link 3-1</span>
-                                 </a>
-                              </li>
-                              <li class="nav-main-item">
-                                 <a class="nav-main-link" href="#">
-                                 <span class="nav-main-link-name">Link 3-2</span>
-                                 </a>
-                              </li>
-                              <li class="nav-main-item">
-                                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                 <span class="nav-main-link-name">Sub Level 4</span>
-                                 </a>
-                                 <ul class="nav-main-submenu">
-                                    <li class="nav-main-item">
-                                       <a class="nav-main-link" href="#">
-                                       <span class="nav-main-link-name">Link 4-1</span>
-                                       </a>
-                                    </li>
-                                    <li class="nav-main-item">
-                                       <a class="nav-main-link" href="#">
-                                       <span class="nav-main-link-name">Link 4-2</span>
-                                       </a>
-                                    </li>
-                                    <li class="nav-main-item">
-                                       <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                       <span class="nav-main-link-name">Sub Level 5</span>
-                                       </a>
-                                       <ul class="nav-main-submenu">
-                                          <li class="nav-main-item">
-                                             <a class="nav-main-link" href="#">
-                                             <span class="nav-main-link-name">Link 5-1</span>
-                                             </a>
-                                          </li>
-                                          <li class="nav-main-item">
-                                             <a class="nav-main-link" href="#">
-                                             <span class="nav-main-link-name">Link 5-2</span>
-                                             </a>
-                                          </li>
-                                          <li class="nav-main-item">
-                                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                             <span class="nav-main-link-name">Sub Level 6</span>
-                                             </a>
-                                             <ul class="nav-main-submenu">
-                                                <li class="nav-main-item">
-                                                   <a class="nav-main-link" href="#">
-                                                   <span class="nav-main-link-name">Link 6-1</span>
-                                                   </a>
-                                                </li>
-                                                <li class="nav-main-item">
-                                                   <a class="nav-main-link" href="#">
-                                                   <span class="nav-main-link-name">Link 6-2</span>
-                                                   </a>
-                                                </li>
-                                             </ul>
-                                          </li>
-                                       </ul>
-                                    </li>
-                                 </ul>
-                              </li>
-                           </ul>
-                        </li>
-                     </ul>
-                  </li>
-               </ul>
-            </li>
+        
             
          
          </ul>
