@@ -140,6 +140,7 @@ public class ProfileController {
 		String phone_number = (String) params.get("phone_number");
 		String bio = (String) params.get("bio");
 		
+		
 		if(bio == null)
 		{
 			bio = "";
