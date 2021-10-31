@@ -36,9 +36,9 @@ public class IndexController {
 	public List<Posts> getListPostsByCat(int catId, int limitPost)
 	{
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Posts p WHERE p.category.id = :catId"; 
+		String hql = "FROM Posts p WHERE p.category.id = :catId ORDER BY p.id DESC"; 
 		if(catId == 1) {
-			hql = "FROM Posts p WHERE p.category.id != :catId AND featured = 1";
+			hql = "FROM Posts p WHERE p.category.id != :catId AND featured = 'true' ORDER BY p.id DESC";
 		}
 		Query query = session.createQuery(hql); 
 		query.setFirstResult(0);

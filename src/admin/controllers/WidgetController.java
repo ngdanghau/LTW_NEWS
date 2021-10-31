@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import entities.Categories;
-import entities.Users;
 import entities.Widgets;
 import models.CategoriesModel;
 
