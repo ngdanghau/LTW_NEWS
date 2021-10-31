@@ -42,12 +42,12 @@ public class ResetPasswordController {
 		Users user = getUser(id);
 		String recoveryhash = "";
 		if(user == null) {
-			return "admin/404";
+			return "admin/errors/404";
 		}
 		
 		JsonNode jsonNode = mapper.readTree(user.getData());
 		if(jsonNode.get("recoveryhash") == null) {
-			return "admin/404";
+			return "admin/errors/404";
 		}
 		recoveryhash = jsonNode.get("recoveryhash").asText();
 		
@@ -55,7 +55,7 @@ public class ResetPasswordController {
 		{
 			return "admin/reset-password";
 		}
-		return "admin/404";
+		return "admin/errors/404";
 		
 	}
 	

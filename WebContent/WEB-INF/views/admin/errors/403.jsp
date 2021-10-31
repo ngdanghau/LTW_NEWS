@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-     <title>404 - ${ SettingsData.getSite_name() }</title>
+     <title>403 - ${ SettingsData.getSite_name() }</title>
     <meta name="description" content="${ SettingsData.getSite_description() }">
     <meta name="author" content="pixelcave">
     <meta name="robots" content="noindex, nofollow">
@@ -18,7 +18,6 @@
     <link rel="icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
      <link rel="shortcut icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
       
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicons/apple-touch-icon-180x180.png">
      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
   	<link rel="stylesheet" id="css-main" href="./public/admin/css/oneui.min.css">
 </head>
@@ -30,11 +29,11 @@
     <div class="bg-body-extra-light">
       <div class="content content-full overflow-hidden">
         <div class="py-4">
-          <h1 class="display-1 fw-bolder text-city">
-            404
+          <h1 class="display-1 fw-bolder text-flat">
+            403
           </h1>
           <h2 class="h4 fw-normal text-muted mb-5">
-            We are sorry but the page you are looking for was not found..
+            We are sorry but you do not have permission to access this page..
           </h2>
           <form action="be_pages_generic_search.html" method="POST">
             <div class="row justify-content-center mb-4">
