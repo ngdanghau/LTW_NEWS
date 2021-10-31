@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
    pageEncoding="utf-8"%>
-   
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Media - ${ SettingsData.getSite_name() }</title>
+    <title>Widget - ${ SettingsData.getSite_name() }</title>
     <meta name="description" content="${ SettingsData.getSite_description() }">
       <meta name="author" content="pixelcave">
       <meta name="robots" content="noindex, nofollow">
@@ -29,18 +30,118 @@
       <jsp:include page="./fragments/header.fragment.jsp"/>
   <main id="main-container">
 <div class="content">
-  <div class="block block-rounded">
-    <div class="block-header block-header-default">
-      <h3 class="block-title">Đa phương tiện</h3>
-    </div>
-    <div class="block-content" id="">
-     <ul id="items">
-	<li>item 1</li>
-	<li>item 2</li>
-	<li>item 3</li>
-</ul>
-    </div>
-  </div>
+<div class="row">
+	<div class="col-xl-4">
+		<div class="block block-rounded">
+		    <div class="block-header block-header-default">
+		      <h3 class="block-title">Thêm widget</h3>
+		    </div>
+		    <div class="block-content">
+			    <form class="js-ajax-form" action="${ AMINURL }/widget.htm" method="post">
+				   <input type="hidden" name="action" value="save">
+				   <input type="hidden" name="order_widget" value="10">
+				   <div class="mb-4">
+				      <label for="title" class="form-label">Tiêu Đề</label>
+				      <input type="text" class="form-control" name="title" placeholder="Tên">
+				   </div>
+				   <div class="mb-4">
+				      <label for="layout" class="form-label">Layout</label>
+				      <select class="form-select" id="layout" name="layout">
+				         <option value="layout-group-1">Layout Group 1</option>
+				         <option value="layout-group-2">Layout Group 2</option>
+				         <option value="layout-group-3">Layout Group 3</option>
+				         <option value="layout-group-4">Layout Group 4</option>
+				         <option value="layout-grid-1">Layout Grid 1</option>
+				         <option value="layout-grid-2">Layout Grid 2</option>
+				         <option value="layout-vertical">Layout Vertical</option>
+				      </select>
+				   </div>
+				   <div class="mb-4">
+				      <label for="cat_id" class="form-label">Chuyên Mục</label>
+				      <select class="form-control" id="cat_id" name="cat_id">
+				         <c:forEach var="c" items="${ listCategories }">
+				         	<option value="${ c.category.id }">${ c.category.name }</option>
+					          	<c:if test = "${c.children != null && c.children.size() > 0}">
+					              <c:forEach var="child" items="${c.children}">
+									  <option value="${ child.id }">&nbsp;&nbsp;&nbsp;--${ child.name }</option>
+					                </c:forEach>
+							  	</c:if>
+                			</c:forEach>
+				      </select>
+				   </div>
+				   <div class="row mb-4">
+                  <div class="col-md-6 col-xl-5">
+                    <button type="submit" class="btn w-100 btn-primary">
+                      Thêm widget
+                    </button>
+                  </div>
+                </div>
+				</form>
+		    </div>
+		  </div>
+	</div>
+	<div class="col-xl-6">
+	 <form class="js-ajax-form" action="${ AMINURL }/widget.htm" method="post">
+		<div id="items">
+			     <c:forEach var="widget" items="${ listWidget }">
+					<div class="block block-rounded block-themed block-mode-hidden mb-2">
+				        <div class="block-header bg-muted">
+				          <h3 class="block-title">${ widget.title }</h3>
+				          <div class="block-options">
+				            
+				            <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="block-option" data-action="content_toggle">
+				            	<i class="si si-arrow-up"></i>
+				            </button>
+				            <button type="button" class="btn btn-sm btn-alt-danger" data-toggle="block-option" data-action="close">
+				              <i class="si si-close"></i>
+				            </button>
+				            
+				          </div>
+				        </div>
+				        <div class="block-content">
+				          <input type="hidden" name="order_widget" value="10">
+						   <div class="mb-4">
+						      <label for="title" class="form-label">Tiêu Đề</label>
+						      <input type="text" class="form-control" name="title[]" placeholder="Tên" value="${ widget.title }">
+						   </div>
+						   <div class="mb-4">
+						      <label for="layout" class="form-label">Layout</label>
+						      <select class="form-select" id="layout" name="layout[]">
+						         <option value="layout-group-1" ${ widget.layout == 'layout-group-1' ? 'selected' : 'layout-group-1' }>Layout Group 1</option>
+						         <option value="layout-group-2" ${ widget.layout == 'layout-group-2' ? 'selected' : 'layout-group-2' }>Layout Group 2</option>
+						         <option value="layout-group-3" ${ widget.layout == 'layout-group-3' ? 'selected' : 'layout-group-3' }>Layout Group 3</option>
+						         <option value="layout-group-4" ${ widget.layout == 'layout-group-4' ? 'selected' : 'layout-group-4' }>Layout Group 4</option>
+						         <option value="layout-grid-1" ${ widget.layout == 'layout-grid-1' ? 'selected' : 'layout-grid-1' }>Layout Grid 1</option>
+						         <option value="layout-grid-2" ${ widget.layout == 'layout-grid-2' ? 'selected' : 'layout-grid-2' }>Layout Grid 2</option>
+						         <option value="layout-vertical" ${ widget.layout == 'layout-vertical' ? 'selected' : 'layout-vertical' }>Layout Vertical</option>
+						      </select>
+						   </div>
+						   <div class="mb-4">
+						      <label for="cat_id" class="form-label">Chuyên Mục</label>
+						      <select class="form-control" id="cat_id" name="cat_id[]">
+						         <c:forEach var="c" items="${ listCategories }">
+					         		<option value="${ c.category.id }" ${ widget.category.id ==  c.category.id ? 'selected' : ''}>${ c.category.name }</option>
+						          	<c:if test = "${c.children != null && c.children.size() > 0}">
+						              <c:forEach var="child" items="${c.children}">
+										  <option value="${ child.id }" ${ widget.category.id ==  child.id ? 'selected' : ''}>&nbsp;&nbsp;&nbsp;--${ child.name }</option>
+						                </c:forEach>
+								  	</c:if>
+	                			</c:forEach>
+						      </select>
+						   </div>
+				       </div>
+				     </div>
+				  </c:forEach>
+				 
+				     <button type="submit" class="btn w-100 btn-primary mt-4">
+                      Lưu vị trí
+                    </button>
+				</div>
+				</form>
+	</div>
+</div>
+  
+   
 </div>
   </main>
   <!-- FOOTER FRAGMENT -->
@@ -52,7 +153,7 @@
 		<script src="./public/admin/js/plugins/sortablejs/sortable.min.js"></script>
 		<script>
 		var el = document.getElementById('items');
-		var sortable = Sortable.create(el);
+		var sortable = Sortable.create(el, { animation: 150 });
 
 		
 		</script>
