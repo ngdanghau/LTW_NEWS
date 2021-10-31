@@ -64,7 +64,9 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		Query query = session.createQuery(hql); 
 		query.setParameter("name", name); 
 		try {
-			General_Data json = (General_Data) query.list().get(0);
+			// lấy text 
+			General_Data json = (General_Data) query.list().get(0);// lấy text {""}
+			// chuyển text -> json
 			return mapper.readValue(json.getData(), SettingsData.class);
 		}catch(Exception ex) {
 			return null;
