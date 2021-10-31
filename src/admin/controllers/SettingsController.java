@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.General_Data;
 import models.SettingsData;
-import models.UserSettings;
+import models.SocialData;
 
 @Transactional
 @Controller
@@ -45,14 +45,14 @@ public class SettingsController {
 		}
 	}
 	
-	public UserSettings getSocialData(String name) {
+	public SocialData getSocialData(String name) {
 		Session session = factory.getCurrentSession();
 		String hql = String.format("FROM General_Data WHERE name = :name"); 
 		Query query = session.createQuery(hql); 
 		query.setParameter("name", name); 
 		try {
 			General_Data json = (General_Data) query.list().get(0);// lấy text {""}
-			return mapper.readValue(json.getData(), UserSettings.class);
+			return mapper.readValue(json.getData(), SocialData.class);
 		}catch(Exception ex) {
 			return null;
 		}
@@ -79,12 +79,6 @@ public class SettingsController {
 			model.addAttribute("settings", settings);
 			return "admin/settings-site";
 		}
-		if(settings.getSite_name().equalsIgnoreCase(site_name) && settings.getSite_slogan().equalsIgnoreCase(site_slogan) && settings.getSite_description().equalsIgnoreCase(site_description) && settings.getSite_keywords().equalsIgnoreCase(site_keywords))
-		{
-			model.addAttribute("change","Không có dữ liệu được thay đổi");
-			model.addAttribute("settings", settings);
-			return "admin/settings-site";
-		}
 		
 		settings.setSite_name(site_name);
 		settings.setSite_slogan(site_slogan);
@@ -93,8 +87,7 @@ public class SettingsController {
 		try {
 			String data = mapper.writeValueAsString(settings);
 			System.out.println("DATA: "+data);
-			if(data=="")
-			throw new Exception("LOI CHUYEN HOA JSON -> STRING");
+				
 			Session session = factory.getCurrentSession();
 			String hql = "UPDATE General_Data gd SET gd.data = :data where gd.name = 'settings'";
 			Query query = session.createQuery(hql); 
@@ -103,11 +96,7 @@ public class SettingsController {
 			model.addAttribute("success","Lưu thành công");
 			model.addAttribute("settings", settings);
 			return "admin/settings-site";
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}catch (Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println(e);
 			model.addAttribute("error","Lưu không thành công");
 		}
@@ -119,7 +108,7 @@ public class SettingsController {
 	@RequestMapping(value="social",method = RequestMethod.GET)
 	public String SocialController(ModelMap model)
 	{
-		UserSettings social = getSocialData("social");
+		SocialData social = getSocialData("social");
 		System.out.println("facebook: "+social.getFacebook());
 		model.addAttribute("social", social);
 		return "admin/settings-social";
@@ -131,16 +120,10 @@ public class SettingsController {
 											@RequestParam("tumblr") String tumblr, @RequestParam("telegram") String telegram, @RequestParam("whatsapp") String whatsapp)
 	{
 		
-		UserSettings social = getSocialData("social");
+		SocialData social = getSocialData("social");
 		if(facebook.isEmpty()||twitter.isEmpty()||instagram.isEmpty()||pinterest.isEmpty() || tumblr.isEmpty()||telegram.isEmpty()||whatsapp.isEmpty())
 		{
 			model.addAttribute("error","Vui lòng không để trống");
-			model.addAttribute("social", social);
-			return "admin/settings-social";
-		}
-		if(social.getFacebook().equalsIgnoreCase(facebook) && social.getTwitter().equalsIgnoreCase(twitter) && social.getInstagram().equalsIgnoreCase(instagram) && social.getPinterest().equalsIgnoreCase(pinterest) && social.getTumblr().equalsIgnoreCase(tumblr) && social.getTelegram().equalsIgnoreCase(telegram) && social.getWhatsapp().equalsIgnoreCase(whatsapp))
-		{
-			model.addAttribute("change","Không có dữ liệu được thay đổi");
 			model.addAttribute("social", social);
 			return "admin/settings-social";
 		}
@@ -154,9 +137,6 @@ public class SettingsController {
 		social.setWhatsapp(whatsapp);
 		try {
 			String data = mapper.writeValueAsString(social);
-			System.out.println("DATA: "+data);
-			if(data=="")
-			throw new Exception("LOI CHUYEN HOA JSON -> STRING");
 			Session session = factory.getCurrentSession();
 			String hql = "UPDATE General_Data gd SET gd.data = :data where gd.name = 'social'";
 			Query query = session.createQuery(hql); 
@@ -165,10 +145,8 @@ public class SettingsController {
 			model.addAttribute("success","Lưu thành công");
 			model.addAttribute("social", social);
 			return "admin/settings-social";
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}catch (Exception e)
+		} 
+		catch (Exception e)
 		{
 			System.out.println(e);
 			model.addAttribute("error","Lưu không thành công");
@@ -181,7 +159,5 @@ public class SettingsController {
 	public String LogoController(ModelMap model)
 	{
 		return "admin/errors/404";
-//		
-//		return "admin/settings-logo";
 	}
 }

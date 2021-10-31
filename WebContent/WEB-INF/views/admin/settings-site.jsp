@@ -53,19 +53,19 @@
 			         
 			            <div class="mb-4">
 			              <label class="col-sm-2 col-form-label text-right">Tên trang web</label>
-			              <input type="text" class="form-control" id="example-text-input" name="site_name" placeholder="Tên trang web" value="${settings.site_name }">
+			              <input type="text" class="form-control" id="site_name" name="site_name" placeholder="Tên trang web" value="${settings.site_name }">
 			            </div>
 			            <div class="mb-4">
 			              <label class="col-sm-2 col-form-label text-right">Slogan web</label>
-			              <input type="text" class="form-control" id="example-email-input" name="site_slogan" placeholder="Slogan web" value="${settings.site_slogan }">
+			              <input type="text" class="form-control" id="site_slogan" name="site_slogan" placeholder="Slogan web" value="${settings.site_slogan }">
 			            </div>
 			            <div class="mb-4">
 			              <label class="col-sm-2 col-form-label text-right">Mô tả trang web </label>
-			              <textarea class="form-control" id="example-textarea-input" name="site_description" rows="4" placeholder="Mô tả trang web"value="${settings.site_description }" >${settings.site_description }</textarea>
+			              <textarea class="form-control" id="site_description" name="site_description" rows="4" placeholder="Mô tả trang web"value="${settings.site_description }" >${settings.site_description }</textarea>
 			            </div>
 			            <div class="mb-4">
 			              <label class="col-sm-2 col-form-label text-right">Từ khóa</label>
-			              <textarea class="form-control" id="example-textarea-input" name="site_keywords" rows="4" placeholder="Từ khóa" value="${settings.site_keywords }">${settings.site_keywords }</textarea>
+			              <textarea class="form-control" id="site_keywords" name="site_keywords" rows="4" placeholder="Từ khóa" value="${settings.site_keywords }">${settings.site_keywords }</textarea>
 			            </div>
 			            <div>
 			            <c:if test="${success != null|| success.length == 0}">
