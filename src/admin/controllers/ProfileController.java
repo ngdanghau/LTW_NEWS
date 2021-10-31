@@ -247,7 +247,6 @@ public class ProfileController {
 		List<String> errorMessage = new ArrayList<String>();
 		
 		Users user = (Users) request.getAttribute("AuthUser");
-		UserSettings settings = this.getUserSettings(user);
 		
 		String password_current = (String) params.get("password_current");
 		String password_new = (String) params.get("password_new");
