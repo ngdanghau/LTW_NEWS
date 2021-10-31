@@ -8,13 +8,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import javax.websocket.server.PathParam;
 
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -45,6 +43,7 @@ public class AdminInformationPageController {
 	 * @author Phong
 	 * @return lay toan bo trang thong tin ra
 	 **************************************************/
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="information-page",method = RequestMethod.GET)
 	public String retrieveInformationPage(HttpServletRequest request, ModelMap modelMap )
 	{
@@ -60,7 +59,7 @@ public class AdminInformationPageController {
 		
 		
 		/*PAGINATION*/
-		@SuppressWarnings({ "rawtypes", "unchecked" })
+		@SuppressWarnings({ "rawtypes" })
 		PagedListHolder pagedListHolder = new PagedListHolder(list);
 		int page = ServletRequestUtils.getIntParameter(request, "p", 0);
 		pagedListHolder.setPage(page);
@@ -212,7 +211,6 @@ public class AdminInformationPageController {
 		
 		
 		/*Step 1*/
-		int id = page.getId();
 		String title = page.getTitle();
 		String excerpt = page.getExcerpt();
 		

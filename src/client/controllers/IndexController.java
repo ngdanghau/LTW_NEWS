@@ -38,7 +38,7 @@ public class IndexController {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM Posts p WHERE p.category.id = :catId"; 
 		if(catId == 1) {
-			hql = "FROM Posts p WHERE p.category.id != :catId";
+			hql = "FROM Posts p WHERE p.category.id != :catId AND featured = 1";
 		}
 		Query query = session.createQuery(hql); 
 		query.setFirstResult(0);

@@ -107,7 +107,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		if(userPrincipal != null) {
 			try 
 			{
-				Session session = factory.getCurrentSession();
+				Session session = factory.openSession();
 				String hql = "SELECT u FROM Users u "
 							+ "WHERE u.email = :email";
 				
@@ -116,6 +116,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 				
 				List<Users> list = query.list();
 				AuthUser = list.get(0);
+				session.close();
 			}
 			catch(Exception ex) 
 			{

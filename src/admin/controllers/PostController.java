@@ -35,6 +35,13 @@ public class PostController {
 	@Autowired
 	SessionFactory factory;
 	
+	/**
+	 * Kiểm tra một giá trị có nằm trong list giá trị khác hay ko
+	 * @param <T>
+	 * @param array
+	 * @param v
+	 * @return
+	 */
 	public <T> boolean contains(final T[] array, final T v) {
 	    if (v == null) {
 	        for (final T e : array)
@@ -50,6 +57,11 @@ public class PostController {
 	    return false;
 	}
 	
+	/**
+	 * Lấy thông tin thể loại theo level
+	 * @param parent
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Categories> getCat(int parent){
 		Session session = factory.getCurrentSession();
@@ -60,6 +72,11 @@ public class PostController {
 		return list;
 	}
 	
+	/**
+	 * Lấy 1 bài viết theo id
+	 * @param postid
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public Posts getPostById(int postid){
 		Session session = factory.getCurrentSession();
@@ -249,7 +266,11 @@ public class PostController {
 		return "redirect:/admin/post.htm?postid=" + post.getId();
 	}
 	
-	
+	/**
+	 * Lấy thông tin thể loại theo bài viết
+	 * @param cat_id
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public Categories getCategory(String cat_id)
 	{

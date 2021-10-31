@@ -149,7 +149,7 @@
       
       <!-- MY OWN LIBRARY -->
       
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+		<script src="./public/admin/js/lib/jquery.min.js"></script>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		

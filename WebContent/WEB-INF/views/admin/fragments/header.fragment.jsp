@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
 <header id="page-header">
   <div class="content-header">
@@ -36,13 +37,14 @@
             <p class="mb-0 text-muted fs-sm fw-medium">${AuthUser.account_type } </p>
           </div>
           <div class="p-2">
-            <a class="dropdown-item d-flex align-items-center justify-content-between" href="be_pages_generic_profile.html">
+            <a class="dropdown-item d-flex align-items-center justify-content-between" href="${ ADMINURL }/profile.htm">
               <span class="fs-sm fw-medium">Profile</span>
-              <span class="badge rounded-pill bg-primary ms-2">1</span>
             </a>
-            <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-              <span class="fs-sm fw-medium">Settings</span>
-            </a>
+            <c:if test="${ AuthUser.account_type == 'ADMIN' }"> 
+	            <a class="dropdown-item d-flex align-items-center justify-content-between" href="${ ADMINURL }/settings/site.htm">
+	              <span class="fs-sm fw-medium">Settings</span>
+	            </a>
+            </c:if>
           </div>
           <div role="separator" class="dropdown-divider m-0"></div>
           <div class="p-2">

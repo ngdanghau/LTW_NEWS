@@ -21,6 +21,8 @@
       <link rel="shortcut icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
       <link rel="stylesheet" id="css-main" href="./public/admin/css/oneui.min.css">
+     <link rel="stylesheet" href="./public/admin/js/plugins/sweetalert2/sweetalert2.min.css">
+      
 </head>
 <body>
 <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed">
@@ -44,7 +46,7 @@
 	  </div>
 	</div>
 	<div class="content">
-		<form class="mb-4" action="${ADMINURL }/post.htm?postid=${ post.id }" method="POST">
+		<form class="mb-4 post-form" action="${ADMINURL }/post.htm?postid=${ post.id }" method="POST">
 			<c:if test="${successMessage != null && successMessage.trim().length() > 0 }">
 				<div class="alert alert-success alert-dismissible" role="alert">
 		            <p class="mb-0">
@@ -190,8 +192,9 @@
       
 
 </div>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="./public/admin/js/lib/jquery.min.js"></script>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
+		<script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
 		<script src="./public/vendor/ckeditor/ckeditor.js"></script>
 		<script src="./public/vendor/ckfinder/ckfinder.js"></script>
 		<script src="./public/admin/js/pages/post.js"></script>
@@ -205,6 +208,7 @@
 				
 				TimesWriter.Thumbnail();
 				TimesWriter.SlugUrl();
+				TimesWriter.Validate();
 			    
 				
 			});
