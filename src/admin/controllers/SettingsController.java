@@ -1,7 +1,6 @@
 package admin.controllers;
 
 
-import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
@@ -9,11 +8,9 @@ import javax.transaction.Transactional;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.jboss.logging.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,9 +38,7 @@ public class SettingsController {
 		Query query = session.createQuery(hql); 
 		query.setParameter("name", name); 
 		try {
-			// lấy text 
 			General_Data json = (General_Data) query.list().get(0);// lấy text {""}
-			// chuyển text -> json
 			return mapper.readValue(json.getData(), SettingsData.class);
 		}catch(Exception ex) {
 			return null;
@@ -56,9 +51,7 @@ public class SettingsController {
 		Query query = session.createQuery(hql); 
 		query.setParameter("name", name); 
 		try {
-			// lấy text 
 			General_Data json = (General_Data) query.list().get(0);// lấy text {""}
-			// chuyển text -> json
 			return mapper.readValue(json.getData(), UserSettings.class);
 		}catch(Exception ex) {
 			return null;
@@ -187,7 +180,7 @@ public class SettingsController {
 	@RequestMapping(value="logo",method = RequestMethod.GET)
 	public String LogoController(ModelMap model)
 	{
-		return "admin/404";
+		return "admin/errors/404";
 //		
 //		return "admin/settings-logo";
 	}

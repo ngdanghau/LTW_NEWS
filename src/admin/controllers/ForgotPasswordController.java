@@ -78,7 +78,7 @@ public class ForgotPasswordController {
 			}
 		}catch(Exception ex){	
 			ex.printStackTrace();
-			return "admin/404";
+			return "admin/errors/404";
 		}
 		return "admin/forgot-password";
 	}
