@@ -37,7 +37,7 @@
 		      <h3 class="block-title">Thêm widget</h3>
 		    </div>
 		    <div class="block-content">
-			    <form class="js-ajax-form" action="${ AMINURL }/widget.htm" method="post">
+			    <form class="widget-form" action="${ ADMINURL }/widget.htm" method="post">
 				   <input type="hidden" name="action" value="save">
 				   <input type="hidden" name="order_widget" value="10">
 				   <div class="mb-4">
@@ -144,6 +144,9 @@
    
 </div>
   </main>
+  
+  <c:remove var="successMessage" scope="session" />
+  <c:remove var="errorMessage" scope="session" />
   <!-- FOOTER FRAGMENT -->
       <jsp:include page="./fragments/footer.fragment.jsp"/>
       
@@ -151,9 +154,12 @@
 </div>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="./public/admin/js/plugins/sortablejs/sortable.min.js"></script>
+		<script src="./public/admin/js/lib/jquery.min.js"></script>
+		<script src="./public/admin/js/plugins/jquery-validation/jquery.validate.min.js"></script>
+		<script src="./public/admin/js/pages/widget.js"></script>
 		<script>
-		var el = document.getElementById('items');
-		var sortable = Sortable.create(el, { animation: 150 });
+			var el = document.getElementById('items');
+			var sortable = Sortable.create(el, { animation: 150 });
 
 		
 		</script>

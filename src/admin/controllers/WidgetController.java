@@ -10,10 +10,16 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import entities.Categories;
 import entities.Widgets;
@@ -26,6 +32,9 @@ import models.CategoriesModel;
 public class WidgetController {
 	@Autowired
 	SessionFactory factory;
+	
+	@Autowired
+	ObjectMapper mapper;
 		
 	/**
 	 * Lấy thông tin thể loại theo level
@@ -84,5 +93,13 @@ public class WidgetController {
 		model.addAttribute("listCategories", list);
 		model.addAttribute("listWidget", listWidget);
 		return "admin/widget";
+	}
+	
+	@RequestMapping( value="widget", method = RequestMethod.POST)
+	public ResponseEntity<JsonNode> save(ModelMap model){	
+		ObjectNode objectNode = mapper.createObjectNode();
+		
+		objectNode.put("result", 1);
+		return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
 	}
 }
