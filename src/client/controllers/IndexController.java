@@ -11,11 +11,20 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import bean.Mailer;
 import entities.Posts;
 import entities.Widgets;
 import models.WidgetModel;
@@ -31,6 +40,12 @@ public class IndexController {
 	
 	@Autowired
 	SessionFactory factory;
+	
+	@Autowired
+	ObjectMapper mapper;
+	
+	@Autowired
+	Mailer mailer;
 	
 	@SuppressWarnings("unchecked")
 	public List<Posts> getListPostsByCat(int catId, int limitPost)
@@ -99,5 +114,31 @@ public class IndexController {
 		model.addAttribute("pagedListHolder", pagedlistHolder);
 		model.addAttribute("listWidgets", lists);
 		return "index";
+	}
+	
+	@RequestMapping(value = "index", method = RequestMethod.POST)
+	public ResponseEntity<JsonNode> dangKyNhanTin(@RequestParam("email") String email,ModelMap model)
+	{
+		ObjectNode objectNode = mapper.createObjectNode();
+		String error = "";
+		
+		// code ở dây
+		String regex = "^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$";
+		if(email.isEmpty())
+			error="Không được để trống";
+		else if (!email.matches(regex)||email.length()<15) {
+			error="Email không hợp lệ";
+		}
+		
+		
+		
+		if(error.isEmpty()==false) {
+			objectNode.put("msg", error);
+		}else {
+			mailer.send(mailer.from(),email,mailer.ReceiveMessage(), mailer.bodyRM());	
+			objectNode.put("msg", "Thành công. Vui lòng kiểm tra mail");
+		}
+	
+		return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
 	}
 }

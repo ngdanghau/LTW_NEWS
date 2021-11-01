@@ -51,31 +51,31 @@
         <div class="block-content">
           <div class="mb-4">
              <label class="col-sm-2 col-form-label text-right">Facebook</label>
-             <input type="text" class="form-control" id="facebook" name="facebook" placeholder="Tên trang web" value="${social.facebook }">
+             <input type="text" class="form-control" id="facebook" name="facebook" placeholder="Facebook" value="${social.facebook }">
            </div>
            <div class="mb-4">
 	            <label class="col-sm-2 col-form-label text-right">Twitter</label>
-	            <input type="text" class="form-control" id="twitter" name="twitter" placeholder="Tên trang web" value="${social.twitter }">
+	            <input type="text" class="form-control" id="twitter" name="twitter" placeholder="Twitter" value="${social.twitter }">
 	       </div>
 	       <div class="mb-4">
              <label class="col-sm-2 col-form-label text-right">Instagram</label>
-             <input type="text" class="form-control" id="instagram" name="instagram" placeholder="Tên trang web" value="${social.instagram }">
+             <input type="text" class="form-control" id="instagram" name="instagram" placeholder="Instagram" value="${social.instagram }">
            </div>
            <div class="mb-4">
              <label class="col-sm-2 col-form-label text-right">Pinterest</label>
-             <input type="text" class="form-control" id="pinterest" name="pinterest" placeholder="Tên trang web" value="${social.pinterest }">
+             <input type="text" class="form-control" id="pinterest" name="pinterest" placeholder="Pinterest" value="${social.pinterest }">
            </div>
            <div class="mb-4">
 	            <label class="col-sm-2 col-form-label text-right">Tumblr</label>
-	            <input type="text" class="form-control" id="tumblr" name="tumblr" placeholder="Tên trang web" value="${social.tumblr }">
+	            <input type="text" class="form-control" id="tumblr" name="tumblr" placeholder="Tumblr" value="${social.tumblr }">
 	       </div>
 	       <div class="mb-4">
              <label class="col-sm-2 col-form-label text-right">Telegram</label>
-             <input type="text" class="form-control" id="telegram" name="telegram" placeholder="Tên trang web" value="${social.telegram }">
+             <input type="text" class="form-control" id="telegram" name="telegram" placeholder="Telegram" value="${social.telegram }">
            </div>
            <div class="mb-4">
 	            <label class="col-sm-2 col-form-label text-right">WhatsApp</label>
-	            <input type="text" class="form-control" id="whatsapp" name="whatsapp" placeholder="Tên trang web" value="${social.whatsapp }">
+	            <input type="text" class="form-control" id="whatsapp" name="whatsapp" placeholder="WhatsApp" value="${social.whatsapp }">
 	       </div>
 	       <div>
 	       <c:if test="${success != null|| success.length == 0}">
@@ -123,8 +123,9 @@
     </div>
 	</div>
   </main>
-  <c:remove var="successMessage" scope="session" />
-  <c:remove var="errorMessage" scope="session" />
+  <c:remove var="success" scope="session" />
+  <c:remove var="error" scope="session" />
+  <c:remove var="change" scope="session" />
   <!-- FOOTER FRAGMENT -->
       <jsp:include page="./fragments/footer.fragment.jsp"/>
       

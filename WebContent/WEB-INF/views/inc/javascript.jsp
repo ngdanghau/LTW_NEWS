@@ -9,7 +9,7 @@
                $.ajax({
                   url: $form.attr("action"),
                   type: $form.attr("method"),
-                  dataType: 'jsonp',
+                  dataType: 'json',
                   data: $form.serialize(),
                   error: function() {
                      $form.find("input#submit").prop('disabled', false);
