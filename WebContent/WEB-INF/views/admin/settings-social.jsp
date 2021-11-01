@@ -51,31 +51,31 @@
         <div class="block-content">
           <div class="mb-4">
              <label class="col-sm-2 col-form-label text-right">Facebook</label>
-             <input type="text" class="form-control" id="example-text-input" name="facebook" placeholder="Tên trang web" value="${social.facebook }">
+             <input type="text" class="form-control" id="example-text-input" name="facebook" placeholder="Tên trang web" value="${social.facebook }" required>
            </div>
            <div class="mb-4">
 	            <label class="col-sm-2 col-form-label text-right">Twitter</label>
-	            <input type="text" class="form-control" id="example-text-input" name="twitter" placeholder="Tên trang web" value="${social.twitter }">
+	            <input type="text" class="form-control" id="example-text-input" name="twitter" placeholder="Tên trang web" value="${social.twitter }" required>
 	       </div>
 	       <div class="mb-4">
              <label class="col-sm-2 col-form-label text-right">Instagram</label>
-             <input type="text" class="form-control" id="example-text-input" name="instagram" placeholder="Tên trang web" value="${social.instagram }">
+             <input type="text" class="form-control" id="example-text-input" name="instagram" placeholder="Tên trang web" value="${social.instagram }" required>
            </div>
            <div class="mb-4">
              <label class="col-sm-2 col-form-label text-right">Pinterest</label>
-             <input type="text" class="form-control" id="example-text-input" name="pinterest" placeholder="Tên trang web" value="${social.pinterest }">
+             <input type="text" class="form-control" id="example-text-input" name="pinterest" placeholder="Tên trang web" value="${social.pinterest }" required>
            </div>
            <div class="mb-4">
 	            <label class="col-sm-2 col-form-label text-right">Tumblr</label>
-	            <input type="text" class="form-control" id="example-text-input" name="tumblr" placeholder="Tên trang web" value="${social.tumblr }">
+	            <input type="text" class="form-control" id="example-text-input" name="tumblr" placeholder="Tên trang web" value="${social.tumblr }" required>
 	       </div>
 	       <div class="mb-4">
              <label class="col-sm-2 col-form-label text-right">Telegram</label>
-             <input type="text" class="form-control" id="example-text-input" name="telegram" placeholder="Tên trang web" value="${social.telegram }">
+             <input type="text" class="form-control" id="example-text-input" name="telegram" placeholder="Tên trang web" value="${social.telegram }" required>
            </div>
            <div class="mb-4">
 	            <label class="col-sm-2 col-form-label text-right">WhatsApp</label>
-	            <input type="text" class="form-control" id="example-text-input" name="whatsapp" placeholder="Tên trang web" value="${social.whatsapp }">
+	            <input type="text" class="form-control" id="example-text-input" name="whatsapp" placeholder="Tên trang web" value="${social.whatsapp }" required>
 	       </div>
 	       <div>
 	       <c:if test="${success != null|| success.length == 0}">
