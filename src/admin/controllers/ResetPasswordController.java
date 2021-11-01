@@ -70,7 +70,7 @@ public class ResetPasswordController {
 	{
 		if(password.compareTo(repeatpassword) != 0)
 		{
-			model.addAttribute("message", "Mật khẩu và mật khẩu nhập lại không trùng nhau!");
+			request.getSession().setAttribute("message", "Mật khẩu và mật khẩu nhập lại không trùng nhau!");
 			return "redirect:/reset-password/"+hash+".htm";
 		}
 		

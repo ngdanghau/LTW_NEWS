@@ -78,6 +78,7 @@
 </div>
   </main>
   </div>
+    <c:remove var="message" scope="session" />
 <script src="<c:url value='./public/admin/js/oneui.app.min.js' />"></script>
 <script src="<c:url value='./public/admin/js/lib/jquery.min.js' />"></script>
 <script src="<c:url value='./public/admin/js/plugins/jquery-validation/jquery.validate.min.js' />"></script>

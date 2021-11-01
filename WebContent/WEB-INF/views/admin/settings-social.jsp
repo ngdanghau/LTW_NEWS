@@ -123,8 +123,9 @@
     </div>
 	</div>
   </main>
-  <c:remove var="successMessage" scope="session" />
-  <c:remove var="errorMessage" scope="session" />
+  <c:remove var="success" scope="session" />
+  <c:remove var="error" scope="session" />
+  <c:remove var="change" scope="session" />
   <!-- FOOTER FRAGMENT -->
       <jsp:include page="./fragments/footer.fragment.jsp"/>
       
