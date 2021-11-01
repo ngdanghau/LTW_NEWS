@@ -4,9 +4,59 @@
  * Copyright (c) 2021
  */
 $( document ).ready(function() {
-			  
+		
+	$("body").on("click", ".remove-widget", function(){
+		$button = $(this);
+		var id = $button.data("id");
+		var action = $button.data("action");
+		var url = $button.data("url");
+		$.ajax({
+            url: url + "?id=" + id,
+            type: 'PUT',
+            error: function(error) {
+                Swal.fire('Oops...', "Oops! Đã xảy ra lỗi. Vui lòng thử lại sau!", 'error')
+            },
+
+            success: function(resp) {
+            	if(resp.result == 0){
+                    Swal.fire('Oops...', resp.msg, 'error')
+                }else{
+                	One.block(action, "#widget_" + id);
+                }
+            }
+        });
+		
+	})
+	
+	
+	$("body").on("submit", ".js-ajax-form", function(){
+		$form = $(this);
+		var method = $form.attr("method");
+		var action = $form.attr("action");
+		$form.find("button[type='submit']").attr("disabled", true);
+		$.ajax({
+            url: action,
+            type: method,
+            data: $form.serialize(),
+            error: function(error) {
+                Swal.fire('Oops...', "Oops! Đã xảy ra lỗi. Vui lòng thử lại sau!", 'error');
+                $form.find("button[type='submit']").attr("disabled", false);
+            },
+
+            success: function(resp) {
+            	if(resp.result == 0){
+                    Swal.fire('Oops...', resp.msg, 'error');
+                }else{
+                	Swal.fire('Thành công', resp.msg, 'success');
+                }
+                $form.find("button[type='submit']").attr("disabled", false);
+            }
+        });
+		return false;
+	})
 				
 });
+
 One.onLoad(class {
     static initValidation() {
         One.helpers("jq-validation"), jQuery(".widget-form").validate({
@@ -20,6 +70,9 @@ One.onLoad(class {
                 },
                 "cat_id": {
                     required: !0
+                },
+                "num_post": {
+                    required: !0
                 }
             },
             messages: {
@@ -32,6 +85,9 @@ One.onLoad(class {
                 },
                 "cat_id": {
                     required: "Hãy chọn thể loại",
+                },
+                "num_post": {
+                    required: "Hãy nhập số lượng hiện thị",
                 }
             },
             submitHandler: function(form) {
@@ -54,7 +110,10 @@ One.onLoad(class {
                     	if(resp.result == 0){
                             Swal.fire('Oops...', resp.msg, 'error')
                         }else{
-                           console.log(resp.msg);
+                        	Swal.fire('Thành công', resp.msg, 'success');
+                        	var listElem = jQuery("#items");
+                        	listElem.append(resp.html);
+                        	One._uiInit();
                         }
                     }
                 });

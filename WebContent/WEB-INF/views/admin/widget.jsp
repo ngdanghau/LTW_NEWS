@@ -21,6 +21,7 @@
       <link rel="shortcut icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
       <link rel="stylesheet" id="css-main" href="./public/admin/css/oneui.min.css">
+      <link rel="stylesheet" href="./public/admin/js/plugins/sweetalert2/sweetalert2.min.css">
 </head>
 <body>
 <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow remember-theme">
@@ -38,11 +39,14 @@
 		    </div>
 		    <div class="block-content">
 			    <form class="widget-form" action="${ ADMINURL }/widget.htm" method="post">
-				   <input type="hidden" name="action" value="save">
-				   <input type="hidden" name="order_widget" value="10">
+				   <input type="hidden" name="order_widget" value="${ listWidget.size() + 1 }">
 				   <div class="mb-4">
 				      <label for="title" class="form-label">Tiêu Đề</label>
-				      <input type="text" class="form-control" name="title" placeholder="Tên">
+				      <input type="text" class="form-control" name="title" placeholder="Tiêu Đề">
+				   </div>
+				   <div class="mb-4">
+				      <label for="num_post" class="form-label">Số lượng bài hiện thị</label>
+				      <input type="number" class="form-control" name="num_post" placeholder="Số lượng bài hiện thị">
 				   </div>
 				   <div class="mb-4">
 				      <label for="layout" class="form-label">Layout</label>
@@ -81,10 +85,11 @@
 		  </div>
 	</div>
 	<div class="col-xl-6">
-	 <form class="js-ajax-form" action="${ AMINURL }/widget.htm" method="post">
+	 <form class="js-ajax-form" action="${ ADMINURL }/widget-update.htm" method="post">
 		<div id="items">
 			     <c:forEach var="widget" items="${ listWidget }">
-					<div class="block block-rounded block-themed block-mode-hidden mb-2">
+			     <input type="hidden" name="id[]" value="${widget.id }">
+					<div class="block block-rounded block-themed block-mode-hidden mb-2"  id="widget_${widget.id }">
 				        <div class="block-header bg-muted">
 				          <h3 class="block-title">${ widget.title }</h3>
 				          <div class="block-options">
@@ -92,28 +97,31 @@
 				            <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="block-option" data-action="content_toggle">
 				            	<i class="si si-arrow-up"></i>
 				            </button>
-				            <button type="button" class="btn btn-sm btn-alt-danger" data-toggle="block-option" data-action="close">
+				            <button type="button" class="btn btn-sm btn-alt-danger remove-widget" data-action="close" data-id="${ widget.id }" data-url="${ADMINURL }/widget.htm">
 				              <i class="si si-close"></i>
 				            </button>
 				            
 				          </div>
 				        </div>
 				        <div class="block-content">
-				          <input type="hidden" name="order_widget" value="10">
 						   <div class="mb-4">
 						      <label for="title" class="form-label">Tiêu Đề</label>
-						      <input type="text" class="form-control" name="title[]" placeholder="Tên" value="${ widget.title }">
+						      <input type="text" class="form-control" name="title[]" placeholder="Tiêu Đề" value="${ widget.title }">
+						   </div>
+						   <div class="mb-4">
+						      <label for="num_post" class="form-label">Số lượng bài hiện thị</label>
+						      <input type="number" class="form-control" name="num_post[]" value="${ widget.num_post }" placeholder="Số lượng bài hiện thị">
 						   </div>
 						   <div class="mb-4">
 						      <label for="layout" class="form-label">Layout</label>
 						      <select class="form-select" id="layout" name="layout[]">
-						         <option value="layout-group-1" ${ widget.layout == 'layout-group-1' ? 'selected' : 'layout-group-1' }>Layout Group 1</option>
-						         <option value="layout-group-2" ${ widget.layout == 'layout-group-2' ? 'selected' : 'layout-group-2' }>Layout Group 2</option>
-						         <option value="layout-group-3" ${ widget.layout == 'layout-group-3' ? 'selected' : 'layout-group-3' }>Layout Group 3</option>
-						         <option value="layout-group-4" ${ widget.layout == 'layout-group-4' ? 'selected' : 'layout-group-4' }>Layout Group 4</option>
-						         <option value="layout-grid-1" ${ widget.layout == 'layout-grid-1' ? 'selected' : 'layout-grid-1' }>Layout Grid 1</option>
-						         <option value="layout-grid-2" ${ widget.layout == 'layout-grid-2' ? 'selected' : 'layout-grid-2' }>Layout Grid 2</option>
-						         <option value="layout-vertical" ${ widget.layout == 'layout-vertical' ? 'selected' : 'layout-vertical' }>Layout Vertical</option>
+						         <option value="layout-group-1" ${ widget.layout == 'layout-group-1' ? 'selected' : '' }>Layout Group 1</option>
+						         <option value="layout-group-2" ${ widget.layout == 'layout-group-2' ? 'selected' : '' }>Layout Group 2</option>
+						         <option value="layout-group-3" ${ widget.layout == 'layout-group-3' ? 'selected' : '' }>Layout Group 3</option>
+						         <option value="layout-group-4" ${ widget.layout == 'layout-group-4' ? 'selected' : '' }>Layout Group 4</option>
+						         <option value="layout-grid-1" ${ widget.layout == 'layout-grid-1' ? 'selected' : '' }>Layout Grid 1</option>
+						         <option value="layout-grid-2" ${ widget.layout == 'layout-grid-2' ? 'selected' : '' }>Layout Grid 2</option>
+						         <option value="layout-vertical" ${ widget.layout == 'layout-vertical' ? 'selected' : '' }>Layout Vertical</option>
 						      </select>
 						   </div>
 						   <div class="mb-4">
@@ -133,10 +141,11 @@
 				     </div>
 				  </c:forEach>
 				 
-				     <button type="submit" class="btn w-100 btn-primary mt-4">
+				    
+				</div>
+				 <button type="submit" class="btn w-100 btn-primary mt-4">
                       Lưu vị trí
                     </button>
-				</div>
 				</form>
 	</div>
 </div>
@@ -154,6 +163,7 @@
 </div>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="./public/admin/js/plugins/sortablejs/sortable.min.js"></script>
+		<script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
 		<script src="./public/admin/js/lib/jquery.min.js"></script>
 		<script src="./public/admin/js/plugins/jquery-validation/jquery.validate.min.js"></script>
 		<script src="./public/admin/js/pages/widget.js"></script>
