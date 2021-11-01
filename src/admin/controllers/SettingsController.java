@@ -125,7 +125,7 @@ public class SettingsController {
 											@RequestParam("tumblr") String tumblr, @RequestParam("telegram") String telegram, @RequestParam("whatsapp") String whatsapp)
 	{
 		
-		UserSettings social = getSocialData("social");
+		SocialData social = getSocialData("social");
 		if(facebook.isEmpty()||twitter.isEmpty()||instagram.isEmpty()||pinterest.isEmpty() || tumblr.isEmpty()||telegram.isEmpty()||whatsapp.isEmpty())
 		{
 			request.getSession().setAttribute("error","Vui lòng không để trống");
