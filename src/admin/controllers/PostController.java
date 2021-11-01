@@ -27,35 +27,12 @@ import entities.Users;
 import helpers.CommonHelper;
 import models.CategoriesModel;
 
-
 @Transactional
 @Controller
 @RequestMapping("/admin")
 public class PostController {
 	@Autowired
 	SessionFactory factory;
-	
-	/**
-	 * Kiểm tra một giá trị có nằm trong list giá trị khác hay ko
-	 * @param <T>
-	 * @param array
-	 * @param v
-	 * @return
-	 */
-	public <T> boolean contains(final T[] array, final T v) {
-	    if (v == null) {
-	        for (final T e : array)
-	            if (e == null)
-	                return true;
-	    } 
-	    else {
-	        for (final T e : array)
-	            if (e == v || v.equals(e))
-	                return true;
-	    }
-
-	    return false;
-	}
 	
 	/**
 	 * Lấy thông tin thể loại theo level
@@ -180,7 +157,7 @@ public class PostController {
 		if(post_status == null || post_status.trim().length() == 0) {
 			errorMessage.add("Tình trạng bài viết không được bỏ trống!");
 			error = true;
-		}else if(!this.contains(new String[] { "pending", "publish", "draft" }, post_status)) {
+		}else if(!CommonHelper.contains(new String[] { "pending", "publish", "draft" }, post_status)) {
 			errorMessage.add("Tình trạng bài viết không hợp lệ!");
 			error = true;
 		}
