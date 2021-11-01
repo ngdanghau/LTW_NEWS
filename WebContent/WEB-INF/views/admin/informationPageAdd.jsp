@@ -38,7 +38,7 @@
 		  margin: 0;
 		  position: absolute;
 		  top: 20%;
-		  left: 60%;
+		  left: 35%;
 		}
 		</style>
    		
@@ -54,12 +54,13 @@
          <div class="content">
             <div class="block block-rounded">
                <div class="block-header block-header-default">
-                  <h3 class="block-title">Thể loại <b style="color:red;"> mới </b> </h3>
+                  <h3 class="block-title">Trang thông tin<b style="color:red;"> MỚI </b> </h3>
                </div>
                <div class="block-content block-content-full">
                
-                  <form:form action="${APPURL }/admin/add-category.htm" method="POST" modelAttribute="category">
+                  <form:form action="${APPURL }/admin/add-information-page.htm" method="POST" modelAttribute="page">
                   
+                  	<!-- IN THONG BAO THANH CONG HOAC LOI -->
                   	<c:if test="${successMessage != null && successMessage.trim().length() > 0 }">
 						<div class="alert alert-success alert-dismissible" role="alert">
 				            <p class="mb-0">
@@ -80,59 +81,51 @@
 				          	</div>
 						</c:forEach>
 					</c:if>
-                  
+                  	<!-- KET THUC IN THONG BAO THANH CONG HOAC LOI -->
                      <div class="row">
-                        <div class="col-lg-4">
+                        <!-- <div class="col-lg-4">
                            <p class="fs-sm text-muted">
                               <p>Tên: Tên riêng sẽ hiển thị trên trang mạng của bạn.</p>
                               <p>Đường dẫn: Đường dẫn (URL). Chuỗi này bao gồm chữ cái thường, số và dấu gạch ngang (-). Ví dụ: https://www.fb.com/game-online123</p>
-                              <p>Chuyên mục: Chuyên mục khác với thẻ, bạn có thể sử dụng nhiều cấp chuyên mục. Ví dụ: Trong chuyên mục nhạc, bạn có chuyên mục con là nhạc Pop, nhạc Jazz.</p>
-                              <p>Mô tả: đoạn văn bản mô tả khái quát nội dung của thể loại.</p>
+                              <p>Trạng thái:</br> <b>Xuất bản</b> sẽ hiển thị trên trang chủ. <b>Chờ duyệt</b> sẽ không hiển thị ở trang chủ</p>
+                              <p>Mô tả rút gọn: khái quát ý nghĩa trang thông tin này</p>
+                              <p>Mô tả đầy đủ: thể hiện đầy đủ ý nghĩa của trang thông tin này </p>
                            </p>
-                        </div>
-                        <div class="col-lg-8 col-xl-5">
+                        </div> -->
+                        <div class="col-lg-8 col-xl-9">
                            <div class="form-floating mb-4">
-                              <form:input path="name" class="form-control" id="example-text-input-floating" name="example-text-input-floating" placeholder="John Doe"/>
+                              <form:input path="title" class="form-control" id="example-text-input-floating" name="example-text-input-floating" placeholder="John Doe"/>
                               <label for="example-text-input-floating">Tên</label>
                            </div>
+                           
                            <div class="form-floating mb-4">
-                              <form:input path="slug" class="form-control" id="example-email-input-floating" name="example-email-input-floating" placeholder="john.doe@example.com"/>
+                              <form:input path="page_slug" class="form-control" id="example-email-input-floating" name="example-email-input-floating" placeholder="john.doe@example.com"/>
                               <label for="example-email-input-floating">Đường dẫn</label>
                            </div>
                            
                           <div class="form-floating mb-4">
-                              <form:select path="parent" class="form-select" id="example-select-floating" name="example-select-floating" aria-label="Floating label select example">
-                              	<c:forEach var="element" items="${ categories }" varStatus="status">
-                              	
-                              		<c:if test="${ category.parent == element.id }">
-                              			<option selected value="${ element.id }">${ element.name }</option>
-                              		</c:if>
-                              		
-                              		<c:if test="${ category.parent != element.id }">
-                              			<option value="${ element.id }">${ element.name }</option>
-                              		</c:if>
-                              		
-                              		
-                              	</c:forEach>
-                                 
+                              <form:select path="page_status" items="${ publishStatus }" varStatus="status" 
+                              				class="form-select" id="example-select-floating" 
+                              				name="example-select-floating" 
+                              				aria-label="Floating label select example">
                               </form:select>
-                              <label for="example-select-floating">Chuyên mục</label>
+                              <label for="example-select-floating">Trạng thái</label>
                            </div>
                            
-                          
-                           
-                           <div class="form-floating mb-4">
-                              <form:textarea path="description" class="form-control" id="example-textarea-floating" name="example-textarea-floating" style="height: 200px" placeholder="Leave a comment here" />
-                              <label for="example-textarea-floating">Mô tả</label>
+                          <div class="form-floating mb-4">
+                              <form:input path="excerpt" class="form-control" id="example-text-input-floating" name="example-text-input-floating" placeholder="John Doe"/>
+                              <label for="example-text-input-floating">Mô tả rút gọn</label>
                            </div>
-                        </div>
+                                                
+                     <!-- <div class="col-xl-9"> -->
+                     	   <label for="example-textarea-floating">Mô tả đầy đủ</label>
+                           <form:textarea path="content" id="content" class="form-control" name="content" rows="10" cols="80"></form:textarea> 
                      </div>
-                     
                       
                       <div class="container">
 						  <div class="center">
-						    	<input type="submit" class="btn btn-primary" value="Lưu lại">
-						    	<input type="button" id="btn-add-category-cancel" class="btn btn-danger" value="Hủy bỏ">
+						    	<input type="submit" data-uid="${ page.id }" class="btn btn-primary" value="Lưu lại">
+						    	<input type="button" id="btn-edit-information-page-cancel" class="btn btn-danger" value="Hủy bỏ">
 						  </div>
 					 </div>
 						                      
@@ -148,9 +141,25 @@
       <jsp:include page="./fragments/footer.fragment.jsp"/>
       
       <!-- MY OWN LIBRARY -->
-      
 		<script src="./public/admin/js/lib/jquery.min.js"></script>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		
-		<script src="./public/admin/js/pages/category.js"></script>
+		<script src="./public/admin/js/pages/informationPage.js"></script>
+		
+		<script src="./public/vendor/ckeditor/ckeditor.js"></script>
+		<script src="./public/vendor/ckfinder/ckfinder.js"></script>
+		<script>
+			$( document ).ready(function() {
+			    // khoi tao ckeditor va ckfinder
+				var editor = CKEDITOR.replace('content');
+				editor.config.height = '500px';
+				CKFinder.setupCKEditor( editor, '${APPURL}/public/vendor/ckfinder/' );
+				
+				
+				TimesWriter.Thumbnail();
+				TimesWriter.SlugUrl();
+			    
+				
+			});
+		</script>

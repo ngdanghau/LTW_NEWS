@@ -59,18 +59,20 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 	 **************************************************/
 	public SettingsData getGeneralData(String name) {
 		ObjectMapper mapper = new ObjectMapper();
-		Session session = factory.getCurrentSession();
+		Session session = factory.openSession();
 		String hql = String.format("FROM General_Data WHERE name = :name"); 
 		Query query = session.createQuery(hql); 
 		query.setParameter("name", name); 
+		
+		SettingsData result = null;
 		try {
-			// lấy text 
-			General_Data json = (General_Data) query.list().get(0);// lấy text {""}
-			// chuyển text -> json
-			return mapper.readValue(json.getData(), SettingsData.class);
+			General_Data json = (General_Data) query.list().get(0);
+			session.close();
+			result = mapper.readValue(json.getData(), SettingsData.class);
 		}catch(Exception ex) {
-			return null;
+			result =  null;
 		}
+		return result;
 	}
 	
 	
@@ -109,7 +111,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		if(userPrincipal != null) {
 			try 
 			{
-				Session session = factory.getCurrentSession();
+				Session session = factory.openSession();
 				String hql = "SELECT u FROM Users u "
 							+ "WHERE u.email = :email";
 				
@@ -118,6 +120,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 				
 				List<Users> list = query.list();
 				AuthUser = list.get(0);
+				session.close();
 			}
 			catch(Exception ex) 
 			{

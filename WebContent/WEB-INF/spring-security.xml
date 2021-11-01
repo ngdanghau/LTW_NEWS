@@ -23,10 +23,22 @@
         <intercept-url pattern="/dashboard.htm" access="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_CONTRIBUTOR')" />
         <intercept-url pattern="/admin/posts.htm" access="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_CONTRIBUTOR')" />
         <intercept-url pattern="/admin/post.htm" access="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_CONTRIBUTOR')" />
+        <intercept-url pattern="/admin/widget.htm" access="hasAnyRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/admin/menu.htm" access="hasAnyRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/admin/settings/**" access="hasAnyRole('ROLE_ADMIN')" />
+        
+        <intercept-url pattern="/admin/information-page.htm" access="hasAnyRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/admin/add-information-page.htm" access="hasAnyRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/admin/edit-information-page-**" access="hasAnyRole('ROLE_ADMIN')" />
+        
+        <intercept-url pattern="/admin/category.htm" access="hasAnyRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/admin/add-category.htm" access="hasAnyRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/admin/edit-category-**" access="hasAnyRole('ROLE_ADMIN')" />
+        
         <intercept-url pattern="/admin/**" access="isAuthenticated()" />
         
         
-        <access-denied-handler error-page="/403" />
+        <access-denied-handler error-page="/403.htm" />
 
         <form-login login-page='/admin.htm' login-processing-url="/login.htm"
             default-target-url="/dashboard.htm" always-use-default-target="false"

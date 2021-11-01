@@ -21,32 +21,18 @@
       <meta property="og:url" content="${HOMEURL}" />
       <meta property="og:description" content="${ SettingsData.getSite_description() }" />
       <base href="${APPURL }/"/>
-      <link rel="shortcut icon" href="./public/admin/media/favicons/favicon.png">
-      <link rel="icon" type="image/png" sizes="192x192" href="./public/admin/media/favicons/favicon-192x192.png">
-      <link rel="apple-touch-icon" sizes="180x180" href="./public/admin/media/favicons/apple-touch-icon-180x180.png">
+      <link rel="icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
+      <link rel="shortcut icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
       <link rel="stylesheet" id="css-main" href="./public/admin/css/oneui.min.css">
       
       <link rel='stylesheet' id='wi-fonts-css' href='https://fonts.googleapis.com/css?family=Libre+Franklin%3A400%2C400italic%2C900%7CTinos%3A400%2C400italic%2C700%7CLora%3A400&#038;display=swap&#038;ver=4.6.7.1' media='all' />
    		
-   		<style>
-		.container { 
-		  height: 50px;
-		  position: relative;
-		}
-		
-		.center {
-		  margin: 0;
-		  position: absolute;
-		  top: 20%;
-		  left: 60%;
-		}
-		</style>
    		
    </head>
    <body>
       <!-- AMIND CATEGORY EDIT -->
-      <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+      <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow remember-theme">
       <!-- SIDEBAR FRAGMENT -->
       <jsp:include page="./fragments/sidebar.fragment.jsp"/>
       <!-- HEADER FRAGMENT -->
@@ -55,7 +41,7 @@
          <div class="content">
             <div class="block block-rounded">
                <div class="block-header block-header-default">
-                  <h3 class="block-title">Thể loại <b style="color:red;"> ${ category.name } </b> </h3>
+                  <h3 class="block-title">Thể loại <b class="text-danger"> ${ category.name } </b> </h3>
                </div>
                <div class="block-content block-content-full">
                
@@ -108,7 +94,7 @@
                      
                       
                       <div class="container">
-						  <div class="center">
+						  <div class="text-center">
 						    	<input type="button" id="btn-edit-category-confirm" data-uid="${ category.id }" class="btn btn-primary" value="Lưu lại">
 						    	<input type="button" id="btn-edit-category-cancel" class="btn btn-danger" value="Hủy bỏ">
 						  </div>
@@ -123,12 +109,12 @@
       <!-- FOOTER FRAGMENT -->
       <jsp:include page="./fragments/footer.fragment.jsp"/>
 </div>
-		<script src="./public/admin/js/oneui.app.min.js"></script>
 		
 		<!-- MY OWN LIBRARY -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+		<script src="./public/admin/js/lib/jquery.min.js"></script>
+		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		
-		<script src="./public/admin/js/category.js"></script>
+		<script src="./public/admin/js/pages/category.js"></script>
   </body>
 </html>

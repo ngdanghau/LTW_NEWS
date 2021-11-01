@@ -147,3 +147,47 @@ TimesWriter.ActionSubmit = function () {
     });
  }
 
+TimesWriter.Validate = function () {
+	$(".post-form").on('submit',function (e){
+		$form = $(this);
+		var title = $form.find("input[name=title]").val(),
+			post_slug = $form.find("input[name=title]").val(),
+			content = $form.find("textarea[name=content]").val(),
+			post_status = $form.find("select[name=post_status]").val(),
+			comment_status = $form.find("select[name=comment_status]").val(),
+			media = $form.find("input[name=media]").val();
+		
+		if(!title){
+			Swal.fire('Oops...', "Tiêu đề không được bỏ trống!", 'warning');
+			e.preventDefault();
+			return false;
+		}
+		if(!post_slug){
+			Swal.fire('Oops...', "Slug bài viết không được bỏ trống!", 'warning');
+			e.preventDefault();
+			return false;
+		}
+		if(!content){
+			Swal.fire('Oops...', "Nội dung bài viết không được bỏ trống!", 'warning');
+			e.preventDefault();
+			return false;
+		}
+		if(!post_status){
+			Swal.fire('Oops...', "Trạng thái bài viết không được bỏ trống!", 'warning');
+			e.preventDefault();
+			return false;
+		}
+		if(!comment_status){
+			Swal.fire('Oops...', "Trạng thái bình luận không được bỏ trống!", 'warning');
+			e.preventDefault();
+			return false;
+		}
+		if(!media){
+			Swal.fire('Oops...', "Ảnh bài không được bỏ trống!", 'warning');
+			e.preventDefault();
+			return false;
+		}
+		return true;
+	});
+ }
+

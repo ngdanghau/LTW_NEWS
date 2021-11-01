@@ -1,19 +1,15 @@
 package admin.controllers;
 
 
-import java.sql.SQLException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.jboss.logging.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.General_Data;
 import models.SettingsData;
-import models.UserSettings;
+import models.SocialData;
 
 @Transactional
 @Controller
@@ -41,25 +37,21 @@ public class SettingsController {
 		Query query = session.createQuery(hql); 
 		query.setParameter("name", name); 
 		try {
-			// lấy text 
-			General_Data json = (General_Data) query.list().get(0);// lấy text {""}
-			// chuyển text -> json
+			General_Data json = (General_Data) query.list().get(0);
 			return mapper.readValue(json.getData(), SettingsData.class);
 		}catch(Exception ex) {
 			return null;
 		}
 	}
 	
-	public UserSettings getSocialData(String name) {
+	public SocialData getSocialData(String name) {
 		Session session = factory.getCurrentSession();
 		String hql = String.format("FROM General_Data WHERE name = :name"); 
 		Query query = session.createQuery(hql); 
 		query.setParameter("name", name); 
 		try {
-			// lấy text 
-			General_Data json = (General_Data) query.list().get(0);// lấy text {""}
-			// chuyển text -> json
-			return mapper.readValue(json.getData(), UserSettings.class);
+			General_Data json = (General_Data) query.list().get(0);
+			return mapper.readValue(json.getData(), SocialData.class);
 		}catch(Exception ex) {
 			return null;
 		}
@@ -98,8 +90,6 @@ public class SettingsController {
 		try {
 			String data = mapper.writeValueAsString(settings);
 			System.out.println("DATA: "+data);
-			if(data=="")
-			throw new Exception("LOI CHUYEN HOA JSON -> STRING");
 			Session session = factory.getCurrentSession();
 			String hql = "UPDATE General_Data gd SET gd.data = :data where gd.name = 'settings'";
 			Query query = session.createQuery(hql); 
@@ -123,7 +113,7 @@ public class SettingsController {
 	@RequestMapping(value="social",method = RequestMethod.GET)
 	public String SocialController(ModelMap model)
 	{
-		UserSettings social = getSocialData("social");
+		SocialData social = getSocialData("social");
 		System.out.println("facebook: "+social.getFacebook());
 		model.addAttribute("social", social);
 		return "admin/settings-social";
@@ -156,9 +146,6 @@ public class SettingsController {
 		social.setWhatsapp(whatsapp);
 		try {
 			String data = mapper.writeValueAsString(social);
-			System.out.println("DATA: "+data);
-			if(data=="")
-			throw new Exception("LOI CHUYEN HOA JSON -> STRING");
 			Session session = factory.getCurrentSession();
 			String hql = "UPDATE General_Data gd SET gd.data = :data where gd.name = 'social'";
 			Query query = session.createQuery(hql); 
@@ -181,8 +168,6 @@ public class SettingsController {
 	@RequestMapping(value="logo",method = RequestMethod.GET)
 	public String LogoController(ModelMap model)
 	{
-		return "admin/404";
-//		
-//		return "admin/settings-logo";
+		return "admin/errors/404";
 	}
 }

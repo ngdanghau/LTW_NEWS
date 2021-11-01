@@ -21,7 +21,6 @@
     <meta property="og:image" content="">
     <link rel="icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
      <link rel="shortcut icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="<c:url value='./public/admin/media/favicons/apple-touch-icon-180x180.png' />">
     													
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" id="css-main" href="<c:url value='./public/admin/css/oneui.min.css' />">
