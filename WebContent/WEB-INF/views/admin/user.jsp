@@ -49,7 +49,7 @@
 			      <h3 class="block-title">${user.firstname } ${ user.lastname }</h3>
 			    </div>
 			    <div class="block-content block-content-full">
-			      <form action="${ADMINURL }/user.htm?userid=${ user.id }" method="POST">			       
+			      <form action="${ADMINURL }/user.htm?userid=${ user.id }" method="POST" class="js-validation">			       
 			         	<c:if test="${successMessage != null && successMessage.trim().length() > 0 }">
 							<div class="alert alert-success alert-dismissible" role="alert">
 					            <p class="mb-0">
@@ -75,7 +75,7 @@
 			            </div>
 			           <div class="mb-4">
 			              <label class="col-sm-2 col-form-label text-right">Email</label>
-			              <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="${ user.email }" required ${ user.email != null ? 'disabled':'' }>
+			              <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="${ user.email }" required ${ user.email != null ? 'disabled':'' }>
 			            </div>
 			            <div class="mb-4">
 			              <label class="col-sm-2 col-form-label text-right">Họ</label>

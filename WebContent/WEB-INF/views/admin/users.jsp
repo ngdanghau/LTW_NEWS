@@ -38,7 +38,7 @@
           Người dùng
         </h1>
       </div>
-     <a  href="${ ADMINURL }/post.htm" class="btn btn-sm btn-primary">
+     <a  href="${ ADMINURL }/user.htm" class="btn btn-sm btn-primary">
                 <i class="fa fa-plus me-1"></i> Người dùng mới
               </a>
     </div>
