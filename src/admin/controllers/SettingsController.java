@@ -1,6 +1,12 @@
 package admin.controllers;
 
 
+import java.awt.Image;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
@@ -168,6 +174,71 @@ public class SettingsController {
 	@RequestMapping(value="logo",method = RequestMethod.GET)
 	public String LogoController(ModelMap model)
 	{
-		return "admin/errors/404";
+		SettingsData settings = getGeneralData("settings");
+		model.addAttribute("settings", settings);
+		return "admin/settings-logo";
+	}
+	
+	@RequestMapping(value="logo",method = RequestMethod.POST)
+	public String SaveLogo(HttpServletRequest request,ModelMap model,@RequestParam("logotype") String logotype, @RequestParam("logomark") String logomark)
+	{
+		
+			if(logotype==null||logotype.isEmpty())
+			{
+				request.getSession().setAttribute("logoerror", "Vui lòng không để trống");
+				return "redirect:/admin/settings/logo.htm";
+			}
+			if(logomark==null||logomark.isEmpty())
+			{
+				request.getSession().setAttribute("logomarkerror", "Vui lòng không để trống");
+				return "redirect:/admin/settings/logo.htm";
+			}
+
+			SettingsData settings = getGeneralData("settings");
+			settings.setLogotype(logotype);
+			settings.setLogomark(logomark);
+			try {
+				String data = mapper.writeValueAsString(settings);
+				System.out.println("DATA: "+data);
+				Session session = factory.getCurrentSession();
+				String hql = "UPDATE General_Data gd SET gd.data = :data where gd.name = 'settings'";
+				Query query = session.createQuery(hql); 
+				query.setParameter("data", data);
+				query.executeUpdate();
+				request.getSession().setAttribute("success","Lưu thành công");
+				return "redirect:/admin/settings/logo.htm";
+				} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				}catch (Exception e)
+				{
+					System.out.println(e);
+					request.getSession().setAttribute("error","Lưu không thành công");
+					
+				}
+			return "redirect:/admin/settings/logo.htm";
+	}
+	
+	public boolean checkImage(String url) // xai khong duoc
+	{
+		Image image;
+		try {
+			image = ImageIO.read(new URL(url));
+			if(image != null){
+		    System.out.println("IMAGE"); 
+		    return true;
+		}else{
+		    System.out.println("NOT IMAGE"); 
+		    return false;
+		}
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
