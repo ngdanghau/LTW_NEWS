@@ -102,10 +102,6 @@
 	              <textarea  class="form-control" id="bio" name="bio" rows="7" placeholder="Nhập bio" >${ user.bio }</textarea>
 	            </div>
 	            <div class="mb-4">
-	              <label class="form-label" for="phone_number">Số điện thoại</label>
-	               <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Nhập Số điện thoại" required="required"  value="${ user.phone_number }" >
-	            </div>
-	            <div class="mb-4">
 	              <label class="form-label" for="example-email-input">Email</label>
 	               <input type="email" class="form-control" id="email" name="email" disabled="disabled" value="${ user.email }" placeholder="Email" required="required" >
 	            </div>

@@ -149,7 +149,6 @@ public class PostActionController {
 		if(errorMessage.size() > 0) {
 			return "redirect:" + url;
 		}
-		request.getSession().setAttribute("successMessage", "Xóa bài viết thành công");
 		return "redirect:"+ url;
 	}
 	
