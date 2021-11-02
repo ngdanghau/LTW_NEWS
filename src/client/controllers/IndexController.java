@@ -1,16 +1,21 @@
 package client.controllers;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,6 +31,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import bean.Mailer;
 import entities.Posts;
+import entities.Subscribers;
 import entities.Widgets;
 import models.WidgetModel;
 
@@ -135,8 +141,32 @@ public class IndexController {
 		if(error.isEmpty()==false) {
 			objectNode.put("msg", error);
 		}else {
-			mailer.send(mailer.from(),email,mailer.ReceiveMessage(), mailer.bodyRM());	
-			objectNode.put("msg", "Thành công. Vui lòng kiểm tra mail");
+			
+			Session session = factory.openSession();
+			Transaction t = session.beginTransaction();
+			Subscribers sub = new Subscribers();
+			sub = sub.createSub(email);
+			
+			try {
+				session.save(sub);
+				t.commit();
+				mailer.send(mailer.from(),email,mailer.ReceiveMessage(), mailer.bodyRM());	
+				objectNode.put("msg", "Thành công. Vui lòng kiểm tra mail");
+				
+			}catch(HibernateException e){
+				t.rollback();
+				objectNode.put("msg", "Email đã đăng ký nhận tin.");
+			}
+			catch(Exception ex)
+			{
+				t.rollback();
+				System.out.println(ex);
+				objectNode.put("msg", "Oops.Có lỗi xảy ra");
+			}
+			finally {
+				session.close();
+			}
+			
 		}
 	
 		return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
