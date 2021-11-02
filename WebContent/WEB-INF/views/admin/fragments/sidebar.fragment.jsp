@@ -170,8 +170,18 @@
                </a>
                <ul class="nav-main-submenu">
                   <li class="nav-main-item">
-                     <a class="nav-main-link" href="be_comp_loaders.html">
-                     <span class="nav-main-link-name">Loaders</span>
+                     <a class="nav-main-link" href="${ ADMINURL }/users.htm">
+                     <span class="nav-main-link-name">Tất cả người dùng</span>
+                     </a>
+                  </li>
+                  <li class="nav-main-item">
+                     <a class="nav-main-link" href="${ ADMINURL }/user.htm">
+                     <span class="nav-main-link-name">Thêm mới</span>
+                     </a>
+                  </li>
+                  <li class="nav-main-item">
+                     <a class="nav-main-link" href="${ ADMINURL }/profile.htm">
+                     <span class="nav-main-link-name">Hồ sơ</span>
                      </a>
                   </li>
                </ul>

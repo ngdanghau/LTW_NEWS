@@ -137,7 +137,6 @@ public class ProfileController {
 		Users user = (Users) request.getAttribute("AuthUser");
 		String firstname = (String) params.get("firstname");
 		String lastname = (String) params.get("lastname");
-		String phone_number = (String) params.get("phone_number");
 		String bio = (String) params.get("bio");
 		
 		
@@ -158,16 +157,9 @@ public class ProfileController {
 			error = true;
 		}
 		
-		if(phone_number == null || phone_number.trim().length() == 0)
-		{
-			errorMessage.add("Không để trống số điện thoại");
-			error = true;
-		}
-		
 		if(!error) {
 			user.setFirstname(firstname);
 			user.setLastname(lastname);
-			user.setPhone_number(phone_number);
 			user.setBio(bio);
 			Session session = factory.openSession();
 			Transaction t =  session.beginTransaction();

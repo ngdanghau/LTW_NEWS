@@ -117,6 +117,7 @@ public class PostController {
 	public String save(HttpServletRequest request, ModelMap model, @RequestParam Map<String, Object> params){	
 		List<String> errorMessage = new ArrayList<String>();
 		Boolean error = false;
+		boolean is_new = false;
 		String title = (String) params.get("title");
 		String post_slug = (String) params.get("post_slug");
 		String post_status = (String) params.get("post_status");
@@ -183,6 +184,10 @@ public class PostController {
 			
 		}
 		
+		if(post.getTitle() == null || post.getTitle().length() == 0) {
+			is_new = true;
+		}
+		
 		if(error == false){
 			Session session = factory.openSession();
 			Transaction t =  session.beginTransaction();
@@ -197,7 +202,7 @@ public class PostController {
 			post.setPost_status(post_status);
 			post.setComment_status(comment_status);
 			
-			if(postId > 0) {
+			if(is_new) {
 				post.setModified_at(new Date());
 				// cập nhật - sửa
 				try{   

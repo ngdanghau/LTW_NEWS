@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Bài viết - ${ SettingsData.getSite_name() }</title>
+    <title>Người dùng - ${ SettingsData.getSite_name() }</title>
     <meta name="description" content="${ SettingsData.getSite_description() }">
       <meta name="author" content="pixelcave">
       <meta name="robots" content="noindex, nofollow">
@@ -35,28 +35,28 @@
     <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
       <div class="flex-grow-1">
         <h1 class="h3 fw-bold mb-0">
-          Bài viết
+          Người dùng
         </h1>
       </div>
-     <a  href="${ ADMINURL }/post.htm" class="btn btn-sm btn-primary">
-                <i class="fa fa-plus me-1"></i> Bài viết mới
+     <a  href="${ ADMINURL }/user.htm" class="btn btn-sm btn-primary">
+                <i class="fa fa-plus me-1"></i> Người dùng mới
               </a>
     </div>
   </div>
 </div>
 <div class="content">
-	<div class="sub mb-3 fs-sm">
+	<div class="sub mb-3 fs-sm">              
 		<c:forEach items="${listSummary}" var="summary">
-			<c:if test="${ summary[0] == 'publish' }">
+			<c:if test="${ summary[0] == 'ADMIN' }">
 			  		<c:choose>
-					    <c:when test="${ param.post_status == null || param.post_status == 'publish' }">
-					    	<a class=" link-fx text-primary-darker" href="${ ADMINURL }/posts.htm?post_status=publish">
-					    		<strong>Xuất bản (${ summary[1] })</strong>
+					    <c:when test="${ param.role == 'admin' }">
+					    	<a class=" link-fx text-primary-darker" href="${ ADMINURL }/users.htm?role=admin">
+					    		<strong>Quản trị viên (${ summary[1] })</strong>
 					  		</a>
 					    </c:when>    
 					    <c:otherwise>
-					    	<a class=" link-fx" href="${ ADMINURL }/posts.htm?post_status=publish">
-					    		 Xuất bản (${ summary[1] })
+					    	<a class=" link-fx" href="${ ADMINURL }/users.htm?role=admin">
+					    		 Quản trị viên (${ summary[1] })
 					  		</a>
 					    </c:otherwise>
 					</c:choose>
@@ -65,16 +65,16 @@
         </c:forEach>
         
         <c:forEach items="${listSummary}" var="summary">
-			<c:if test="${ summary[0] == 'draft' }">
+			<c:if test="${ summary[0] == 'CONTRIBUTOR' }">
 			  		<c:choose>
-					    <c:when test="${ param.post_status == 'draft' }">
-					    	<a class=" link-fx text-primary-darker" href="${ ADMINURL }/posts.htm?post_status=draft">
-					    		<strong>Nháp (${ summary[1] })</strong>
+					    <c:when test="${ param.role == 'contributor' }">
+					    	<a class=" link-fx text-primary-darker" href="${ ADMINURL }/users.htm?role=contributor">
+					    		<strong>Cộng tác viên (${ summary[1] })</strong>
 					  		</a>
 					    </c:when>    
 					    <c:otherwise>
-					    	<a class=" link-fx" href="${ ADMINURL }/posts.htm?post_status=draft">
-					    		 Nháp (${ summary[1] })
+					    	<a class=" link-fx" href="${ ADMINURL }/users.htm?role=contributor">
+					    		 Cộng tác viên (${ summary[1] })
 					  		</a>
 					    </c:otherwise>
 					</c:choose>
@@ -83,16 +83,16 @@
         </c:forEach>
         
         <c:forEach items="${listSummary}" var="summary">
-			<c:if test="${ summary[0] == 'pending' }">
+			<c:if test="${ summary[0] == 'EDITOR' }">
 			  		<c:choose>
-					    <c:when test="${ param.post_status == 'pending' }">
-					    	<a class=" link-fx text-primary-darker" href="${ ADMINURL }/posts.htm?post_status=pending">
-					    		<strong>Chờ duyệt (${ summary[1] })</strong>
+					    <c:when test="${ param.role == 'editor' }">
+					    	<a class=" link-fx text-primary-darker" href="${ ADMINURL }/users.htm?role=editor">
+					    		<strong>Biên tập viên (${ summary[1] })</strong>
 					  		</a>
 					    </c:when>    
 					    <c:otherwise>
-					    	<a class=" link-fx" href="${ ADMINURL }/posts.htm?post_status=pending">
-					    		 Chờ duyệt (${ summary[1] })
+					    	<a class=" link-fx" href="${ ADMINURL }/users.htm?role=editor">
+					    		 Biên tập viên (${ summary[1] })
 					  		</a>
 					    </c:otherwise>
 					</c:choose>
@@ -100,17 +100,35 @@
             </c:if>
         </c:forEach>
         
-        <c:forEach items="${listSummary}" var="summary">
-			<c:if test="${ summary[0] == 'trash' }">
+        <c:forEach items="${listSummaryByActive}" var="summary">
+			<c:if test="${ summary[0] == 'true' }">
 			  		<c:choose>
-					    <c:when test="${ param.post_status == 'trash' }">
-					    	<a class=" link-fx text-primary-darker" href="${ ADMINURL }/posts.htm?post_status=trash">
-					    		<strong>Rác (${ summary[1] })</strong>
+					    <c:when test="${  param.active == 'true' }">
+					    	<a class=" link-fx text-primary-darker" href="${ ADMINURL }/users.htm?active=true">
+					    		<strong>Đang hoạt động (${ summary[1] })</strong>
 					  		</a>
 					    </c:when>    
 					    <c:otherwise>
-					    	<a class=" link-fx" href="${ ADMINURL }/posts.htm?post_status=trash">
-					    		 Rác (${ summary[1] })
+					    	<a class=" link-fx" href="${ ADMINURL }/users.htm?active=true">
+					    		Đang hoạt động (${ summary[1] })
+					  		</a>
+					    </c:otherwise>
+					</c:choose>
+	            |
+            </c:if>
+        </c:forEach>
+        
+        <c:forEach items="${listSummaryByActive}" var="summary">
+			<c:if test="${ summary[0] == 'false' }">
+			  		<c:choose>
+					    <c:when test="${ param.active == 'false' }">
+					    	<a class=" link-fx text-primary-darker" href="${ ADMINURL }/users.htm?active=false">
+					    		<strong>Chặn hoạt động (${ summary[1] })</strong>
+					  		</a>
+					    </c:when>    
+					    <c:otherwise>
+					    	<a class=" link-fx" href="${ ADMINURL }/users.htm?active=false">
+					    		 Chặn hoạt động (${ summary[1] })
 					  		</a>
 					    </c:otherwise>
 					</c:choose>
@@ -122,26 +140,7 @@
     <div class="block-header block-header-default">
       
 		<div class="row">
-			<div class="col-sm-6">
-				<div class="form-group">
-		          <select class="form-select form-select-sm" id="action" name="action" style="width: 120px">
-		          	<option value="-1">Chọn hành động</option>
-		          	<c:choose>
-					    <c:when test="${ param.post_status == 'trash' }">
-					    	<option value="restore">Khôi phục</option>
-					    	<option value="delete">Xóa vĩnh viễn</option>
-					    </c:when>    
-					    <c:otherwise>
-					    	<option value="trash">Cho vào rác</option>
-					    </c:otherwise>
-					</c:choose>
-		          	
-		         </select>
-		        </div>
-			</div>
-			<div class="col-sm-6">
-				<button class="btn btn-sm btn-primary btn-action" data-url="${ADMINURL }/post_bulk.htm" >Thực hiện</button>
-			</div>
+			
 		</div>
       <div class="block-options">
         <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="class-toggle" data-target="#one-search" data-class="d-none">
@@ -178,12 +177,10 @@
                   <input class="form-check-input" type="checkbox" id="check-all" name="check-all">
                 </div>
              </th>
-            <th colspan="2">Tiêu đề</th>
-            <th class="d-none d-md-table-cell text-center" style="width: 100px;">Tác giả</th>
-            <th class="d-none d-md-table-cell text-center" style="width: 100px;">Thể Loại</th>
-            <th class="d-none d-md-table-cell" style="width: 200px;">Ngày</th>
-            <th class="d-none d-md-table-cell" >Nổi bật</th>
-            <th class="d-none d-md-table-cell">Hành động</th>
+            <th colspan="3">Họ và tên</th>
+            <th class="d-none d-md-table-cell" style="width: 100px;">Email</th>
+            <th class="d-none d-md-table-cell" style="width: 250px;">Tình trạng hoạt động</th>
+            <th class="d-none d-md-table-cell text-center">Hành động</th>
           </tr>
         </thead>
         <tfoot class="border-bottom">
@@ -193,67 +190,71 @@
                   <input class="form-check-input" type="checkbox" id="check-all" name="check-all">
                 </div>
              </th>
-            <th colspan="2">Tiêu đề</th>
-            <th class="d-none d-md-table-cell text-center" style="width: 100px;">Tác giả</th>
-            <th class="d-none d-md-table-cell text-center" style="width: 100px;">Thể Loại</th>
-            <th class="d-none d-md-table-cell" style="width: 200px;">Ngày</th>
-            <th class="d-none d-md-table-cell" >Nổi bật</th>
-            <th class="d-none d-md-table-cell">Hành động</th>
+            <th colspan="3">Họ và tên</th>
+            <th class="d-none d-md-table-cell" style="width: 100px;">Email</th>
+            <th class="d-none d-md-table-cell" style="width: 250px;">Tình trạng hoạt động</th>
+            <th class="d-none d-md-table-cell text-center">Hành động</th>
           </tr>
         </tfoot>
         <tbody>
         	<jsp:useBean id="pagedListHolder" scope="request" type="org.springframework.beans.support.PagedListHolder"/>
-			<c:url value="${ ADMINURL }/posts.htm?search=${ param.search }&user_id=${ param.user_id }&cat_id=${ param.cat_id }&post_status=${ param.post_status != null ? param.post_status : 'publish' }" var="pagedLink">
+			<c:url value="${ ADMINURL }/users.htm?search=${ param.search }&user_id=${ param.user_id }&cat_id=${ param.cat_id }&post_status=${ param.post_status != null ? param.post_status : 'publish' }" var="pagedLink">
 				<c:param name="p" value="~" />
 			</c:url>
-			<c:forEach var="post" items="${ pagedListHolder.pageList }" begin="0" > 			
+			<c:forEach var="user" items="${ pagedListHolder.pageList }" begin="0" > 			
 	          <tr>
+	          
 	            <td class="text-center" style="width: 40px;">
 	              <div class="form-check">
-	                  <input class="form-check-input" type="checkbox" value="${ post.id }" id="items[]" name="items[]">
+	                  <input class="form-check-input" type="checkbox" value="${ user.id }" id="items[]" name="items[]">
 	                </div>
 	            </td>
-	            <td colspan="2">
-	            	<c:choose>
-					    <c:when test="${ post.post_status == 'trash' }">
-					    	<span class="fw-semibold">${ post.title }</span>
-					    </c:when>    
-					    <c:otherwise>
-					        <a class="fw-semibold" href="${ ADMINURL }/post.htm?postid=${ post.id }">${ post.title }</a>
-					    </c:otherwise>
-					</c:choose>
-	            </td>
-	            <td class="d-none d-md-table-cell text-center">
-					<a class="fw-semibold" href="${ADMINURL }/posts.htm?user_id=${ post.user.id }">${ post.user.username }</a>
-	            </td>
-	            <td class="d-none d-md-table-cell text-center">
-	              <a class="fw-semibold" href="${ADMINURL }/posts.htm?cat_id=${ post.category.id }">${ post.category.name }</a>
+	            <td colspan="3">
+	              
+	               <a class="d-flex py-2" href="${ ADMINURL }/user.htm?userid=${user.id}">
+	                  <div class="flex-shrink-0 me-3 ms-2 overlay-container overlay-bottom">
+	                    <img class="img-avatar img-avatar48" src="${ user.avatar == null || user.avatar.length() == 0 ? './public/admin/media/avatars/no-avatar.png' : user.avatar }" alt="">
+	                  </div>
+	                  <div class="flex-grow-1">
+	                    <div class="fw-semibold"> ${ user.username  }</div>
+	                    <div class="fw-normal text-muted">${ user.account_type  }</div>
+	                  </div>
+	                </a>
 	            </td>
 	            <td class="d-none d-md-table-cell">
-	              <span class="fs-sm"> ${ post.post_status } <br> ${ dateFormatPost.format(post.modified_at) }</span>
+	               <a class="fw-semibold" href="mailto:${ user.email  }">${ user.email  }</a>
+	               <p class="fs-sm fw-medium text-muted mb-0">${ user.firstname } ${ user.lastname }</p>
 	            </td>
 	            <td class="d-none d-md-table-cell">
-	            	<c:choose>
-					    <c:when test="${ post.featured == 'true' }">
-					    	<a class="btn-featured" href="javascript:void(0)" data-url="${ADMINURL }/post_featured.htm" data-id="${ post.id }">
-			            		<i class="fa fa-star text-warning"></i>
-			            	</a>
+	               <c:choose>
+					    <c:when test="${ user.is_active == 'true' }">
+					    	<span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">Active</span>
 					    </c:when>    
 					    <c:otherwise>
-					        <a class="btn-featured" href="javascript:void(0)"  data-url="${ADMINURL }/post_featured.htm" data-id="${ post.id }">
-			            		<i class="far fa-star"></i>
-			            	</a>
+					        <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">Suspend</span>
 					    </c:otherwise>
 					</c:choose>
 	            </td>
 	            <td class="text-center">
-                  <a class="btn btn-sm btn-alt-secondary" href="${APPURL }/article/${post.id}/${post.post_slug}.htm" target="_blank" data-bs-toggle="tooltip" title="View">
+                  <a class="btn btn-sm btn-alt-secondary" href="${APPURL }/author/${user.username}.htm" target="_blank" data-bs-toggle="tooltip" title="View">
                     <i class="fa fa-fw fa-eye"></i>
                   </a>
                   
-                  <a class="btn btn-sm btn-alt-secondary" href="${ADMINURL }/${ post.post_status == 'trash' ? 'post_delete' : 'post_trash' }.htm?postid=${post.id}&next=${dataUrl}" data-bs-toggle="tooltip" title="Delete">
-                    <i class="fa fa-fw fa-times"></i>
-                  </a>
+                   <c:choose>
+					    <c:when test="${ user.is_active == 'true' }">
+					    	 <a class="btn btn-sm btn-alt-danger" href="${ADMINURL }/user_active.htm?userid=${user.id}&next=${dataUrl}&active=false" data-bs-toggle="tooltip" title="Delete">
+			                    <i class="fa fa-fw fa-times"></i>
+			                  </a>
+					    </c:when>    
+					    <c:otherwise>
+					         <a class="btn btn-sm btn-alt-success" href="${ADMINURL }/user_active.htm?userid=${user.id}&next=${dataUrl}&active=true" data-bs-toggle="tooltip" title="Active">
+			                    <i class="fa fa-fw fa-check"></i>
+			                  </a>
+					    </c:otherwise>
+					</c:choose>
+					<a class="btn btn-sm btn-alt-primary" href="${ADMINURL }/user_recovery.htm?userid=${user.id}&next=${dataUrl}" data-bs-toggle="tooltip" title="Lấy lại mật khẩu">
+			            <i class="fa fa-fw fa-undo"></i>
+			        </a>
                 </td>
 	          </tr>
           </c:forEach>
@@ -275,13 +276,11 @@
 		<script src="./public/admin/js/lib/jquery.min.js"></script>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
-		<script src="./public/admin/js/pages/post.js"></script>
+		<script src="./public/admin/js/pages/user.js"></script>
 		<script>
 			$( document ).ready(function() {
 				
 				TimesWriter.CheckAll();
-				TimesWriter.Featured();
-				TimesWriter.ActionSubmit();
 				
 			});
 		</script>

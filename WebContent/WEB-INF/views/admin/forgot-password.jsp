@@ -80,7 +80,7 @@
             	</c:if>
               <form class="js-validation-reminder" action="${APPURL }/forgot-password.htm" method="POST">
                 <div class="mb-4">
-                  <input type="email" class="form-control form-control-lg form-control-alt py-3" id="email" name="email" placeholder="Email">
+                  <input type="email" class="form-control form-control-lg form-control-alt py-3" id="email" name="email" placeholder="Email" required>
                 </div>
                 <div class="text-center">
                   <button type="submit" class="btn btn-lg btn-alt-primary">
@@ -104,8 +104,6 @@
   </div>
 <script src="./public/admin/js/oneui.app.min.js"></script>
 <script src="./public/admin/js/lib/jquery.min.js"></script>
-<script src="./public/admin/js/plugins/jquery-validation/jquery.validate.min.js"></script>
-<script src="./public/admin/js/pages/op_auth_signin.min.js"></script>
   </body>
 </html>
    
