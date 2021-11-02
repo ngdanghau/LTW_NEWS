@@ -101,7 +101,7 @@
             
             
             <li class="nav-main-item">
-               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="${APPURL }/admin/category.htm">
                		<i class="nav-main-link-icon si si-tag"></i>
                		<span class="nav-main-link-name"> Thể loại </span>
                </a>
@@ -122,7 +122,7 @@
             </li>
             
             <li class="nav-main-item">
-               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="${APPURL }/admin/information-page.htm">
                		<i class="nav-main-link-icon si si-docs"></i>
                		<span class="nav-main-link-name"> Trang thông tin </span>
                </a>
@@ -143,7 +143,7 @@
             </li>
             
             <li class="nav-main-item">
-               <a class="nav-main-link" aria-haspopup="true" aria-expanded="false" href="#">
+               <a class="nav-main-link" aria-haspopup="true" aria-expanded="false" href="${APPURL }/admin/comment.htm">
                		<i class="nav-main-link-icon si si-badge"></i>
                		<span class="nav-main-link-name"> Bình luận </span>
                </a>

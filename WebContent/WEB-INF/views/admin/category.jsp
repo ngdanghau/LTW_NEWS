@@ -9,7 +9,7 @@
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-      <title>Dashboard - ${ SettingsData.getSite_name() }</title>
+      <title>Thể loại - ${ SettingsData.getSite_name() }</title>
       <meta name="description" content="${ SettingsData.getSite_description() }">
       <meta name="author" content="pixelcave">
       <meta name="robots" content="noindex, nofollow">
