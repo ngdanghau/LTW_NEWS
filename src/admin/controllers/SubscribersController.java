@@ -4,11 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import entities.Users;
+import entities.Subscribers;
 
 
 @Transactional
@@ -43,30 +40,24 @@ public class SubscribersController {
 	@Autowired
 	ObjectMapper mapper;
 	
-	@SuppressWarnings("unchecked")
-	public List<Object[]> getListSummary(){
-		Session session = factory.getCurrentSession();
-		String hql = "SELECT u.account_type, COUNT(u.id) FROM Users u GROUP BY u.account_type"; 
-		Query query = session.createQuery(hql); 
-		return query.list();
-	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getListSummaryByActive(){
 		Session session = factory.getCurrentSession();
-		String hql = "SELECT u.is_active, COUNT(u.id) FROM Users u GROUP BY u.is_active"; 
+		String hql = "SELECT s.is_active, COUNT(s.id) FROM Subscribers s GROUP BY s.is_active"; 
 		Query query = session.createQuery(hql); 
 		return query.list();
 	}
 	
+	
 	@SuppressWarnings("unchecked")
-	public Users getUserById(int userid){
+	public Subscribers getSubscriberByEmail(String email){
 		Session session = factory.getCurrentSession();
-		String hql = "SELECT u FROM Users u WHERE u.id = :userid"; 
+		String hql = "SELECT s FROM Subscribers s WHERE s.email = :email"; 
 		Query query = session.createQuery(hql); 
-		query.setParameter("userid", userid);
+		query.setParameter("email", email);
 		
-		List<Users> list = query.list();
+		List<Subscribers> list = query.list();
 		
 		try 
 		{
@@ -77,34 +68,25 @@ public class SubscribersController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Users> getUsers(String keyword, String role, String active){
+	public List<Subscribers> getSubscribers(String keyword, String active){
 		Session session = factory.getCurrentSession();
-		String hql = "SELECT u FROM Users u WHERE u.username LIKE :keyword"; 
-		
-		if(role != null && role.length() > 0 ) {
-			if(role.contains("all")) {
-				hql += " AND u.account_type != :role";
-			}else {
-				hql += " AND u.account_type = :role";
-			}
-		}
+		String hql = "SELECT s FROM Subscribers s WHERE s.email LIKE :keyword"; 
 		
 		if(active != null && active.length() > 0) {
-			hql += " AND u.is_active = :active";
+			hql += " AND s.is_active = :active";
 		}
 		
 		
-		hql += " ORDER BY u.id DESC";
+		hql += " ORDER BY s.id DESC";
 		Query query = session.createQuery(hql); 
 		query.setParameter("keyword", "%"+keyword+"%");
-		query.setParameter("role", role);
 		query.setParameter("active", Boolean.parseBoolean(active));
 		try 
 		{
 			return query.list();
 		}catch(Exception ex) {
 			ex.printStackTrace();
-			return new ArrayList<Users>();
+			return new ArrayList<Subscribers>();
 		}
 	}
 	
@@ -120,14 +102,12 @@ public class SubscribersController {
 		}
 		String search = request.getParameter("search");
 		if(search == null) search = "";
-		
-		String role = request.getParameter("role");
-		if(role == null) role = "all";
+
 		
 		String active = request.getParameter("active");
 		if(active == null) active = "true";
 
-		List<Users> posts = getUsers(search, role, active);
+		List<Subscribers> posts = getSubscribers(search, active);
 		PagedListHolder pagedlistHolder = new PagedListHolder(posts);
 		int page = ServletRequestUtils.getIntParameter(request, "p", 0);
 		pagedlistHolder.setPage(page);
@@ -137,30 +117,22 @@ public class SubscribersController {
 		
 		// lấy tóm tắt 
 		String url = request.getRequestURL().toString() + "?" + (request.getQueryString() == null ? "role=all" : request.getQueryString().toString());
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa", new Locale("vi", "VN"));
-		model.addAttribute("dateFormatPost", dateFormat);
 		model.addAttribute("pagedListHolder", pagedlistHolder);
 		model.addAttribute("successMessage", successMessage);
 		model.addAttribute("errorMessage", errorMessage);
-		model.addAttribute("listSummary", getListSummary());
 		model.addAttribute("listSummaryByActive", getListSummaryByActive());
 		model.addAttribute("dataUrl", URLEncoder.encode(url, StandardCharsets.UTF_8.toString()));
-		return "admin/users";
+		return "admin/subscribers";
 	}
 	
 	
-	@RequestMapping( value="user_active", method = RequestMethod.GET)
+	@RequestMapping( value="email_active", method = RequestMethod.GET)
 	public String active(HttpServletRequest request, @RequestParam Map<String, Object> params) throws UnsupportedEncodingException {	
 		String url = request.getParameter("next");
-		if(url == null) url = "/admin/posts.htm";
+		if(url == null) url = "/admin/subscribers.htm";
 		else url = URLDecoder.decode(url, "UTF-8");
 		
-		int userId = 0;
-		try {
-			userId = Integer.parseInt(request.getParameter("userid"));
-		}catch(Exception ex) {
-			userId = 0;
-		}
+		String email = request.getParameter("email");
 		
 		boolean is_active = false;
 		try {
@@ -171,22 +143,22 @@ public class SubscribersController {
 		
 		
 		List<String> errorMessage = new ArrayList<String>();
-		Users user = getUserById(userId);
-		if(user == null) {
-			errorMessage.add("Người dùng không tồn tại !");
+		Subscribers subscriber = getSubscriberByEmail(email);
+		if(subscriber == null) {
+			errorMessage.add("Email không tồn tại !");
 		}else {
 			Session session = factory.openSession();
 			Transaction t =  session.beginTransaction();
 			try{   
-				user.setIs_active(is_active);
-				session.update(user);
+				subscriber.setIs_active(is_active);
+				session.update(subscriber);
 				t.commit();
-				request.getSession().setAttribute("successMessage", "Set người dùng thành công");
+				request.getSession().setAttribute("successMessage", "Set email thành công");
 			}
 			catch(Exception e){
 				e.printStackTrace();
 				t.rollback();
-				errorMessage.add("Set người dùng thất bại !");
+				errorMessage.add("Set email thất bại !");
 			}
 			finally{
 				session.close();
@@ -194,57 +166,7 @@ public class SubscribersController {
 		}
 		
 		if(errorMessage.size() > 0) {
-			return "redirect:/admin/user.htm?userid=" + userId;
-		}
-		return "redirect:"+ url;
-	}
-	
-	@RequestMapping( value="user_recovery", method = RequestMethod.GET)
-	public String recovery(HttpServletRequest request, @RequestParam Map<String, Object> params) throws UnsupportedEncodingException {	
-		String url = request.getParameter("next");
-		if(url == null) url = "/admin/posts.htm";
-		else url = URLDecoder.decode(url, "UTF-8");
-		
-		int userId = 0;
-		try {
-			userId = Integer.parseInt(request.getParameter("userid"));
-		}catch(Exception ex) {
-			userId = 0;
-		}
-		
-		boolean is_active = false;
-		try {
-			is_active = Boolean.parseBoolean(request.getParameter("active"));
-		}catch(Exception ex) {
-			is_active = false;
-		}
-		
-		
-		List<String> errorMessage = new ArrayList<String>();
-		Users user = getUserById(userId);
-		if(user == null) {
-			errorMessage.add("Người dùng không tồn tại !");
-		}else {
-			Session session = factory.openSession();
-			Transaction t =  session.beginTransaction();
-			try{   
-				user.setIs_active(is_active);
-				session.update(user);
-				t.commit();
-				request.getSession().setAttribute("successMessage", "Gửi mail khôi phục thành công");
-			}
-			catch(Exception e){
-				e.printStackTrace();
-				t.rollback();
-				errorMessage.add("Gửi mail khôi phục thất bại !");
-			}
-			finally{
-				session.close();
-			}
-		}
-		
-		if(errorMessage.size() > 0) {
-			return "redirect:/admin/user.htm?userid=" + userId;
+			return "redirect:/admin/subscribers.htm";
 		}
 		return "redirect:"+ url;
 	}

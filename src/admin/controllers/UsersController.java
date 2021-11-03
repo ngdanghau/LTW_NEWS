@@ -5,11 +5,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -144,8 +141,6 @@ public class UsersController {
 		
 		// lấy tóm tắt 
 		String url = request.getRequestURL().toString() + "?" + (request.getQueryString() == null ? "role=all" : request.getQueryString().toString());
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa", new Locale("vi", "VN"));
-		model.addAttribute("dateFormatPost", dateFormat);
 		model.addAttribute("pagedListHolder", pagedlistHolder);
 		model.addAttribute("successMessage", successMessage);
 		model.addAttribute("errorMessage", errorMessage);
@@ -201,7 +196,7 @@ public class UsersController {
 		}
 		
 		if(errorMessage.size() > 0) {
-			return "redirect:/admin/user.htm?userid=" + userId;
+			return "redirect:/admin/users.htm";
 		}
 		return "redirect:"+ url;
 	}
@@ -248,7 +243,7 @@ public class UsersController {
 		}
 		
 		if(errorMessage.size() > 0) {
-			return "redirect:/admin/user.htm?userid=" + userId;
+			return "redirect:/admin/users.htm";
 		}
 		return "redirect:"+ url;
 	}
