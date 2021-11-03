@@ -165,7 +165,7 @@
             
             <li class="nav-main-item">
                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-               <i class="nav-main-link-icon si si-wrench"></i>
+               <i class="nav-main-link-icon si si-users"></i>
                <span class="nav-main-link-name">Thành viên</span>
                </a>
                <ul class="nav-main-submenu">
@@ -187,6 +187,12 @@
                </ul>
             </li>
             <li class="nav-main-item">
+               <a class="nav-main-link" href="${ ADMINURL }/subscribers.htm">
+               <i class="nav-main-link-icon si si-flag"></i>
+               		<span class="nav-main-link-name">Đăng ký nhận tin</span>
+               </a>
+            </li>
+            <li class="nav-main-item">
                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                <i class="nav-main-link-icon si si-magic-wand"></i>
                		<span class="nav-main-link-name">Giao diện</span>
@@ -198,7 +204,7 @@
                      </a>
                   </li>
                   <li class="nav-main-item">
-                     <a class="nav-main-link" href="be_layout_api.html">
+                     <a class="nav-main-link" href="${ ADMINURL}/menu.htm">
                      <span class="nav-main-link-name">Menu</span>
                      </a>
                   </li>
