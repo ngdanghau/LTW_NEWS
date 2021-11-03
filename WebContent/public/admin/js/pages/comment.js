@@ -1,8 +1,6 @@
 /**
  * 
  */
-let URL = "http://localhost:8080/LTW_NEWS/admin/";
-let CLIENTURL = "http://localhost:8080/LTW_NEWS/";
 
 
 /**************************************************

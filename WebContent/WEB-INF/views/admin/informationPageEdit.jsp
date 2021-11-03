@@ -141,7 +141,9 @@
 		<script src="./public/admin/js/lib/jquery.min.js"></script>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		
+		<script>
+      		let URL = "${APPURL}";
+      	</script>
 		<script src="./public/admin/js/pages/informationPage.js"></script>
 		
 		<script src="./public/vendor/ckeditor/ckeditor.js"></script>

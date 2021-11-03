@@ -219,6 +219,10 @@
       <script src="./public/admin/js/lib/jquery.min.js"></script>
       <script src="./public/admin/js/oneui.app.min.js"></script>
       <script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+      <script>
+      	let URL = "${ADMINURL}";
+		let CLIENTURL = "${APPURL}";
+      </script>
       <script src="./public/admin/js/pages/comment.js"></script>
    </body>
 </html>

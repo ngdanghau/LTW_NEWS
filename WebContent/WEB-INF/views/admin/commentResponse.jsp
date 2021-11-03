@@ -193,22 +193,10 @@
       <script src="./public/admin/js/lib/jquery.min.js"></script>
       <script src="./public/admin/js/oneui.app.min.js"></script>
       <script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+      <script>
+      	let URL = "${ADMINURL}";
+		let CLIENTURL = "${APPURL}";
+      </script>
       <script src="./public/admin/js/pages/comment.js"></script>
-      <script src="./public/vendor/ckeditor/ckeditor.js"></script>
-      <script src="./public/vendor/ckfinder/ckfinder.js"></script>
-      <!-- <script>
-         $( document ).ready(function() {
-             // khoi tao ckeditor va ckfinder
-         	var editor = CKEDITOR.replace('content');
-         	editor.config.height = '500px';
-         	CKFinder.setupCKEditor( editor, '${APPURL}/public/vendor/ckfinder/' );
-         	
-         	
-         	TimesWriter.Thumbnail();
-         	TimesWriter.SlugUrl();
-             
-         	
-         });
-         </script> -->
    </body>
 </html>
