@@ -342,6 +342,7 @@ let ajaxTrashComment = (id) =>{
 				
 				/*Step 2b */
 				$(".commentcontent").find(`.btn-group[data-uid=${id}] button`).remove();
+				$(".commentcontent").find(`.btn-group[data-uid=${id}] a`).remove();
 				$(".commentcontent")
 				.find(`.btn-group[data-uid=${id}]`)
 				.append(`<button type="button" data-uid=${ id } class="btn-option btn-restore-comment btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" >
@@ -379,6 +380,7 @@ let ajaxTrashComment = (id) =>{
 }
 
 
+
 /**************************************************
  * @author Phong
  * @return nut phan hoi binh luan cua comment
@@ -387,8 +389,8 @@ let responseComment = () =>{
 	/* HIEN FORM TRA LOI PHAN HOI VA TAM AN DI BANG COMMENT */
 	$(".btn-response-comment").unbind("click").on("click", function(){
 		/*lay ra id cua comment can tra loi */
-		let id = $(".btn-response-comment").data("uid");
-		
+		let id = $(".btn-response-comment").parent().data("uid");
+		console.log("IP NHAN DUOC : " + id);
 		
 	    $(`.center[data-uid=${id}]`).show();
 	    $(".table").hide();
@@ -406,24 +408,151 @@ let responseComment = () =>{
 }
 
 
-let confirmResponseComment = ()=>{
+
+/**************************************************
+ * @author Phong
+ * @return xu ly nut luu lai trong form phan hoi binh luan
+ **************************************************/
+let confirmResponseComment = ()=> {
 	$(".btn-confirm-response-comment").unbind("click").on("click", function(){
 		
 		let id = $(this).data("uid");
 		let content = $("#content").val();
+		
+		$.ajax({
+			type: "POST",
+			url: `${URL}response-comment.htm`,
+			data: { id: id, content: content},
+			success: function(data){
+				if( data == "success")
+				{
+					Swal.fire('Hoàn tất!','Thao tác thành công','success').then( (result)=>{
+				            if (result.isConfirmed) 
+							{
+							  /* Nhan OK -> Dieu huong ve admin/comment.htm */
+					  		  window.location.href = `${URL}comment.htm`;
+				            }
+					  });
+				}
+				else
+				{
+					Swal.fire(
+				      'Thất bại !',
+				      'Thao tác xảy ra sự cố',
+				      'error'
+				    );
+				}
+			}
+		});
+		});
+}
 
-		$.post(`${URL}response-comment-${id}.htm`, { content : content }, function(data){
+
+
+/**************************************************
+ * @author Phong
+ * @return huy phan hoi comment
+ **************************************************/
+let cancelResponseComment = () =>{
+	$(".btn-cancel-response-comment").unbind("click").on("click", function(){
+		/*Step 1 */
+		Swal.fire({
+            title: 'Bạn có chắc chắn muốn hủy không ?',
+            text: "Bạn không thể khôi phục hành động này!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Có',
+            cancelButtonText: 'Không'
+          }).then((result) => {
+	
+            /*Step 2*/
+            if (result.isConfirmed) {
+			
+			  /* Nhan OK -> Dieu huong ve admin/comment.htm */
+			  window.location.href = `${URL}comment.htm`;
+				
+            }
+          })
+	})
+}
+
+
+
+/**************************************************
+ * @author Phong
+ * @return xu ly nut chap thuan, chuyen trang thai tu pending len approved
+ **************************************************/
+let approveComment = () =>{
+	$(".btn-approve-comment").unbind("click").on("click", function(){
+		
+		let id = $(this).data("uid");
+		
+		/*Step 1 */
+		Swal.fire({
+            title: 'Bạn có chắc chắn không ?',
+            text: "Bạn có thể khôi phục hành động này khi kết thúc hành động này!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Có',
+            cancelButtonText: 'Không'
+          }).then((result) => {
+	
+            /*Step 2*/
+            if (result.isConfirmed) {
+			
+			  ajaxApproveComment(id);
+				
+            }
+          })
+	});
+}
+
+
+
+
+let ajaxApproveComment = (id)=>{
+	$.ajax({
+		type: "GET",
+		url: `${URL}approve-comment.htm`,
+		data: {id : id},
+		success: function(data)
+		{
 			if( data == "success")
 			{
-				Swal.fire(
-                'Hoàn tất!',
-                'Thao tác thành công',
-                'success'
-              );
-
-				$(`.center[data-uid=${id}]`).hide();
-				$(".table").show();
+				Swal.fire('Hoàn tất!','Thao tác thành công','success');
+				
+				/*Step 2a */
+				$(`.text-center[data-uid=${id}]`).find("span:first").replaceWith("<span class='fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success'>approved</span>")
+				
+				/*Step 2b */
+				$(".commentcontent").find(`.btn-group[data-uid=${id}] button`).remove();
+				
+				$(".commentcontent")
+				.find(`.btn-group[data-uid=${id}]`)
+				.append(`<a type="button" href="${URL }/response-comment-${ id }.htm" class="btn-option btn-response-comment btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip">
+                         		Phản hồi
+                         </a>
+                         <button type="button" data-uid=${ id } class="btn-option btn-trash-comment btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip">
+                         		Thùng rác
+                         </button>`);
+				
+				
+				/*Step 3 */
+				let quantityPendingComment = +$("#quantityPendingComment").text();
+				let leftQuantityPendingComment = quantityPendingComment + 1;
+				$("#quantityPendingComment").text(leftQuantityPendingComment);
+				
+				/*Step 4 */
+				let quantityApprovedComment = +$("#quantityApprovedComment").text();
+				let leftQuantityApprovedComment = quantityApprovedComment + 1;
+				$("#quantityApprovedComment").text(leftQuantityApprovedComment);
+				
 			}
+			/*IN THONG BAO NEU THAT BAI */
 			else
 			{
 				Swal.fire(
@@ -432,11 +561,13 @@ let confirmResponseComment = ()=>{
 			      'error'
 			    );
 			}
-		});
+		}
 	})
 }
+
+
 $(document).ready(function(){
-	searchByKeyword();
+	//searchByKeyword();
 	
 	removeComment();
 	
@@ -444,7 +575,11 @@ $(document).ready(function(){
 	
 	trashComment();
 	
-	responseComment();
+	approveComment();
+	
+	//responseComment();
 	
 	confirmResponseComment();
+	
+	cancelResponseComment();
 });

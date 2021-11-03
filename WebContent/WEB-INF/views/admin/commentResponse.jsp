@@ -23,8 +23,29 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
       <link rel="stylesheet" id="css-main" href="./public/admin/css/oneui.min.css">
       <link rel="stylesheet" href="./public/admin/js/plugins/sweetalert2/sweetalert2.min.css">
-      <link rel="stylesheet" href="./public/admin/css/comment.css">
-      
+      <style>
+         .btn-option{
+         display:none;
+         }
+         .commentcontent:hover .btn-option{
+         display:block;
+         transition-duration: 5s;  
+         }
+         center {
+         margin: auto;
+         width: 60%;
+         padding: 20px;
+         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+         }
+         .hideform {
+         display: none;
+         }
+         .divider{
+         width:10px;
+         height:auto;
+         display:inline-block;
+         }
+      </style>
    </head>
    <body>
       <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow remember-theme">
@@ -46,6 +67,7 @@
             </div>
             <div class="content">
                <!-- IN RA TRANG THAI VA SO LUONG BINH LUAN THUOC TRANG THAI DO -->
+               <!-- trang thai tong so -->
                <div class="sub mb-3 fs-sm">
                   <c:if test="${ commentStatusNow == 'all' }">
                      <a class=" link-fx text-primary-darker" href="${ ADMINURL }/comment.htm">
@@ -53,10 +75,10 @@
                   </c:if>
                   <c:if test="${ commentStatusNow != 'all' }">
                   <a class=" link-fx" href="${ ADMINURL }/comment.htm">
-                  			Tổng số(<span id="quantityTotalComment">${ totalComment }</span>)
+                  Tổng số(<span id="quantityTotalComment">${ totalComment }</span>)
                   </a>
                   </c:if>
-                  <!-- CHAP NHAN -->
+                  <!-- trang thai chap thuan -->
                   <c:forEach items="${listStatus}" var="element">
                      <c:if test="${ element[0] == 'approved' }">
                         <c:choose>
@@ -74,7 +96,7 @@
                         |
                      </c:if>
                   </c:forEach>
-                  <!-- CHO DUYET -->
+                  <!-- trang thai cho duyet -->
                   <c:forEach items="${listStatus}" var="element">
                      <c:if test="${ element[0] == 'pending' }">
                         <c:choose>
@@ -85,14 +107,14 @@
                            </c:when>
                            <c:otherwise>
                               <a class=" link-fx" href="${ ADMINURL }/comment.htm?commentStatus=pending">
-                              		Chờ duyệt (<span id="quantityPendingComment">  ${ element[1] } </span>)
+                              Chờ duyệt (<span id="quantityPendingComment">  ${ element[1] } </span>)
                               </a>
                            </c:otherwise>
                         </c:choose>
                         |
                      </c:if>
                   </c:forEach>
-                  <!-- THUNG RAC -->
+                  <!-- trang thai thung rac -->
                   <c:forEach items="${listStatus}" var="element">
                      <c:if test="${ element[0] == 'trash' }">
                         <c:choose>
@@ -103,7 +125,7 @@
                            </c:when>
                            <c:otherwise>
                               <a class=" link-fx" href="${ ADMINURL }/comment.htm?commentStatus=trash">
-                              		Thùng rác (<span id="quantityTrashComment"> ${ element[1] } </span>)
+                              Thùng rác (<span id="quantityTrashComment"> ${ element[1] } </span>)
                               </a>
                            </c:otherwise>
                         </c:choose>
@@ -112,7 +134,7 @@
                </div>
                <div class="block block-rounded">
                   <div class="block-header block-header-default">
-                     <!-- THANH TIM KIEM -->
+                     <!-- thanh tim kiem -->
                      <form action="${APPURL }/admin/search-comment-by-keyword.htm" method="post">
                         <div class="input-group">
                            <button type="submit" class="btn-search-comment btn btn-alt-primary">
@@ -123,87 +145,42 @@
                      </form>
                   </div>
                   <div class="block-content">
-                     <table class="table table-bordered table-striped table-vcenter">
-                        <thead>
-                           <tr>
-                              <!-- <th class="text-center" style="width: 100px;">
-                                 <i class="far fa-user"></i>
-                                 </th> -->
-                              <th style="width: 100px;">Tác giả</th>
-                              <th style="width: 20%">Nội dung</th>
-                              <th style="width: 40%;">Bài viết</th>
-                              <th style="width: 15%;">Ngày</th>
-                              <th class="text-center" style="width: 100px;">Trạng thái</th>
-                           </tr>
-                        </thead>
-                        <tbody id="commentBody">
-                           <!-- PAGINATION - HIEN THI BAI VIET NHUNG CO PHAN TRANG -->
-                           <jsp:useBean id="pagedListHolder" scope="request" type="org.springframework.beans.support.PagedListHolder"/>
-                           <c:url value="/admin/comment.htm" var="pagedLink">
-                              <c:param name="p" value="~" />
-                           </c:url>
-                           <c:forEach items="${pagedListHolder.pageList }" var="element">
-                              <tr data-uid="${element.id }">
-                                
-                                 <td class="fw-semibold fs-sm">
-                                    <a href="${ADMINURL }/comment.htm?commentAuthor=${element.comment_author}">${ element.comment_author }</a>
-                                 </td>
-                                 <td class="fw-semibold fs-sm">
-                                    <!-- noi dung bai viet va cac nut tuy chon -->
-                                    <div class="commentcontent">
-                                       ${ element.comment_content } 
-                                       </br>
-                                       <div class="btn-group" data-uid="${ element.id }">
-                                          <c:if test="${ element.comment_status == 'pending' }">
-                                             <!-- trang thai pending -->
-                                             <button type="button" data-uid=${ element.id } class="btn-option btn-approve-comment btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip">
-                                             		Chấp thuận
-                                             </button>
-                                             <button type="button" data-uid=${ element.id } class="btn-option btn-trash-comment btn-trash-comment btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip">
-                                             		Thùng rác
-                                             </button>
-                                          </c:if>
-                                          <c:if test="${ element.comment_status == 'approved' }">
-                                             <!-- trang thai approved -->
-                                             <a type="button" href="${APPURL }/admin/response-comment-${ element.id }.htm" class="btn-option btn-response-comment btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip">
-                                             		Phản hồi
-                                             </a>
-                                             <button type="button" data-uid=${ element.id } class="btn-option btn-trash-comment btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip">
-                                             		Thùng rác
-                                             </button>
-                                          </c:if>
-                                          <c:if test="${ element.comment_status == 'trash'}">
-                                             <!-- trang thai trash -->
-                                             <button type="button" data-uid=${ element.id } class="btn-option btn-restore-comment btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" >
-                                             		Phục hồi
-                                             </button>
-                                             <button type="button" data-uid=${ element.id } class="btn-option btn-remove-comment btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="">
-                                             		Xoá
-                                             </button>
-                                          </c:if>
-                                       </div>
-                                    </div>
-                                 </td>
-                                 <td class="fs-sm"><a href="${APPURL }/article/${element.post.id }/${element.post.post_slug}.htm">${ element.post.title }</a></em></td>
-                                 <td>
-                                    <format:formatDate value="${element.comment_date }" pattern="dd-MM-yyyy hh:mm aa" />
-                                 </td>
-                                 <td class="text-center" data-uid="${ element.id }">
-                                    <c:if test="${ element.comment_status == 'approved' }">
-                                       <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">${ element.comment_status }</span>
-                                    </c:if>
-                                    <c:if test="${ element.comment_status == 'pending' }">
-                                       <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">${ element.comment_status }</span>
-                                    </c:if>
-                                    <c:if test="${ element.comment_status == 'trash' }">
-                                       <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger">${ element.comment_status }</span>
-                                    </c:if>
-                                 </td>
-                              </tr>
-                           </c:forEach>
-                        </tbody>
-                     </table>
-                     <tg:paging_admin pagedListHolder="${pagedListHolder}" pagedLink="${pagedLink}" />
+                     <tbody id="commentBody">
+                        <!-- form phan hoi binh luan - moi the <tr> deu co 1 form nhu nay -->
+                        <div class="center col-xs-4">
+                           <a class="btn-close-response" style="float: right;" title="Đóng" href="${APPURL }/admin/comment.htm"><i class="fa fa-fw fa-times"></i></a>
+                           <form action="${APPURL }/admin/response-comment-${comment.id}.htm" method="POST">
+                              <div class="form-group">
+                                 <label for="exampleInputEmail1">Bài viết</label>
+                                 <input class="form-control" type="text" placeholder="${ comment.post.title }" readonly>
+                              </div>
+                              <br/>
+                              <a class="col-sm-1 btn btn-warning btn-sm" href="${APPURL }/article/${comment.post.id }/${comment.post.post_slug}.htm" target="_blank">Truy cập</a>
+                              <br/>
+                              <br/>
+                              <div class="form-group">
+                                 <label for="exampleInputEmail1">Người dùng</label>
+                                 <input class="form-control" type="text" placeholder="${ comment.comment_author }" readonly>
+                              </div>
+                              <br/>
+                              <div class="form-group">
+                                 <label for="exampleInputEmail1">Bình luận</label>
+                                 <input class="form-control" type="text" placeholder="${ comment.comment_content }" readonly>
+                              </div>
+                              <br/>
+                              <div class="form-group">
+                                 <label for="exampleInputEmail1">Bình luận của bạn</label>
+                                 <textarea id="content" class="form-control" name="content" rows="10" cols="40"></textarea>
+                              </div>
+                              <br/>
+                              <div class="text-center">
+                                 <input type="button" data-uid="${ comment.id }" class="btn-confirm-response-comment btn btn-primary" value="Lưu lại">
+                                 <div class="divider"></div>
+                                 <input type="button" class="btn-cancel-response-comment btn- btn btn-danger" value="Hủy bỏ">
+                              </div>
+                           </form>
+                        </div>
+                     </tbody>
                   </div>
                </div>
             </div>
@@ -219,7 +196,7 @@
       <script src="./public/admin/js/pages/comment.js"></script>
       <script src="./public/vendor/ckeditor/ckeditor.js"></script>
       <script src="./public/vendor/ckfinder/ckfinder.js"></script>
-      <script>
+      <!-- <script>
          $( document ).ready(function() {
              // khoi tao ckeditor va ckfinder
          	var editor = CKEDITOR.replace('content');
@@ -232,6 +209,6 @@
              
          	
          });
-      </script>
+         </script> -->
    </body>
 </html>

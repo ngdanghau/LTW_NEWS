@@ -114,7 +114,8 @@ public class AdminCommentController {
 		if( keyword.trim().length() > 0)
 		{
 			hql +="WHERE comment_content LIKE '%" + keyword + "%' "
-					+ "OR comment_author LIKE '%" + keyword + "%' ";
+					+ "OR comment_author LIKE '%" + keyword + "%' "
+					+ "OR comment_status LIKE '%" + keyword + "%' ";
 		}
 		if( author.trim().length() > 0)
 		{
@@ -204,21 +205,6 @@ public class AdminCommentController {
 	
 	/**************************************************
 	 * @author Phong
-	 * @return truy van cac comment theo dieu kien la keyword
-	 * do nguoi dung nhap vao
-	 **************************************************/
-	@RequestMapping(value="comment", method = RequestMethod.POST)
-	public @ResponseBody List<Comments> index(HttpServletRequest request)
-	{
-		String keyword = request.getParameter("keyword");
-		List<Comments> list = retrieveComment(keyword, "", "");
-		return list;
-	}
-	
-	
-	
-	/**************************************************
-	 * @author Phong
 	 * Step 1: khai bao bien 
 	 * Step 2: cap nhat nhung comment co comment_parent la ID
 	 * Step 3: xoa comment theo id
@@ -258,6 +244,7 @@ public class AdminCommentController {
 	}
 	
 	
+	
 	/**************************************************
 	 * @author Phong
 	 * @return khoi phuc comment tu trash thanh pending
@@ -269,17 +256,22 @@ public class AdminCommentController {
 		{
 			/*Step 1*/
 			String id = request.getParameter("id");
-			//System.out.println("DU LIEU RESTORE COMMENT NHAN DUOC : " + id);
 			Session session = factory.openSession();
 			Query query = null ;
 			String hql = "";
 			
+			
+			
 			/*Step 2*/
 			hql = "UPDATE Comments SET comment_status = 'pending' WHERE id = " + id;
+			
+			
 			
 			/*Step 3*/
 			query = session.createQuery(hql);
 			query.executeUpdate();
+			
+			
 			
 			/*Step 4*/
 			return "success";
@@ -304,17 +296,19 @@ public class AdminCommentController {
 		{
 			/*Step 1*/
 			String id = request.getParameter("id");
-			//System.out.println("DU LIEU trash COMMENT NHAN DUOC : " + id);
 			Session session = factory.openSession();
 			Query query = null ;
 			String hql = "";
 			
+			
 			/*Step 2*/
 			hql = "UPDATE Comments SET comment_status = 'trash' WHERE id = " + id;
+			
 			
 			/*Step 3*/
 			query = session.createQuery(hql);
 			query.executeUpdate();
+			
 			
 			/*Step 4*/
 			return "success";
@@ -326,6 +320,30 @@ public class AdminCommentController {
 		}
 	}
 	
+	@RequestMapping(value="response-comment-{id}", method = RequestMethod.GET)
+	public String responseComment(HttpServletRequest request, ModelMap modelMap, @PathVariable("id") String id)
+	{
+		Comments comment = retrieveCommentByID(id);
+		
+		/*
+		 * System.out.println("DU LIEU NHAN DUOC " + id);
+		 * System.out.println("DU LIEU TU COMMENT : " + comment.getComment_content());
+		 */
+		/*Step 2*/
+		String commentStatusNow = request.getParameter("commentStatus") == null ? "all" : request.getParameter("commentStatus");
+		long totalComment = retrieveTotalComment();
+		
+		/*Step 3*/
+		List<Object[]> listStatus = retrieveStatus();
+		
+		/*Step 4*/
+		modelMap.addAttribute("commentStatusNow", commentStatusNow);
+		modelMap.addAttribute("totalComment", totalComment);
+		modelMap.addAttribute("listStatus", listStatus);
+		modelMap.addAttribute("comment", comment);
+		return "admin/commentResponse";
+	}
+	
 	
 	
 	/**************************************************
@@ -333,52 +351,137 @@ public class AdminCommentController {
 	 * Step 1: lay ra thong tin ve comment parent va nguoi dung dang nhap
 	 * @return
 	 **************************************************/
-	@RequestMapping(value="response-comment-{id}", method = RequestMethod.POST)
-	public @ResponseBody String trashComment(HttpServletRequest request, @PathVariable("id") String id)
+	@RequestMapping(value="response-comment", method = RequestMethod.POST)
+	public @ResponseBody String responseComment(HttpServletRequest request)
 	{
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try 
 		{
+			
 			/*Step 1*/
+			String id = request.getParameter("id");
 			Comments commentParent = retrieveCommentByID(id);
 			Users user = (Users) request.getAttribute("AuthUser");
 			String content = request.getParameter("content");
 			
-			if( content.length() < 0 || content == "" || id.length() < 0)
-			{
-				return "fail";
+			
+			if( content.length() < 0 || content == "" || id.length() < 0) 
+			{ 
+				return"fail"; 
 			}
+			 
+			
 			
 			/*Step 2*/
-			Comments comment = new Comments();
-			comment.setPost( commentParent.getPost() );
-			comment.setComment_author( user.getUsername() );
-			comment.setComment_author_email( user.getEmail() );
-			comment.setComment_author_ip("14.226.244.132");
-			comment.setComment_date( new Date() );
-			comment.setComment_content( content );
 			
-			String status = ( user.getAccount_type() == "admin" ? "approved" : "pending");
-			comment.setComment_status(status);
-			
-			comment.setComment_agent("Mozilla/5.0 (Linux; Android 9; SM-A530F)");
-			comment.setComment_parent( commentParent.getId() );
-			
-			comment.setUser_id( user.getId() );
+			  Comments comment = new Comments(); 
+			  comment.setPost( commentParent.getPost() ); 
+			  comment.setComment_author( user.getUsername() );
+			  comment.setComment_author_email( user.getEmail() );
+			 
+			  
+			 String IP = request.getHeader("X-FORWARDED-FOR"); 
+			 if (IP == null) IP = request.getRemoteAddr(); 
+			 comment.setComment_author_ip(IP);
+			  
+			  
+			 comment.setComment_date( new Date() ); comment.setComment_content( content );
+			  
+			  
+			 String status = ( user.getAccount_type() == "ADMIN") ? "pending" : "approved";
+			 comment.setComment_status(status);
+			 
+			 
+			 String userAgent = request.getHeader("User-Agent");
+			 comment.setComment_agent(userAgent);
+			 
+			 
+			 comment.setComment_parent( commentParent.getId() ); 
+			 comment.setUser_id(user.getId() );
+			 
 			
 			/*Step 3*/
 			
-			
-			session.save(comment);
+			session.save(comment); 
 			t.commit();
+			 
 			return "success";
 		} 
 		catch (Exception e) 
 		{
 			t.rollback();
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 			return "fail";
 		}
+	}
+	
+	
+	
+	/**************************************************
+	 * @author Phong
+	 * Step 1: khai bao 3 tham so cho retrieveComment() truoc
+	 * Step 2: lay trang thai commentStatus dang xem va tong so luong comment
+	 * Step 3: lay comment theo dieu kien va danh sach trang trai co trong may
+	 * Step 4: do du lieu ra view
+	 * @return tim kiem bang keyword
+	 **************************************************/
+	@RequestMapping(value="search-comment-by-keyword", method=RequestMethod.POST)
+	public String search(HttpServletRequest request,ModelMap modelMap)
+	{
+		/*Step 1*/
+		String keyword = request.getParameter("keyword");
+		String commentAuthor = "";
+		String commentStatus = "";
+		
+		
+		/*Step 2*/
+		String commentStatusNow = request.getParameter("commentStatus") == null ? "all" : request.getParameter("commentStatus");
+		long totalComment = retrieveTotalComment();
+		
+		/*Step 3*/
+		List<Comments> comment = retrieveComment(keyword,commentAuthor, commentStatus);
+		List<Object[]> listStatus = retrieveStatus();
+		
+		
+		/*PAGINATION*/
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		PagedListHolder pagedListHolder = new PagedListHolder(comment);
+		int page = ServletRequestUtils.getIntParameter(request, "p", 0);
+		pagedListHolder.setPage(page);
+		pagedListHolder.setMaxLinkedPages(3);
+		pagedListHolder.setPageSize(7);
+		
+		
+		
+		/*Step 4*/
+		modelMap.addAttribute("commentStatusNow", commentStatusNow);
+		modelMap.addAttribute("totalComment", totalComment);
+		modelMap.addAttribute("pagedListHolder", pagedListHolder);
+		modelMap.addAttribute("listStatus", listStatus);
+		return "admin/comment";
+	}
+	
+	
+	
+	/**************************************************
+	 * @author Phong
+	 * @return chuyen trang thai comment tu pending len approved
+	 **************************************************/
+	@RequestMapping(value="approve-comment", method = RequestMethod.GET)
+	public @ResponseBody String approveComment(HttpServletRequest request)
+	{
+		/*Step 1*/
+		String id = request.getParameter("id");
+		Session session = factory.openSession();
+		
+		/*Step 2*/
+		String hql = "UPDATE Comments SET comment_status = 'approved' WHERE id = " + id;
+		Query query = session.createQuery(hql);
+		
+		/*Step 3*/
+		query.executeUpdate();
+		return "success";
 	}
 }
