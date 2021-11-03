@@ -13,7 +13,7 @@
                      <div class="container">
                         <div class="modal-search-container">
                            <div class="searchform">
-                              <form role="search" method="get" action="${ APPURL }/search" class="form">
+                              <form role="search" method="get" action="${ APPURL }/search.htm" class="form">
                                  <input type="text" name="q" class="s search-field" value="" placeholder="Nhập và enter" />
                                  <button class="submit" role="button" title="Go">
                                  <i class="fa fa-search"></i>
