@@ -49,12 +49,15 @@
                <div class="sub mb-3 fs-sm">
                   <c:if test="${ commentStatusNow == 'all' }">
                      <a class=" link-fx text-primary-darker" href="${ ADMINURL }/comment.htm">
-                        <strong>Tổng số (<span id="quantityTotalComment">${ totalComment }</span>)|</strong>
+                        <strong>Tổng số (<span id="quantityTotalComment">${ totalComment }</span>)</strong>
+                        </a>
+                        |
                   </c:if>
                   <c:if test="${ commentStatusNow != 'all' }">
                   <a class=" link-fx" href="${ ADMINURL }/comment.htm">
-                  			Tổng số(<span id="quantityTotalComment">${ totalComment }</span>)
+                  			Tổng số (<span id="quantityTotalComment">${ totalComment }</span>)
                   </a>
+                  |
                   </c:if>
                   <!-- CHAP NHAN -->
                   <c:forEach items="${listStatus}" var="element">
@@ -159,7 +162,7 @@
                                              <button type="button" data-uid=${ element.id } class="btn-option btn-approve-comment btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip">
                                              		Chấp thuận
                                              </button>
-                                             <button type="button" data-uid=${ element.id } class="btn-option btn-trash-comment btn-trash-comment btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip">
+                                             <button type="button" data-uid=${ element.id } class="btn-option btn-trash-comment btn-trash-comment btn btn-sm btn-alt-danger" data-bs-toggle="tooltip">
                                              		Thùng rác
                                              </button>
                                           </c:if>
@@ -168,7 +171,7 @@
                                              <a type="button" href="${APPURL }/admin/response-comment-${ element.id }.htm" class="btn-option btn-response-comment btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip">
                                              		Phản hồi
                                              </a>
-                                             <button type="button" data-uid=${ element.id } class="btn-option btn-trash-comment btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip">
+                                             <button type="button" data-uid=${ element.id } class="btn-option btn-trash-comment btn btn-sm btn-alt-danger" data-bs-toggle="tooltip">
                                              		Thùng rác
                                              </button>
                                           </c:if>
@@ -177,14 +180,14 @@
                                              <button type="button" data-uid=${ element.id } class="btn-option btn-restore-comment btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" >
                                              		Phục hồi
                                              </button>
-                                             <button type="button" data-uid=${ element.id } class="btn-option btn-remove-comment btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="">
+                                             <button type="button" data-uid=${ element.id } class="btn-option btn-remove-comment btn btn-sm btn-alt-danger" data-bs-toggle="tooltip" title="">
                                              		Xoá
                                              </button>
                                           </c:if>
                                        </div>
                                     </div>
                                  </td>
-                                 <td class="fs-sm"><a href="${APPURL }/article/${element.post.id }/${element.post.post_slug}.htm">${ element.post.title }</a></em></td>
+                                 <td class="fs-sm"><a target="_blank" href="${APPURL }/article/${element.post.id }/${element.post.post_slug}.htm">${ element.post.title }</a></em></td>
                                  <td>
                                     <format:formatDate value="${element.comment_date }" pattern="dd-MM-yyyy hh:mm aa" />
                                  </td>
@@ -217,21 +220,5 @@
       <script src="./public/admin/js/oneui.app.min.js"></script>
       <script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
       <script src="./public/admin/js/pages/comment.js"></script>
-      <script src="./public/vendor/ckeditor/ckeditor.js"></script>
-      <script src="./public/vendor/ckfinder/ckfinder.js"></script>
-      <script>
-         $( document ).ready(function() {
-             // khoi tao ckeditor va ckfinder
-         	var editor = CKEDITOR.replace('content');
-         	editor.config.height = '500px';
-         	CKFinder.setupCKEditor( editor, '${APPURL}/public/vendor/ckfinder/' );
-         	
-         	
-         	TimesWriter.Thumbnail();
-         	TimesWriter.SlugUrl();
-             
-         	
-         });
-      </script>
    </body>
 </html>
