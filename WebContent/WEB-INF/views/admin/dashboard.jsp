@@ -532,7 +532,9 @@
   
 </div>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
+		<script src="./public/admin/js/lib/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
 		<script src="./public/admin/js/pages/be_pages_dashboard.min.js"></script>
+		<script src="./public/admin/js/pages/core.js"></script>
   </body>
 </html>

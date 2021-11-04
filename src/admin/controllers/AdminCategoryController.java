@@ -48,7 +48,7 @@ public class AdminCategoryController {
 	 * @return liet ke tat cac cac the loai
 	 **************************************************/
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping("category")
+	@RequestMapping("categories")
 	public String retrieveCategory(HttpServletRequest request, ModelMap modelMap )
 	{
 		/*Step 1*/

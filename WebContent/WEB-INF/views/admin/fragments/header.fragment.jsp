@@ -38,18 +38,18 @@
           </div>
           <div class="p-2">
             <a class="dropdown-item d-flex align-items-center justify-content-between" href="${ ADMINURL }/profile.htm">
-              <span class="fs-sm fw-medium">Profile</span>
+              <span class="fs-sm fw-medium">Hồ sơ</span>
             </a>
             <c:if test="${ AuthUser.account_type == 'ADMIN' }"> 
 	            <a class="dropdown-item d-flex align-items-center justify-content-between" href="${ ADMINURL }/settings/site.htm">
-	              <span class="fs-sm fw-medium">Settings</span>
+	              <span class="fs-sm fw-medium">Cài đặt</span>
 	            </a>
             </c:if>
           </div>
           <div role="separator" class="dropdown-divider m-0"></div>
           <div class="p-2">
             <a class="dropdown-item d-flex align-items-center justify-content-between" href="${ APPURL }/logout.htm">
-              <span class="fs-sm fw-medium">Log Out</span>
+              <span class="fs-sm fw-medium">Đăng xuất</span>
             </a>
           </div>
         </div>

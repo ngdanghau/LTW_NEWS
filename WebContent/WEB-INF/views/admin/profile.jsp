@@ -217,10 +217,6 @@
 		<script src="./public/admin/js/plugins/jquery-validation/jquery.validate.min.js"></script>
 		<script src="./public/vendor/ckfinder/ckfinder.js"></script>
 		<script src="./public/admin/js/pages/profile.js"></script>
-		<script>
-		
-	
-		
-		</script>
+		<script src="./public/admin/js/pages/core.js"></script>
   </body>
 </html>

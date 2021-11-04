@@ -72,7 +72,7 @@ public class PostController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping( value="post", method = RequestMethod.GET)
+	@RequestMapping( value={"post","post-new"}, method = RequestMethod.GET)
 	public String index(HttpServletRequest request, ModelMap model, HttpSession session){	
 		
 		String successMessage = (String) session.getAttribute("successMessage");
@@ -202,7 +202,7 @@ public class PostController {
 			post.setPost_status(post_status);
 			post.setComment_status(comment_status);
 			
-			if(is_new) {
+			if(!is_new) {
 				post.setModified_at(new Date());
 				// cập nhật - sửa
 				try{   

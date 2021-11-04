@@ -276,6 +276,7 @@
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
 		<script src="./public/admin/js/pages/post.js"></script>
+		<script src="./public/admin/js/pages/core.js"></script>
 		<script>
 			$( document ).ready(function() {
 				

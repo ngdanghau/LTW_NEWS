@@ -148,6 +148,7 @@
 		
 		<script src="./public/vendor/ckeditor/ckeditor.js"></script>
 		<script src="./public/vendor/ckfinder/ckfinder.js"></script>
+		<script src="./public/admin/js/pages/core.js"></script>
 		<script>
 			$( document ).ready(function() {
 			    // khoi tao ckeditor va ckfinder

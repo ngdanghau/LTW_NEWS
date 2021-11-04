@@ -82,5 +82,6 @@
 <script src="<c:url value='./public/admin/js/lib/jquery.min.js' />"></script>
 <script src="<c:url value='./public/admin/js/plugins/jquery-validation/jquery.validate.min.js' />"></script>
 <script  src='./public/admin/js/pages/reset_password.js'charset="UTF-8" ></script>
+<script src="./public/admin/js/pages/core.js"></script>
   </body>
 </html>

@@ -46,6 +46,8 @@
 </div>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="./public/vendor/ckfinder/ckfinder.js"></script>
+		<script src="./public/admin/js/lib/jquery.min.js"></script>
+		<script src="./public/admin/js/pages/core.js"></script>
 		<script>
 		
 		var finder = new CKFinder();

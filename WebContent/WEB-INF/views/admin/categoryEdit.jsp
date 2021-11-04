@@ -11,7 +11,7 @@
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-      <title>Dashboard - ${ SettingsData.getSite_name() }</title>
+      <title>Sửa thể loại - ${ SettingsData.getSite_name() }</title>
       <meta name="description" content="${ SettingsData.getSite_description() }">
       <meta name="author" content="pixelcave">
       <meta name="robots" content="noindex, nofollow">
@@ -114,6 +114,7 @@
 		<script src="./public/admin/js/lib/jquery.min.js"></script>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+		<script src="./public/admin/js/pages/core.js"></script>
 		<script>
       		let URL = "${APPURL}";
       	</script>

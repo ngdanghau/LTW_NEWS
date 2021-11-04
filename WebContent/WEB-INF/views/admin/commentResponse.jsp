@@ -198,5 +198,6 @@
 		let CLIENTURL = "${APPURL}";
       </script>
       <script src="./public/admin/js/pages/comment.js"></script>
+      <script src="./public/admin/js/pages/core.js"></script>
    </body>
 </html>
