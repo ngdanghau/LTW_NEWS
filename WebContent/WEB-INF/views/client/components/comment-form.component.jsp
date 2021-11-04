@@ -27,7 +27,7 @@
                                                          <div class="comment-form-recaptcha">
                                                             <input type="hidden" name="recaptcha" value="1">
                                                             <div class="mb-40 recaptcha">
-                                                               <div class="g-recaptcha" data-sitekey="6Lc8NDEbAAAAAHMseX5cELt00_rVpWnsQXrReuPm"></div>
+                                                               <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
                                                                <div class="recaptcha-error"></div>
                                                             </div>
                                                          </div>
