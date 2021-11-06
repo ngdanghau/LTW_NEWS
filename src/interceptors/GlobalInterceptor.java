@@ -23,7 +23,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.General_Data;
 import entities.Users;
+import lib.Recaptcha;
 import models.SettingsData;
+import models.SocialData;
 
 @Transactional
 public class GlobalInterceptor extends HandlerInterceptorAdapter  {
@@ -75,6 +77,29 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		return result;
 	}
 	
+
+	/**************************************************
+	 * @author Hau
+	 * 
+	 * @return lay du lieu chung
+	 **************************************************/
+	public SocialData getSocialData(String name) {
+		ObjectMapper mapper = new ObjectMapper();
+		Session session = factory.openSession();
+		String hql = String.format("FROM General_Data WHERE name = :name"); 
+		Query query = session.createQuery(hql); 
+		query.setParameter("name", name); 
+		
+		SocialData result = null;
+		try {
+			General_Data json = (General_Data) query.list().get(0);
+			session.close();
+			result = mapper.readValue(json.getData(), SocialData.class);
+		}catch(Exception ex) {
+			result =  null;
+		}
+		return result;
+	}
 	
 	
 	
@@ -85,7 +110,8 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 	 **************************************************/
 	public void setGeneralData(HttpServletRequest request) {
 		request.setAttribute("SettingsData", getGeneralData("settings"));
-		request.setAttribute("SocialData", getGeneralData("social"));
+		request.setAttribute("SocialData", getSocialData("social"));
+		request.setAttribute("Recaptcha", new Recaptcha());
 	}
 	
 	

@@ -17,11 +17,12 @@
     <meta property="og:url" content="${HOMEURL}" />
     <meta property="og:description" content="${ post.excerpt }" />
     <base href="${APPURL}/" />
-    <link rel="shortcut icon" href="./public/admin/media/favicons/favicon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="./public/admin/media/favicons/favicon-192x192.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="./public/admin/media/favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
+      <link rel="shortcut icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" id="css-main" href="./public/admin/css/oneui.min.css">
+  <script src="https://www.google.com/recaptcha/api.js?hl=vi" async defer></script>
+  
 </head>
 <body>
 <div id="page-container">
@@ -68,7 +69,7 @@
           <div class="row g-0 justify-content-center">
             <div class="col-sm-8 col-xl-4">
             
-            		<c:if test="${param.error == 'true'}">
+            		<c:if test="${param.error == 'true' && sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message.length() > 0}">
 			            <div class="alert alert-danger alert-dismissible" role="alert">
 						   <p class="mb-0">
 						              ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
@@ -102,6 +103,14 @@
                 <div class="mb-4">
                   <input type="password" class="form-control form-control-lg form-control-alt py-3" id="password" name="password" placeholder="Mật khẩu">
                 </div>
+                
+                <div class="mb-4">
+					<div class="mb-40 recaptcha">
+						<div class="g-recaptcha" data-sitekey="${ Recaptcha.site_key }"></div>
+						<div class="recaptcha-error"></div>
+					</div>
+				</div>
+               
                 <div class="mb-4">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="" id="remember" name="remember">

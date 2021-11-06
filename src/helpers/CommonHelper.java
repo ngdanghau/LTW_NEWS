@@ -1,6 +1,10 @@
 package helpers;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class CommonHelper {
@@ -32,4 +36,24 @@ public class CommonHelper {
 
 	    return false;
 	}
+	
+	  public static String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException{
+	        StringBuilder result = new StringBuilder();
+	        boolean first = true;
+	        for(Map.Entry<String, String> entry : params.entrySet()){
+	        	if(entry == null)  continue;
+
+	            if (first)
+	                first = false;
+	            else
+	                result.append("&");
+	            
+	            
+	            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+	            result.append("=");
+	            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+	        }
+
+	        return result.toString();
+	    }
 }
