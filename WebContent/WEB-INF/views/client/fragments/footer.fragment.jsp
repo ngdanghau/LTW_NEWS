@@ -40,8 +40,7 @@
             <aside class="widget-area footer-col col-1-2">
                <div class="footer-col-inner">
                   <div id="mc4wp_form_widget-2" class="widget widget_mc4wp_form_widget">
-                     <form id="mc4wp-form-1" class="mc4wp-form mc4wp-form-491" method="post" action="https://timeswriter.xyz">
-                        <input type="hidden" name="action" value="subscribe">
+                     <form id="mc4wp-form-1" class="mc4wp-form mc4wp-form-491" method="POST" action="http://localhost:8080/LTW_NEWS/index.htm">
                         <div class="mc4wp-form-fields">
                            <div class="fox-form-inline-wrapper">
                               <div class="fox-form-inline">

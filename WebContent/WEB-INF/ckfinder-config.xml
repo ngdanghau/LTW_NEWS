@@ -17,7 +17,7 @@
 	Configure the location of uploaded files. See the following article for more details:
 	http://docs.cksource.com/CKFinder_2.x/Developers_Guide/Java/Configuration/baseURL_and_baseDir
 	-->
-	<baseDir>C:\Users\ngdanghau\eclipse-workspace\LTW_NEWS\WebContent\public\uploads\</baseDir>
+	<baseDir>F:\LDK\Present Semester(updated)\laptrinhweb\eclipse-2019-03\workspace\LTW_NEWS\WebContent\public\uploads\</baseDir>
 	<baseURL>http://localhost:8080/LTW_NEWS/public/uploads/</baseURL>
 	<licenseKey>RQRKLRDFXGCE42U8H5JRL2RL18XCMUJK</licenseKey>
 	<licenseName>timeswriter</licenseName>

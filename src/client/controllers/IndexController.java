@@ -1,22 +1,37 @@
 package client.controllers;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import bean.Mailer;
 import entities.Posts;
+import entities.Subscribers;
 import entities.Widgets;
 import models.WidgetModel;
 
@@ -32,13 +47,19 @@ public class IndexController {
 	@Autowired
 	SessionFactory factory;
 	
+	@Autowired
+	ObjectMapper mapper;
+	
+	@Autowired
+	Mailer mailer;
+	
 	@SuppressWarnings("unchecked")
 	public List<Posts> getListPostsByCat(int catId, int limitPost)
 	{
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Posts p WHERE p.category.id = :catId"; 
+		String hql = "FROM Posts p WHERE p.category.id = :catId ORDER BY p.id DESC"; 
 		if(catId == 1) {
-			hql = "FROM Posts p WHERE p.category.id != :catId";
+			hql = "FROM Posts p WHERE p.category.id != :catId AND featured = 'true' ORDER BY p.id DESC";
 		}
 		Query query = session.createQuery(hql); 
 		query.setFirstResult(0);
@@ -99,5 +120,55 @@ public class IndexController {
 		model.addAttribute("pagedListHolder", pagedlistHolder);
 		model.addAttribute("listWidgets", lists);
 		return "index";
+	}
+	
+	@RequestMapping(value = "index", method = RequestMethod.POST)
+	public ResponseEntity<JsonNode> dangKyNhanTin(@RequestParam("email") String email,ModelMap model)
+	{
+		ObjectNode objectNode = mapper.createObjectNode();
+		String error = "";
+		
+		// code ở dây
+		String regex = "^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$";
+		if(email.isEmpty())
+			error="Không được để trống";
+		else if (!email.matches(regex)||email.length()<15) {
+			error="Email không hợp lệ";
+		}
+		
+		
+		
+		if(error.isEmpty()==false) {
+			objectNode.put("msg", error);
+		}else {
+			
+			Session session = factory.openSession();
+			Transaction t = session.beginTransaction();
+			Subscribers sub = new Subscribers();
+			sub = sub.createSub(email);
+			
+			try {
+				session.save(sub);
+				t.commit();
+				mailer.send(mailer.from(),email,mailer.ReceiveMessage(), mailer.bodyRM());	
+				objectNode.put("msg", "Thành công. Vui lòng kiểm tra mail");
+				
+			}catch(HibernateException e){
+				t.rollback();
+				objectNode.put("msg", "Email đã đăng ký nhận tin.");
+			}
+			catch(Exception ex)
+			{
+				t.rollback();
+				System.out.println(ex);
+				objectNode.put("msg", "Oops.Có lỗi xảy ra");
+			}
+			finally {
+				session.close();
+			}
+			
+		}
+	
+		return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
 	}
 }

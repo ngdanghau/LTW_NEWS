@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 
-<base href="${pageContext.servletContext.contextPath}/">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!doctype html>
@@ -19,14 +18,13 @@
     <meta property="og:url" content="${HOMEURL}" />
     <meta property="og:description" content="${ SettingsData.getSite_description() }" />
     <base href="${APPURL }/"/>
-    <link rel="shortcut icon" href="./public/admin/media/favicons/favicon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="./public/admin/media/favicons/favicon-192x192.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="./public/admin/media/favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
+     <link rel="shortcut icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
   	<link rel="stylesheet" id="css-main" href="./public/admin/css/oneui.min.css">
 </head>
 <body>
-<div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+<div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow remember-theme ">
     
   <!-- SIDEBAR FRAGMENT -->
   <jsp:include page="./fragments/sidebar.fragment.jsp"/>

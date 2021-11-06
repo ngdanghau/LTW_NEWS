@@ -1,6 +1,5 @@
 package entities;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -35,9 +34,6 @@ public class Users {
 	@Column(name="SETTINGS")
 	private String settings;
 	
-	@Column(name="PREFERENCES")
-	private String preferences;
-	
 	@Column(name="IS_ACTIVE")
 	private boolean is_active;
 	
@@ -54,9 +50,6 @@ public class Users {
 	
 	@Column(name="AVATAR")
 	private String avatar;
-	
-	@Column(name="PHONE_NUMBER")
-	private String phone_number;
 	
 	@Column(name="VIEWER")
 	private int viewer;
@@ -125,14 +118,6 @@ public class Users {
 		this.lastname = lastname;
 	}
 
-	public String getPreferences() {
-		return preferences;
-	}
-
-	public void setPreferences(String preferences) {
-		this.preferences = preferences;
-	}
-
 	public boolean isIs_active() {
 		return is_active;
 	}
@@ -171,14 +156,6 @@ public class Users {
 
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
-	}
-
-	public String getPhone_number() {
-		return phone_number;
-	}
-
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
 	}
 
 	public int getViewer() {

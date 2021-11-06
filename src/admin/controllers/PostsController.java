@@ -35,7 +35,14 @@ public class PostsController {
 	@Autowired
 	SessionFactory factory;
 		
-	
+	/**
+	 * Lấy danh sách bài viết theo 4 thuộc tính lọc
+	 * @param keyword từ khóa tìm kiếm
+	 * @param user_id
+	 * @param cat_id
+	 * @param post_status
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Posts> getPosts(String keyword, int user_id, int cat_id, String post_status){
 		Session session = factory.getCurrentSession();
@@ -70,6 +77,10 @@ public class PostsController {
 		}
 	}
 	
+	/**
+	 * Lấy tóm tắt tình trạng của bài viết và số bài viết theo tình trạng đó
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getListSummary(){
 		Session session = factory.getCurrentSession();

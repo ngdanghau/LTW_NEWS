@@ -22,7 +22,7 @@ public class Comments {
 	@Column(name="Id")
 	private int id;
 	
-	@ManyToOne( fetch=FetchType.LAZY)
+	@ManyToOne( fetch=FetchType.EAGER)
 	@JoinColumn(name="POST_ID")
 	private Posts post;
 
@@ -141,6 +141,27 @@ public class Comments {
 
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
+	}
+
+	public Comments(int id, Posts post, String comment_author, String comment_author_email, String comment_author_ip,
+			Date comment_date, String comment_content, String comment_status, String comment_agent, int comment_parent,
+			int user_id) {
+		super();
+		this.id = id;
+		this.post = post;
+		this.comment_author = comment_author;
+		this.comment_author_email = comment_author_email;
+		this.comment_author_ip = comment_author_ip;
+		this.comment_date = comment_date;
+		this.comment_content = comment_content;
+		this.comment_status = comment_status;
+		this.comment_agent = comment_agent;
+		this.comment_parent = comment_parent;
+		this.user_id = user_id;
+	}
+
+	public Comments() {
+		super();
 	}
 	
 	

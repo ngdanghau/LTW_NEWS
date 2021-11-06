@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+   pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <%@taglib prefix="tg" tagdir="/WEB-INF/tags" %> --%>
 <!doctype html>
-<html lang="vi">
+<html lang="en">
   <head>
 	 <style>
 	  .error {color:red;}
@@ -22,7 +21,6 @@
     <meta property="og:image" content="">
     <link rel="icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
      <link rel="shortcut icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="<c:url value='./public/admin/media/favicons/apple-touch-icon-180x180.png' />">
     													
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" id="css-main" href="<c:url value='./public/admin/css/oneui.min.css' />">
@@ -50,13 +48,13 @@
               <p class="error">
                 ${message}
               </p>
-              <form class="js-validation-signin" action="${APPURL }/reset-password/${hash}.htm" method="POST">
+              <form class="js-validation-reset" action="${APPURL }/reset-password/${hash}.htm" method="POST">
                 <div class="py-3">
                   <div class="mb-4">
-                    <input type="password" class="form-control form-control-alt form-control-lg" id="login-password" name="password" placeholder="Mật khẩu mới">
+                    <input type="password" class="form-control form-control-alt form-control-lg" id="password" name="password" placeholder="Mật khẩu mới">
                   </div>
                   <div class="mb-4">
-                    <input type="password" class="form-control form-control-alt form-control-lg" id="login-password" name="repeatpassword" placeholder="Nhập lại mật khẩu mới">
+                    <input type="password" class="form-control form-control-alt form-control-lg" id="repeatpassword" name="repeatpassword" placeholder="Nhập lại mật khẩu mới">
                   </div>               
                 </div>
                 <div class="row mb-4">
@@ -79,9 +77,10 @@
 </div>
   </main>
   </div>
+    <c:remove var="message" scope="session" />
 <script src="<c:url value='./public/admin/js/oneui.app.min.js' />"></script>
 <script src="<c:url value='./public/admin/js/lib/jquery.min.js' />"></script>
 <script src="<c:url value='./public/admin/js/plugins/jquery-validation/jquery.validate.min.js' />"></script>
-<script src="<c:url value='./public/admin/js/pages/op_auth_signin.min.js' />"></script>
+<script  src='./public/admin/js/pages/reset_password.js'charset="UTF-8" ></script>
   </body>
 </html>

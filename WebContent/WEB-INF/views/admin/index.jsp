@@ -139,7 +139,7 @@
 <script src="./public/admin/js/oneui.app.min.js"></script>
 <script src="./public/admin/js/lib/jquery.min.js"></script>
 <script src="./public/admin/js/plugins/jquery-validation/jquery.validate.min.js"></script>
-<script src="./public/admin/js/pages/op_auth_signin.min.js"></script>
+<script src="./public/admin/js/pages/signin.min.js"></script>
   </body>
 </html>
    

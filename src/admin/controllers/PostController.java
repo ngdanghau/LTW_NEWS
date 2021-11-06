@@ -27,7 +27,6 @@ import entities.Users;
 import helpers.CommonHelper;
 import models.CategoriesModel;
 
-
 @Transactional
 @Controller
 @RequestMapping("/admin")
@@ -35,21 +34,11 @@ public class PostController {
 	@Autowired
 	SessionFactory factory;
 	
-	public <T> boolean contains(final T[] array, final T v) {
-	    if (v == null) {
-	        for (final T e : array)
-	            if (e == null)
-	                return true;
-	    } 
-	    else {
-	        for (final T e : array)
-	            if (e == v || v.equals(e))
-	                return true;
-	    }
-
-	    return false;
-	}
-	
+	/**
+	 * Lấy thông tin thể loại theo level
+	 * @param parent
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Categories> getCat(int parent){
 		Session session = factory.getCurrentSession();
@@ -60,6 +49,11 @@ public class PostController {
 		return list;
 	}
 	
+	/**
+	 * Lấy 1 bài viết theo id
+	 * @param postid
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public Posts getPostById(int postid){
 		Session session = factory.getCurrentSession();
@@ -123,6 +117,7 @@ public class PostController {
 	public String save(HttpServletRequest request, ModelMap model, @RequestParam Map<String, Object> params){	
 		List<String> errorMessage = new ArrayList<String>();
 		Boolean error = false;
+		boolean is_new = false;
 		String title = (String) params.get("title");
 		String post_slug = (String) params.get("post_slug");
 		String post_status = (String) params.get("post_status");
@@ -163,7 +158,7 @@ public class PostController {
 		if(post_status == null || post_status.trim().length() == 0) {
 			errorMessage.add("Tình trạng bài viết không được bỏ trống!");
 			error = true;
-		}else if(!this.contains(new String[] { "pending", "publish", "draft" }, post_status)) {
+		}else if(!CommonHelper.contains(new String[] { "pending", "publish", "draft" }, post_status)) {
 			errorMessage.add("Tình trạng bài viết không hợp lệ!");
 			error = true;
 		}
@@ -174,10 +169,8 @@ public class PostController {
 		}else {
 			category = getCategory(cat_id);
 			if(category == null) {
-				errorMessage.add("Thể loại không tồn tại!");
-				error = true;
+				category = getCategory("1");
 			}
-			
 		}
 		
 		
@@ -189,6 +182,10 @@ public class PostController {
 			if(post == null ) post = new Posts();
 		}catch(Exception ex) {
 			
+		}
+		
+		if(post.getTitle() == null || post.getTitle().length() == 0) {
+			is_new = true;
 		}
 		
 		if(error == false){
@@ -205,7 +202,7 @@ public class PostController {
 			post.setPost_status(post_status);
 			post.setComment_status(comment_status);
 			
-			if(postId > 0) {
+			if(is_new) {
 				post.setModified_at(new Date());
 				// cập nhật - sửa
 				try{   
@@ -251,7 +248,11 @@ public class PostController {
 		return "redirect:/admin/post.htm?postid=" + post.getId();
 	}
 	
-	
+	/**
+	 * Lấy thông tin thể loại theo bài viết
+	 * @param cat_id
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public Categories getCategory(String cat_id)
 	{
