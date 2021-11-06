@@ -106,7 +106,7 @@
                 
                 <div class="mb-4">
 					<div class="mb-40 recaptcha">
-						<div class="g-recaptcha" data-sitekey="${ Recaptcha.site_key }"></div>
+						<div class="g-recaptcha" data-sitekey="${ Recaptcha.getSiteKey() }"></div>
 						<div class="recaptcha-error"></div>
 					</div>
 				</div>

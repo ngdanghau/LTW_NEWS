@@ -24,8 +24,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Recaptcha {
  
  private String url = "https://www.google.com/recaptcha/api/siteverify";
- public String site_key = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
- public String secret_key = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe";
+ public final String site_key = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
+ public final String secret_key = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe";
  
  public boolean verification(String recaptcha_response) throws MalformedURLException, IOException {
 	 
@@ -69,4 +69,22 @@ public class Recaptcha {
 	
     return true;
  }
+
+	public String getUrl() {
+		return url;
+	}
+	
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	public String getSiteKey() {
+		return site_key;
+	}
+	
+	public String getSecretKey() {
+		return secret_key;
+	}
+	 
+ 
 }

@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.General_Data;
 import entities.Users;
 import lib.Recaptcha;
+import models.IntegrationsData;
 import models.SettingsData;
 import models.SocialData;
 
@@ -101,6 +102,24 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		return result;
 	}
 	
+	public IntegrationsData getIntegrationsData(String name) {
+		ObjectMapper mapper = new ObjectMapper();
+		Session session = factory.openSession();
+		String hql = String.format("FROM General_Data WHERE name = :name"); 
+		Query query = session.createQuery(hql); 
+		query.setParameter("name", name); 
+		
+		IntegrationsData result = null;
+		try {
+			General_Data json = (General_Data) query.list().get(0);
+			session.close();
+			result = mapper.readValue(json.getData(), IntegrationsData.class);
+		}catch(Exception ex) {
+			result =  null;
+		}
+		return result;
+	}
+	
 	
 	
 	/**************************************************
@@ -112,6 +131,7 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		request.setAttribute("SettingsData", getGeneralData("settings"));
 		request.setAttribute("SocialData", getSocialData("social"));
 		request.setAttribute("Recaptcha", new Recaptcha());
+		request.setAttribute("IntegrationsData", getIntegrationsData("integrations")); 
 	}
 	
 	

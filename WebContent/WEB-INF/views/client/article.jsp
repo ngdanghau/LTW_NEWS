@@ -83,9 +83,11 @@
                                              <jsp:include page="./components/share.component.jsp"/>
                                              <jsp:include page="./components/authorbox.component.jsp"/>
                                              
-                                             <jsp:include page="./components/comments.component.jsp"/>
+                                            
                                              
                                              <c:if test="${ post.comment_status }">
+                                             	<c:set var="listComments" value="${listComments}" scope="request"/>
+                                             	<c:set var="post" value="${post}" scope="request"/>
                                              	<jsp:include page="./components/comment-form.component.jsp"/>
                                              </c:if>
                                           </div>
