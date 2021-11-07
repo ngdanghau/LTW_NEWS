@@ -17,7 +17,6 @@
 		|--fonts
 		|--js
 		|--pages
-		|--uploads
 	|--client
 		|--css
 		|--js
@@ -25,6 +24,7 @@
 		+style.css
 		+style.min.css
 	|--images
+	|--uploads
 ****************************************************************/
 
 
