@@ -1,10 +1,12 @@
 package client.controllers;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
