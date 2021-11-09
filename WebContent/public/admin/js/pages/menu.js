@@ -35,9 +35,8 @@ let saveMenuOrder = ()=>{
 		let order = serialize(root);
 		
 		console.log("clicked button");
-		/*console.log(order);
-		console.log("type: " + typeof(order) );*/
-		
+		console.log(order);
+		console.log("type: " + typeof(order) );
 		
 		$.ajax({
 			url: `${URL}save-menu-order.htm`,
@@ -92,7 +91,7 @@ let addMenu = ()=>{
 		let url = $("#url").val();
 		let position;
 		
-		if( getUrlParameter('position') == false )
+		if( getUrlParameter('position') == false || getUrlParameter('position') == 0 )
 		{
 			position = 0;	
 		}
@@ -101,12 +100,13 @@ let addMenu = ()=>{
 			position = 1;
 		}
 		
-		
-		if( !title || !url || !position )
+		if( title.length < 0 || url.length < 0 || position == null )
 		{
 			Swal.fire('Thất bại !','Thao tác xảy ra sự cố','error');
 			return;
 		}
+		
+		
 		
 		$.ajax({
 			url: `${URL}/add-menu.htm`,
@@ -114,13 +114,20 @@ let addMenu = ()=>{
 			data: { title , url, position},
 			success: function(data)
 			{
-				if( data == "success")
+				if( data == "success" )
 				{
-					Swal.fire(
-		                'Hoàn tất!',
-		                'Thao tác thành công',
-		                'success'
-		              );
+					Swal.fire('Hoàn tất!','Thao tác thành công','success').then( (result)=>{
+				            if (result.isConfirmed && position == 0) 
+							{
+							  /* Nhan OK -> Dieu huong ve admin/comment.htm */
+					  		  window.location.href = `${URL}menu.htm`;
+				            }
+							if (result.isConfirmed && position == 1) 
+							{
+							  /* Nhan OK -> Dieu huong ve admin/comment.htm */
+					  		  window.location.href = `${URL}menu.htm?position=1`;
+				            }
+					  });				
 				}
 				/*IN THONG BAO NEU THAT BAI */
 				else
@@ -139,8 +146,45 @@ let addMenu = ()=>{
 
 
 
+let removeMenu = () =>{
+	$(".btn-remove-menu").unbind("click").on("click", function()
+	{
+		let id = $("#removeMenu").val();
+		console.log(id);
+		$.ajax({
+			url: `${URL}remove-menu.htm`,
+			type: "post",
+			data: { id: id},
+			success: function(data)
+			{
+				if( data == "success" )
+				{
+					Swal.fire('Hoàn tất!','Thao tác thành công','success');
+					
+					$("#items").find(`div[data-sortable-id = ${id} ]`).remove();
+					
+					$(`#removeMenu option[value=${id}]`).remove();
+					$("#removeMenu").val($("#removeMenu option:first").val());
+								
+				}
+				/*IN THONG BAO NEU THAT BAI */
+				else
+				{
+					Swal.fire(
+				      'Thất bại !',
+				      'Thao tác xảy ra sự cố',
+				      'error'
+				    );
+				}
+			}
+		});
+	})
+}
+
 $(document).ready(function(){
 	saveMenuOrder();
 	
 	addMenu();
+	
+	removeMenu();
 });
