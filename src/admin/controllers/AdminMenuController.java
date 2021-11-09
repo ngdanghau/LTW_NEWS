@@ -10,8 +10,11 @@ import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Menu;
 import models.MenuModel;
 import models.MenuOrder;
+import models.SettingsData;
 
 @Transactional
 @Controller
@@ -30,6 +34,7 @@ public class AdminMenuController {
 	
 	@Autowired
 	ObjectMapper mapper;
+	
 	
 	
 	/**************************************************
@@ -54,6 +59,21 @@ public class AdminMenuController {
 	
 	
 	
+	public List<Menu> retrieveAllMenu(String position)
+	{
+		/*Step 1*/
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Menu WHERE position = " + position + " ORDER BY order_menu ASC";
+		
+		
+		/*Step 3*/
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Menu> list = query.list();
+		return list;
+	}
+	
+	
 	/**************************************************
 	 * @author Phong
 	 * position = 0 - tuc menu header
@@ -74,7 +94,7 @@ public class AdminMenuController {
 		/*Step 2*/
 		List<Menu> menuParent = retrieveMenu(position,parent);
 		List<MenuModel> listMenuModel = new ArrayList<>();
-		
+		List<Menu> listAllMenuModel = retrieveAllMenu( position);
 		for(Menu element : menuParent)
 		{
 			MenuModel menuModel = new MenuModel();
@@ -90,6 +110,7 @@ public class AdminMenuController {
 		
 		/*Step 3*/
 		modelMap.addAttribute("listMenuModel", listMenuModel);
+		modelMap.addAttribute("listAllMenuModel", listAllMenuModel);
 		modelMap.addAttribute("position", position);
 		return "admin/menu";
 	}
@@ -106,9 +127,8 @@ public class AdminMenuController {
 		{
 			/*Step 1*/
 			Session session = factory.openSession();
-			String hql = "UPDATE Menu SET order_menu = " + orderMenu
-					+ " WHERE id = " + menuID 
-					+ " AND parent = 0";
+			String hql = "UPDATE Menu SET order_menu = " + orderMenu + ", parent = 0"
+					+ " WHERE id = " + menuID;
 			System.out.println(hql);
 			
 			/*Step 2*/
@@ -236,7 +256,7 @@ public class AdminMenuController {
 			}
 			
 			String position = request.getParameter("position");
-			System.out.println("position : " +position);
+			//System.out.println("position : " +position);
 			
 			
 			/*Step 2*/
@@ -265,6 +285,38 @@ public class AdminMenuController {
 			t.rollback();
 			return "fail";
 		}
-		
+	}
+	
+	@RequestMapping(value="remove-menu", method=RequestMethod.POST)
+	public @ResponseBody String removeMenu(HttpServletRequest request)
+	{
+		try 
+		{
+			String id = request.getParameter("id");
+			
+			if( id.length() < 0 || id == null)
+			{
+				return "fail";
+			}
+			
+			Session session = factory.openSession();
+			String hql = "";
+			Query query = null;
+			
+			
+			hql = "UPDATE Menu SET parent = 0 WHERE parent = " +  id;
+			query = session.createQuery(hql);
+			query.executeUpdate();
+			
+			hql = "DELETE Menu Where id = " + id;
+			query = session.createQuery(hql);
+			query.executeUpdate();
+			
+			return "success"; 
+		} 
+		catch (Exception e) 
+		{
+			return "fail";
+		}
 	}
 }

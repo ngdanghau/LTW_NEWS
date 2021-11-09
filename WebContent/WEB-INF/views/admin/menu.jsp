@@ -60,35 +60,54 @@
 				</form>
 		    </div>
 		  </div>
+		  
+		  <div class="block block-rounded">
+		    <div class="block-header block-header-default">
+		      <h3 class="block-title">Xóa menu</h3>
+		    </div>
+		    <div class="block-content">
+			    <form class="widget-form" action="${ ADMINURL }/remove-menu.htm" method="post">
+				   <div class="mb-4">
+				      <select id="removeMenu" class="form-select" >
+			            <c:forEach items="${listAllMenuModel }" var="element">
+			            	<option value="${element.id }">${ element.title }</option>
+			            </c:forEach>
+			          </select>
+				   </div>
+				   
+				   <div class="col-md-6 col-xl-5">
+	                    <button type="button" class="btn-remove-menu btn w-100 btn-primary">
+	                      	Xóa
+	                    </button>
+	               </div>
+				</form>
+		    </div>
+		  </div>
 	</div>
-	<div class="col-xl-6">
+	<div class="col-xl-5">
 	 <form class="js-ajax-form" action="${ ADMINURL }/menu.htm" method="post">
 		
-		<div class="form-floating mb-4">
-	          <select  class="selectMenu form-select" aria-label="Floating label select example">
-	            <option selected value="">Select an option</option>
-	            <option value="${APPURL }/admin/menu.htm">Header</option>
-	            <option value="${APPURL }/admin/menu.htm?position=1">Footer</a></option>
-	          </select>
-	          <label for="example-select-floating">Chọn thanh điều hướng để sắp xếp</label>
-        </div>
+		
 		<div class="block-header block-header-default">
 		      <h3 class="block-title">Sắp xếp</h3>
 		 </div>
 		<div id="items" class="list-group col nested-sortable">
 			<c:forEach var="element" items="${ listMenuModel }">
 				<!-- IN RA MENU CHA -->
-				<div data-sortable-id="${element.menu.id }" class="list-group-item nested-1">${element.menu.title}
-				
+				<div data-sortable-id="${element.menu.id }" data-uid="${ element.menu.id }" class="list-group-item nested-1">${element.menu.title}
 				<!-- IN RA MENU CON -->
-				<c:if test="${ element.children.size() > 0 && element.children != null }">
-						<div class="list-group nested-sortable">
-						<c:forEach var="e" items="${ element.children }">
-							<div data-sortable-id="${e.id }" class="list-group-item nested-2"> ${ e.title }</div>
-						</c:forEach>
-						</div>
-				</c:if> 
-				
+				<div class="list-group nested-sortable">
+					<c:if test="${ element.children.size() > 0 && element.children != null }">
+							<c:forEach var="e" items="${ element.children }">
+								<div data-sortable-id="${e.id }" data-uid="${ element.menu.id }" class="list-group-item nested-2"> 
+									${ e.title }
+									<div class="list-group nested-sortable">
+									
+									</div>
+								</div>
+							</c:forEach>
+					</c:if> 
+				</div>
 				</div>
 			</c:forEach>
 			
@@ -97,6 +116,17 @@
 		 <button type="button" id="btn-save-menu-order" class="btn w-100 btn-primary mt-4">Lưu vị trí</button>
 		 
 		</form>
+	</div>
+	
+	<div class="col-xl-3">
+		<label for="example-select-floating">Chọn thanh điều hướng để sắp xếp</label>
+		<div class="form-floating mb-4">
+	          <select  class="selectMenu form-select" aria-label="Floating label select example">
+	            <option value="${APPURL }/admin/menu.htm">Select an option</option>
+	            <option ${ position == "0" ? 'selected' : '' } value="${APPURL }/admin/menu.htm">Header</option>
+	            <option ${ position == "1" ? 'selected' : '' } value="${APPURL }/admin/menu.htm?position=1">Footer</a></option>
+	          </select>
+        </div>
 	</div>
 </div>
   
@@ -126,7 +156,15 @@
 			// dung vong lap de duyet qua tat ca cac element nay 
 			for (var i = 0; i < nestedSortables.length; i++) {
 				new Sortable(nestedSortables[i], {
-					group: 'nested',
+					group: {
+						name: 'nested',
+						pull: function (to, from) {
+		                    var toLvl = $(to.el).parents('.nested-sortable').length;
+		                    console.log(toLvl);
+		                    if(toLvl > 1) return false;
+		                    return true;
+	                    }
+					},
 					animation: 150,
 					fallbackOnBody: true,
 					swapThreshold: 0.65,
