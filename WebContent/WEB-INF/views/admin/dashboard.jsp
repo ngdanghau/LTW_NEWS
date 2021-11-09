@@ -78,16 +78,16 @@
       <div class="block block-rounded d-flex flex-column h-100 mb-0">
         <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
           <dl class="mb-0">
-            <dt class="fs-3 fw-bold">32</dt>
-            <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Pending Orders</dd>
+            <dt class="fs-3 fw-bold">${count.post }</dt>
+            <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Bài viết</dd>
           </dl>
           <div class="item item-rounded-lg bg-body-light">
             <i class="far fa-gem fs-3 text-primary"></i>
           </div>
         </div>
         <div class="bg-body-light rounded-bottom">
-          <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
-            <span>View all orders</span>
+          <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="${ADMINURL}/posts.htm">
+            <span>Xem tất cả bài viết</span>
             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
           </a>
         </div>
@@ -97,16 +97,16 @@
       <div class="block block-rounded d-flex flex-column h-100 mb-0">
         <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
           <dl class="mb-0">
-            <dt class="fs-3 fw-bold">124</dt>
-            <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">New Customers</dd>
+            <dt class="fs-3 fw-bold">${count.cat }</dt>
+            <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Thể loại</dd>
           </dl>
           <div class="item item-rounded-lg bg-body-light">
             <i class="far fa-user-circle fs-3 text-primary"></i>
           </div>
         </div>
         <div class="bg-body-light rounded-bottom">
-          <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
-            <span>View all customers</span>
+          <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="${ADMINURL}/categories.htm">
+            <span>Xem tất cả thể loại</span>
             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
           </a>
         </div>
@@ -116,16 +116,16 @@
       <div class="block block-rounded d-flex flex-column h-100 mb-0">
         <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
           <dl class="mb-0">
-            <dt class="fs-3 fw-bold">45</dt>
-            <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Messages</dd>
+            <dt class="fs-3 fw-bold">${count.cmt }</dt>
+            <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Bình luận</dd>
           </dl>
           <div class="item item-rounded-lg bg-body-light">
             <i class="far fa-paper-plane fs-3 text-primary"></i>
           </div>
         </div>
         <div class="bg-body-light rounded-bottom">
-          <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
-            <span>View all messages</span>
+          <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="${ADMINURL}/comment.htm">
+            <span>Xem tất cả bình luận</span>
             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
           </a>
         </div>
@@ -135,24 +135,23 @@
       <div class="block block-rounded d-flex flex-column h-100 mb-0">
         <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
           <dl class="mb-0">
-            <dt class="fs-3 fw-bold">4.5%</dt>
-            <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Conversion Rate</dd>
+            <dt class="fs-3 fw-bold">${count.user }</dt>
+            <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Thành viên</dd>
           </dl>
           <div class="item item-rounded-lg bg-body-light">
             <i class="fa fa-chart-bar fs-3 text-primary"></i>
           </div>
         </div>
         <div class="bg-body-light rounded-bottom">
-          <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
-            <span>View statistics</span>
+          <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="${ADMINURL}/users.htm">
+            <span>Xem tất cả thành viên</span>
             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
           </a>
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xl-8 col-xxl-9 d-flex flex-column">
+      <div class="col-xl-12 col-xxl-12 d-flex flex-column">
       <div class="block block-rounded flex-grow-1 d-flex flex-column">
         <div class="block-header block-header-default">
           <h3 class="block-title">Earnings Summary</h3>
@@ -166,7 +165,7 @@
           </div>
         </div>
         <div class="block-content block-content-full flex-grow-1 d-flex align-items-center">
-          <canvas id="js-chartjs-earnings"></canvas>
+          <canvas id="js-chartjs-earnings" width="520" height="259" style="display: block; box-sizing: border-box; height: 287.778px; width: 577.778px;"></canvas>
         </div>
         <div class="block-content bg-body-light">
           <div class="row items-push text-center w-100">
@@ -201,68 +200,8 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-4 col-xxl-3 d-flex flex-column">
-      <div class="row items-push flex-grow-1">
-        <div class="col-md-6 col-xl-12">
-          <div class="block block-rounded d-flex flex-column h-100 mb-0">
-            <div class="block-content flex-grow-1 d-flex justify-content-between">
-              <dl class="mb-0">
-                <dt class="fs-3 fw-bold">570</dt>
-                <dd class="fs-sm fw-medium text-muted mb-0">Total Orders</dd>
-              </dl>
-              <div>
-                <div class="d-inline-block px-2 py-1 rounded-3 fs-xs fw-semibold text-danger bg-danger-light">
-                  <i class="fa fa-caret-down me-1"></i>
-                  2.2%
-                </div>
-              </div>
-            </div>
-            <div class="block-content p-1 text-center overflow-hidden">
-              <canvas id="js-chartjs-total-orders" style="height: 90px;"></canvas>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-xl-12">
-          <div class="block block-rounded d-flex flex-column h-100 mb-0">
-            <div class="block-content flex-grow-1 d-flex justify-content-between">
-              <dl class="mb-0">
-                <dt class="fs-3 fw-bold">$5,234.21</dt>
-                <dd class="fs-sm fw-medium text-muted mb-0">Total Earnings</dd>
-              </dl>
-              <div>
-                <div class="d-inline-block px-2 py-1 rounded-3 fs-xs fw-semibold text-success bg-success-light">
-                  <i class="fa fa-caret-up me-1"></i>
-                  4.2%
-                </div>
-              </div>
-            </div>
-            <div class="block-content p-1 text-center overflow-hidden">
-              <canvas id="js-chartjs-total-earnings" style="height: 90px;"></canvas>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-12">
-          <div class="block block-rounded d-flex flex-column h-100 mb-0">
-            <div class="block-content flex-grow-1 d-flex justify-content-between">
-              <dl class="mb-0">
-                <dt class="fs-3 fw-bold">264</dt>
-                <dd class="fs-sm fw-medium text-muted mb-0">New Customers</dd>
-              </dl>
-              <div>
-                <div class="d-inline-block px-2 py-1 rounded-3 fs-xs fw-semibold text-success bg-success-light">
-                  <i class="fa fa-caret-up me-1"></i>
-                  9.3%
-                </div>
-              </div>
-            </div>
-            <div class="block-content p-1 text-center overflow-hidden">
-              <canvas id="js-chartjs-new-customers" style="height: 90px;"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    
+
 </div>
   </main>
   
