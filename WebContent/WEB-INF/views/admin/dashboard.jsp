@@ -41,34 +41,16 @@
         Dashboard
       </h1>
       <h2 class="h6 fw-medium fw-medium text-muted mb-0">
-        Welcome <a class="fw-semibold" href="be_pages_generic_profile.html">John</a>, everything looks great.
+        Xin chào <a class="fw-semibold" href="${APPURL }/admin/profile.htm">${ AuthUser.firstname } ${ AuthUser.lastname }</a>.
       </h2>
     </div>
     <div class="mt-3 mt-md-0 ms-md-3 space-x-1">
-      <a class="btn btn-sm btn-alt-secondary space-x-1" href="be_pages_generic_profile_edit.html">
-        <i class="fa fa-cogs opacity-50"></i>
-        <span>Settings</span>
-      </a>
-      <div class="dropdown d-inline-block">
-        <button type="button" class="btn btn-sm btn-alt-secondary space-x-1" id="dropdown-analytics-overview" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-fw fa-calendar-alt opacity-50"></i>
-          <span>All time</span>
-          <i class="fa fa-fw fa-angle-down"></i>
-        </button>
-        <div class="dropdown-menu dropdown-menu-end fs-sm" aria-labelledby="dropdown-analytics-overview">
-          <a class="dropdown-item fw-medium" href="javascript:void(0)">Last 30 days</a>
-          <a class="dropdown-item fw-medium" href="javascript:void(0)">Last month</a>
-          <a class="dropdown-item fw-medium" href="javascript:void(0)">Last 3 months</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item fw-medium" href="javascript:void(0)">This year</a>
-          <a class="dropdown-item fw-medium" href="javascript:void(0)">Last Year</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
-            <span>All time</span>
-            <i class="fa fa-check"></i>
-          </a>
-        </div>
-      </div>
+    	<c:if test="${ AuthUser.account_type == 'ADMIN' }">
+    		<a class="btn btn-sm btn-alt-secondary space-x-1" href="${ ADMINURL }/settings/site.htm">
+	        <i class="fa fa-cogs opacity-50"></i>
+	        <span>Settings</span>
+	      </a>
+    	</c:if>
     </div>
   </div>
 </div>
@@ -82,7 +64,7 @@
             <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Bài viết</dd>
           </dl>
           <div class="item item-rounded-lg bg-body-light">
-            <i class="far fa-gem fs-3 text-primary"></i>
+            <i class="far fa-edit fs-3 text-primary"></i>
           </div>
         </div>
         <div class="bg-body-light rounded-bottom">
@@ -101,7 +83,7 @@
             <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Thể loại</dd>
           </dl>
           <div class="item item-rounded-lg bg-body-light">
-            <i class="far fa-user-circle fs-3 text-primary"></i>
+            <i class="fa fa-tags fs-3 text-primary"></i>
           </div>
         </div>
         <div class="bg-body-light rounded-bottom">
@@ -120,7 +102,7 @@
             <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Bình luận</dd>
           </dl>
           <div class="item item-rounded-lg bg-body-light">
-            <i class="far fa-paper-plane fs-3 text-primary"></i>
+            <i class="far fa-comments fs-3 text-primary"></i>
           </div>
         </div>
         <div class="bg-body-light rounded-bottom">
@@ -139,7 +121,7 @@
             <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Thành viên</dd>
           </dl>
           <div class="item item-rounded-lg bg-body-light">
-            <i class="fa fa-chart-bar fs-3 text-primary"></i>
+            <i class="fa fa-user-circle fs-3 text-primary"></i>
           </div>
         </div>
         <div class="bg-body-light rounded-bottom">
@@ -154,49 +136,10 @@
       <div class="col-xl-12 col-xxl-12 d-flex flex-column">
       <div class="block block-rounded flex-grow-1 d-flex flex-column">
         <div class="block-header block-header-default">
-          <h3 class="block-title">Earnings Summary</h3>
-          <div class="block-options">
-            <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
-              <i class="si si-refresh"></i>
-            </button>
-            <button type="button" class="btn-block-option">
-              <i class="si si-settings"></i>
-            </button>
-          </div>
+          <h3 class="block-title">Biểu đồ tuần suất</h3>
         </div>
         <div class="block-content block-content-full flex-grow-1 d-flex align-items-center">
           <canvas id="js-chartjs-earnings" width="520" height="259" style="display: block; box-sizing: border-box; height: 287.778px; width: 577.778px;"></canvas>
-        </div>
-        <div class="block-content bg-body-light">
-          <div class="row items-push text-center w-100">
-            <div class="col-sm-4">
-              <dl class="mb-0">
-                <dt class="fs-3 fw-bold d-inline-flex align-items-center space-x-2">
-                  <i class="fa fa-caret-up fs-base text-success"></i>
-                  <span>2.5%</span>
-                </dt>
-                <dd class="fs-sm fw-medium text-muted mb-0">Customer Growth</dd>
-              </dl>
-            </div>
-            <div class="col-sm-4">
-              <dl class="mb-0">
-                <dt class="fs-3 fw-bold d-inline-flex align-items-center space-x-2">
-                  <i class="fa fa-caret-up fs-base text-success"></i>
-                  <span>3.8%</span>
-                </dt>
-                <dd class="fs-sm fw-medium text-muted mb-0">Page Views</dd>
-              </dl>
-            </div>
-            <div class="col-sm-4">
-              <dl class="mb-0">
-                <dt class="fs-3 fw-bold d-inline-flex align-items-center space-x-2">
-                  <i class="fa fa-caret-down fs-base text-danger"></i>
-                  <span>1.7%</span>
-                </dt>
-                <dd class="fs-sm fw-medium text-muted mb-0">New Products</dd>
-              </dl>
-            </div>
-          </div>
         </div>
       </div>
     </div>

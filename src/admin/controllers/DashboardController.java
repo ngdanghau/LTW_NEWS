@@ -1,8 +1,6 @@
 package admin.controllers;
 
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -48,7 +46,7 @@ public class DashboardController {
 		String hql = String.format("SELECT COUNT(*) FROM %s ", name); 
 		Query query = session.createQuery(hql); 
 		try {
-			System.out.println((long)query.uniqueResult());
+//			System.out.println((long)query.uniqueResult());
 			return (long)query.uniqueResult();
 		}
 		catch(Exception e)
