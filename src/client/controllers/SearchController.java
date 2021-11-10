@@ -30,10 +30,11 @@ public class SearchController {
 	public List<Posts> getListPosts(String keyword)
 	{
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Posts p WHERE p.title LIKE :keyword ORDER BY p.id DESC"; 
+		String hql = "FROM Posts p WHERE p.title LIKE :keyword AND p.post_status = :post_status ORDER BY p.id DESC"; 
 		Query query = session.createQuery(hql); 
 		query.setFirstResult(0);
 		query.setParameter("keyword", "%" + keyword+"%");
+		query.setParameter("post_status", "publish");
 		return query.list();
 	}
 	
