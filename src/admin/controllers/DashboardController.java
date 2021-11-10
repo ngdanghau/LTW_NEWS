@@ -1,6 +1,5 @@
 package admin.controllers;
 
-
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -29,7 +28,6 @@ public class DashboardController {
 	}
 	
 	
-	
 	public CountModel GetCount() {
 		CountModel count = new CountModel();
 		count.setPost(CountData("Posts"));
@@ -46,7 +44,6 @@ public class DashboardController {
 		String hql = String.format("SELECT COUNT(*) FROM %s ", name); 
 		Query query = session.createQuery(hql); 
 		try {
-//			System.out.println((long)query.uniqueResult());
 			return (long)query.uniqueResult();
 		}
 		catch(Exception e)

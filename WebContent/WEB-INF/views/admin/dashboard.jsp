@@ -133,16 +133,6 @@
       </div>
     </div>
   </div>
-      <div class="col-xl-12 col-xxl-12 d-flex flex-column">
-      <div class="block block-rounded flex-grow-1 d-flex flex-column">
-        <div class="block-header block-header-default">
-          <h3 class="block-title">Biểu đồ tuần suất</h3>
-        </div>
-        <div class="block-content block-content-full flex-grow-1 d-flex align-items-center">
-          <canvas id="js-chartjs-earnings" width="520" height="259" style="display: block; box-sizing: border-box; height: 287.778px; width: 577.778px;"></canvas>
-        </div>
-      </div>
-    </div>
     
 
 </div>
@@ -154,8 +144,6 @@
 </div>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="./public/admin/js/lib/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
-		<script src="./public/admin/js/pages/be_pages_dashboard.min.js"></script>
 		<script src="./public/admin/js/pages/core.js"></script>
   </body>
 </html>

@@ -3,11 +3,14 @@ package helpers;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class CommonHelper {
+public class CommonHelper{
 	public static String RandomString(int length) {
 	    byte[] array = new byte[length]; // length is bounded by 7
 	    new Random().nextBytes(array);
@@ -56,4 +59,8 @@ public class CommonHelper {
 
 	        return result.toString();
 	    }
+	  
+	  public static Date ConverToDate(LocalDate localDate) {
+		  return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+	  }
 }

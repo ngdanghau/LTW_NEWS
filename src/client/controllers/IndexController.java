@@ -54,14 +54,15 @@ public class IndexController {
 	public List<Posts> getListPostsByCat(int catId, int limitPost)
 	{
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Posts p WHERE p.category.id = :catId ORDER BY p.id DESC"; 
+		String hql = "FROM Posts p WHERE p.category.id = :catId AND p.post_status = :post_status ORDER BY p.id DESC"; 
 		if(catId == 1) {
-			hql = "FROM Posts p WHERE p.category.id != :catId AND featured = 'true' ORDER BY p.id DESC";
+			hql = "FROM Posts p WHERE p.category.id != :catId AND p.post_status = :post_status AND featured = 'true' ORDER BY p.id DESC";
 		}
 		Query query = session.createQuery(hql); 
 		query.setFirstResult(0);
 		query.setMaxResults(limitPost);
 		query.setParameter("catId", catId);
+		query.setParameter("post_status", "publish");
 		return query.list();
 	}
 	
@@ -77,8 +78,9 @@ public class IndexController {
 	@SuppressWarnings("unchecked")
 	public List<Posts> getPostRecent(){
 		Session session = factory.getCurrentSession();
-		String hql = "SELECT p FROM Posts p"; 
+		String hql = "SELECT p FROM Posts p WHERE p.post_status = :post_status"; 
 		Query query = session.createQuery(hql); 
+		query.setParameter("post_status", "publish");
 		try 
 		{
 			return query.list();
