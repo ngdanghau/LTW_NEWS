@@ -48,7 +48,6 @@ public class DashboardController {
 		String hql = String.format("SELECT COUNT(*) FROM %s ", name); 
 		Query query = session.createQuery(hql); 
 		try {
-			System.out.println((long)query.uniqueResult());
 			return (long)query.uniqueResult();
 		}
 		catch(Exception e)
