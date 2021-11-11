@@ -9,7 +9,7 @@
 		<article id="div-comment-${item.comment.id}" class="comment-body">
 			<footer class="comment-meta">
 				<div class="comment-author vcard">
-					<img alt="" src="./public/images/users/no-vatar.png" srcset="./public/images/users/no-vatar.png 2x" class="avatar avatar-120 photo" height="120" width="120" loading="lazy"> <b class="fn">${ item.comment.comment_author }</b> <span class="says">viết:</span>
+					<img alt="" src="./public/images/users/no-avatar.png" srcset="./public/images/users/no-avatar.png 2x" class="avatar avatar-120 photo" height="120" width="120" loading="lazy"> <b class="fn">${ item.comment.comment_author }</b> <span class="says">viết:</span>
 				</div>
 				
 				<div class="comment-metadata">

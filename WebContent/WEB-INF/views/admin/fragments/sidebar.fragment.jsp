@@ -98,7 +98,7 @@
                   	</li>
                </ul>
             </li>
-            
+             <c:if test="${ AuthUser.account_type != 'CONTRIBUTOR' }"> 
             
             <li class="nav-main-item">
                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="${APPURL }/admin/category.htm">
@@ -120,8 +120,9 @@
                   	</li>
                </ul>
             </li>
-            
-            <li class="nav-main-item">
+               </c:if>
+             <c:if test="${ AuthUser.account_type == 'ADMIN' }"> 
+	             <li class="nav-main-item">
                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="${APPURL }/admin/information-page.htm">
                		<i class="nav-main-link-icon si si-docs"></i>
                		<span class="nav-main-link-name"> Trang thông tin </span>
@@ -141,6 +142,9 @@
                   	</li>
                </ul>
             </li>
+            </c:if>
+            
+           <c:if test="${ AuthUser.account_type != 'CONTRIBUTOR' }"> 
             
             <li class="nav-main-item">
                <a class="nav-main-link comment" aria-haspopup="true" aria-expanded="false" href="${APPURL }/admin/comment.htm">
@@ -148,7 +152,7 @@
                		<span class="nav-main-link-name"> Bình luận </span>
                </a>
             </li>
-            
+             </c:if>
             
             <li class="nav-main-heading">MEDIA</li>
             <li class="nav-main-item">

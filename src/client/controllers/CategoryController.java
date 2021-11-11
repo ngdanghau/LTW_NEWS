@@ -48,12 +48,16 @@ public class CategoryController {
 		
 		/*Step 2*/
 		Categories category = retrieveCategory(slug);
+		if(category == null) {
+			return "redirect:/not-found.htm";
+		}
 		
 		/*Step 3*/
-		String hql = "FROM Posts p WHERE p.category.id = :catId";
+		String hql = "FROM Posts p WHERE p.category.id = :catId AND p.post_status = :post_status";
 		
 		Query query = session.createQuery(hql);
 		query.setParameter("catId", category.getId());
+		query.setParameter("post_status", "publish");
 		List<Posts> list = query.list();
 		
 		/*PAGINATION*/
@@ -91,8 +95,7 @@ public class CategoryController {
 		{
 			/*Step 1*/
 			Session session = factory.getCurrentSession();
-			String hql = "FROM Categories c "
-						+ "WHERE c.slug = :slug";
+			String hql = "FROM Categories c WHERE c.slug = :slug";
 			
 			
 			/*Step 2*/

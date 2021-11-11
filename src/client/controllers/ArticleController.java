@@ -43,9 +43,10 @@ public class ArticleController {
 	public Posts getPost(int post_id)
 	{
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Posts WHERE id = :id"; 
+		String hql = "FROM Posts WHERE id = :id AND post_status = :post_status"; 
 		Query query = session.createQuery(hql); 
 		query.setParameter("id", post_id);
+		query.setParameter("post_status", "publish");
 		try 
 		{
 			Posts post = (Posts) query.list().get(0);
@@ -70,11 +71,12 @@ public class ArticleController {
 	@SuppressWarnings("unchecked")
 	public List<Posts> getRelatedPost(int postId, int limitPost){
 		Session session = factory.getCurrentSession();
-		String hql = "SELECT p FROM Posts p WHERE p.id != :postId ORDER BY RAND()"; 
+		String hql = "SELECT p FROM Posts p WHERE p.id != :postId AND p.post_status = :post_status ORDER BY RAND()"; 
 		Query query = session.createQuery(hql); 
 		query.setFirstResult(0);
 		query.setMaxResults(limitPost);
 		query.setParameter("postId", postId);
+		query.setParameter("post_status", "publish");
 		try 
 		{
 			return query.list();
@@ -91,8 +93,9 @@ public class ArticleController {
 	public String article(ModelMap model, @PathVariable("post_id") int post_id, @PathVariable("post_slug") String post_slug){	
 		Posts post = this.getPost(post_id);
 		if(post == null) {
-			return "redirect:../index.htm";
+			return "redirect:/not-found.htm";
 		}
+		addViewer(post);
 		model.addAttribute("post", post);
 		
 		UserSettings settings = this.getUserSettings(post.getUser());
@@ -111,6 +114,24 @@ public class ArticleController {
 		Query query = session.createQuery(hql); 
 		query.setParameter("post_id", post_id);
 		return (long)query.uniqueResult();
+	}
+	
+	public void addViewer(Posts post) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			post.setViewer(post.getViewer()+1);
+			session.update(post);
+			t.commit();
+			
+		}catch(Exception ex)
+		{
+			t.rollback();
+			
+		}
+		finally {
+			session.close();
+		}
 	}
 	
 	public boolean Insertcomment(Comments cmt) {
@@ -140,11 +161,11 @@ public class ArticleController {
 			@RequestParam(value = "author", required = false) String author,
 			@RequestParam(value = "email", required = false) String email,
 			@RequestParam("comment_parent") int parent,
-			@RequestParam("g-recaptcha-response") String recaptcha_response
+			@RequestParam(value = "g-recaptcha-response", required = false) String recaptcha_response
 		) throws MalformedURLException, IOException{	
 		Posts post = getPost(post_id);
 		if(post == null) {
-			return "redirect:../index.htm";
+			return "redirect:/not-found.htm";
 		}
 		
 		

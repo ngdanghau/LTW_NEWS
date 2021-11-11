@@ -1,9 +1,6 @@
 package client.controllers;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -35,7 +31,6 @@ import bean.Mailer;
 import entities.Posts;
 import entities.Subscribers;
 import entities.Widgets;
-import models.CovidModel;
 import models.WidgetModel;
 
 @Transactional
@@ -124,60 +119,9 @@ public class IndexController {
 		
 		model.addAttribute("pagedListHolder", pagedlistHolder);
 		model.addAttribute("listWidgets", lists);
-		dataCovid19(model,false);
 		return "index";
 	}
-	
-	//GET DATA COVID-19
-	
-	
-	
-	public void dataCovid19(ModelMap model,boolean covidworld) {
-		try{
-			
-	        String url = "https://disease.sh/v3/covid-19/countries";
-	        if(covidworld)
-	        url = "https://disease.sh/v3/covid-19/all";
-	        URL obj = new URL(url);
-	        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-	        con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36");
-	        
-	        int responseCode = con.getResponseCode();
-	            System.out.println("\nSending Get Request to URL: "+url);
-	            System.out.println("Response Code: "+responseCode);
-	            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-	            String inputLine;
-	            StringBuffer response = new StringBuffer();
-	            while((inputLine = in.readLine())!=null){
-	                response.append(inputLine);
-	            }
-	            in.close();
-	            con.disconnect();
-//	             CONVERT JSON TO model[]
-	            String json = response.toString();
-	            if(json.contains("long")){
-	            	 json.replace("long", "Long");
-	            	 CovidModel[] result = mapper.readValue(json, CovidModel[].class);
-	            	 System.out.println(result[3].country);
-	 	             model.addAttribute("covidlist",result);
-	 	             dataCovid19(model,true); // Gọi lại hàm để lấy dữ liệu covid all
-	            }
-	            else{
-			         String[] covidWorld = new String[4];
-			         covidWorld[0] = mapper.readTree(json).path("cases").asText();
-			         System.out.println("cases: "+covidWorld[0]);
-			         covidWorld[1] = mapper.readTree(json).path("todayCases").asText();
-			         covidWorld[2] = mapper.readTree(json).path("deaths").asText();
-			         covidWorld[3] = mapper.readTree(json).path("todayDeaths").asText();
-			         model.addAttribute("covidworld",covidWorld);
-	            }     
-	    }
-	    
-	        catch(Exception e){
-	            System.out.println(e);  
-	        }
-		
-	}
+
 	
 	// DANG KY NHAN TIN
 	@RequestMapping(value = "index", method = RequestMethod.POST)

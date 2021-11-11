@@ -1,5 +1,9 @@
 package interceptors;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,14 +28,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.General_Data;
 import entities.Users;
 import lib.Recaptcha;
+import models.CovidModel;
 import models.IntegrationsData;
 import models.SettingsData;
 import models.SocialData;
+
 
 @Transactional
 public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 	@Autowired
 	SessionFactory factory;
+	
+	@Autowired
+	ObjectMapper mapper;
 	
 	/**************************************************
 	 * @author Hau
@@ -187,6 +196,55 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		request.setAttribute("dateFormat", dateFormat);
 	}
 	
+	
+	//GET DATA COVID-19
+	
+	
+	
+		public void dataCovid19(HttpServletRequest request, boolean covidworld) {
+			try{
+				
+		        String url = "https://disease.sh/v3/covid-19/countries";
+		        if(covidworld)
+		        url = "https://disease.sh/v3/covid-19/all";
+		        URL obj = new URL(url);
+		        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		        con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36");
+		        
+		            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		            String inputLine;
+		            StringBuffer response = new StringBuffer();
+		            while((inputLine = in.readLine())!=null){
+		                response.append(inputLine);
+		            }
+		            in.close();
+		            con.disconnect();
+//		             CONVERT JSON TO model[]
+		            String json = response.toString();
+		            if(json.contains("long")){
+		            	 json.replace("long", "Long");
+		            	 CovidModel[] result = mapper.readValue(json, CovidModel[].class);
+		            	 //System.out.println(result[3].country);
+		            	 request.setAttribute("covidlist",result);
+		 	             dataCovid19(request,true); // Gọi lại hàm để lấy dữ liệu covid all
+		            }
+		            else{
+				         String[] covidWorld = new String[4];
+				         covidWorld[0] = mapper.readTree(json).path("cases").asText();
+				         //System.out.println("cases: "+covidWorld[0]);
+				         covidWorld[1] = mapper.readTree(json).path("todayCases").asText();
+				         covidWorld[2] = mapper.readTree(json).path("deaths").asText();
+				         covidWorld[3] = mapper.readTree(json).path("todayDeaths").asText();
+				         request.setAttribute("covidworld",covidWorld);
+		            }     
+		    }
+		    
+		        catch(Exception e){
+		            System.out.println(e);  
+		        }
+			
+		}
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object Handler) throws Exception{
 		setAppUrl(request);
@@ -194,6 +252,8 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter  {
 		setCurrentYear(request);
 		setDateFormat(request);	
 		setAuthUser(request);
+		
+		dataCovid19(request,false);
 		return true;
 	}
 }

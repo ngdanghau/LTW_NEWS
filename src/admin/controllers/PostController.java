@@ -74,7 +74,6 @@ public class PostController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping( value={"post","post-new"}, method = RequestMethod.GET)
 	public String index(HttpServletRequest request, ModelMap model, HttpSession session){	
-		
 		String successMessage = (String) session.getAttribute("successMessage");
 		List<String> errorMessage = (List<String>) session.getAttribute("errorMessage");
 		
@@ -115,6 +114,9 @@ public class PostController {
 	
 	@RequestMapping( value="post", method = RequestMethod.POST)
 	public String save(HttpServletRequest request, ModelMap model, @RequestParam Map<String, Object> params){	
+		
+		Users user = (Users)request.getAttribute("AuthUser");
+		
 		List<String> errorMessage = new ArrayList<String>();
 		Boolean error = false;
 		boolean is_new = false;
@@ -161,6 +163,10 @@ public class PostController {
 		}else if(!CommonHelper.contains(new String[] { "pending", "publish", "draft" }, post_status)) {
 			errorMessage.add("Tình trạng bài viết không hợp lệ!");
 			error = true;
+		}
+		
+		if(user.getAccount_type().equals("CONTRIBUTOR")) {
+			post_status = "pending";
 		}
 		
 		if(cat_id == null || cat_id.trim().length() == 0) {
@@ -224,7 +230,7 @@ public class PostController {
 				post.setCreated_at(date);
 				post.setExternal_id("");
 				post.setSource("");
-				post.setUser((Users)request.getAttribute("AuthUser"));
+				post.setUser(user);
 				String external_id = CommonHelper.RandomString(10);
 				post.setExternal_id(external_id);
 				post.setFeatured(false);

@@ -102,6 +102,18 @@
 	              <textarea  class="form-control" id="bio" name="bio" rows="7" placeholder="Nhập bio" >${ user.bio }</textarea>
 	            </div>
 	            <div class="mb-4">
+	            <label class="form-label" for="avatar">Avatar</label>
+	            	<div class="input-group">
+			             <input class="form-control" id="avatar" name="avatar" placeholder="Nhập avatar" value="${ user.avatar }">
+			            <span class="input-group-append">
+							<button type="button" class="btn btn-primary avatar"><i class="fas fa-image"></i></button>
+						  </span>
+						</div>
+						
+	              
+	              
+	            </div>
+	            <div class="mb-4">
 	              <label class="form-label" for="example-email-input">Email</label>
 	               <input type="email" class="form-control" id="email" name="email" disabled="disabled" value="${ user.email }" placeholder="Email" required="required" >
 	            </div>
@@ -218,5 +230,19 @@
 		<script src="./public/vendor/ckfinder/ckfinder.js"></script>
 		<script src="./public/admin/js/pages/profile.js"></script>
 		<script src="./public/admin/js/pages/core.js"></script>
+		<script>
+		
+			$("body").on("click", ".avatar", function(){
+				CKFinder.popup( {
+					basePath: "${APPURL}/public/vendor/ckfinder/",
+					height: 700,
+					selectActionFunction: function( fileUrl ) {
+						$("#avatar").val(fileUrl)
+		            }
+				});
+			});
+			
+		
+		</script>
   </body>
 </html>
