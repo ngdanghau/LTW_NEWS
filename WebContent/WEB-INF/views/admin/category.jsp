@@ -62,7 +62,7 @@
                         <tbody>
                         	<!-- PAGINATION - HIEN THI BAI VIET NHUNG CO PHAN TRANG -->
 			            	<jsp:useBean id="pagedListHolder" scope="request" type="org.springframework.beans.support.PagedListHolder"/>
-							<c:url value="/admin/category.htm" var="pagedLink">
+							<c:url value="/admin/categories.htm" var="pagedLink">
 								<c:param name="p" value="~" />
 							</c:url>
                                                 		

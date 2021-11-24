@@ -115,7 +115,7 @@ let confirmEditCategory = ()=>{
 			            if (result.isConfirmed) 
 						{
 						  /* Nhan OK -> Dieu huong ve admin/category.htm */
-				  		  window.location.href = `${URL}/admin/category.htm`;
+				  		  window.location.href = `${URL}/admin/categories.htm`;
 			            }
 				  });
 			}
@@ -153,7 +153,7 @@ let cancelEditCategory = ()=>{
             /*Step 2*/
             if (result.isConfirmed) {
 				/* Dieu huong ve admin/category.htm */
-				window.location.href = `${URL}/admin/category.htm`;
+				window.location.href = `${URL}/admin/categories.htm`;
             }
           })
 	});
@@ -184,7 +184,7 @@ let confirmAddCategory = ()=>{
 			            if (result.isConfirmed) 
 						{
 						  /* Nhan OK -> Dieu huong ve admin/category.htm */
-				  		  window.location.href = `${URL}/admin/category.htm`;
+				  		  window.location.href = `${URL}/admin/categories.htm`;
 			            }
 				  });
 			}
@@ -222,7 +222,7 @@ let cancelAddCategory = ()=>{
             /*Step 2*/
             if (result.isConfirmed) {
 				/* Dieu huong ve admin/category.htm */
-				window.location.href = `${URL}/admin/category.htm`;
+				window.location.href = `${URL}/admin/categories.htm`;
             }
           })
 	});

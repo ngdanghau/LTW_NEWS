@@ -52,7 +52,7 @@ let removeInformationPage = ()=>{
 let ajaxRemoveInformationPage = (id)=>{
 	
     $.ajax({
-		url:`${URL}/admin/remove-information-page.htm`,
+		url:`${URL}/admin/remove-information-pages.htm`,
 		type:"GET",
 		data: {
 			id: id
@@ -116,7 +116,7 @@ let confirmEditInformationPage = ()=>{
 			            if (result.isConfirmed) 
 						{
 						  /* Nhan OK -> Dieu huong ve admin/category.htm */
-				  		  window.location.href = `${URL}/admin/information-page.htm`;
+				  		  window.location.href = `${URL}/admin/information-pages.htm`;
 			            }
 				  });
 			}
@@ -154,7 +154,7 @@ let cancelEditInformationPage = ()=>{
             if (result.isConfirmed) {
 			
 			   /* Nhan OK -> Dieu huong ve admin/category.htm */
-			   window.location.href = `${URL}/admin/information-page.htm`;
+			   window.location.href = `${URL}/admin/information-pages.htm`;
 				
             }
           })
