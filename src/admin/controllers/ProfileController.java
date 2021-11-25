@@ -138,11 +138,16 @@ public class ProfileController {
 		String firstname = (String) params.get("firstname");
 		String lastname = (String) params.get("lastname");
 		String bio = (String) params.get("bio");
-		
+		String avatar = (String) params.get("avatar");
 		
 		if(bio == null)
 		{
 			bio = "";
+		}
+		
+		if(avatar == null)
+		{
+			avatar = "";
 		}
 		
 		if(firstname == null || firstname.trim().length() == 0)
@@ -160,6 +165,7 @@ public class ProfileController {
 		if(!error) {
 			user.setFirstname(firstname);
 			user.setLastname(lastname);
+			user.setAvatar(avatar);
 			user.setBio(bio);
 			Session session = factory.openSession();
 			Transaction t =  session.beginTransaction();

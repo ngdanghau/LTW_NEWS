@@ -198,7 +198,7 @@
         </tfoot>
         <tbody>
         	<jsp:useBean id="pagedListHolder" scope="request" type="org.springframework.beans.support.PagedListHolder"/>
-			<c:url value="${ ADMINURL }/users.htm?search=${ param.search }&user_id=${ param.user_id }&cat_id=${ param.cat_id }&post_status=${ param.post_status != null ? param.post_status : 'publish' }" var="pagedLink">
+			<c:url value="${ ADMINURL }/users.htm?search=${ param.search }&active=${ param.active }" var="pagedLink">
 				<c:param name="p" value="~" />
 			</c:url>
 			<c:forEach var="user" items="${ pagedListHolder.pageList }" begin="0" > 			
@@ -277,6 +277,7 @@
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
 		<script src="./public/admin/js/pages/user.js"></script>
+		<script src="./public/admin/js/pages/core.js"></script>
 		<script>
 			$( document ).ready(function() {
 				

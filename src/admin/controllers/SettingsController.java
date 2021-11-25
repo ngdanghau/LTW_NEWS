@@ -63,11 +63,10 @@ public class SettingsController {
 		}
 	}
 	
-	
-	
 	@RequestMapping(value="site",method = RequestMethod.GET)
-	public String SiteController(ModelMap model)
+	public String SiteController(ModelMap model, HttpServletRequest request)
 	{
+		
 		SettingsData settings = getGeneralData("settings");
 		model.addAttribute("settings", settings);
 		return "admin/settings-site";
@@ -78,6 +77,7 @@ public class SettingsController {
 	public String SiteSubmit(HttpServletRequest request,ModelMap model,@RequestParam("site_name") String site_name,@RequestParam("site_slogan") String site_slogan ,
 											@RequestParam("site_description") String site_description,@RequestParam("site_keywords") String site_keywords)
 	{
+
 		SettingsData settings = getGeneralData("settings");
 		if(site_name.isEmpty()||site_description.isEmpty()||site_keywords.isEmpty()||site_slogan.isEmpty()) {
 			request.getSession().setAttribute("error","Vui lòng không để trống");

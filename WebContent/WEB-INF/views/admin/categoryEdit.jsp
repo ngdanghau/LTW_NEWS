@@ -11,7 +11,7 @@
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-      <title>Dashboard - ${ SettingsData.getSite_name() }</title>
+      <title>Sửa thể loại - ${ SettingsData.getSite_name() }</title>
       <meta name="description" content="${ SettingsData.getSite_description() }">
       <meta name="author" content="pixelcave">
       <meta name="robots" content="noindex, nofollow">
@@ -25,7 +25,7 @@
       <link rel="shortcut icon" href="${ SettingsData.getLogomark() != '' ? SettingsData.getLogomark() : './public/images/favicon.ico' }" type="image/x-icon">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
       <link rel="stylesheet" id="css-main" href="./public/admin/css/oneui.min.css">
-      
+      <link rel="stylesheet" href="./public/admin/js/plugins/sweetalert2/sweetalert2.min.css">
       <link rel='stylesheet' id='wi-fonts-css' href='https://fonts.googleapis.com/css?family=Libre+Franklin%3A400%2C400italic%2C900%7CTinos%3A400%2C400italic%2C700%7CLora%3A400&#038;display=swap&#038;ver=4.6.7.1' media='all' />
    		
    		
@@ -113,8 +113,11 @@
 		<!-- MY OWN LIBRARY -->
 		<script src="./public/admin/js/lib/jquery.min.js"></script>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
-		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		
+		<script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+		<script src="./public/admin/js/pages/core.js"></script>
+		<script>
+      		let URL = "${APPURL}";
+      	</script>
 		<script src="./public/admin/js/pages/category.js"></script>
   </body>
 </html>

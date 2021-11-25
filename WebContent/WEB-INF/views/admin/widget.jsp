@@ -167,6 +167,7 @@
 		<script src="./public/admin/js/lib/jquery.min.js"></script>
 		<script src="./public/admin/js/plugins/jquery-validation/jquery.validate.min.js"></script>
 		<script src="./public/admin/js/pages/widget.js"></script>
+		<script src="./public/admin/js/pages/core.js"></script>
 		<script>
 			var el = document.getElementById('items');
 			var sortable = Sortable.create(el, { animation: 150 });

@@ -56,7 +56,7 @@ public class UserController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping( value="user", method = RequestMethod.GET)
+	@RequestMapping( value={"user","user-new"}, method = RequestMethod.GET)
 	public String index(HttpServletRequest request, ModelMap model, HttpSession session) {
 		
 		String successMessage = (String) session.getAttribute("successMessage");

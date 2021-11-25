@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Chỉnh sửa người dùng - ${ SettingsData.getSite_name() }</title>
+    <title>${ user.username == null ? 'Thêm mới người dùng' : 'Chỉnh sửa người dùng' } - ${ SettingsData.getSite_name() }</title>
     <meta name="description" content="${ SettingsData.getSite_description() }">
       <meta name="author" content="pixelcave">
       <meta name="robots" content="noindex, nofollow">
@@ -131,6 +131,7 @@
 </div>
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
+		<script src="./public/admin/js/pages/core.js"></script>
 		
   </body>
 </html>

@@ -29,6 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import entities.Posts;
+import entities.Users;
 
 
 @Transactional
@@ -60,6 +61,8 @@ public class PostActionController {
 	
 	@RequestMapping( value="post_trash", method = RequestMethod.GET)
 	public String trash(HttpServletRequest request, ModelMap model) throws UnsupportedEncodingException{
+		List<String> errorMessage = new ArrayList<String>();
+		
 		String url = request.getParameter("next");
 		if(url == null) url = "/admin/posts.htm";
 		else url = URLDecoder.decode(url, "UTF-8");
@@ -75,7 +78,13 @@ public class PostActionController {
 			return "redirect:" + url;
 		}
 		
-		List<String> errorMessage = new ArrayList<String>();
+		Users user = (Users)request.getAttribute("AuthUser");
+		if(user.getAccount_type().equals("CONTRIBUTOR")) {
+			errorMessage.add("Bạn ko có quyền xóa bài viết!");
+			request.getSession().setAttribute("errorMessage", errorMessage);
+			return "redirect:" + url;
+		}
+		
 		Posts post = getPostById(postId);
 		if(post == null) {
 			errorMessage.add("Bài viết không tồn tại !");
@@ -98,6 +107,7 @@ public class PostActionController {
 			}
 		}
 		
+		request.getSession().setAttribute("errorMessage", errorMessage);
 		if(errorMessage.size() > 0) {
 			return "redirect:/admin/post.htm?postid=" + postId;
 		}
@@ -107,6 +117,7 @@ public class PostActionController {
 	
 	@RequestMapping( value="post_delete", method = RequestMethod.GET)
 	public String delete(HttpServletRequest request, ModelMap model) throws UnsupportedEncodingException{
+		List<String> errorMessage = new ArrayList<String>();
 		String url = request.getParameter("next");
 		if(url == null) url = "/admin/posts.htm";
 		else url = URLDecoder.decode(url, "UTF-8");
@@ -122,9 +133,16 @@ public class PostActionController {
 			return "redirect:" + url;
 		}
 		
+		Users user = (Users)request.getAttribute("AuthUser");
+		if(user.getAccount_type().equals("CONTRIBUTOR")) {
+			errorMessage.add("Bạn ko có quyền xóa bài viết!");
+			request.getSession().setAttribute("errorMessage", errorMessage);
+			return "redirect:" + url;
+		}
 		
 		
-		List<String> errorMessage = new ArrayList<String>();
+		
+		
 		Posts post = getPostById(postId);
 		if(post == null) {
 			errorMessage.add("Bài viết không tồn tại !");
@@ -145,7 +163,7 @@ public class PostActionController {
 				session.close();
 			}
 		}
-		
+		request.getSession().setAttribute("errorMessage", errorMessage);
 		if(errorMessage.size() > 0) {
 			return "redirect:" + url;
 		}
@@ -231,8 +249,16 @@ public class PostActionController {
 			}
 		}
 		
+		Users user = (Users)request.getAttribute("AuthUser");
+		if(user.getAccount_type().equals("CONTRIBUTOR")) {
+			objectNode.put("result", 0);
+			objectNode.put("msg", "Bạn không có quyền thực hiện hành động!");
+			return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
+		}
+		
 		Transaction t =  session.beginTransaction();
 		if(action.equals("trash")) {
+			
 			try{   
 				String hql = "UPDATE Posts SET post_status = :post_status WHERE " + values; 
 				Query query = session.createQuery(hql); 

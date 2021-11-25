@@ -1,17 +1,9 @@
 package admin.controllers;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -28,10 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 import entities.Comments;
-import entities.Posts;
 import entities.Users;
 
 @Transactional
@@ -165,9 +155,7 @@ public class AdminCommentController {
 		long totalComment = retrieveTotalComment();
 		/* String keyword = request.getParameter("keyword"); */
 		String keyword = "";
-		
-		if( keyword == null) keyword = "";
-		
+				
 		
 		String commentAuthor = request.getParameter("commentAuthor");
 		if( commentAuthor == null) commentAuthor = "";

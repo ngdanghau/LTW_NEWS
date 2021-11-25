@@ -115,6 +115,10 @@
 		<script src="./public/admin/js/lib/jquery.min.js"></script>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+		<script src="./public/admin/js/pages/core.js"></script>
+		<script>
+      		let URL = "${APPURL}";
+      	</script>
 		<script src="./public/admin/js/pages/informationPage.js"></script>
 		
   </body>

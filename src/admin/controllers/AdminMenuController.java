@@ -10,11 +10,16 @@ import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+=======
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+>>>>>>> a2b2065da1be6b563bf8bb226984aef5f9870c9b
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,8 +27,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Menu;
 import models.MenuModel;
 import models.MenuOrder;
+<<<<<<< HEAD
 import models.MenuOrderWrapper;
 import models.SettingsData;
+=======
+>>>>>>> a2b2065da1be6b563bf8bb226984aef5f9870c9b
 
 @Transactional
 @Controller

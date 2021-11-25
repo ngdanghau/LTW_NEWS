@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Thêm bài viết mới - ${ SettingsData.getSite_name() }</title>
+    <title> ${post.title == null ? 'Thêm bài viết mới' : 'Sửa bài viết' } - ${ SettingsData.getSite_name() }</title>
     <meta name="description" content="${ SettingsData.getSite_description() }">
       <meta name="author" content="pixelcave">
       <meta name="robots" content="noindex, nofollow">
@@ -198,6 +198,7 @@
 		<script src="./public/vendor/ckeditor/ckeditor.js"></script>
 		<script src="./public/vendor/ckfinder/ckfinder.js"></script>
 		<script src="./public/admin/js/pages/post.js"></script>
+		<script src="./public/admin/js/pages/core.js"></script>
 		<script>
 			$( document ).ready(function() {
 			    // khoi tao ckeditor va ckfinder

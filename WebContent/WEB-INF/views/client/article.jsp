@@ -82,8 +82,13 @@
                                              <p>Nguồn: <i>${ post.source }</i></p>
                                              <jsp:include page="./components/share.component.jsp"/>
                                              <jsp:include page="./components/authorbox.component.jsp"/>
+                                             
+                                            
+                                             
                                              <c:if test="${ post.comment_status }">
-                                             	<jsp:include page="./components/comment.component.jsp"/>
+                                             	<c:set var="listComments" value="${listComments}" scope="request"/>
+                                             	<c:set var="post" value="${post}" scope="request"/>
+                                             	<jsp:include page="./components/comment-form.component.jsp"/>
                                              </c:if>
                                           </div>
                                        </div>
@@ -109,7 +114,7 @@
       <jsp:include page="./fragments/mobilenav.fragment.jsp"/>
       <jsp:include page="./fragments/topup.fragment.jsp"/>
       <jsp:include page="./fragments/progress.fragment.jsp"/>
-      <script src="https://timeswriter.xyz/themes/assets/js/comment-reply.min.js?v=0403013" id='wi-main-js'></script>
+      <script src="https://timeswriter.xyz/themes/assets/js/comment-reply.min.js" id='wi-main-js'></script>
       <script id='wi-main-js-extra'>
          var WITHEMES = {"enable_sticky_sidebar":"","enable_sticky_header":"1","tablet_breakpoint":"840","enable_lightbox":"1"};
       </script>

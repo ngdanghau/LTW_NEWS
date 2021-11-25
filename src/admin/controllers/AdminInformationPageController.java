@@ -44,7 +44,7 @@ public class AdminInformationPageController {
 	 * @return lay toan bo trang thong tin ra
 	 **************************************************/
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value="information-page",method = RequestMethod.GET)
+	@RequestMapping(value="information-pages",method = RequestMethod.GET)
 	public String retrieveInformationPage(HttpServletRequest request, ModelMap modelMap )
 	{
 		/*Step 1*/

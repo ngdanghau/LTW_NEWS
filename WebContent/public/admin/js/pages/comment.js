@@ -1,8 +1,6 @@
 /**
  * 
  */
-let URL = "http://localhost:8080/LTW_NEWS/admin/";
-let CLIENTURL = "http://localhost:8080/LTW_NEWS/";
 
 
 /**************************************************
@@ -77,9 +75,6 @@ let searchByKeyword = ()=>{
 					/*Step 6 */
 					$("#commentBody").append(`
 							<tr>
-                                <!--  <td class="text-center">
-                                    <img class="img-avatar img-avatar48" src="element." alt="">
-                                 </td> -->
                                  <td class="fw-semibold fs-sm">
                                     <a href="${URL }/comment.htm?commentAuthor=${element.comment_author}">${ element.comment_author }</a>
                                  </td>
@@ -567,7 +562,6 @@ let ajaxApproveComment = (id)=>{
 
 
 $(document).ready(function(){
-	//searchByKeyword();
 	
 	removeComment();
 	
@@ -577,7 +571,6 @@ $(document).ready(function(){
 	
 	approveComment();
 	
-	//responseComment();
 	
 	confirmResponseComment();
 	

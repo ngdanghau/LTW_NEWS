@@ -1,12 +1,11 @@
 package client.controllers;
 
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import javax.validation.ConstraintViolationException;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -15,7 +14,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -57,14 +55,15 @@ public class IndexController {
 	public List<Posts> getListPostsByCat(int catId, int limitPost)
 	{
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Posts p WHERE p.category.id = :catId ORDER BY p.id DESC"; 
+		String hql = "FROM Posts p WHERE p.category.id = :catId AND p.post_status = :post_status ORDER BY p.id DESC"; 
 		if(catId == 1) {
-			hql = "FROM Posts p WHERE p.category.id != :catId AND featured = 'true' ORDER BY p.id DESC";
+			hql = "FROM Posts p WHERE p.category.id != :catId AND p.post_status = :post_status AND featured = 'true' ORDER BY p.id DESC";
 		}
 		Query query = session.createQuery(hql); 
 		query.setFirstResult(0);
 		query.setMaxResults(limitPost);
 		query.setParameter("catId", catId);
+		query.setParameter("post_status", "publish");
 		return query.list();
 	}
 	
@@ -80,8 +79,9 @@ public class IndexController {
 	@SuppressWarnings("unchecked")
 	public List<Posts> getPostRecent(){
 		Session session = factory.getCurrentSession();
-		String hql = "SELECT p FROM Posts p"; 
+		String hql = "SELECT p FROM Posts p WHERE p.post_status = :post_status"; 
 		Query query = session.createQuery(hql); 
+		query.setParameter("post_status", "publish");
 		try 
 		{
 			return query.list();
@@ -121,7 +121,9 @@ public class IndexController {
 		model.addAttribute("listWidgets", lists);
 		return "index";
 	}
+
 	
+	// DANG KY NHAN TIN
 	@RequestMapping(value = "index", method = RequestMethod.POST)
 	public ResponseEntity<JsonNode> dangKyNhanTin(@RequestParam("email") String email,ModelMap model)
 	{
@@ -129,7 +131,7 @@ public class IndexController {
 		String error = "";
 		
 		// code ở dây
-		String regex = "^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$";
+		String regex = "^(([^<>()[\\]\\\\.,;:\\s@\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 		if(email.isEmpty())
 			error="Không được để trống";
 		else if (!email.matches(regex)||email.length()<15) {

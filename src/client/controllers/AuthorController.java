@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
@@ -41,13 +42,32 @@ public class AuthorController {
 		}
 	}
 	
+	public void addViewer(Users user) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			user.setViewer(user.getViewer()+1);
+			session.update(user);
+			t.commit();
+			
+		}catch(Exception ex)
+		{
+			t.rollback();
+			
+		}
+		finally {
+			session.close();
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Posts> getPostByAuthor(int userid){
 		Session session = factory.getCurrentSession();
-		String hql = "SELECT p FROM Posts p WHERE p.user.id = :userid"; 
+		String hql = "SELECT p FROM Posts p WHERE p.user.id = :userid AND p.post_status = :post_status"; 
 		Query query = session.createQuery(hql); 
 
 		query.setParameter("userid", userid);
+		query.setParameter("post_status", "publish");
 		try 
 		{
 			return query.list();
@@ -65,8 +85,7 @@ public class AuthorController {
 		{
 			/*Step 1*/
 			Session session = factory.getCurrentSession();
-			String hql = "FROM Users u "
-						+ "WHERE u.username = :username";
+			String hql = "FROM Users u WHERE u.username = :username";
 			
 			/*Step 2*/
 			Query query = session.createQuery(hql);
@@ -92,8 +111,9 @@ public class AuthorController {
 	{
 		Users user = getUser(username);
 		if(user == null) {
-			return "redirect:../index.htm";
+			return "redirect:/not-found.htm";
 		}
+		addViewer(user);
 		List<Posts> posts = getPostByAuthor(user.getId());
 		PagedListHolder pagedlistHolder = new PagedListHolder(posts);
 		int page = ServletRequestUtils.getIntParameter(request, "p",0);

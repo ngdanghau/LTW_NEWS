@@ -7,7 +7,6 @@
  * Step 2.2: hien thong bao hoan tat
  * @return gui ajax xoa the loai nay di
  **************************************************/
-let URL = "http://localhost:8080/LTW_NEWS";
 
 
 
@@ -116,7 +115,7 @@ let confirmEditCategory = ()=>{
 			            if (result.isConfirmed) 
 						{
 						  /* Nhan OK -> Dieu huong ve admin/category.htm */
-				  		  window.location.href = `${URL}/admin/category.htm`;
+				  		  window.location.href = `${URL}/admin/categories.htm`;
 			            }
 				  });
 			}
@@ -154,7 +153,7 @@ let cancelEditCategory = ()=>{
             /*Step 2*/
             if (result.isConfirmed) {
 				/* Dieu huong ve admin/category.htm */
-				window.location.href = `${URL}/admin/category.htm`;
+				window.location.href = `${URL}/admin/categories.htm`;
             }
           })
 	});
@@ -185,7 +184,7 @@ let confirmAddCategory = ()=>{
 			            if (result.isConfirmed) 
 						{
 						  /* Nhan OK -> Dieu huong ve admin/category.htm */
-				  		  window.location.href = `${URL}/admin/category.htm`;
+				  		  window.location.href = `${URL}/admin/categories.htm`;
 			            }
 				  });
 			}
@@ -223,7 +222,7 @@ let cancelAddCategory = ()=>{
             /*Step 2*/
             if (result.isConfirmed) {
 				/* Dieu huong ve admin/category.htm */
-				window.location.href = `${URL}/admin/category.htm`;
+				window.location.href = `${URL}/admin/categories.htm`;
             }
           })
 	});

@@ -1,14 +1,12 @@
 package admin.controllers;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +26,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import bean.Mailer;
 import entities.Users;
 
 
@@ -42,6 +43,9 @@ public class UsersController {
 	
 	@Autowired
 	ObjectMapper mapper;
+	
+	@Autowired
+	Mailer mailer;
 	
 	@SuppressWarnings("unchecked")
 	public List<Object[]> getListSummary(){
@@ -137,8 +141,6 @@ public class UsersController {
 		
 		// lấy tóm tắt 
 		String url = request.getRequestURL().toString() + "?" + (request.getQueryString() == null ? "role=all" : request.getQueryString().toString());
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa", new Locale("vi", "VN"));
-		model.addAttribute("dateFormatPost", dateFormat);
 		model.addAttribute("pagedListHolder", pagedlistHolder);
 		model.addAttribute("successMessage", successMessage);
 		model.addAttribute("errorMessage", errorMessage);
@@ -152,7 +154,7 @@ public class UsersController {
 	@RequestMapping( value="user_active", method = RequestMethod.GET)
 	public String active(HttpServletRequest request, @RequestParam Map<String, Object> params) throws UnsupportedEncodingException {	
 		String url = request.getParameter("next");
-		if(url == null) url = "/admin/posts.htm";
+		if(url == null) url = "/admin/users.htm";
 		else url = URLDecoder.decode(url, "UTF-8");
 		
 		int userId = 0;
@@ -194,7 +196,7 @@ public class UsersController {
 		}
 		
 		if(errorMessage.size() > 0) {
-			return "redirect:/admin/user.htm?userid=" + userId;
+			return "redirect:/admin/users.htm";
 		}
 		return "redirect:"+ url;
 	}
@@ -202,7 +204,7 @@ public class UsersController {
 	@RequestMapping( value="user_recovery", method = RequestMethod.GET)
 	public String recovery(HttpServletRequest request, @RequestParam Map<String, Object> params) throws UnsupportedEncodingException {	
 		String url = request.getParameter("next");
-		if(url == null) url = "/admin/posts.htm";
+		if(url == null) url = "/admin/users.htm";
 		else url = URLDecoder.decode(url, "UTF-8");
 		
 		int userId = 0;
@@ -212,14 +214,6 @@ public class UsersController {
 			userId = 0;
 		}
 		
-		boolean is_active = false;
-		try {
-			is_active = Boolean.parseBoolean(request.getParameter("active"));
-		}catch(Exception ex) {
-			is_active = false;
-		}
-		
-		
 		List<String> errorMessage = new ArrayList<String>();
 		Users user = getUserById(userId);
 		if(user == null) {
@@ -228,8 +222,13 @@ public class UsersController {
 			Session session = factory.openSession();
 			Transaction t =  session.beginTransaction();
 			try{   
-				user.setIs_active(is_active);
-				session.update(user);
+				
+				String recoveryhash = "";
+				recoveryhash = updateToken(user);	
+				if(recoveryhash != "") {
+					recoveryhash = user.getId()+"_"+recoveryhash;
+					mailer.send(mailer.from(), user.getEmail(), mailer.retrievePasswordSubject(), mailer.bodyRP(recoveryhash));	
+				}
 				t.commit();
 				request.getSession().setAttribute("successMessage", "Gửi mail khôi phục thành công");
 			}
@@ -244,8 +243,27 @@ public class UsersController {
 		}
 		
 		if(errorMessage.size() > 0) {
-			return "redirect:/admin/user.htm?userid=" + userId;
+			return "redirect:/admin/users.htm";
 		}
 		return "redirect:"+ url;
+	}
+	
+	public String updateToken(Users user) throws IOException
+	{
+		JsonNode jsonNode = mapper.readTree(user.getData());
+		String token = Long.toHexString(Double.doubleToLongBits(Math.random())); // HÀM TẠO RANDOM HASH ĐỂ LẤY LẠI MẬT KHẨU
+		((ObjectNode)jsonNode).put("recoveryhash", token);
+		user.setData(mapper.writeValueAsString(jsonNode));
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			session.update(user);
+			t.commit();
+		}catch (Exception ex)
+			{
+				t.rollback();
+				return "";
+			}
+		return token;
 	}
 }

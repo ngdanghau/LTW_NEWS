@@ -62,7 +62,7 @@
                         <tbody>
                         	<!-- PAGINATION - HIEN THI BAI VIET NHUNG CO PHAN TRANG -->
 			            	<jsp:useBean id="pagedListHolder" scope="request" type="org.springframework.beans.support.PagedListHolder"/>
-							<c:url value="/admin/category.htm" var="pagedLink">
+							<c:url value="/admin/categories.htm" var="pagedLink">
 								<c:param name="p" value="~" />
 							</c:url>
                                                 		
@@ -110,6 +110,10 @@
 		<script src="./public/admin/js/lib/jquery.min.js"></script>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+		<script src="./public/admin/js/pages/core.js"></script>
+		<script>
+      		let URL = "${APPURL}";
+      	</script>
 		<script src="./public/admin/js/pages/category.js"></script>
 		
   </body>

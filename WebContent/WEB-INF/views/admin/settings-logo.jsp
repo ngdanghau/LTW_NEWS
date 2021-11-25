@@ -143,6 +143,7 @@
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="./public/vendor/ckfinder/ckfinder.js"></script>
+		<script src="./public/admin/js/pages/core.js"></script>
 		<script>
 		
 			$("body").on("click", ".logotype", function(){

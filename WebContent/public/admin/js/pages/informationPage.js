@@ -7,7 +7,6 @@
  * Step 2.2: hien thong bao hoan tat
  * @return gui ajax xoa the loai nay di
  **************************************************/
-let URL = "http://localhost:8080/LTW_NEWS";
 
 
 
@@ -53,7 +52,7 @@ let removeInformationPage = ()=>{
 let ajaxRemoveInformationPage = (id)=>{
 	
     $.ajax({
-		url:`${URL}/admin/remove-information-page.htm`,
+		url:`${URL}/admin/remove-information-pages.htm`,
 		type:"GET",
 		data: {
 			id: id
@@ -117,7 +116,7 @@ let confirmEditInformationPage = ()=>{
 			            if (result.isConfirmed) 
 						{
 						  /* Nhan OK -> Dieu huong ve admin/category.htm */
-				  		  window.location.href = `${URL}/admin/information-page.htm`;
+				  		  window.location.href = `${URL}/admin/information-pages.htm`;
 			            }
 				  });
 			}
@@ -155,7 +154,7 @@ let cancelEditInformationPage = ()=>{
             if (result.isConfirmed) {
 			
 			   /* Nhan OK -> Dieu huong ve admin/category.htm */
-			   window.location.href = `${URL}/admin/information-page.htm`;
+			   window.location.href = `${URL}/admin/information-pages.htm`;
 				
             }
           })

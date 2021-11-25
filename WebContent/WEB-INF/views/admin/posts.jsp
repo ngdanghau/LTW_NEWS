@@ -170,6 +170,16 @@
 		    	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	      	</div>
 		</c:if>
+		<c:if test="${errorMessage != null && errorMessage.size() > 0 }">
+				<c:forEach var="error" items="${ errorMessage }">
+					<div class="alert alert-danger alert-dismissible" role="alert">
+			            <p class="mb-0">
+			              ${ error }
+			            </p>
+			            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		          	</div>
+				</c:forEach>
+			</c:if>
       <table class="table table-striped table-borderless table-vcenter">
         <thead class="border-bottom">
           <tr>
@@ -276,6 +286,7 @@
 		<script src="./public/admin/js/oneui.app.min.js"></script>
 		<script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
 		<script src="./public/admin/js/pages/post.js"></script>
+		<script src="./public/admin/js/pages/core.js"></script>
 		<script>
 			$( document ).ready(function() {
 				

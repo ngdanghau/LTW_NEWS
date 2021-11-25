@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Cài đặt trang - ${ SettingsData.getSite_name() }</title>
+    <title>Cài đặt mạng xã hội - ${ SettingsData.getSite_name() }</title>
     <meta name="description" content="${ SettingsData.getSite_description() }">
       <meta name="author" content="pixelcave">
       <meta name="robots" content="noindex, nofollow">
@@ -34,7 +34,7 @@
 	    <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
 	      <div class="flex-grow-1">
 	        <h1 class="h3 fw-bold mb-0">
-	          Cài đặt trang
+	          Cài đặt mạng xã hội
 	        </h1>
 	      </div>
 	    </div>
@@ -132,6 +132,7 @@
 </div>
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script src="./public/admin/js/oneui.app.min.js"></script>
+		<script src="./public/admin/js/pages/core.js"></script>
 		
   </body>
 </html>

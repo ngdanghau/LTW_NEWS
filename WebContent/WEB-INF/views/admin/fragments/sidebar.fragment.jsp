@@ -70,7 +70,7 @@
          
          	
             <li class="nav-main-item">
-               <a class="nav-main-link active" href="${APPURL }/dashboard.htm">
+               <a class="nav-main-link dashboard" href="${APPURL }/dashboard.htm">
                <i class="nav-main-link-icon si si-speedometer"></i>
                <span class="nav-main-link-name">Dashboard</span>
                </a>
@@ -86,19 +86,19 @@
                
                <ul class="nav-main-submenu">
                		<li class="nav-main-item">
-	                     <a class="nav-main-link" href="${ ADMINURL }/posts.htm">
+	                     <a class="nav-main-link posts post" href="${ ADMINURL }/posts.htm">
 	                     	<span class="nav-main-link-name"> Xem tất cả</span>
 	                     </a>
                   	</li>
                   	
                   	<li class="nav-main-item">
-	                     <a class="nav-main-link" href="${ ADMINURL }/post.htm">
+	                     <a class="nav-main-link post-new" href="${ ADMINURL }/post-new.htm">
 	                     	<span class="nav-main-link-name"> Thêm mới</span>
 	                     </a>
                   	</li>
                </ul>
             </li>
-            
+             <c:if test="${ AuthUser.account_type != 'CONTRIBUTOR' }"> 
             
             <li class="nav-main-item">
                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="${APPURL }/admin/category.htm">
@@ -108,20 +108,21 @@
                
                <ul class="nav-main-submenu">
                		<li class="nav-main-item">
-	                     <a class="nav-main-link" href="${APPURL }/admin/category.htm">
+	                     <a class="nav-main-link categories edit-category" href="${APPURL }/admin/categories.htm">
 	                     	<span class="nav-main-link-name"> Xem tất cả</span>
 	                     </a>
                   	</li>
                   	
                   	<li class="nav-main-item">
-	                     <a class="nav-main-link" href="${APPURL }/admin/add-category.htm">
+	                     <a class="nav-main-link add-category" href="${APPURL }/admin/add-category.htm">
 	                     	<span class="nav-main-link-name"> Thêm mới</span>
 	                     </a>
                   	</li>
                </ul>
             </li>
-            
-            <li class="nav-main-item">
+               </c:if>
+             <c:if test="${ AuthUser.account_type == 'ADMIN' }"> 
+	             <li class="nav-main-item">
                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="${APPURL }/admin/information-page.htm">
                		<i class="nav-main-link-icon si si-docs"></i>
                		<span class="nav-main-link-name"> Trang thông tin </span>
@@ -129,30 +130,33 @@
                
                <ul class="nav-main-submenu">
                		<li class="nav-main-item">
-	                     <a class="nav-main-link" href="${APPURL }/admin/information-page.htm">
+	                     <a class="nav-main-link information-pages edit-information-page" href="${APPURL }/admin/information-pages.htm">
 	                     	<span class="nav-main-link-name"> Xem tất cả</span>
 	                     </a>
                   	</li>
                   	
                   	<li class="nav-main-item">
-	                     <a class="nav-main-link" href="${APPURL }/admin/add-information-page.htm">
+	                     <a class="nav-main-link add-information-page" href="${APPURL }/admin/add-information-page.htm">
 	                     	<span class="nav-main-link-name"> Thêm mới</span>
 	                     </a>
                   	</li>
                </ul>
             </li>
+            </c:if>
+            
+           <c:if test="${ AuthUser.account_type != 'CONTRIBUTOR' }"> 
             
             <li class="nav-main-item">
-               <a class="nav-main-link" aria-haspopup="true" aria-expanded="false" href="${APPURL }/admin/comment.htm">
+               <a class="nav-main-link comment" aria-haspopup="true" aria-expanded="false" href="${APPURL }/admin/comment.htm">
                		<i class="nav-main-link-icon si si-badge"></i>
                		<span class="nav-main-link-name"> Bình luận </span>
                </a>
             </li>
-            
+             </c:if>
             
             <li class="nav-main-heading">MEDIA</li>
             <li class="nav-main-item">
-               <a class="nav-main-link" aria-haspopup="true" aria-expanded="false" href="${ ADMINURL }/media.htm">
+               <a class="nav-main-link media" aria-haspopup="true" aria-expanded="false" href="${ ADMINURL }/media.htm">
                		<i class="nav-main-link-icon si si-picture"></i>
                		<span class="nav-main-link-name"> Media </span>
                </a>
@@ -165,26 +169,32 @@
             
             <li class="nav-main-item">
                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-               <i class="nav-main-link-icon si si-wrench"></i>
+               <i class="nav-main-link-icon si si-users"></i>
                <span class="nav-main-link-name">Thành viên</span>
                </a>
                <ul class="nav-main-submenu">
                   <li class="nav-main-item">
-                     <a class="nav-main-link" href="${ ADMINURL }/users.htm">
+                     <a class="nav-main-link users user" href="${ ADMINURL }/users.htm">
                      <span class="nav-main-link-name">Tất cả người dùng</span>
                      </a>
                   </li>
                   <li class="nav-main-item">
-                     <a class="nav-main-link" href="${ ADMINURL }/user.htm">
+                     <a class="nav-main-link user-new" href="${ ADMINURL }/user-new.htm">
                      <span class="nav-main-link-name">Thêm mới</span>
                      </a>
                   </li>
                   <li class="nav-main-item">
-                     <a class="nav-main-link" href="${ ADMINURL }/profile.htm">
+                     <a class="nav-main-link profile" href="${ ADMINURL }/profile.htm">
                      <span class="nav-main-link-name">Hồ sơ</span>
                      </a>
                   </li>
                </ul>
+            </li>
+            <li class="nav-main-item">
+               <a class="nav-main-link subscribers"  href="${ ADMINURL }/subscribers.htm">
+               <i class="nav-main-link-icon si si-flag"></i>
+               		<span class="nav-main-link-name">Đăng ký nhận tin</span>
+               </a>
             </li>
             <li class="nav-main-item">
                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
@@ -193,12 +203,16 @@
                </a>
                <ul class="nav-main-submenu">
                	  <li class="nav-main-item">
-                     <a class="nav-main-link" href="${ ADMINURL}/widget.htm">
+                     <a class="nav-main-link widget" href="${ ADMINURL}/widget.htm">
                      <span class="nav-main-link-name">Widget</span>
                      </a>
                   </li>
                   <li class="nav-main-item">
+<<<<<<< HEAD
                      <a class="nav-main-link" href="${ADMINURL }/menu.htm">
+=======
+                     <a class="nav-main-link menu" href="${ ADMINURL}/menu.htm">
+>>>>>>> a2b2065da1be6b563bf8bb226984aef5f9870c9b
                      <span class="nav-main-link-name">Menu</span>
                      </a>
                   </li>
@@ -207,23 +221,42 @@
             <!-- CAI DAT CHUNG -->
             <li class="nav-main-item">
                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-               <i class="nav-main-link-icon si si-puzzle"></i>
+               <i class="nav-main-link-icon si si-settings"></i>
                <span class="nav-main-link-name">Cài đặt chung</span>
                </a>
                <ul class="nav-main-submenu">
                   <li class="nav-main-item">
-                     <a class="nav-main-link" href="${ ADMINURL }/settings/site.htm">
+                     <a class="nav-main-link site" href="${ ADMINURL }/settings/site.htm">
                      <span class="nav-main-link-name">Cài đặt trang</span>
                      </a>
                   </li>
                   <li class="nav-main-item">
-                     <a class="nav-main-link" href="${ ADMINURL }/settings/logo.htm">
+                     <a class="nav-main-link logo" href="${ ADMINURL }/settings/logo.htm">
                      <span class="nav-main-link-name">Logo</span>
                      </a>
                   </li>
                   <li class="nav-main-item">
-                     <a class="nav-main-link" href="${ ADMINURL }/settings/social.htm">
+                     <a class="nav-main-link social" href="${ ADMINURL }/settings/social.htm">
                      <span class="nav-main-link-name">Social</span>
+                     </a>
+                  </li>
+               </ul>
+            </li>
+            
+            <li class="nav-main-item">
+               <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+               <i class="nav-main-link-icon si si-puzzle"></i>
+               <span class="nav-main-link-name">Tích hợp</span>
+               </a>
+               <ul class="nav-main-submenu">
+                  <li class="nav-main-item">
+                     <a class="nav-main-link google-analytics" href="${ ADMINURL }/integrations/google-analytics.htm">
+                     <span class="nav-main-link-name">Google Analytics</span>
+                     </a>
+                  </li>
+                  <li class="nav-main-item">
+                     <a class="nav-main-link recaptcha" href="${ ADMINURL }/integrations/recaptcha.htm">
+                     <span class="nav-main-link-name">Recaptcha</span>
                      </a>
                   </li>
                </ul>
