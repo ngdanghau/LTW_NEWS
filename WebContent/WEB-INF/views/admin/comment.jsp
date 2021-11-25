@@ -139,7 +139,7 @@
                         <tbody id="commentBody">
                            <!-- PAGINATION - HIEN THI BAI VIET NHUNG CO PHAN TRANG -->
                            <jsp:useBean id="pagedListHolder" scope="request" type="org.springframework.beans.support.PagedListHolder"/>
-                           <c:url value="/admin/comment.htm" var="pagedLink">
+                           <c:url value="/admin/comment.htm?commentStatus=${ commentStatusNow }" var="pagedLink">
                               <c:param name="p" value="~" />
                            </c:url>
                            <c:forEach items="${pagedListHolder.pageList }" var="element">

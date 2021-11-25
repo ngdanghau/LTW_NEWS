@@ -321,6 +321,8 @@ public class WidgetController {
 			objectNode.put("msg", "Danh sách id không hợp lệ!");
 			return new ResponseEntity<JsonNode>(objectNode, HttpStatus.OK);
 		}
+		System.out.println("DU LIEU NHAN DUOC WIDGET" );
+		System.out.println(ids);
 		int total = ids.size();
 		if(num_posts == null || num_posts.size() != total ) {
 			objectNode.put("result", 0);

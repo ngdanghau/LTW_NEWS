@@ -161,7 +161,7 @@ public class AdminCommentController {
 	public String index(HttpServletRequest request, ModelMap modelMap)
 	{
 		/*Step 1*/
-		String commentStatusNow = request.getParameter("commentStatus") == null ? "all" : request.getParameter("commentStatus");
+		String commentStatusNow = request.getParameter("commentStatus") == null ? "" : request.getParameter("commentStatus");
 		long totalComment = retrieveTotalComment();
 		/* String keyword = request.getParameter("keyword"); */
 		String keyword = "";

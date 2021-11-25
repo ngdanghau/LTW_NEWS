@@ -198,7 +198,7 @@
                      </a>
                   </li>
                   <li class="nav-main-item">
-                     <a class="nav-main-link" href="be_layout_api.html">
+                     <a class="nav-main-link" href="${ADMINURL }/menu.htm">
                      <span class="nav-main-link-name">Menu</span>
                      </a>
                   </li>
