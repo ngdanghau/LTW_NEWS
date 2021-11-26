@@ -112,13 +112,7 @@ let confirmEditInformationPage = ()=>{
 		{
 			if( data == "success")
 			{
-				  Swal.fire('Hoàn tất!','Thao tác thành công','success').then( (result)=>{
-			            if (result.isConfirmed) 
-						{
-						  /* Nhan OK -> Dieu huong ve admin/category.htm */
-				  		  window.location.href = `${URL}/admin/information-pages.htm`;
-			            }
-				  });
+				  Swal.fire('Hoàn tất!','Thao tác thành công','success');
 			}
 			else
 			{

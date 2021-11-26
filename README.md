@@ -1,5 +1,9 @@
-<h1 align="center">Lập Trình Web</h1>
-<h2 align="center">Trang tin tức tổng hợp</h2>
+<h1 align="center">Lập Trình Web</br>
+Trang tin tức tổng hợp</h1>
+
+<p align="center"> 
+    <img src="./avatar/cropped-1280-600-927078.jpg" >
+</p>
 
 # [**Table of contents**](#table-of-contents)
 
@@ -25,7 +29,7 @@ Chủ đề của nhóm mình là xây dựng một trang tin tức tổng hợp
         <a href="https://github.com/ngdanghau">
             <img src="./avatar/Hau.jpg" width="100px;" alt=""/>
             <br />
-            <sub><b>Nguyễn Đăng Hậu</b></sub>
+        <sub><b>Nguyễn Đăng Hậu</b></sub>
         </a>
     </td>
       <td align="center">
