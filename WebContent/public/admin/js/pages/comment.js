@@ -193,7 +193,7 @@ let ajaxRemoveComment = (id) =>{
  * @return xu ly viec khoi phuc comment rac thanh approved
  **************************************************/
 let restoreComment = ()=>{
-	$(".btn-restore-comment").unbind("click").on("click", function(){
+	$(".btn-restore-comment").on("click", function(){
 		let id = $(this).data("uid");
 		/*Step 1*/
         Swal.fire({
@@ -291,7 +291,7 @@ let ajaxRestoreComment = (id)=>{
  * @return chuyen mot comment tu trang thai approved|pending sang trash
  **************************************************/
 let trashComment = () =>{
-	$(".btn-trash-comment").unbind("click").on("click", function(){
+	$(".btn-trash-comment").on("click", function(){
 		let id = $(this).data("uid");
 		
 		Swal.fire({
@@ -480,7 +480,7 @@ let cancelResponseComment = () =>{
  * @return xu ly nut chap thuan, chuyen trang thai tu pending len approved
  **************************************************/
 let approveComment = () =>{
-	$(".btn-approve-comment").unbind("click").on("click", function(){
+	$(".btn-approve-comment").on("click", function(){
 		
 		let id = $(this).data("uid");
 		
@@ -575,4 +575,28 @@ $(document).ready(function(){
 	confirmResponseComment();
 	
 	cancelResponseComment();
+	
+	/********************************************************************************
+	 *Phần này để sửa việc sau khi jQuery append thì các nút được thêm sẽ không hoạt động
+	 *".btn-option" sẽ cho phép các button có class này được phép tiếp tục ủy quyền sự kiện click
+	 ********************************************************************************/
+	$(document).on("click", ".btn-option",function(){
+		let nameButton = $(this).text().trim();
+		console.log("BUTTON CLICKED : " + nameButton );
+		if( nameButton == "Chấp thuận")
+		{
+			console.log("this is chấp thuận");
+			approveComment();
+		}
+		if( nameButton == "Thùng rác")
+		{
+			console.log("this is thùng rác");
+			trashComment();
+		}
+		if( nameButton == "Phục hồi")
+		{
+			console.log("this is phục hồi");
+			restoreComment();
+		}
+	});
 });
