@@ -194,8 +194,8 @@
       <script src="./public/admin/js/oneui.app.min.js"></script>
       <script src="./public/admin/js/plugins/sweetalert2/sweetalert2.min.js"></script>
       <script>
-      	let URL = "${ADMINURL}";
-		let CLIENTURL = "${APPURL}";
+      	let URL = "${ADMINURL}/";
+		let CLIENTURL = "${APPURL}/";
       </script>
       <script src="./public/admin/js/pages/comment.js"></script>
       <script src="./public/admin/js/pages/core.js"></script>

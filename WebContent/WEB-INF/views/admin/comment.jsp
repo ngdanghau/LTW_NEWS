@@ -222,7 +222,7 @@
       <script src="./public/admin/js/pages/core.js"></script>
       <script>
       	let URL = "${ADMINURL}/";
-		let CLIENTURL = "${APPURL}";
+		let CLIENTURL = "${APPURL}/";
       </script>
       <script src="./public/admin/js/pages/comment.js"></script>
    </body>
