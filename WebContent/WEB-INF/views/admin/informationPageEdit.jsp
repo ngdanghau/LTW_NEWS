@@ -113,7 +113,7 @@
                                                 
                      
                      	   <label for="example-textarea-floating">Mô tả đầy đủ</label>
-                           <form:textarea path="content"  class="form-control" name="mainContent" rows="10" cols="80"></form:textarea> 
+                           <form:textarea path="content" id="mainContent" class="form-control" name="mainContent" rows="10" cols="80"></form:textarea> 
                      </div>
                         
                      </div>

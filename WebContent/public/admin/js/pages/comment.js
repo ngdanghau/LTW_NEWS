@@ -416,7 +416,7 @@ let confirmResponseComment = ()=> {
 		
 		$.ajax({
 			type: "POST",
-			url: `${URL}/response-comment.htm`,
+			url: `${URL}response-comment.htm`,
 			data: { id: id, content: content},
 			success: function(data){
 				if( data == "success")
@@ -425,7 +425,7 @@ let confirmResponseComment = ()=> {
 				            if (result.isConfirmed) 
 							{
 							  /* Nhan OK -> Dieu huong ve admin/comment.htm */
-					  		  window.location.href = `${URL}/comment.htm`;
+					  		  window.location.href = `${URL}comment.htm`;
 				            }
 					  });
 				}
@@ -466,7 +466,7 @@ let cancelResponseComment = () =>{
             if (result.isConfirmed) {
 			
 			  /* Nhan OK -> Dieu huong ve admin/comment.htm */
-			  window.location.href = `${URL}/comment.htm`;
+			  window.location.href = `${URL}comment.htm`;
 				
             }
           })
