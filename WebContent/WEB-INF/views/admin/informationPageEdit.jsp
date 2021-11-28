@@ -113,7 +113,7 @@
                                                 
                      
                      	   <label for="example-textarea-floating">Mô tả đầy đủ</label>
-                           <form:textarea path="content" id="mainContent" class="form-control" name="mainContent" rows="10" cols="80"></form:textarea> 
+                           <form:textarea path="content" id="content" class="form-control" name="content" rows="10" cols="80"></form:textarea> 
                      </div>
                         
                      </div>
@@ -152,7 +152,7 @@
 		<script>
 			$( document ).ready(function() {
 			    // khoi tao ckeditor va ckfinder
-				var editor = CKEDITOR.replace('mainContent');
+				var editor = CKEDITOR.replace('content');
 				editor.config.height = '500px';
 				CKFinder.setupCKEditor( editor, '${APPURL}/public/vendor/ckfinder/' );
 			});

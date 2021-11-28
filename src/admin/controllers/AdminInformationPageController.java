@@ -79,7 +79,7 @@ public class AdminInformationPageController {
 	 * @author Phong
 	 * @return xoa trang thong tin theo ID
 	 **************************************************/
-	@RequestMapping(value="remove-information-page", method = RequestMethod.GET)
+	@RequestMapping(value="remove-information-pages", method = RequestMethod.GET)
 	public @ResponseBody String removeInformationPage(HttpServletRequest request)
 	{
 		try 
@@ -137,7 +137,7 @@ public class AdminInformationPageController {
 	 * @return
 	 **************************************************/
 	@RequestMapping(value="edit-information-page-{id}", method=RequestMethod.POST)
-	public @ResponseBody String addInformationPage(HttpServletRequest request, @ModelAttribute("page") Pages page, @PathVariable("id") String id)
+	public @ResponseBody String addInformationPage(HttpServletRequest request, @ModelAttribute("page") Pages page, @PathVariable("id") int id)
 	{
 		/*Step 1*/
 		String title = page.getTitle();
@@ -145,7 +145,7 @@ public class AdminInformationPageController {
 		
 		String slug = page.getPage_slug();
 		String content = page.getContent();
-		
+		System.out.println(request.getParameter("mainContent"));
 		String status = page.getPage_status();
 		
 		
@@ -163,15 +163,22 @@ public class AdminInformationPageController {
 		try 
 		{
 			Session session = factory.openSession();
+			/*
 			String hql = "UPDATE Pages "
 					+ "SET title = '" + title + "',"
 					+ "excerpt = '" + excerpt + "',"
 					+ "page_slug = '" + slug + "',"
 					+ "content = '" + content + "',"
 					+ "page_status = '" + status + "' "
-					+ "WHERE id = " + id;
-			
-			Query query = session.createQuery(hql);
+					+ "WHERE id = " + id;*/
+			String hql1 = "UPDATE Pages SET title = :title, excerpt = :excerpt, page_slug = :page_slug, content = :content, page_status = :page_status WHERE id = :id";
+			Query query = session.createQuery(hql1);
+			query.setParameter("title", title);
+			query.setParameter("excerpt", excerpt);
+			query.setParameter("page_slug", slug);
+			query.setParameter("content", content);
+			query.setParameter("page_status", status);
+			query.setParameter("id", id);
 			int x = query.executeUpdate();
 			System.out.println("AFFECTED ROWS :" +x);		
 		    return "success";
