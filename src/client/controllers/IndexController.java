@@ -31,6 +31,7 @@ import bean.Mailer;
 import entities.Posts;
 import entities.Subscribers;
 import entities.Widgets;
+import helpers.CommonHelper;
 import models.WidgetModel;
 
 @Transactional
@@ -131,10 +132,9 @@ public class IndexController {
 		String error = "";
 		
 		// code ở dây
-		String regex = "^(([^<>()[\\]\\\\.,;:\\s@\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 		if(email.isEmpty())
 			error="Không được để trống";
-		else if (!email.matches(regex)||email.length()<15) {
+		else if (!CommonHelper.isValid(email) || email.length()<15 ) {
 			error="Email không hợp lệ";
 		}
 		

@@ -1,0 +1,44 @@
+LƯƠNG ĐÌNH KHANG – N18DCCN093
+- Khai báo Entities( Posts, Comment, Categories, Menu, Widget, Pages, Posts, Subscribers)
+- Cắt template admin-settings, forgot password, reset password.
+- Khai báo, config thư viện mailer
+- Khai báo GlobalInterceptor.
+- Cài đặt chung(logo, site, social) 
+- Tích hợp (recaptcha, google analytics)
+- Trang tác giả
+- Tính năng reset password
+- Tính năng đăng ký nhận tin
+- hiện thị thông tin covid
+- Bình luận bài viết 
+- Dashboard
+
+NGUYỄN THÀNH PHONG – N18DCCN147
+- Tạo cấu trúc thư mục chung cho cả project
+- Tạo paging phân trang chung
+- Cắt template thành các file jsp
+- Quản lý thể loại
+- Quản lý Trang
+- Quản lý bình luận 
+- Phản hồi bình luận từ admin
+- Trang thể loại 
+- Trang thông tin 
+- Sidebar của website
+- Quản lý menu header, menu footer, vị trí menu
+- Khai báo ClientInterceptor
+
+NGUYỄN ĐĂNG HẬU – N18DCCN060
+- Thiết kế CSDL
+- Khai báo Entities( Options, General_Data)
+- Config hibernate, spring-security, interceptor, mvc
+- Tính năng đăng nhập
+- Quản lý bài viết
+- Quản lý thành viên 
+- quản lý đăng ký nhận tin
+- quản lý hồ sơ cá nhân
+- Media
+- Quản lý Widget
+- Thiết kế trang chủ website
+- Tính năng tìm kiếm bài viết trên trang chủ
+- Menu website
+- Phân quyền
+- Tích hợp ckeditor, ckfinder

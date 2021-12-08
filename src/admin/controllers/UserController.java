@@ -76,7 +76,7 @@ public class UserController {
 		return "admin/user";
 	}
 	
-	@RequestMapping( value="user", method = RequestMethod.POST)
+	@RequestMapping( value={"user","user-new"}, method = RequestMethod.POST)
 	public String update(HttpServletRequest request, ModelMap model, @RequestParam Map<String, Object> params) throws JsonProcessingException {
 		
 		Users authUser = (Users)request.getAttribute("AuthUser");
@@ -108,7 +108,7 @@ public class UserController {
 		String firstname = (String) params.get("firstname");
 		String lastname = (String) params.get("lastname");
 		String email = (String) params.get("email");
-		String username = (String) params.get("username");
+		String username = (String) params.get("user_name");
 		String password = (String) params.get("password");
 		String password_confirm = (String) params.get("password_confirm");
 		String account_type = (String) params.get("account_type");
@@ -136,8 +136,12 @@ public class UserController {
 				errorMessage.add("Email không được bỏ trống!");
 				error = true;
 			}
+			if(!CommonHelper.isValid(email)) {
+				errorMessage.add("Email không hợp lệ!");
+				error = true;
+			}
 			if(username == null || username.trim().length() == 0) {
-				errorMessage.add("Tên đăng nhập không được bỏ trống!");
+				errorMessage.add("Tên đăng nhập không được bỏ trống! 1");
 				error = true;
 			}
 			

@@ -208,11 +208,7 @@
                      </a>
                   </li>
                   <li class="nav-main-item">
-<<<<<<< HEAD
-                     <a class="nav-main-link" href="${ADMINURL }/menu.htm">
-=======
                      <a class="nav-main-link menu" href="${ ADMINURL}/menu.htm">
->>>>>>> a2b2065da1be6b563bf8bb226984aef5f9870c9b
                      <span class="nav-main-link-name">Menu</span>
                      </a>
                   </li>

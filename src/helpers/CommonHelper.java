@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.regex.Pattern;
 import java.text.NumberFormat;
 
 public class CommonHelper{
@@ -91,6 +92,20 @@ public class CommonHelper{
 	  public static Date ConverToDate(LocalDate localDate) {
 		  return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 	  }
+	  
+	  public static boolean isValid(String email)
+	    {
+	        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+	                            "[a-zA-Z0-9_+&*-]+)*@" +
+	                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+	                            "A-Z]{2,7}$";
+	                              
+	        Pattern pat = Pattern.compile(emailRegex);
+	        if (email == null)
+	            return false;
+	        return pat.matcher(email).matches();
+	    }
+	  
 }
 	  
 

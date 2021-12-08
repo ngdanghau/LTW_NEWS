@@ -35,6 +35,8 @@
         <intercept-url pattern="/admin/widget.htm" access="hasAnyRole('ROLE_ADMIN')" />
         <intercept-url pattern="/admin/menu.htm" access="hasAnyRole('ROLE_ADMIN')" />
         <intercept-url pattern="/admin/settings/**" access="hasAnyRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/admin/users.html" access="hasAnyRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/admin/user-new.html" access="hasAnyRole('ROLE_ADMIN')" />
         
         <intercept-url pattern="/admin/information-pages.htm" access="hasAnyRole('ROLE_ADMIN')" />
         <intercept-url pattern="/admin/add-information-page.htm" access="hasAnyRole('ROLE_ADMIN')" />

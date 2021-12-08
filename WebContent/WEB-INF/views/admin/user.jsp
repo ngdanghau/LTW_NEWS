@@ -71,7 +71,7 @@
 						</c:if>
 			            <div class="mb-4">
 			              <label class="col-sm-2 col-form-label text-right">Tên đăng nhập</label>
-			              <input type="text" class="form-control" id="username" name="username" placeholder="Tên đăng nhập" value="${ user.username }" required ${ user.username != null ? 'disabled':'' }>
+			              <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Tên đăng nhập" value="${ user.username }" required ${ user.username != null ? 'disabled':'' }>
 			            </div>
 			           <div class="mb-4">
 			              <label class="col-sm-2 col-form-label text-right">Email</label>
